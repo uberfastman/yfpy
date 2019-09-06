@@ -1,11 +1,7 @@
-import json
 import logging
-import os
 from collections import ChainMap
 
 import stringcase
-
-from yffpy.dao import YahooFantasyObject, complex_json_handler
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +73,16 @@ def get_type(json_obj_dict, parent_class, subclasses):
     return json_obj_dict
 
 
+def complex_json_handler(obj):
+    if hasattr(obj, "serialized"):
+        return obj.serialized()
+    else:
+        try:
+            return str(obj, "utf-8")
+        except TypeError:
+            raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
+
+
 def reformat_json_list(json_obj):
     if isinstance(json_obj[0], list):
         if len(json_obj) > 1:
@@ -86,41 +92,3 @@ def reformat_json_list(json_obj):
             return reformat_json_list(json_obj[0])
     else:
         return ChainMap(*[value for value in json_obj if value])
-
-
-def persist_and_retrieve_data(yff_query, data_dir, data_file_name, data_type_class=None, params=None,
-                              persist_data=False, refresh_data=True):
-    data_persistence_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), data_dir)
-
-    if not os.path.exists(data_persistence_dir):
-        os.makedirs(data_persistence_dir)
-
-    if refresh_data:
-        # run data query
-        if params:
-            query_output = yff_query(**params, run=True)
-        else:
-            query_output = yff_query(run=True)
-        data = query_output.get("data")
-        url = query_output.get("url")
-        logger.info(
-            "DATA FETCHED WITH QUERY URL: {}".format(url) + (" AND PARAMS: {}".format(params) if params else ""))
-    else:
-        persisted_data_file_path = os.path.join(data_persistence_dir, data_file_name + ".json")
-        if os.path.exists(persisted_data_file_path):
-            with open(persisted_data_file_path, "r", encoding="utf-8") as data_file:
-                unpacked = unpack_data(json.load(data_file), YahooFantasyObject)
-                data = data_type_class(unpacked) if data_type_class else unpacked
-            logger.info("DATA RETRIEVED LOCALLY: {}".format(persisted_data_file_path))
-        else:
-            raise FileNotFoundError(
-                "FILE {} DOES NOT EXIST. CANNOT RUN LOCALLY WITHOUT HAVING PREVIOUSLY PERSISTED DATA!".format(
-                    persisted_data_file_path))
-
-    if persist_data and refresh_data:
-        persisted_data_file_path = os.path.join(data_persistence_dir, data_file_name + ".json")
-        with open(persisted_data_file_path, "w", encoding="utf-8") as persisted_data_file:
-            json.dump(data, persisted_data_file, ensure_ascii=False, indent=2, default=complex_json_handler)
-        logger.info("DATA PERSISTED LOCALLY: {}".format(persisted_data_file_path))
-
-    return data

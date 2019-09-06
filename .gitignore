@@ -1,2 +1,12 @@
-auth/private.json
-auth/token.json
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# JetBrains IDE project files
+.idea/*
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
