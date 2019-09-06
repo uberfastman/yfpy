@@ -1,21 +1,11 @@
 import json
 import logging
 
-import inflect
 import stringcase
 
+from yffpy.utils import complex_json_handler
+
 logger = logging.getLogger(__name__)
-place = inflect.engine()
-
-
-def complex_json_handler(obj):
-    if hasattr(obj, "serialized"):
-        return obj.serialized()
-    else:
-        try:
-            return str(obj, "utf-8")
-        except TypeError:
-            raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
 
 
 class YahooFantasyObject(object):

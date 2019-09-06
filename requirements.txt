@@ -1,0 +1,2 @@
+yahoo-oauth==0.1.9
+stringcase==1.2.0
