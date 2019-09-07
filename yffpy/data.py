@@ -16,9 +16,11 @@ class Data(object):
     Retrieve, save, and load Yahoo fantasy football data
     """
 
-    def __init__(self, data_dir):
+    def __init__(self, data_dir, save_data=False, dev_offline=False):
         # data storage directory
         self.data_dir = data_dir
+        self.save_data = save_data
+        self.dev_offline = dev_offline
 
     def update_data_dir(self, new_save_dir):
         # modify data storage directory
@@ -69,3 +71,13 @@ class Data(object):
                 "FILE {} DOES NOT EXIST. CANNOT LOAD DATA LOCALLY WITHOUT HAVING PREVIOUSLY SAVED DATA!".format(
                     saved_data_file_path))
         return data
+
+    def retrieve(self, file_name, yff_query, params=None, data_type_class=None, new_data_dir=None):
+        # fetch data from the web or load it locally depending on the configurations set for save_data and dev_offline
+        if self.dev_offline:
+            return self.load(file_name, data_type_class, new_data_dir)
+        else:
+            if self.save_data:
+                return self.save(file_name, yff_query, params, new_data_dir)
+            else:
+                return self.get(yff_query, params)
