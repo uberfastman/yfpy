@@ -1,0 +1,12 @@
+# Include the README
+include README.md
+
+# Include the license file
+include LICENSE.txt
+
+# Include dependency lists
+include requirements.txt
+include dev-requirements.txt
+
+# Include example code and resources
+recursive-include examples *
