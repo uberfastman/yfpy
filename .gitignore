@@ -10,3 +10,8 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+
+# Testing
+examples/test_output/
+examples/private.json
+examples/token.json
