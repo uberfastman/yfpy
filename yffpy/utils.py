@@ -1,3 +1,6 @@
+__author__ = "Wren J. R. (uberfastman)"
+__email__ = "wrenjr@yahoo.com"
+
 import logging
 from collections import ChainMap
 
@@ -8,11 +11,21 @@ logger = logging.getLogger(__name__)
 
 # noinspection PyTypeChecker
 def unpack_data(json_obj, parent_class=None):
+    """
+    Recursive utility function to parse, clean, and assign custom data types to retrieved Yahoo fantasy football data
+
+    :param json_obj: json object for parsing; can be dict, list, or primitive
+    :param parent_class: parent class type used to extract custom subclass type options
+    :return: recursively returns json data objects until data is completely parsed, cleaned, and typed where applicable
+    """
+
+    # extract subclasses from parent class for typing
     subclasses = {}
     if parent_class:
         subclasses = {stringcase.snakecase(cls.__name__): cls for cls in parent_class.__subclasses__()}
 
     if json_obj:
+        # handle lists
         if isinstance(json_obj, list):
             json_obj = [obj for obj in json_obj if obj]
 
@@ -24,8 +37,10 @@ def unpack_data(json_obj, parent_class=None):
 
                 return [unpack_data(obj, parent_class) for obj in json_obj if obj]
 
+        # handle dictionaries
         elif isinstance(json_obj, dict):
 
+            # eliminate odd single-key Yahoo dicts with key "0" and value of the next layer of data
             if "0" in json_obj.keys() and "1" not in json_obj.keys():
                 if len(json_obj.keys()) == 1:
                     return unpack_data(json_obj.get("0"), parent_class)
@@ -33,6 +48,7 @@ def unpack_data(json_obj, parent_class=None):
                     if isinstance(json_obj.get("0"), dict):
                         json_obj.update(json_obj.get("0"))
 
+            # eliminate data obj counts except in player position dicts that tell how many of each position a league has
             if "count" in json_obj.keys() and "position" in json_obj.keys():
                 return get_type({k: unpack_data(v, parent_class) for k, v in json_obj.items()}, parent_class,
                                 subclasses)
@@ -44,6 +60,14 @@ def unpack_data(json_obj, parent_class=None):
 
 
 def flatten_dict_list(json_obj_dict_list, parent_class):
+    """
+    Recursive utility function to flatten lists containing all disparate dicts with no overlapping keys
+
+    :param json_obj_dict_list: list of json dicts
+    :param parent_class: parent class type used to extract custom subclass type options
+    :return: returns dict if list was flattened, else returns cleaned list
+    """
+
     json_obj_dict_list = [obj for obj in json_obj_dict_list if obj]
     item_keys = []
     ndx = 0
@@ -67,6 +91,7 @@ def flatten_dict_list(json_obj_dict_list, parent_class):
 
 
 def get_type(json_obj_dict, parent_class, subclasses):
+    # cast json obj to custom subclass type extracted from parent class
     for k, v in json_obj_dict.items():
         if k in subclasses.keys() and isinstance(v, dict) and not isinstance(v, subclasses[k]):
             json_obj_dict[k] = subclasses[k](unpack_data(v, parent_class))
@@ -74,6 +99,7 @@ def get_type(json_obj_dict, parent_class, subclasses):
 
 
 def complex_json_handler(obj):
+    # custom json function to handle serialization of custom data types
     if hasattr(obj, "serialized"):
         return obj.serialized()
     else:
@@ -84,6 +110,7 @@ def complex_json_handler(obj):
 
 
 def reformat_json_list(json_obj):
+    # clean and reformat json lists to eliminate empty values and unnecessarily nested lists
     if isinstance(json_obj[0], list):
         if len(json_obj) > 1:
             return reformat_json_list(
