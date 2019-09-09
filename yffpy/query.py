@@ -34,7 +34,6 @@ class YahooFantasyFootballQuery(object):
         self.league_id = league_id
         self.game_id = game_id
         self.league_key = None
-        self.league_name = None
         self.offline = offline
 
         if not self.offline:
@@ -64,7 +63,6 @@ class YahooFantasyFootballQuery(object):
 
     def query(self, url, data_key_list, data_type_class=None):
         """
-
         :param url: web url for desired Yahoo fantasy football data
         :param data_key_list: list of keys used to extract the specific data desired by the given query
         :param data_type_class: highest level data model type (if one exists for the specific retrieved data
@@ -111,12 +109,15 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id), ["game"], Game)
 
     def get_league_key(self):
-        if self.game_id:
-            return self.get_nfl_fantasy_game(self.game_id).get("data").game_key + ".l." + self.league_id
+        if not self.league_key:
+            if self.game_id:
+                return self.get_nfl_fantasy_game(self.game_id).get("data").game_key + ".l." + self.league_id
+            else:
+                logger.warning(
+                    "No Yahoo Fantasy game id provided, defaulting to current NFL fantasy football season game id.")
+                return self.get_current_nfl_fantasy_game().get("data").game_key + ".l." + self.league_id
         else:
-            logger.warning(
-                "No Yahoo Fantasy game id provided, defaulting to current NFL fantasy football season game id.")
-            return self.get_current_nfl_fantasy_game().get("data").game_key + ".l." + self.league_id
+            return self.league_key
 
     def get_user_game_history(self):
         return self.query(
@@ -130,34 +131,34 @@ class YahooFantasyFootballQuery(object):
 
     def get_overview(self):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/", ["league"], League)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/", ["league"], League)
 
     def get_standings(self):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/standings",
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/standings",
             ["league", "standings"], Standings)
 
     def get_settings(self):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/settings",
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/settings",
             ["league", "settings"], Settings)
 
     def get_teams(self):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/teams", ["league", "teams"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/teams", ["league", "teams"])
 
     def get_matchups(self, chosen_week):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/scoreboard;week=" +
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week=" +
             str(chosen_week), ["league", "scoreboard", "0", "matchups"])
 
     def get_team_roster(self, team_id, chosen_week):
-        team_key = self.league_key + ".t." + str(team_id)
+        team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
             str(chosen_week) + "/players/stats", ["team", "roster", "0", "players"])
 
     def get_player_stats(self, player_key, chosen_week):
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.league_key + "/players;player_keys=" +
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
             str(player_key) + "/stats;type=week;week=" + str(chosen_week), ["league", "players", "0", "player"], Player)
