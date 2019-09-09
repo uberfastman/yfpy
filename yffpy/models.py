@@ -146,9 +146,9 @@ class League(YahooFantasyObject):
         self.renewed = self.extracted_data.get("renewed", "")
         self.scoring_type = self.extracted_data.get("scoring_type", "")
         self.season = self.extracted_data.get("season", "")
-        self.settings = self.extracted_data.get("settings", "")  # type: Settings
+        self.settings = self.extracted_data.get("settings", Settings({}))  # type: Settings
         self.short_invitation_url = self.extracted_data.get("short_invitation_url", "")
-        self.standings = self.extracted_data.get("standings", "")  # type: Standings
+        self.standings = self.extracted_data.get("standings", Standings({}))  # type: Standings
         self.start_date = self.extracted_data.get("start_date", "")
         self.start_week = self.extracted_data.get("start_week", "")
         self.url = self.extracted_data.get("url", "")
@@ -171,12 +171,12 @@ class Team(YahooFantasyObject):
         self.name = self.extracted_data.get("name", "").encode("utf-8")
         self.number_of_moves = self.extracted_data.get("number_of_moves", "")
         self.number_of_trades = self.extracted_data.get("number_of_trades", "")
-        self.roster_adds = self.extracted_data.get("roster_adds", "")  # type: RosterAdds
+        self.roster_adds = self.extracted_data.get("roster_adds", RosterAdds({}))  # type: RosterAdds
         self.team_id = self.extracted_data.get("team_id", "")
         self.team_key = self.extracted_data.get("team_key", "")
         self.team_logos = self.extracted_data.get("team_logos", "")
-        self.team_points = self.extracted_data.get("team_points", "")  # type: TeamPoints
-        self.team_standings = self.extracted_data.get("team_standings", "")  # type: TeamStandings
+        self.team_points = self.extracted_data.get("team_points", TeamPoints({}))  # type: TeamPoints
+        self.team_standings = self.extracted_data.get("team_standings", TeamStandings({}))  # type: TeamStandings
         self.url = self.extracted_data.get("url", "")
         self.waiver_priority = self.extracted_data.get("waiver_priority", "")
 
@@ -248,12 +248,12 @@ class TeamStandings(YahooFantasyObject):
 
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
-        self.outcome_totals = self.extracted_data.get("outcome_totals")  # type: OutcomeTotals
+        self.outcome_totals = self.extracted_data.get("outcome_totals", OutcomeTotals({}))  # type: OutcomeTotals
         self.playoff_seed = self.extracted_data.get("playoff_seed", 0)
-        self.points_against = self.extracted_data.get("points_against", 0)
-        self.points_for = self.extracted_data.get("points_for", 0)
+        self.points_against = float(self.extracted_data.get("points_against", 0) or 0)
+        self.points_for = float(self.extracted_data.get("points_for", 0) or 0)
         self.rank = self.extracted_data.get("rank", 0)
-        self.streak = self.extracted_data.get("streak")  # type: Streak
+        self.streak = self.extracted_data.get("streak", Streak({}))  # type: Streak
 
 
 class OutcomeTotals(YahooFantasyObject):
@@ -303,8 +303,8 @@ class Settings(YahooFantasyObject):
         self.post_draft_players = self.extracted_data.get("post_draft_players", "")
         self.roster_positions = self.extracted_data.get("roster_positions", "")
         self.scoring_type = self.extracted_data.get("scoring_type", "")
-        self.stat_categories = self.extracted_data.get("stat_categories", "")  # type: StatCategories
-        self.stat_modifiers = self.extracted_data.get("stat_modifiers", "")  # type: StatModifiers
+        self.stat_categories = self.extracted_data.get("stat_categories", StatCategories({}))  # type: StatCategories
+        self.stat_modifiers = self.extracted_data.get("stat_modifiers", StatModifiers({}))  # type: StatModifiers
         self.trade_end_date = self.extracted_data.get("trade_end_date", "")
         self.trade_ratify_type = self.extracted_data.get("trade_ratify_type", "")
         self.trade_reject_time = self.extracted_data.get("trade_reject_time", "")
@@ -387,7 +387,7 @@ class Bonus(YahooFantasyObject):
 
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
-        self.points = self.extracted_data.get("points", "")
+        self.points = self.extracted_data.get("points", 0)
         self.target = self.extracted_data.get("target", "")
 
 
@@ -432,7 +432,7 @@ class Player(YahooFantasyObject):
 
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
-        self.bye_weeks = self.extracted_data.get("bye_weeks")  # type: ByeWeeks
+        self.bye_weeks = self.extracted_data.get("bye_weeks", ByeWeeks({}))  # type: ByeWeeks
         self.display_position = self.extracted_data.get("display_position", "")
         self.editorial_player_key = self.extracted_data.get("editorial_player_key", "")
         self.editorial_team_abbr = self.extracted_data.get("editorial_team_abbr", "")
@@ -440,18 +440,18 @@ class Player(YahooFantasyObject):
         self.editorial_team_key = self.extracted_data.get("editorial_team_key", "")
         self.eligible_positions = self.extracted_data.get("eligible_positions", "")
         self.has_player_notes = self.extracted_data.get("has_player_notes", "")
-        self.headshot = self.extracted_data.get("headshot", "")  # type: Headshot
+        self.headshot = self.extracted_data.get("headshot", Headshot({}))  # type: Headshot
         self.is_editable = self.extracted_data.get("is_editable", "")
         self.is_undroppable = self.extracted_data.get("is_undroppable", "")
-        self.name = self.extracted_data.get("name", "")  # type: Name
+        self.name = self.extracted_data.get("name", Name({}))  # type: Name
         self.player_id = self.extracted_data.get("player_id", "")
         self.player_key = self.extracted_data.get("player_key", "")
         self.player_notes_last_timestamp = self.extracted_data.get("player_notes_last_timestamp", "")
-        self.player_points = self.extracted_data.get("player_points", "")  # type: PlayerPoints
-        self.player_stats = self.extracted_data.get("player_stats", "")  # type: PlayerStats
+        self.player_points = self.extracted_data.get("player_points", PlayerPoints({}))  # type: PlayerPoints
+        self.player_stats = self.extracted_data.get("player_stats", PlayerStats({}))  # type: PlayerStats
         self.position_type = self.extracted_data.get("position_type", "")
         self.primary_position = self.extracted_data.get("primary_position", "")
-        self.selected_position = self.extracted_data.get("selected_position", "")  # type: SelectedPosition
+        self.selected_position = self.extracted_data.get("selected_position", SelectedPosition({}))  # type: SelectedPosition
         self.status = self.extracted_data.get("status", "")
         self.uniform_number = self.extracted_data.get("uniform_number", "")
 
