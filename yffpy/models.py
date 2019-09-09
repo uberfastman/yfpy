@@ -263,10 +263,10 @@ class OutcomeTotals(YahooFantasyObject):
 
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
-        self.losses = int(self.extracted_data.get("losses", 0))
-        self.percentage = float(self.extracted_data.get("percentage", 0))
+        self.losses = int(self.extracted_data.get("losses", 0) or 0)
+        self.percentage = float(self.extracted_data.get("percentage", 0) or 0)
         self.ties = int(self.extracted_data.get("ties", 0) or 0)
-        self.wins = int(self.extracted_data.get("wins", 0))
+        self.wins = int(self.extracted_data.get("wins", 0) or 0)
 
 
 class Streak(YahooFantasyObject):

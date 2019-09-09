@@ -208,7 +208,7 @@ if __name__ == "__main__":
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
 
     chosen_week = 1
-    player_key = "331.p.7200"
+    player_key = game_id + ".p.7200"
     new_data_dir = os.path.join(data_dir, str(season), str(game_id) + ".l." + str(league_id), "week_" +
                                 str(chosen_week), "players")
     result_data = yahoo_data.save(str(player_key), yahoo_query.get_player_stats,
