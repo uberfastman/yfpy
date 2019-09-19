@@ -15,3 +15,4 @@ dist/
 examples/test_output/
 examples/private.json
 examples/token.json
+test
