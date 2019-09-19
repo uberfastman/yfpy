@@ -53,7 +53,6 @@ class Data(object):
         :param new_data_dir: (optional) full path to new desired directory to which data will be saved
         :return:
         """
-
         # change data save directory
         if new_data_dir:
             logger.debug("Data directory changed from {} to {}.".format(self.data_dir, new_data_dir))
@@ -81,7 +80,6 @@ class Data(object):
         :param new_data_dir: (optional) full path to new desired directory from which data will be loaded
         :return:
         """
-
         # change data load directory
         if new_data_dir:
             self.update_data_dir(new_data_dir)
