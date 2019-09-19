@@ -6,7 +6,7 @@ import logging
 
 import stringcase
 
-from yffpy.utils import complex_json_handler
+from yffpy.utils import complex_json_handler, flatten_to_objects
 
 logger = logging.getLogger(__name__)
 
@@ -25,11 +25,22 @@ class YahooFantasyObject(object):
         if isinstance(extracted_data, dict):
             self._keys = list(self.extracted_data.keys())
 
+    def _after_init(self):
+        pass
+
     def __str__(self):
         return self.to_json()
 
     def __repr__(self):
         return self.to_json()
+
+    # def __getattribute__(self, item):
+    #     return flatten_to_objects(item)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._equality_field_dict() == other._equality_field_dict()
 
     def __len__(self):
         return len(self.extracted_data)
@@ -51,9 +62,12 @@ class YahooFantasyObject(object):
     def __reversed__(self):
         return reversed(self._keys)
 
+    def _equality_field_dict(self):
+        return {k: v for k, v in self.__dict__.items() if k not in ["extracted_data", "_index", "_keys"]}
+
     def subclass_dict(self):
         # derive snake case dict keys from custom object type camel case class names
-        return {stringcase.snakecase(cls.__name__): cls for cls in self.__class__.__subclasses__()}
+        return {stringcase.snakecase(cls.__name__): cls for cls in self.__class__.__mro__[-2].__subclasses__()}
 
     def clean_data_dict(self):
         # recursive method to un-type custom class type objects for serialization
@@ -103,15 +117,44 @@ class Game(YahooFantasyObject):
         self.code = self.extracted_data.get("code", "")
         self.game_id = self.extracted_data.get("game_id", "")
         self.game_key = self.extracted_data.get("game_key", "")
+        self.game_weeks = self.extracted_data.get("game_weeks", "")
         self.is_game_over = self.extracted_data.get("is_game_over", "")
         self.is_live_draft_lobby_active = self.extracted_data.get("is_live_draft_lobby_active", "")
         self.is_offseason = self.extracted_data.get("is_offseason", "")
         self.is_registration_over = self.extracted_data.get("is_registration_over", "")
         self.leagues = self.extracted_data.get("leagues", "")
         self.name = self.extracted_data.get("name", "")
+        self.position_types = self.extracted_data.get("position_types", "")
+        self.roster_positions = self.extracted_data.get("roster_positions", "")
         self.season = self.extracted_data.get("season", "")
+        self.stat_categories = self.extracted_data.get("stat_categories", StatCategories({}))  # type: StatCategories
+        self.teams = self.extracted_data.get("teams", "")
         self.type = self.extracted_data.get("type", "")
         self.url = self.extracted_data.get("url", "")
+
+
+class GameWeek(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "game_week" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.display_name = self.extracted_data.get("display_name", "")
+        self.end = self.extracted_data.get("end", "")
+        self.start = self.extracted_data.get("start", "")
+        self.week = self.extracted_data.get("week", "")
+
+
+class PositionType(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "position_type" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.type = self.extracted_data.get("type", "")
+        self.display_name = self.extracted_data.get("display_name", "")
 
 
 class League(YahooFantasyObject):
@@ -123,6 +166,7 @@ class League(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.allow_add_to_dl_extra_pos = self.extracted_data.get("allow_add_to_dl_extra_pos", "")
         self.current_week = self.extracted_data.get("current_week", "")
+        self.draft_results = self.extracted_data.get("draft_results", "")
         self.draft_status = self.extracted_data.get("draft_status", "")
         self.edit_key = self.extracted_data.get("edit_key", "")
         self.end_date = self.extracted_data.get("end_date", "")
@@ -142,8 +186,10 @@ class League(YahooFantasyObject):
         self.num_teams = self.extracted_data.get("num_teams", "")
         self.password = self.extracted_data.get("password", "")
         self.payment_deadline = self.extracted_data.get("payment_deadline", "")
+        self.players = self.extracted_data.get("players", "")
         self.renew = self.extracted_data.get("renew", "")
         self.renewed = self.extracted_data.get("renewed", "")
+        self.scoreboard = self.extracted_data.get("scoreboard", Scoreboard({}))  # type: Scoreboard
         self.scoring_type = self.extracted_data.get("scoring_type", "")
         self.season = self.extracted_data.get("season", "")
         self.settings = self.extracted_data.get("settings", Settings({}))  # type: Settings
@@ -151,6 +197,7 @@ class League(YahooFantasyObject):
         self.standings = self.extracted_data.get("standings", Standings({}))  # type: Standings
         self.start_date = self.extracted_data.get("start_date", "")
         self.start_week = self.extracted_data.get("start_week", "")
+        self.transactions = self.extracted_data.get("transactions", "")
         self.url = self.extracted_data.get("url", "")
         self.weekly_deadline = self.extracted_data.get("weekly_deadline", "")
 
@@ -164,21 +211,40 @@ class Team(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.clinched_playoffs = self.extracted_data.get("clinched_playoffs", "")
         self.draft_grade = self.extracted_data.get("draft_grade", "")
+        self.draft_position = self.extracted_data.get("draft_position", "")
         self.draft_recap_url = self.extracted_data.get("draft_recap_url", "")
+        self.draft_results = self.extracted_data.get("draft_results", "")
         self.has_draft_grade = self.extracted_data.get("has_draft_grade", "")
         self.league_scoring_type = self.extracted_data.get("league_scoring_type", "")
         self.managers = self.extracted_data.get("managers", "")
+        self.matchups = self.extracted_data.get("matchups", "")
         self.name = self.extracted_data.get("name", "").encode("utf-8")
         self.number_of_moves = self.extracted_data.get("number_of_moves", "")
         self.number_of_trades = self.extracted_data.get("number_of_trades", "")
+        self.roster = self.extracted_data.get("roster", Roster({}))  # type: Roster
         self.roster_adds = self.extracted_data.get("roster_adds", RosterAdds({}))  # type: RosterAdds
         self.team_id = self.extracted_data.get("team_id", "")
         self.team_key = self.extracted_data.get("team_key", "")
         self.team_logos = self.extracted_data.get("team_logos", "")
         self.team_points = self.extracted_data.get("team_points", TeamPoints({}))  # type: TeamPoints
+        self.team_projected_points = self.extracted_data.get("team_projected_points", TeamProjectedPoints({}))  # type: TeamProjectedPoints
         self.team_standings = self.extracted_data.get("team_standings", TeamStandings({}))  # type: TeamStandings
         self.url = self.extracted_data.get("url", "")
         self.waiver_priority = self.extracted_data.get("waiver_priority", "")
+        self.win_probability = self.extracted_data.get("win_probability", "")
+
+
+class DraftResult(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "draft_result" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.pick = self.extracted_data.get("pick", "")
+        self.round = self.extracted_data.get("round", "")
+        self.team_key = self.extracted_data.get("team_key", "")
+        self.player_key = self.extracted_data.get("player_key", "")
 
 
 class Standings(YahooFantasyObject):
@@ -189,6 +255,22 @@ class Standings(YahooFantasyObject):
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
         self.teams = self.extracted_data.get("teams", "")
+        # self.teams = flatten_to_list(self.extracted_data.get("teams", ""))
+
+
+class Transaction(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "transaction" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.players = self.extracted_data.get("players", "")
+        self.status = self.extracted_data.get("status", "")
+        self.timestamp = self.extracted_data.get("timestamp", "")
+        self.transaction_id = self.extracted_data.get("transaction_id", "")
+        self.transaction_key = self.extracted_data.get("transaction_key", "")
+        self.type = self.extracted_data.get("type", "")
 
 
 class Manager(YahooFantasyObject):
@@ -204,6 +286,19 @@ class Manager(YahooFantasyObject):
         self.is_comanager = self.extracted_data.get("is_comanager", "")
         self.manager_id = self.extracted_data.get("manager_id", "")
         self.nickname = self.extracted_data.get("nickname", "")
+
+
+class Roster(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "roster" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type = self.extracted_data.get("coverage_type", "")
+        self.week = self.extracted_data.get("week", "")
+        self.is_editable = self.extracted_data.get("is_editable", "")
+        self.players = self.extracted_data.get("players", "")
 
 
 class RosterAdds(YahooFantasyObject):
@@ -239,6 +334,19 @@ class TeamPoints(YahooFantasyObject):
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.season = self.extracted_data.get("season", "")
         self.total = self.extracted_data.get("total", 0)
+        self.week = self.extracted_data.get("week", "")
+
+
+class TeamProjectedPoints(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "team_projected_points" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type = self.extracted_data.get("coverage_type", "")
+        self.total = self.extracted_data.get("total", 0)
+        self.week = self.extracted_data.get("week", "")
 
 
 class TeamStandings(YahooFantasyObject):
@@ -278,6 +386,17 @@ class Streak(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.type = self.extracted_data.get("type", "")
         self.value = self.extracted_data.get("value", "")
+
+
+class Scoreboard(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "scoreboard" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.week = self.extracted_data.get("week", "")
+        self.matchups = self.extracted_data.get("matchups", "")
 
 
 class Settings(YahooFantasyObject):
@@ -407,7 +526,7 @@ class Matchup(YahooFantasyObject):
         self.matchup_recap_title = self.extracted_data.get("matchup_recap_title", "")
         self.matchup_recap_url = self.extracted_data.get("matchup_recap_url", "")
         self.status = self.extracted_data.get("status", "")
-        self.teams = self.extracted_data.get("teams")
+        self.teams = self.extracted_data.get("teams", "")
         self.week = self.extracted_data.get("week", "")
         self.week_end = self.extracted_data.get("week_end", "")
         self.week_start = self.extracted_data.get("week_start", "")
@@ -433,7 +552,13 @@ class Player(YahooFantasyObject):
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
         self.bye_weeks = self.extracted_data.get("bye_weeks", ByeWeeks({}))  # type: ByeWeeks
+        self.bye = self.bye_weeks.week
         self.display_position = self.extracted_data.get("display_position", "")
+        self.draft_analysis = self.extracted_data.get("draft_analysis", DraftAnalysis({}))  # type: DraftAnalysis
+        self.average_draft_pick = self.draft_analysis.average_pick
+        self.average_draft_round = self.draft_analysis.average_round
+        self.average_draft_cost = self.draft_analysis.average_cost
+        self.percent_drafted = self.draft_analysis.percent_drafted
         self.editorial_player_key = self.extracted_data.get("editorial_player_key", "")
         self.editorial_team_abbr = self.extracted_data.get("editorial_team_abbr", "")
         self.editorial_team_full_name = self.extracted_data.get("editorial_team_full_name", "")
@@ -441,17 +566,28 @@ class Player(YahooFantasyObject):
         self.eligible_positions = self.extracted_data.get("eligible_positions", "")
         self.has_player_notes = self.extracted_data.get("has_player_notes", "")
         self.headshot = self.extracted_data.get("headshot", Headshot({}))  # type: Headshot
+        self.headshot_size = self.headshot.size
+        self.headshot_url = self.headshot.url
         self.is_editable = self.extracted_data.get("is_editable", "")
         self.is_undroppable = self.extracted_data.get("is_undroppable", "")
         self.name = self.extracted_data.get("name", Name({}))  # type: Name
+        self.first_name = self.name.first
+        self.last_name = self.name.last
+        self.full_name = self.name.full
+        self.ownership = self.extracted_data.get("ownership", Ownership({}))  # type: Ownership
+        self.percent_owned = self.extracted_data.get("percent_owned", PercentOwned({}))  # type: PercentOwned
+        self.percent_owned_value = self.percent_owned.value
         self.player_id = self.extracted_data.get("player_id", "")
         self.player_key = self.extracted_data.get("player_key", "")
         self.player_notes_last_timestamp = self.extracted_data.get("player_notes_last_timestamp", "")
         self.player_points = self.extracted_data.get("player_points", PlayerPoints({}))  # type: PlayerPoints
+        self.player_points_value = self.player_points.total
         self.player_stats = self.extracted_data.get("player_stats", PlayerStats({}))  # type: PlayerStats
+        self.stats = self.player_stats.stats
         self.position_type = self.extracted_data.get("position_type", "")
         self.primary_position = self.extracted_data.get("primary_position", "")
         self.selected_position = self.extracted_data.get("selected_position", SelectedPosition({}))  # type: SelectedPosition
+        self.selected_position_value = self.selected_position.position
         self.status = self.extracted_data.get("status", "")
         self.uniform_number = self.extracted_data.get("uniform_number", "")
 
@@ -464,6 +600,19 @@ class ByeWeeks(YahooFantasyObject):
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
         self.week = self.extracted_data.get("week", "")
+
+
+class DraftAnalysis(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "draft_analysis" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.average_pick = self.extracted_data.get("average_pick", "")
+        self.average_round = self.extracted_data.get("average_round", "")
+        self.average_cost = self.extracted_data.get("average_cost", "")
+        self.percent_drafted = self.extracted_data.get("percent_drafted", "")
 
 
 class Headshot(YahooFantasyObject):
@@ -489,6 +638,32 @@ class Name(YahooFantasyObject):
         self.first = self.extracted_data.get("first", "")
         self.full = self.extracted_data.get("full", "")
         self.last = self.extracted_data.get("last", "")
+
+
+class Ownership(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "ownership" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.ownership_type = self.extracted_data.get("ownership_type", "")
+        self.owner_team_key = self.extracted_data.get("owner_team_key", "")
+        self.owner_team_name = self.extracted_data.get("owner_team_name", "")
+        self.teams = self.extracted_data.get("teams", "")
+
+
+class PercentOwned(YahooFantasyObject):
+    """
+    Yahoo fantasy football object for "percent_owned" data key.
+    """
+
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type = self.extracted_data.get("coverage_type", "")
+        self.week = self.extracted_data.get("week", "")
+        self.value = self.extracted_data.get("value", "")
+        self.delta = self.extracted_data.get("delta", "")
 
 
 class PlayerPoints(YahooFantasyObject):

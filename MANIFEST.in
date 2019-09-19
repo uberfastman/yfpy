@@ -8,5 +8,6 @@ include LICENSE.txt
 include requirements.txt
 include dev-requirements.txt
 
-# Include example code and resources
-recursive-include examples *
+# Include test code and resources
+include test/test.py
+include test/EXAMPLE-private.json
