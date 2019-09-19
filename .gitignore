@@ -12,7 +12,6 @@ dist/
 *.egg-info/
 
 # Testing
-examples/test_output/
-examples/private.json
-examples/token.json
-test
+test/test_output/
+test/private.json
+test/token.json
