@@ -34,12 +34,14 @@ class QueryTestCase(TestCase):
 
         # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
         self.game_id = "331"
-        self.game_id = "380"
+        # self.game_id = "303"
+        self.game_code = "nfl"
+        # self.game_code = "nhl"
         self.season = "2014"
-        self.season = "2018"
+        # self.season = "2012"
         self.league_id = "729259"
-        self.league_id = "130225"
-        public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
+        # self.league_id = "69625"
+        example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
         # Test vars
         self.chosen_week = 1
@@ -50,7 +52,8 @@ class QueryTestCase(TestCase):
 
         # Instantiate yffpy objects
         self.yahoo_data = Data(self.data_dir)
-        self.yahoo_query = YahooFantasyFootballQuery(auth_dir, self.league_id, game_id=self.game_id, offline=False)
+        self.yahoo_query = YahooFantasyFootballQuery(auth_dir, self.league_id, game_id=self.game_id,
+                                                     game_code=self.game_code, offline=False)
 
         # Manually override league key for example code to work
         self.yahoo_query.league_key = self.game_id + ".l." + self.league_id
@@ -59,16 +62,17 @@ class QueryTestCase(TestCase):
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ SAVING AND LOADING FANTASY FOOTBALL GAME DATA • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
 
-    def test_get_all_nfl_game_keys(self):
+    def test_get_all_yahoo_fantasy_game_keys(self):
         """Retrieve all Yahoo fantasy football game keys.
         """
-        query_result_data = self.yahoo_data.save("nfl-game_keys", self.yahoo_query.get_all_nfl_game_keys)
+        query_result_data = self.yahoo_data.save(self.game_code + "-game_keys",
+                                                 self.yahoo_query.get_all_yahoo_fantasy_game_keys)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load("nfl-game_keys")
+        loaded_result_data = self.yahoo_data.load(self.game_code + "-game_keys")
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -88,7 +92,7 @@ class QueryTestCase(TestCase):
         self.assertEqual(query_result_data, self.game_id)
 
     def test_get_current_game_metadata(self):
-        """Retrieve game metadata for current NFL season.
+        """Retrieve game metadata for current fantasy season.
         """
         query_result_data = self.yahoo_data.save("current-game-metadata", self.yahoo_query.get_current_game_metadata)
         if self.print_output:
@@ -258,12 +262,12 @@ class QueryTestCase(TestCase):
 
         self.assertEqual(query_result_data, loaded_result_data)
 
-    # @skip("skipping get_user_leagues_by_game_id when current logged-in user has no leagues from test season/year")
+    @skip("skipping get_user_leagues_by_game_key when current logged-in user has no leagues from test season/year")
     def test_get_user_leagues_by_game_id(self):
         """Retrieve league history for current logged-in user for specific game by id.
         """
         new_data_dir = self.data_dir
-        query_result_data = self.yahoo_data.save("user-leagues", self.yahoo_query.get_user_leagues_by_game_id,
+        query_result_data = self.yahoo_data.save("user-leagues", self.yahoo_query.get_user_leagues_by_game_key,
                                                  params={"game_id": self.game_id}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
