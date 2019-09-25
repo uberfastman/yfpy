@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import sys
+from requests.exceptions import HTTPError
 
 from yahoo_oauth import OAuth2
 
@@ -81,6 +82,13 @@ class YahooFantasyFootballQuery(object):
         """
         if not self.offline:
             response = self.oauth.session.get(url, params={"format": "json"})
+
+            try:
+                response.raise_for_status()
+            except HTTPError as e:
+                # log error and terminate query if status code is not 200
+                logger.error("REQUEST FAILED WITH STATUS CODE: {} - {}".format(response.status_code, e))
+                sys.exit()
             logger.debug("Response (JSON): {}".format(response.json()))
 
             # handle if the yahoo query returns an error
