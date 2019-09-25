@@ -85,19 +85,24 @@ class YahooFantasyFootballQuery(object):
 
             try:
                 response.raise_for_status()
+                # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
+                if response.status_code == 999:
+                    raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
             except HTTPError as e:
                 # log error and terminate query if status code is not 200
                 logger.error("REQUEST FAILED WITH STATUS CODE: {} - {}".format(response.status_code, e))
                 sys.exit()
-            logger.debug("Response (JSON): {}".format(response.json()))
+
+            response_json = response.json()
+            logger.debug("Response (JSON): {}".format(response_json))
 
             # handle if the yahoo query returns an error
-            if response.json().get("error"):
-                response_error_msg = response.json().get("error").get("description")
+            if response_json.get("error"):
+                response_error_msg = response_json.get("error").get("description")
                 logger.error("ATTEMPT TO RETRIEVE DATA FAILED WITH ERROR: \"{}\"".format(response_error_msg))
                 sys.exit()
             else:
-                raw_response_data = response.json().get("fantasy_content")
+                raw_response_data = response_json.get("fantasy_content")
 
             # extract data from "fantasy_content" field if it exists
             if raw_response_data:
