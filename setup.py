@@ -6,9 +6,11 @@ with open("README.md", "r") as docs:
 with open("requirements.txt") as reqs:
     required = reqs.read().splitlines()
 
+print(setuptools.find_packages())
+
 setuptools.setup(
     name="yffpy",
-    version="2.2.0",
+    version="2.3.0",
     author="Wren J. R.",
     author_email="wrenjr@yahoo.com",
     description="Python API wrapper for the Yahoo Fantasy Football public API.",
@@ -17,6 +19,7 @@ setuptools.setup(
     keywords="yahoo fantasy football api wrapper sports",
     url="https://github.com/uberfastman/yffpy",
     packages=setuptools.find_packages(),
+    dist_dir="distribution",
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
