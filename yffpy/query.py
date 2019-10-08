@@ -198,6 +198,71 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=" + self.game_code + ";seasons=" +
             str(season), ["games"]).get("game").game_key
 
+    def get_current_game_info(self):
+        """Retrieve game info for current fantasy season.
+
+        :rtype: Game
+        :return: yffpy Game object
+            Example:
+                {
+                  "code": "nfl",
+                  "game_id": "390",
+                  "game_key": "390",
+                  "game_weeks": [
+                    {
+                      "game_week": {
+                        "display_name": "1",
+                        "end": "2019-09-09",
+                        "start": "2019-09-05",
+                        "week": "1"
+                      }
+                    },
+                    ...
+                  ],
+                  "is_game_over": 0,
+                  "is_live_draft_lobby_active": 1,
+                  "is_offseason": 0,
+                  "is_registration_over": 0,
+                  "name": "Football",
+                  "position_types": [
+                    {
+                      "position_type": {
+                        "type": "O",
+                        "display_name": "Offense"
+                      }
+                    },
+                    ...
+                  ],
+                  "roster_positions": [
+                    {
+                      "roster_position": {
+                        "position": "QB",
+                        "position_type": "O"
+                      }
+                    },
+                    ...
+                  ],
+                  "season": "2019",
+                  "stat_categories": {
+                    "stats": [
+                      {
+                        "stat": {
+                          "display_name": "GP",
+                          "name": "Games Played",
+                          "sort_order": "1",
+                          "stat_id": 0
+                        }
+                      },
+                      ...
+                  },
+                  "type": "full",
+                  "url": "https://football.fantasysports.yahoo.com/f1"
+                }
+        """
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code +
+            ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions", ["game"], Game)
+
     def get_current_game_metadata(self):
         """Retrieve game metadata for current fantasy season.
 
@@ -220,6 +285,72 @@ class YahooFantasyFootballQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code + "/metadata", ["game"], Game)
+
+    def get_game_info_by_game_id(self, game_id):
+        """Retrieve game info for specific game by id.
+
+        :param game_id: game_id for specific Yahoo fantasy game
+        :rtype: Game
+        :return: yffpy Game object
+            Example:
+                {
+                  "code": "nfl",
+                  "game_id": "390",
+                  "game_key": "390",
+                  "game_weeks": [
+                    {
+                      "game_week": {
+                        "display_name": "1",
+                        "end": "2019-09-09",
+                        "start": "2019-09-05",
+                        "week": "1"
+                      }
+                    },
+                    ...
+                  ],
+                  "is_game_over": 0,
+                  "is_live_draft_lobby_active": 1,
+                  "is_offseason": 0,
+                  "is_registration_over": 0,
+                  "name": "Football",
+                  "position_types": [
+                    {
+                      "position_type": {
+                        "type": "O",
+                        "display_name": "Offense"
+                      }
+                    },
+                    ...
+                  ],
+                  "roster_positions": [
+                    {
+                      "roster_position": {
+                        "position": "QB",
+                        "position_type": "O"
+                      }
+                    },
+                    ...
+                  ],
+                  "season": "2019",
+                  "stat_categories": {
+                    "stats": [
+                      {
+                        "stat": {
+                          "display_name": "GP",
+                          "name": "Games Played",
+                          "sort_order": "1",
+                          "stat_id": 0
+                        }
+                      },
+                      ...
+                  },
+                  "type": "full",
+                  "url": "https://football.fantasysports.yahoo.com/f1"
+                }
+        """
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) +
+            ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions", ["game"], Game)
 
     def get_game_metadata_by_game_id(self, game_id):
         """Retrieve game metadata for specific game by id.
@@ -547,6 +678,62 @@ class YahooFantasyFootballQuery(object):
         return sorted(self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=" + self.game_code +
             "/teams/", ["users", "0", "user", "games"]), key=lambda x: x.get("game").season)
+
+    def get_league_info(self):
+        """Retrieve info for chosen league.
+
+        :rtype: League
+        :return: yffpy League object
+            Example:
+                {
+                  "allow_add_to_dl_extra_pos": 0,
+                  "current_week": "16",
+                  "draft_status": "postdraft",
+                  "edit_key": "16",
+                  "end_date": "2014-12-22",
+                  "end_week": "16",
+                  "game_code": "nfl",
+                  "iris_group_chat_id": null,
+                  "is_cash_league": "0",
+                  "is_finished": 1,
+                  "is_pro_league": "1",
+                  "league_id": "729259",
+                  "league_key": "331.l.729259",
+                  "league_type": "public",
+                  "league_update_timestamp": "1420099793",
+                  "logo_url": "https://s.yimg.com/cv/api/default/20180206/default-league-logo@2x.png",
+                  "name": "Yahoo Public 729259",
+                  "num_teams": 10,
+                  "renew": null,
+                  "renewed": null,
+                  "scoreboard": {
+                    "week": "16",
+                    "matchups": [
+                      ...
+                    ]
+                  },
+                  "scoring_type": "head",
+                  "season": "2014",
+                  "settings": {
+                    ...
+                  },
+                  "standings": {
+                    "teams": [
+                        ...,
+                        ...
+                    ],
+                    ...
+                  },
+                  "start_date": "2014-09-04",
+                  "start_week": "1",
+                  "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259",
+                  "weekly_deadline": null
+                }
+        """
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() +
+            ";out=metadata,settings,standings,scoreboard,teams,players,draftresults,transactions", ["league"],
+            League)
 
     def get_league_metadata(self):
         """Retrieve metadata for chosen league.
@@ -1038,6 +1225,82 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week=" +
             str(chosen_week), ["league", "scoreboard", "0", "matchups"])
 
+    def get_team_info(self, team_id):
+        """Retrieve info of specific team by team_id for chosen league.
+
+        :param team_id:
+        :rtype: Team
+        :return: yffpy Team object
+            Example:
+                {
+                  "clinched_playoffs": 1,
+                  "draft_grade": "B",
+                  "draft_position": 4,
+                  "draft_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap",
+                  "draft_results": [
+                    ...
+                  ],
+                  "has_draft_grade": 1,
+                  "league_scoring_type": "head",
+                  "managers": {
+                    "manager": {
+                      "guid": "BMACD7S5UXV7JIQX4PGGUVQJAU",
+                      "manager_id": "1",
+                      "nickname": "--hidden--"
+                    }
+                  },
+                  "matchups": [
+                    ...
+                  ],
+                  "name": "Hellacious Hill 12",
+                  "number_of_moves": "71",
+                  "number_of_trades": 0,
+                  "roster": {
+                    ...
+                  },
+                  "roster_adds": {
+                    "coverage_type": "week",
+                    "coverage_value": "17",
+                    "value": "0"
+                  },
+                  "team_id": "1",
+                  "team_key": "331.l.729259.t.1",
+                  "team_logos": {
+                    "team_logo": {
+                      "size": "large",
+                      "url": "https://ct.yimg.com/cy/1441/24935131299_a8242dab70_192sq.jpg?ct=fantasy"
+                    }
+                  },
+                  "team_points": {
+                    "coverage_type": "season",
+                    "season": "2014",
+                    "total": "1409.24"
+                  },
+                  "team_standings": {
+                    "outcome_totals": {
+                      "losses": 5,
+                      "percentage": 0.643,
+                      "ties": 0,
+                      "wins": 9
+                    },
+                    "playoff_seed": "2",
+                    "points_against": 1266.6599999999999,
+                    "points_for": 1409.24,
+                    "rank": 2,
+                    "streak": {
+                      "type": "win",
+                      "value": "1"
+                    }
+                  },
+                  "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1",
+                  "waiver_priority": 9
+                }
+        """
+        team_key = self.get_league_key() + ".t." + str(team_id)
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) +
+            ";out=metadata,stats,standings,roster,draftresults,matchups", ["team"], Team)
+
     def get_team_metadata(self, team_id):
         """Retrieve metadata of specific team by team_id for chosen league.
 
@@ -1221,83 +1484,6 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
             str(chosen_week), ["team", "roster"], Roster)
 
-    def get_team_roster_player_stats_by_week(self, team_id, chosen_week="current"):
-        """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
-
-        :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
-        :param chosen_week: selected week for which to retrieve data
-        :rtype: list
-        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
-            Example:
-                [
-                  {
-                    "player": {
-                      "bye_weeks": {
-                        "week": "10"
-                      },
-                      "display_position": "QB",
-                      "editorial_player_key": "nfl.p.5228",
-                      "editorial_team_abbr": "NE",
-                      "editorial_team_full_name": "New England Patriots",
-                      "editorial_team_key": "nfl.t.17",
-                      "eligible_positions": {
-                        "position": "QB"
-                      },
-                      "has_player_notes": 1,
-                      "headshot": {
-                        "size": "small",
-                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
-                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
-                            3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
-                      },
-                      "is_undroppable": "0",
-                      "name": {
-                        "ascii_first": "Tom",
-                        "ascii_last": "Brady",
-                        "first": "Tom",
-                        "full": "Tom Brady",
-                        "last": "Brady"
-                      },
-                      "player_id": "5228",
-                      "player_key": "331.p.5228",
-                      "player_notes_last_timestamp": 1568837880,
-                      "player_points": {
-                        "coverage_type": "week",
-                        "week": "1",
-                        "total": 10.26
-                      },
-                      "player_stats": {
-                        "coverage_type": "week",
-                        "week": "1",
-                        "stats": [
-                          {
-                            "stat": {
-                              "stat_id": "4",
-                              "value": "249"
-                            }
-                          },
-                          ...
-                        ]
-                      },
-                      "position_type": "O",
-                      "primary_position": "QB",
-                      "selected_position": {
-                        "coverage_type": "week",
-                        "is_flex": 0,
-                        "position": "QB",
-                        "week": "1"
-                      },
-                      "uniform_number": "12"
-                    }
-                  },
-                  ...
-                ]
-        """
-        team_key = self.get_league_key() + ".t." + str(team_id)
-        return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
-            str(chosen_week) + "/players/stats", ["team", "roster", "0", "players"])
-
     def get_team_roster_player_info_by_week(self, team_id, chosen_week="current"):
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
 
@@ -1393,6 +1579,83 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
             str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
             ["team", "roster", "0", "players"])
+
+    def get_team_roster_player_stats_by_week(self, team_id, chosen_week="current"):
+        """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
+
+        :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
+        :param chosen_week: selected week for which to retrieve data
+        :rtype: list
+        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+            Example:
+                [
+                  {
+                    "player": {
+                      "bye_weeks": {
+                        "week": "10"
+                      },
+                      "display_position": "QB",
+                      "editorial_player_key": "nfl.p.5228",
+                      "editorial_team_abbr": "NE",
+                      "editorial_team_full_name": "New England Patriots",
+                      "editorial_team_key": "nfl.t.17",
+                      "eligible_positions": {
+                        "position": "QB"
+                      },
+                      "has_player_notes": 1,
+                      "headshot": {
+                        "size": "small",
+                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                            3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                      },
+                      "is_undroppable": "0",
+                      "name": {
+                        "ascii_first": "Tom",
+                        "ascii_last": "Brady",
+                        "first": "Tom",
+                        "full": "Tom Brady",
+                        "last": "Brady"
+                      },
+                      "player_id": "5228",
+                      "player_key": "331.p.5228",
+                      "player_notes_last_timestamp": 1568837880,
+                      "player_points": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "total": 10.26
+                      },
+                      "player_stats": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "stats": [
+                          {
+                            "stat": {
+                              "stat_id": "4",
+                              "value": "249"
+                            }
+                          },
+                          ...
+                        ]
+                      },
+                      "position_type": "O",
+                      "primary_position": "QB",
+                      "selected_position": {
+                        "coverage_type": "week",
+                        "is_flex": 0,
+                        "position": "QB",
+                        "week": "1"
+                      },
+                      "uniform_number": "12"
+                    }
+                  },
+                  ...
+                ]
+        """
+        team_key = self.get_league_key() + ".t." + str(team_id)
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
+            str(chosen_week) + "/players/stats", ["team", "roster", "0", "players"])
 
     def get_team_draft_results(self, team_id):
         """Retrieve draft results of specific team by team_id for chosen league.

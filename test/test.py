@@ -91,6 +91,23 @@ class QueryTestCase(TestCase):
 
         self.assertEqual(query_result_data, self.game_id)
 
+    def test_get_current_game_info(self):
+        """Retrieve game info for current fantasy season.
+        """
+        query_result_data = self.yahoo_data.save("current-game-info", self.yahoo_query.get_current_game_info)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load("current-game-info", Game)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
     def test_get_current_game_metadata(self):
         """Retrieve game metadata for current fantasy season.
         """
@@ -101,6 +118,26 @@ class QueryTestCase(TestCase):
             print()
 
         loaded_result_data = self.yahoo_data.load("current-game-metadata", Game)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
+    def test_get_game_info_by_game_id(self):
+        """Retrieve game info for specific game by id.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season))
+        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-info",
+                                                 self.yahoo_query.get_game_info_by_game_id,
+                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-info", Game, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -305,6 +342,26 @@ class QueryTestCase(TestCase):
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ SAVING AND LOADING FANTASY FOOTBALL LEAGUE DATA • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~
 
+    def test_get_league_info(self):
+        """Retrieve info for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-info",
+                                                 self.yahoo_query.get_league_info, new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.league_id) + "-league-info", League,
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
     def test_get_league_metadata(self):
         """Retrieve metadata for chosen league.
         """
@@ -493,6 +550,29 @@ class QueryTestCase(TestCase):
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • SAVING AND LOADING SPECIFIC TEAM DATA ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
 
+    def test_get_team_info(self):
+        """Retrieve info of specific team by team_id for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season),
+                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.team_id) + "-" + self.team_name)
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-info",
+                                                 self.yahoo_query.get_team_info,
+                                                 params={"team_id": self.team_id}, new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-info", Team,
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
     def test_get_team_metadata(self):
         """Retrieve metadata of specific team by team_id for chosen league.
         """
@@ -608,30 +688,6 @@ class QueryTestCase(TestCase):
 
         self.assertEqual(query_result_data, loaded_result_data)
 
-    def test_get_team_roster_player_stats_by_week(self):
-        """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
-        """
-        new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
-                                    "rosters")
-        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
-                                                 self.yahoo_query.get_team_roster_player_stats_by_week,
-                                                 params={"team_id": self.team_id, "chosen_week": self.chosen_week},
-                                                 new_data_dir=new_data_dir)
-        if self.print_output:
-            pprint.pprint(query_result_data)
-            print("-" * 100)
-            print()
-
-        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
-                                                  new_data_dir=new_data_dir)
-        if self.print_output:
-            pprint.pprint(loaded_result_data)
-            print("-" * 100)
-            print()
-
-        self.assertEqual(query_result_data, loaded_result_data)
-
     def test_get_team_roster_player_info_by_week(self):
         """Retrieve roster with player info of specific team by team_id and by week for chosen league.
         """
@@ -648,6 +704,30 @@ class QueryTestCase(TestCase):
             print()
 
         loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_info",
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
+    def test_get_team_roster_player_stats_by_week(self):
+        """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season),
+                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
+                                    "rosters")
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
+                                                 self.yahoo_query.get_team_roster_player_stats_by_week,
+                                                 params={"team_id": self.team_id, "chosen_week": self.chosen_week},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
