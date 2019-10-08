@@ -110,7 +110,7 @@ class User(YahooFantasyObject):
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
-        self.games = self.extracted_data.get("games", "")
+        self.games = self.extracted_data.get("games", [])
         self.guid = self.extracted_data.get("guid", "")
 
 
@@ -127,13 +127,13 @@ class Game(YahooFantasyObject):
         self.is_live_draft_lobby_active = self.extracted_data.get("is_live_draft_lobby_active", "")
         self.is_offseason = self.extracted_data.get("is_offseason", "")
         self.is_registration_over = self.extracted_data.get("is_registration_over", "")
-        self.leagues = self.extracted_data.get("leagues", "")
+        self.leagues = self.extracted_data.get("leagues", [])
         self.name = self.extracted_data.get("name", "")
-        self.position_types = self.extracted_data.get("position_types", "")
-        self.roster_positions = self.extracted_data.get("roster_positions", "")
+        self.position_types = self.extracted_data.get("position_types", [])
+        self.roster_positions = self.extracted_data.get("roster_positions", [])
         self.season = self.extracted_data.get("season", "")
         self.stat_categories = self.extracted_data.get("stat_categories", StatCategories({}))  # type: StatCategories
-        self.teams = self.extracted_data.get("teams", "")
+        self.teams = self.extracted_data.get("teams", [])
         self.type = self.extracted_data.get("type", "")
         self.url = self.extracted_data.get("url", "")
 
@@ -185,7 +185,7 @@ class League(YahooFantasyObject):
         self.num_teams = self.extracted_data.get("num_teams", "")
         self.password = self.extracted_data.get("password", "")
         self.payment_deadline = self.extracted_data.get("payment_deadline", "")
-        self.players = self.extracted_data.get("players", "")
+        self.players = self.extracted_data.get("players", [])
         self.renew = self.extracted_data.get("renew", "")
         self.renewed = self.extracted_data.get("renewed", "")
         self.scoreboard = self.extracted_data.get("scoreboard", Scoreboard({}))  # type: Scoreboard
@@ -228,15 +228,15 @@ class Team(YahooFantasyObject):
         self.team_key = self.extracted_data.get("team_key", "")
         self.team_logos = self.extracted_data.get("team_logos", "")
         self.team_points = self.extracted_data.get("team_points", TeamPoints({}))  # type: TeamPoints
-        self.points = self.team_points.total
+        self.points = float(self.team_points.total)
         self.team_projected_points = self.extracted_data.get("team_projected_points",
                                                              TeamProjectedPoints({}))  # type: TeamProjectedPoints
-        self.projected_points = self.team_projected_points.total
+        self.projected_points = float(self.team_projected_points.total)
         self.team_standings = self.extracted_data.get("team_standings", TeamStandings({}))  # type: TeamStandings
-        self.wins = self.team_standings.outcome_totals.wins
-        self.losses = self.team_standings.outcome_totals.losses
-        self.ties = self.team_standings.outcome_totals.ties
-        self.matchup_percentage = self.team_standings.outcome_totals.percentage
+        self.wins = int(self.team_standings.outcome_totals.wins)
+        self.losses = int(self.team_standings.outcome_totals.losses)
+        self.ties = int(self.team_standings.outcome_totals.ties)
+        self.percentage = float(self.team_standings.outcome_totals.percentage)
         self.playoff_seed = self.team_standings.playoff_seed
         self.points_against = self.team_standings.points_against
         self.points_for = self.team_standings.points_for
@@ -383,7 +383,7 @@ class Scoreboard(YahooFantasyObject):
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
         self.week = self.extracted_data.get("week", "")
-        self.matchups = self.extracted_data.get("matchups", "")
+        self.matchups = self.extracted_data.get("matchups", [])
 
 
 class Settings(YahooFantasyObject):

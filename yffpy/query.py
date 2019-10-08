@@ -680,7 +680,8 @@ class YahooFantasyFootballQuery(object):
                         "clinched_playoffs": 1,
                         "draft_grade": "C+",
                         "draft_position": 7,
-                        "draft_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/8/draftrecap",
+                        "draft_recap_url":
+                            "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/8/draftrecap",
                         "has_draft_grade": 1,
                         "league_scoring_type": "head",
                         "managers": {
@@ -751,7 +752,8 @@ class YahooFantasyFootballQuery(object):
                       "clinched_playoffs": 1,
                       "draft_grade": "B",
                       "draft_position": 4,
-                      "draft_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap",
+                      "draft_recap_url":
+                        "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap",
                       "has_draft_grade": 1,
                       "league_scoring_type": "head",
                       "managers": {
@@ -811,7 +813,10 @@ class YahooFantasyFootballQuery(object):
                       "has_player_notes": 1,
                       "headshot": {
                         "size": "small",
-                        "url": "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
+                        "url":
+                            "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                            3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
                       },
                       "is_undroppable": "0",
                       "name": {
@@ -946,7 +951,9 @@ class YahooFantasyFootballQuery(object):
                           }
                         ],
                         "matchup_recap_title": "Wax On Wax Off Gets Victory Against Hellacious Hill 12",
-                        "matchup_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?week=1&mid1=1&mid2=2",
+                        "matchup_recap_url":
+                            "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?
+                            week=1&mid1=1&mid2=2",
                         "status": "postevent",
                         "teams": [
                           {
@@ -1002,7 +1009,9 @@ class YahooFantasyFootballQuery(object):
                           }
                         ],
                         "matchup_recap_title": "Wax On Wax Off Gets Victory Against Hellacious Hill 12",
-                        "matchup_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?week=1&mid1=1&mid2=2",
+                        "matchup_recap_url":
+                            "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?
+                            week=1&mid1=1&mid2=2",
                         "status": "postevent",
                         "teams": [
                           {
@@ -1177,7 +1186,9 @@ class YahooFantasyFootballQuery(object):
                         "has_player_notes": 1,
                         "headshot": {
                           "size": "small",
-                          "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                          "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                            3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
                         },
                         "is_undroppable": "0",
                         "name": {
@@ -1235,7 +1246,9 @@ class YahooFantasyFootballQuery(object):
                       "has_player_notes": 1,
                       "headshot": {
                         "size": "small",
-                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                            3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
                       },
                       "is_undroppable": "0",
                       "name": {
@@ -1284,6 +1297,102 @@ class YahooFantasyFootballQuery(object):
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
             str(chosen_week) + "/players/stats", ["team", "roster", "0", "players"])
+
+    def get_team_roster_player_info_by_week(self, team_id, chosen_week="current"):
+        """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
+
+        :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
+        :param chosen_week: selected week for which to retrieve data
+        :rtype: list
+        :return: yffpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
+            "player_stats" and respective yffpy objects
+            Example:
+                [
+                  {
+                    "player": {
+                      "bye_weeks": {
+                        "week": "10"
+                      },
+                      "display_position": "QB",
+                      "draft_analysis": {
+                        "average_pick": "65.9",
+                        "average_round": "7.6",
+                        "average_cost": "5.0",
+                        "percent_drafted": "1.00"
+                      },
+                      "editorial_player_key": "nfl.p.5228",
+                      "editorial_team_abbr": "NE",
+                      "editorial_team_full_name": "New England Patriots",
+                      "editorial_team_key": "nfl.t.17",
+                      "eligible_positions": {
+                        "position": "QB"
+                      },
+                      "has_player_notes": 1,
+                      "headshot": {
+                        "size": "small",
+                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                      },
+                      "is_undroppable": "0",
+                      "name": {
+                        "ascii_first": "Tom",
+                        "ascii_last": "Brady",
+                        "first": "Tom",
+                        "full": "Tom Brady",
+                        "last": "Brady"
+                      },
+                      "ownership": {
+                        "ownership_type": "team",
+                        "owner_team_key": "331.l.729259.t.1",
+                        "owner_team_name": "Hellacious Hill 12"
+                      },
+                      "percent_owned": {
+                        "coverage_type": "week",
+                        "week": "17",
+                        "value": 99,
+                        "delta": "0"
+                      },
+                      "player_id": "5228",
+                      "player_key": "331.p.5228",
+                      "player_notes_last_timestamp": 1568837880,
+                      "player_points": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "total": 10.26
+                      },
+                      "player_stats": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "stats": [
+                          {
+                            "stat": {
+                              "stat_id": "4",
+                              "value": "249"
+                            }
+                          },
+                          ...
+                        ]
+                      },
+                      "position_type": "O",
+                      "primary_position": "QB",
+                      "selected_position": {
+                        "coverage_type": "week",
+                        "is_flex": 0,
+                        "position": "QB",
+                        "week": "1"
+                      },
+                      "uniform_number": "12"
+                    }
+                  },
+                  ...
+                ]
+
+        """
+        team_key = self.get_league_key() + ".t." + str(team_id)
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
+            str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
+            ["team", "roster", "0", "players"])
 
     def get_team_draft_results(self, team_id):
         """Retrieve draft results of specific team by team_id for chosen league.
@@ -1352,7 +1461,9 @@ class YahooFantasyFootballQuery(object):
                   "has_player_notes": 1,
                   "headshot": {
                     "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
+                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C
+                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ
+                        2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
                   },
                   "is_undroppable": "0",
                   "name": {
@@ -1414,7 +1525,9 @@ class YahooFantasyFootballQuery(object):
                   "has_player_notes": 1,
                   "headshot": {
                     "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
+                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C
+                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ
+                        2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
                   },
                   "is_undroppable": "0",
                   "name": {
@@ -1433,7 +1546,8 @@ class YahooFantasyFootballQuery(object):
                         "clinched_playoffs": 1,
                         "draft_grade": "B-",
                         "draft_position": 1,
-                        "draft_recap_url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/4/draftrecap",
+                        "draft_recap_url":
+                            "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/4/draftrecap",
                         "has_draft_grade": 1,
                         "league_scoring_type": "head",
                         "managers": {
@@ -1499,7 +1613,9 @@ class YahooFantasyFootballQuery(object):
                   "has_player_notes": 1,
                   "headshot": {
                     "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
+                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/
+                    https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
                   },
                   "is_undroppable": "0",
                   "name": {
@@ -1556,7 +1672,9 @@ class YahooFantasyFootballQuery(object):
                   "has_player_notes": 1,
                   "headshot": {
                     "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
+                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C
+                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ
+                        2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
                   },
                   "is_undroppable": "0",
                   "name": {

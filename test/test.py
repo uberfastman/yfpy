@@ -632,6 +632,30 @@ class QueryTestCase(TestCase):
 
         self.assertEqual(query_result_data, loaded_result_data)
 
+    def test_get_team_roster_player_info_by_week(self):
+        """Retrieve roster with player info of specific team by team_id and by week for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season),
+                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
+                                    "rosters")
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_info",
+                                                 self.yahoo_query.get_team_roster_player_info_by_week,
+                                                 params={"team_id": self.team_id, "chosen_week": self.chosen_week},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_info",
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
     def test_get_team_draft_results(self):
         """Retrieve draft results of specific team by team_id for chosen league.
         """
