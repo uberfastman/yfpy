@@ -712,6 +712,29 @@ class QueryTestCase(TestCase):
 
         self.assertEqual(query_result_data, loaded_result_data)
 
+    def test_get_team_roster_player_stats(self):
+        """Retrieve roster with player info for season of specific team by team_id for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season),
+                                    str(self.game_id) + ".l." + str(self.league_id), "rosters")
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
+                                                 self.yahoo_query.get_team_roster_player_stats,
+                                                 params={"team_id": self.team_id},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
     def test_get_team_roster_player_stats_by_week(self):
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
         """
