@@ -1,12 +1,25 @@
+import os
+import shutil
+
 import setuptools
+
+if os.path.exists("build"):
+    print("Removing stale \"build\" directory before packaging...")
+    shutil.rmtree("build")
+
+if os.path.exists("dist"):
+    print("Removing stale \"dist\" directory before packaging...")
+    shutil.rmtree("dist")
+
+if os.path.exists("yffpy.egg-info"):
+    print("Removing stale \"yffpy.egg-info\" directory before packaging...")
+    shutil.rmtree("yffpy.egg-info")
 
 with open("README.md", "r") as docs:
     long_description = docs.read()
 
 with open("requirements.txt") as reqs:
     required = reqs.read().splitlines()
-
-print(setuptools.find_packages())
 
 setuptools.setup(
     name="yffpy",
@@ -19,7 +32,6 @@ setuptools.setup(
     keywords="yahoo fantasy football api wrapper sports",
     url="https://github.com/uberfastman/yffpy",
     packages=setuptools.find_packages(),
-    dist_dir="distribution",
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
