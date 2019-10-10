@@ -1626,33 +1626,20 @@ class YahooFantasyFootballQuery(object):
                         "full": "Tom Brady",
                         "last": "Brady"
                       },
-                      "ownership": {
-                        "ownership_type": "team",
-                        "owner_team_key": "331.l.729259.t.1",
-                        "owner_team_name": "Hellacious Hill 12"
-                      },
-                      "percent_owned": {
-                        "coverage_type": "week",
-                        "week": "17",
-                        "value": 99,
-                        "delta": "0"
-                      },
                       "player_id": "5228",
                       "player_key": "331.p.5228",
                       "player_notes_last_timestamp": 1568837880,
                       "player_points": {
-                        "coverage_type": "week",
-                        "week": "1",
-                        "total": 10.26
+                        "coverage_type": "season",
+                        "total": 287.06
                       },
                       "player_stats": {
-                        "coverage_type": "week",
-                        "week": "1",
+                        "coverage_type": "season",
                         "stats": [
                           {
                             "stat": {
                               "stat_id": "4",
-                              "value": "249"
+                              "value": "4109"
                             }
                           },
                           ...
@@ -1664,7 +1651,7 @@ class YahooFantasyFootballQuery(object):
                         "coverage_type": "week",
                         "is_flex": 0,
                         "position": "QB",
-                        "week": "1"
+                        "week": "16"
                       },
                       "uniform_number": "12"
                     }
@@ -1678,7 +1665,6 @@ class YahooFantasyFootballQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) +
             "/roster/players/stats;type=season",
             ["team", "roster", "0", "players"])
-
 
     def get_team_roster_player_stats_by_week(self, team_id, chosen_week="current"):
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
