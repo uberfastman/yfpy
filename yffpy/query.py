@@ -1584,6 +1584,103 @@ class YahooFantasyFootballQuery(object):
             str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
             ["team", "roster", "0", "players"])
 
+    def get_team_roster_player_info_by_date(self, team_id, chosen_date="current"):
+        """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
+        This applies to MLB, NBA, and NHL leauges, NOT NFL
+
+        :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
+        :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
+        :rtype: list
+        :return: yffpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
+            "player_stats" and respective yffpy objects
+            Example:
+                [
+                  {
+                    "player": {
+                      "bye_weeks": {
+                        "week": "10"
+                      },
+                      "display_position": "QB",
+                      "draft_analysis": {
+                        "average_pick": "65.9",
+                        "average_round": "7.6",
+                        "average_cost": "5.0",
+                        "percent_drafted": "1.00"
+                      },
+                      "editorial_player_key": "nfl.p.5228",
+                      "editorial_team_abbr": "NE",
+                      "editorial_team_full_name": "New England Patriots",
+                      "editorial_team_key": "nfl.t.17",
+                      "eligible_positions": {
+                        "position": "QB"
+                      },
+                      "has_player_notes": 1,
+                      "headshot": {
+                        "size": "small",
+                        "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                            /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                      },
+                      "is_undroppable": "0",
+                      "name": {
+                        "ascii_first": "Tom",
+                        "ascii_last": "Brady",
+                        "first": "Tom",
+                        "full": "Tom Brady",
+                        "last": "Brady"
+                      },
+                      "ownership": {
+                        "ownership_type": "team",
+                        "owner_team_key": "331.l.729259.t.1",
+                        "owner_team_name": "Hellacious Hill 12"
+                      },
+                      "percent_owned": {
+                        "coverage_type": "week",
+                        "week": "17",
+                        "value": 99,
+                        "delta": "0"
+                      },
+                      "player_id": "5228",
+                      "player_key": "331.p.5228",
+                      "player_notes_last_timestamp": 1568837880,
+                      "player_points": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "total": 10.26
+                      },
+                      "player_stats": {
+                        "coverage_type": "week",
+                        "week": "1",
+                        "stats": [
+                          {
+                            "stat": {
+                              "stat_id": "4",
+                              "value": "249"
+                            }
+                          },
+                          ...
+                        ]
+                      },
+                      "position_type": "O",
+                      "primary_position": "QB",
+                      "selected_position": {
+                        "coverage_type": "week",
+                        "is_flex": 0,
+                        "position": "QB",
+                        "week": "1"
+                      },
+                      "uniform_number": "12"
+                    }
+                  },
+                  ...
+                ]
+
+        """
+        team_key = self.get_league_key() + ".t." + str(team_id)
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;date=" +
+            str(chosen_date) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
+            ["team", "roster", "0", "players"])
+
     def get_team_roster_player_stats(self, team_id):
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
 
