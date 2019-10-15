@@ -213,6 +213,7 @@ class Team(YahooFantasyObject):
         self.draft_position = self.extracted_data.get("draft_position", "")
         self.draft_recap_url = self.extracted_data.get("draft_recap_url", "")
         self.draft_results = self.extracted_data.get("draft_results", "")
+        self.faab_balance = self.extracted_data.get("faab_balance", "")
         self.has_draft_grade = self.extracted_data.get("has_draft_grade", "")
         self.league_scoring_type = self.extracted_data.get("league_scoring_type", "")
         self.managers = self.extracted_data.get("managers", "")

@@ -34,17 +34,18 @@ class QueryTestCase(TestCase):
 
         # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
         self.game_id = "331"
-        # self.game_id = "303"
+        # self.game_id = "303"  # NHL
         self.game_code = "nfl"
-        # self.game_code = "nhl"
+        # self.game_code = "nhl"  # NHL
         self.season = "2014"
-        # self.season = "2012"
+        # self.season = "2012"  # NHL
         self.league_id = "729259"
-        # self.league_id = "69625"
+        # self.league_id = "69624"  # NHL
         example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
         # Test vars
         self.chosen_week = 1
+        self.chosen_date = "2013-04-15"  # NHL
         self.team_id = 1
         self.team_name = "Legion"
         self.player_id = "7200"  # Aaron Rodgers
@@ -670,7 +671,7 @@ class QueryTestCase(TestCase):
         new_data_dir = os.path.join(self.data_dir, str(self.season),
                                     str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
-        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster",
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster_by_week",
                                                  self.yahoo_query.get_team_roster_by_week,
                                                  params={"team_id": self.team_id, "chosen_week": self.chosen_week},
                                                  new_data_dir=new_data_dir)
@@ -679,7 +680,7 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster", Roster,
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster_by_week", Roster,
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
@@ -694,7 +695,8 @@ class QueryTestCase(TestCase):
         new_data_dir = os.path.join(self.data_dir, str(self.season),
                                     str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
-        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_info",
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
+                                                 "-roster-player_info_by_week",
                                                  self.yahoo_query.get_team_roster_player_info_by_week,
                                                  params={"team_id": self.team_id, "chosen_week": self.chosen_week},
                                                  new_data_dir=new_data_dir)
@@ -703,7 +705,35 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_info",
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name +
+                                                  "-roster-player_info_by_week",
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
+    @skip  # skip because this is only for NHL/NBA/MLB, not NFL
+    def test_get_team_roster_player_info_by_date(self):
+        """Retrieve roster with player info of specific team by team_id and by date for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season),
+                                    str(self.game_id) + ".l." + str(self.league_id), str(self.chosen_date),
+                                    "rosters")
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
+                                                 "-roster-player_info_by_date",
+                                                 self.yahoo_query.get_team_roster_player_info_by_date,
+                                                 params={"team_id": self.team_id, "chosen_date": self.chosen_date},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name +
+                                                  "-roster-player_info_by_date",
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
@@ -741,7 +771,8 @@ class QueryTestCase(TestCase):
         new_data_dir = os.path.join(self.data_dir, str(self.season),
                                     str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
-        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
+        query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
+                                                 "-roster-player_stats_by_week",
                                                  self.yahoo_query.get_team_roster_player_stats_by_week,
                                                  params={"team_id": self.team_id, "chosen_week": self.chosen_week},
                                                  new_data_dir=new_data_dir)
@@ -750,7 +781,8 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
+        loaded_result_data = self.yahoo_data.load(str(self.team_id) + "-" + self.team_name +
+                                                  "-roster-player_stats_by_week",
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)

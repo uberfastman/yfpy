@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Miscelleanous
+.DS_Store
+
 # JetBrains IDE project files
 .idea/*
 
