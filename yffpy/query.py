@@ -1584,7 +1584,7 @@ class YahooFantasyFootballQuery(object):
             str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
             ["team", "roster", "0", "players"])
 
-    def get_team_roster_player_info_by_date(self, team_id, chosen_date="current"):
+    def get_team_roster_player_info_by_date(self, team_id, chosen_date=None):
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
         This applies to MLB, NBA, and NHL leauges, NOT NFL
 
@@ -1677,12 +1677,15 @@ class YahooFantasyFootballQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;date=" +
-            str(chosen_date) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster" +
+            (";date=" + str(chosen_date) if chosen_date else "") +
+            "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
             ["team", "roster", "0", "players"])
 
     def get_team_roster_player_stats(self, team_id):
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
+
+        THIS QUERY WILL FAIL IF YOU PASS IT AN INVALID DATE!
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: list
