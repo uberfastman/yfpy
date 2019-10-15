@@ -16,5 +16,5 @@ dist/
 
 # Testing
 test/test_output/
-test/private.json
-test/token.json
+test/*private*.json
+test/*token*.json
