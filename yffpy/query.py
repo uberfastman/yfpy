@@ -104,6 +104,11 @@ class YahooFantasyFootballQuery(object):
             else:
                 raw_response_data = response_json.get("fantasy_content")
 
+            # print("RAW RESPONSE JSON:")
+            # import pprint
+            # pprint.pprint(raw_response_data)
+            # print("~" * 100)
+
             # extract data from "fantasy_content" field if it exists
             if raw_response_data:
                 logger.debug("Data fetched with query URL: {}".format(response.url))
