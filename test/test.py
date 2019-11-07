@@ -33,15 +33,21 @@ class QueryTestCase(TestCase):
         self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_output")
 
         # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
-        self.game_id = "331"
+        # self.game_id = "331"
+        # self.game_id = "390"
         # self.game_id = "303"  # NHL
+        self.game_id = "348"  # divisions
         self.game_code = "nfl"
         # self.game_code = "nhl"  # NHL
-        self.season = "2014"
+        # self.season = "2014"
+        # self.season = "2019"
         # self.season = "2012"  # NHL
-        self.league_id = "729259"
+        self.season = "2015"  # divisions
+        # self.league_id = "729259"
+        # self.league_id = "79230"
         # self.league_id = "69624"  # NHL
-        example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
+        self.league_id = "907359"  # divisions
+        # example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
         # Test vars
         self.chosen_week = 1
@@ -491,6 +497,17 @@ class QueryTestCase(TestCase):
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
+
+        # print("//" * 100)
+        # print("//" * 100)
+        # print("//" * 100)
+        # print(self.yahoo_query.get_league_transactions())
+        # print("//" * 100)
+        # print("//" * 100)
+        # print("//" * 100)
+        #
+        # import json
+        # json.loads(str(query_result_data))
 
         loaded_result_data = self.yahoo_data.load(str(self.league_id) + "-league-transactions",
                                                   new_data_dir=new_data_dir)
