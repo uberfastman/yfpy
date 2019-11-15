@@ -10,7 +10,7 @@ from unittest import skip, TestCase
 
 from yffpy import Data
 from yffpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
-    TeamPoints, TeamStandings, Roster
+    TeamPoints, TeamStandings, Roster, Transaction
 from yffpy.query import YahooFantasyFootballQuery
 
 
@@ -33,20 +33,20 @@ class QueryTestCase(TestCase):
         self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_output")
 
         # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
-        # self.game_id = "331"
+        self.game_id = "331"
         # self.game_id = "390"
         # self.game_id = "303"  # NHL
-        self.game_id = "348"  # divisions
+        # self.game_id = "348"  # divisions
         self.game_code = "nfl"
         # self.game_code = "nhl"  # NHL
-        # self.season = "2014"
+        self.season = "2014"
         # self.season = "2019"
         # self.season = "2012"  # NHL
-        self.season = "2015"  # divisions
-        # self.league_id = "729259"
+        # self.season = "2015"  # divisions
+        self.league_id = "729259"
         # self.league_id = "79230"
         # self.league_id = "69624"  # NHL
-        self.league_id = "907359"  # divisions
+        # self.league_id = "907359"  # divisions
         # example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
         # Test vars
@@ -498,17 +498,6 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        # print("//" * 100)
-        # print("//" * 100)
-        # print("//" * 100)
-        # print(self.yahoo_query.get_league_transactions())
-        # print("//" * 100)
-        # print("//" * 100)
-        # print("//" * 100)
-        #
-        # import json
-        # json.loads(str(query_result_data))
-
         loaded_result_data = self.yahoo_data.load(str(self.league_id) + "-league-transactions",
                                                   new_data_dir=new_data_dir)
         if self.print_output:
@@ -857,6 +846,29 @@ class QueryTestCase(TestCase):
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • SAVING AND LOADING SPECIFIC PLAYER DATA • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
+
+    def test_get_player_stats_for_season(self):
+        """Retrieve stats of specific player by player_key for season for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+                                    "players")
+        query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-season-stats",
+                                                 self.yahoo_query.get_player_stats_for_season,
+                                                 params={"player_key": str(self.player_key)},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.player_id) + "-player-season-stats", Player,
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
 
     def test_get_player_stats_by_week(self):
         """Retrieve stats of specific player by player_key and by week for chosen league.

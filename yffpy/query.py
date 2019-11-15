@@ -104,10 +104,10 @@ class YahooFantasyFootballQuery(object):
             else:
                 raw_response_data = response_json.get("fantasy_content")
 
-            # print("RAW RESPONSE JSON:")
-            # import pprint
-            # pprint.pprint(raw_response_data)
-            # print("~" * 100)
+            print("RAW RESPONSE JSON:")
+            import pprint
+            pprint.pprint(raw_response_data)
+            print("~" * 100)
 
             # extract data from "fantasy_content" field if it exists
             if raw_response_data:
@@ -1082,23 +1082,14 @@ class YahooFantasyFootballQuery(object):
                             },
                             "player_id": "26853",
                             "player_key": "331.p.26853",
-                            "position_type": "O"
-                          }
-                        },
-                        {
-                          "player": {
-                            "display_position": "RB",
-                            "editorial_team_abbr": "Oak",
-                            "name": {
-                              "ascii_first": "Doug",
-                              "ascii_last": "Martin",
-                              "first": "Doug",
-                              "full": "Doug Martin",
-                              "last": "Martin"
-                            },
-                            "player_id": "25741",
-                            "player_key": "331.p.25741",
-                            "position_type": "O"
+                            "position_type": "O",
+                            "transaction_data": {
+                              "destination_team_key": "331.l.729259.t.1",
+                              "destination_team_name": "Hellacious Hill 12",
+                              "destination_type": "team",
+                              "source_type": "freeagents",
+                              "type": "add"
+                            }
                           }
                         }
                       ],
@@ -1891,6 +1882,68 @@ class YahooFantasyFootballQuery(object):
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/matchups",
             ["team", "matchups"])
+
+    def get_player_stats_for_season(self, player_key):
+        """Retrieve stats of specific player by player_key for the entire season for chosen league.
+
+        :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
+        :rtype: Player
+        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+            Example:
+                {
+                  "bye_weeks": {
+                    "week": "9"
+                  },
+                  "display_position": "QB",
+                  "editorial_player_key": "nfl.p.7200",
+                  "editorial_team_abbr": "GB",
+                  "editorial_team_full_name": "Green Bay Packers",
+                  "editorial_team_key": "nfl.t.9",
+                  "eligible_positions": {
+                    "position": "QB"
+                  },
+                  "has_player_notes": 1,
+                  "headshot": {
+                    "size": "small",
+                    "url": "https://s.yimg.com/iu/api/res/1.2/Xdm96BfVJw4WV_W7GA7xLw--~C
+                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ
+                        2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08202019/7200.2.png"
+                  },
+                  "is_undroppable": "0",
+                  "name": {
+                    "ascii_first": "Aaron",
+                    "ascii_last": "Rodgers",
+                    "first": "Aaron",
+                    "full": "Aaron Rodgers",
+                    "last": "Rodgers"
+                  },
+                  "player_id": "7200",
+                  "player_key": "331.p.7200",
+                  "player_notes_last_timestamp": 1568581740,
+                  "player_points": {
+                    "coverage_type": "season",
+                    "total": 359.14
+                  },
+                  "player_stats": {
+                    "coverage_type": "season",
+                    "stats": [
+                      {
+                        "stat": {
+                          "stat_id": "4",
+                          "value": "4381"
+                        }
+                      },
+                      ...
+                    ]
+                  },
+                  "position_type": "O",
+                  "primary_position": "QB",
+                  "uniform_number": "12"
+                }
+        """
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
+            str(player_key) + "/stats", ["league", "players", "0", "player"], Player)
 
     def get_player_stats_by_week(self, player_key, chosen_week="current"):
         """Retrieve stats of specific player by player_key and by week for chosen league.
