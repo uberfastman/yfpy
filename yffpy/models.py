@@ -277,6 +277,10 @@ class Transaction(YahooFantasyObject):
         self.players = self.extracted_data.get("players", "")
         self.status = self.extracted_data.get("status", "")
         self.timestamp = self.extracted_data.get("timestamp", "")
+        self.tradee_team_key = self.extracted_data.get("tradee_team_key", "")
+        self.tradee_team_name = self.extracted_data.get("tradee_team_name", "")
+        self.trader_team_key = self.extracted_data.get("trader_team_key", "")
+        self.trader_team_name = self.extracted_data.get("trader_team_name", "")
         self.transaction_id = self.extracted_data.get("transaction_id", "")
         self.transaction_key = self.extracted_data.get("transaction_key", "")
         self.type = self.extracted_data.get("type", "")
@@ -581,6 +585,7 @@ class Player(YahooFantasyObject):
                                                          SelectedPosition({}))  # type: SelectedPosition
         self.selected_position_value = self.selected_position.position
         self.status = self.extracted_data.get("status", "")
+        self.transaction_data = self.extracted_data.get("transaction_data", "")
         self.uniform_number = self.extracted_data.get("uniform_number", "")
 
 
@@ -675,3 +680,17 @@ class SelectedPosition(YahooFantasyObject):
         self.is_flex = self.extracted_data.get("is_flex", "")
         self.position = self.extracted_data.get("position", "")
         self.week = self.extracted_data.get("week", "")
+
+
+class TransactionData(YahooFantasyObject):
+    """Yahoo fantasy football object for "transaction_data" data key.
+    """
+    def __init__(self, extracted_data):
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.destination_team_key = self.extracted_data.get("destination_team_key", "")
+        self.destination_team_name = self.extracted_data.get("destination_team_name", "")
+        self.destination_type = self.extracted_data.get("destination_type", "")
+        self.source_team_key = self.extracted_data.get("source_team_key", "")
+        self.source_team_name = self.extracted_data.get("source_team_name", "")
+        self.source_type = self.extracted_data.get("source_type", "")
+        self.type = self.extracted_data.get("type", "")

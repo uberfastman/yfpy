@@ -23,7 +23,7 @@ with open("requirements.txt") as reqs:
 
 setuptools.setup(
     name="yffpy",
-    version="2.7.0",
+    version="2.8.0",
     author="Wren J. R.",
     author_email="wrenjr@yahoo.com",
     description="Python API wrapper for the Yahoo Fantasy Football public API.",
