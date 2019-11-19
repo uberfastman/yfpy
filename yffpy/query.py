@@ -22,7 +22,8 @@ class YahooFantasyFootballQuery(object):
     """Yahoo fantasy football query to retrieve all types of FF data
     """
 
-    def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False):
+    def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False, consumer_key=None,
+                 consumer_secret=None):
         """Instantiate a Yahoo query object for running queries against the Yahoo fantasy REST API.
 
         :param auth_dir: location of both private.json (containing Yahoo dev app consumer_key and consumer_secret) and
@@ -34,6 +35,10 @@ class YahooFantasyFootballQuery(object):
             to "nfl" for fantasy football
         :param offline: boolean to run in offline mode (ONLY WORKS IF ALL NEEDED YAHOO FANTASY DATA HAS BEEN
             PREVIOUSLY SAVED LOCALLY USING data.py)
+        :param consumer_key: user defined consumer key to use instead of values stored in private.json (MUST BE PAIRED
+            WITH USER DEFINED CONSUMER SECRET)
+        :param consumer_secret: user defined consumer secret to use instead of values stored in private.json (MUST BE
+            PAIRED WITH USER DEFINED CONSUMER KEY)
         """
         self.league_id = league_id
         self.game_id = game_id
@@ -44,11 +49,20 @@ class YahooFantasyFootballQuery(object):
         self.executed_queries = []
 
         if not self.offline:
-            # load credentials
-            with open(os.path.join(auth_dir, "private.json")) as yahoo_app_credentials:
-                auth_info = json.load(yahoo_app_credentials)
-            self._yahoo_consumer_key = auth_info["consumer_key"]
-            self._yahoo_consumer_secret = auth_info["consumer_secret"]
+            if consumer_key and consumer_secret:
+                self._yahoo_consumer_key = str(consumer_key)
+                self._yahoo_consumer_secret = str(consumer_secret)
+            else:
+                if consumer_key or consumer_secret:
+                    logger.warning("Must supply both the consumer key AND consumer secret to authenticate with user"
+                                   "defined credentials. Defaulting to credentials located in {}.".format(
+                                    os.path.join(auth_dir, "private.json")))
+
+                # load credentials
+                with open(os.path.join(auth_dir, "private.json")) as yahoo_app_credentials:
+                    auth_info = json.load(yahoo_app_credentials)
+                self._yahoo_consumer_key = auth_info["consumer_key"]
+                self._yahoo_consumer_secret = auth_info["consumer_secret"]
 
             # load or create OAuth2 refresh token
             token_file_path = os.path.join(auth_dir, "token.json")
@@ -62,8 +76,8 @@ class YahooFantasyFootballQuery(object):
             if "access_token" in auth_info.keys():
                 self._yahoo_access_token = auth_info["access_token"]
 
-            # complete OAuth2 3-legged handshake by either refreshing existing token or requesting account access and
-            # returning a verification code to input to the command line prompt
+            # complete OAuth2 3-legged handshake by either refreshing existing token or requesting account access
+            # and returning a verification code to input to the command line prompt
             self.oauth = OAuth2(None, None, from_file=token_file_path)
             if not self.oauth.token_is_valid():
                 self.oauth.refresh_access_token()
