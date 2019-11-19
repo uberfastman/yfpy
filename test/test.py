@@ -10,7 +10,7 @@ from unittest import skip, TestCase
 
 from yffpy import Data
 from yffpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
-    TeamPoints, TeamStandings, Roster, Transaction
+    TeamPoints, TeamStandings, Roster
 from yffpy.query import YahooFantasyFootballQuery
 
 
