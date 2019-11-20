@@ -8,17 +8,17 @@ import unittest
 import warnings
 from unittest import skip, TestCase
 
-from yffpy import Data
-from yffpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
+from yfpy import Data
+from yfpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
     TeamPoints, TeamStandings, Roster
-from yffpy.query import YahooFantasyFootballQuery
+from yfpy.query import YahooFantasySportsQuery
 
 
 class QueryTestCase(TestCase):
 
     def setUp(self):
-        # Suppress YahooFantasyFootballQuery debug logging
-        logging.getLogger("yffpy.query").setLevel(level=logging.INFO)
+        # Suppress YahooFantasySportsQuery debug logging
+        logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 
         # Ignore resource warnings from unittest module
         warnings.simplefilter("ignore", ResourceWarning)
@@ -59,10 +59,10 @@ class QueryTestCase(TestCase):
         # self.player_id = "4588"  # NHL: Braden Holtby
         self.player_key = self.game_id + ".p." + self.player_id
 
-        # Instantiate yffpy objects
+        # Instantiate yfpy objects
         self.yahoo_data = Data(self.data_dir)
-        self.yahoo_query = YahooFantasyFootballQuery(auth_dir, self.league_id, game_id=self.game_id,
-                                                     game_code=self.game_code, offline=False)
+        self.yahoo_query = YahooFantasySportsQuery(auth_dir, self.league_id, game_id=self.game_id,
+                                                   game_code=self.game_code, offline=False)
 
         # Manually override league key for example code to work
         self.yahoo_query.league_key = self.game_id + ".l." + self.league_id

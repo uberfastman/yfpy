@@ -6,19 +6,20 @@ import logging
 
 import stringcase
 
-from yffpy.utils import complex_json_handler, flatten_to_objects
+from yfpy.utils import complex_json_handler
+# from yfpy.utils import flatten_to_objects
 
 logger = logging.getLogger(__name__)
 
 
 class YahooFantasyObject(object):
-    """Base Yahoo fantasy football data object.
+    """Base Yahoo fantasy data object.
     """
 
     def __init__(self, extracted_data):
-        """Instantiate a Yahoo fantasy football object.
+        """Instantiate a Yahoo fantasy object.
 
-        :param extracted_data: parsed and cleaned data retrieved from Yahoo fantasy football API
+        :param extracted_data: parsed and cleaned data retrieved from Yahoo fantasy sports API
         """
         self.extracted_data = extracted_data
         self._index = 0
@@ -106,7 +107,7 @@ class YahooFantasyObject(object):
 
 
 class User(YahooFantasyObject):
-    """Yahoo fantasy football object for "user" data key.
+    """Yahoo fantasy object for "user" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -115,7 +116,7 @@ class User(YahooFantasyObject):
 
 
 class Game(YahooFantasyObject):
-    """Yahoo fantasy football object for "game" data key.
+    """Yahoo fantasy object for "game" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -139,7 +140,7 @@ class Game(YahooFantasyObject):
 
 
 class GameWeek(YahooFantasyObject):
-    """Yahoo fantasy football object for "game_week" data key.
+    """Yahoo fantasy object for "game_week" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -150,7 +151,7 @@ class GameWeek(YahooFantasyObject):
 
 
 class PositionType(YahooFantasyObject):
-    """Yahoo fantasy football object for "position_type" data key.
+    """Yahoo fantasy object for "position_type" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -159,7 +160,7 @@ class PositionType(YahooFantasyObject):
 
 
 class League(YahooFantasyObject):
-    """Yahoo fantasy football object for "league" data key.
+    """Yahoo fantasy object for "league" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -204,7 +205,7 @@ class League(YahooFantasyObject):
 
 
 class Team(YahooFantasyObject):
-    """Yahoo fantasy football object for "team" data key.
+    """Yahoo fantasy object for "team" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -251,7 +252,7 @@ class Team(YahooFantasyObject):
 
 
 class DraftResult(YahooFantasyObject):
-    """Yahoo fantasy football object for "draft_result" data key.
+    """Yahoo fantasy object for "draft_result" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -262,7 +263,7 @@ class DraftResult(YahooFantasyObject):
 
 
 class Standings(YahooFantasyObject):
-    """Yahoo fantasy football object for "standings" data key.
+    """Yahoo fantasy object for "standings" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -270,7 +271,7 @@ class Standings(YahooFantasyObject):
 
 
 class Transaction(YahooFantasyObject):
-    """Yahoo fantasy football object for "transaction" data key.
+    """Yahoo fantasy object for "transaction" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -287,7 +288,7 @@ class Transaction(YahooFantasyObject):
 
 
 class Manager(YahooFantasyObject):
-    """Yahoo fantasy football object for "manager" data key.
+    """Yahoo fantasy object for "manager" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -300,7 +301,7 @@ class Manager(YahooFantasyObject):
 
 
 class Roster(YahooFantasyObject):
-    """Yahoo fantasy football object for "roster" data key.
+    """Yahoo fantasy object for "roster" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -311,7 +312,7 @@ class Roster(YahooFantasyObject):
 
 
 class RosterAdds(YahooFantasyObject):
-    """Yahoo fantasy football object for "roster_adds" data key.
+    """Yahoo fantasy object for "roster_adds" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -321,7 +322,7 @@ class RosterAdds(YahooFantasyObject):
 
 
 class TeamLogo(YahooFantasyObject):
-    """Yahoo fantasy football object for "team_logo" data key.
+    """Yahoo fantasy object for "team_logo" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -330,7 +331,7 @@ class TeamLogo(YahooFantasyObject):
 
 
 class TeamPoints(YahooFantasyObject):
-    """Yahoo fantasy football object for "team_points" data key.
+    """Yahoo fantasy object for "team_points" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -341,7 +342,7 @@ class TeamPoints(YahooFantasyObject):
 
 
 class TeamProjectedPoints(YahooFantasyObject):
-    """Yahoo fantasy football object for "team_projected_points" data key.
+    """Yahoo fantasy object for "team_projected_points" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -351,7 +352,7 @@ class TeamProjectedPoints(YahooFantasyObject):
 
 
 class TeamStandings(YahooFantasyObject):
-    """Yahoo fantasy football object for "team_standings" data key.
+    """Yahoo fantasy object for "team_standings" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -366,7 +367,7 @@ class TeamStandings(YahooFantasyObject):
 
 
 class DivisionalOutcomeTotals(YahooFantasyObject):
-    """Yahoo fantasy football object for "divisional_outcome_totals" data key.
+    """Yahoo fantasy object for "divisional_outcome_totals" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -376,7 +377,7 @@ class DivisionalOutcomeTotals(YahooFantasyObject):
 
 
 class OutcomeTotals(YahooFantasyObject):
-    """Yahoo fantasy football object for "outcome_totals" data key.
+    """Yahoo fantasy object for "outcome_totals" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -387,7 +388,7 @@ class OutcomeTotals(YahooFantasyObject):
 
 
 class Streak(YahooFantasyObject):
-    """Yahoo fantasy football object for "streak" data key.
+    """Yahoo fantasy object for "streak" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -396,7 +397,7 @@ class Streak(YahooFantasyObject):
 
 
 class Scoreboard(YahooFantasyObject):
-    """Yahoo fantasy football object for "scoreboard" data key.
+    """Yahoo fantasy object for "scoreboard" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -405,7 +406,7 @@ class Scoreboard(YahooFantasyObject):
 
 
 class Settings(YahooFantasyObject):
-    """Yahoo fantasy football object for "settings" data key.
+    """Yahoo fantasy object for "settings" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -443,7 +444,7 @@ class Settings(YahooFantasyObject):
 
 
 class Division(YahooFantasyObject):
-    """Yahoo fantasy football object for "division" data key.
+    """Yahoo fantasy object for "division" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -452,7 +453,7 @@ class Division(YahooFantasyObject):
 
 
 class RosterPosition(YahooFantasyObject):
-    """Yahoo fantasy football object for "roster_position" data key.
+    """Yahoo fantasy object for "roster_position" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -462,7 +463,7 @@ class RosterPosition(YahooFantasyObject):
 
 
 class StatCategories(YahooFantasyObject):
-    """Yahoo fantasy football object for "stat_categories" data key.
+    """Yahoo fantasy object for "stat_categories" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -470,7 +471,7 @@ class StatCategories(YahooFantasyObject):
 
 
 class StatModifiers(YahooFantasyObject):
-    """Yahoo fantasy football object for "stat_modifiers" data key.
+    """Yahoo fantasy object for "stat_modifiers" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -478,7 +479,7 @@ class StatModifiers(YahooFantasyObject):
 
 
 class Stat(YahooFantasyObject):
-    """Yahoo fantasy football object for "stat" data key.
+    """Yahoo fantasy object for "stat" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -494,7 +495,7 @@ class Stat(YahooFantasyObject):
 
 
 class StatPositionType(YahooFantasyObject):
-    """Yahoo fantasy football object for "stat_position_type" data key.
+    """Yahoo fantasy object for "stat_position_type" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -503,7 +504,7 @@ class StatPositionType(YahooFantasyObject):
 
 
 class Bonus(YahooFantasyObject):
-    """Yahoo fantasy football object for "bonus" data key.
+    """Yahoo fantasy object for "bonus" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -512,7 +513,7 @@ class Bonus(YahooFantasyObject):
 
 
 class Matchup(YahooFantasyObject):
-    """Yahoo fantasy football object for "matchup" data key.
+    """Yahoo fantasy object for "matchup" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -533,7 +534,7 @@ class Matchup(YahooFantasyObject):
 
 
 class MatchupGrade(YahooFantasyObject):
-    """Yahoo fantasy football object for "matchup_grade" data key.
+    """Yahoo fantasy object for "matchup_grade" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -542,7 +543,7 @@ class MatchupGrade(YahooFantasyObject):
 
 
 class Player(YahooFantasyObject):
-    """Yahoo fantasy football object for "player" data key.
+    """Yahoo fantasy object for "player" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -590,7 +591,7 @@ class Player(YahooFantasyObject):
 
 
 class ByeWeeks(YahooFantasyObject):
-    """Yahoo fantasy football object for "bye_weeks" data key.
+    """Yahoo fantasy object for "bye_weeks" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -598,7 +599,7 @@ class ByeWeeks(YahooFantasyObject):
 
 
 class DraftAnalysis(YahooFantasyObject):
-    """Yahoo fantasy football object for "draft_analysis" data key.
+    """Yahoo fantasy object for "draft_analysis" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -609,7 +610,7 @@ class DraftAnalysis(YahooFantasyObject):
 
 
 class Headshot(YahooFantasyObject):
-    """Yahoo fantasy football object for "headshot" data key.
+    """Yahoo fantasy object for "headshot" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -618,7 +619,7 @@ class Headshot(YahooFantasyObject):
 
 
 class Name(YahooFantasyObject):
-    """Yahoo fantasy football object for "name" data key.
+    """Yahoo fantasy object for "name" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -630,7 +631,7 @@ class Name(YahooFantasyObject):
 
 
 class Ownership(YahooFantasyObject):
-    """Yahoo fantasy football object for "ownership" data key.
+    """Yahoo fantasy object for "ownership" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -641,7 +642,7 @@ class Ownership(YahooFantasyObject):
 
 
 class PercentOwned(YahooFantasyObject):
-    """Yahoo fantasy football object for "percent_owned" data key.
+    """Yahoo fantasy object for "percent_owned" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -652,7 +653,7 @@ class PercentOwned(YahooFantasyObject):
 
 
 class PlayerPoints(YahooFantasyObject):
-    """Yahoo fantasy football object for "player_points" data key.
+    """Yahoo fantasy object for "player_points" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -662,7 +663,7 @@ class PlayerPoints(YahooFantasyObject):
 
 
 class PlayerStats(YahooFantasyObject):
-    """Yahoo fantasy football object for "player_stats" data key.
+    """Yahoo fantasy object for "player_stats" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -672,7 +673,7 @@ class PlayerStats(YahooFantasyObject):
 
 
 class SelectedPosition(YahooFantasyObject):
-    """Yahoo fantasy football object for "selected_position" data key.
+    """Yahoo fantasy object for "selected_position" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)
@@ -683,7 +684,7 @@ class SelectedPosition(YahooFantasyObject):
 
 
 class TransactionData(YahooFantasyObject):
-    """Yahoo fantasy football object for "transaction_data" data key.
+    """Yahoo fantasy object for "transaction_data" data key.
     """
     def __init__(self, extracted_data):
         YahooFantasyObject.__init__(self, extracted_data)

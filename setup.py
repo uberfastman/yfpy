@@ -11,9 +11,9 @@ if os.path.exists("dist"):
     print("Removing stale \"dist\" directory before packaging...")
     shutil.rmtree("dist")
 
-if os.path.exists("yffpy.egg-info"):
-    print("Removing stale \"yffpy.egg-info\" directory before packaging...")
-    shutil.rmtree("yffpy.egg-info")
+if os.path.exists("yfpy.egg-info"):
+    print("Removing stale \"yfpy.egg-info\" directory before packaging...")
+    shutil.rmtree("yfpy.egg-info")
 
 with open("README.md", "r") as docs:
     long_description = docs.read()
@@ -22,15 +22,15 @@ with open("requirements.txt") as reqs:
     required = reqs.read().splitlines()
 
 setuptools.setup(
-    name="yffpy",
-    version="2.10.0",
+    name="yfpy",
+    version="3.0.0",
     author="Wren J. R.",
     author_email="wrenjr@yahoo.com",
-    description="Python API wrapper for the Yahoo Fantasy Football public API.",
+    description="Python API wrapper for the Yahoo Fantasy Sports public API.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    keywords="yahoo fantasy football api wrapper sports",
-    url="https://github.com/uberfastman/yffpy",
+    keywords="yahoo fantasy sports api wrapper nfl football nhl hockey mlb baseball nba basketball",
+    url="https://github.com/uberfastman/yfpy",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -9,17 +9,17 @@ from requests.exceptions import HTTPError
 
 from yahoo_oauth import OAuth2
 
-from yffpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
+from yfpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
     Scoreboard, Team, TeamPoints, TeamStandings, Roster
-from yffpy.utils import reformat_json_list, unpack_data
+from yfpy.utils import reformat_json_list, unpack_data
 
 logger = logging.getLogger(__name__)
 # suppress yahoo-oauth debug logging
 logging.getLogger("yahoo_oauth").setLevel(level=logging.INFO)
 
 
-class YahooFantasyFootballQuery(object):
-    """Yahoo fantasy football query to retrieve all types of FF data
+class YahooFantasySportsQuery(object):
+    """Yahoo fantasy sports query to retrieve all types of fantasy sports data
     """
 
     def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False, consumer_key=None,
@@ -32,7 +32,7 @@ class YahooFantasyFootballQuery(object):
         :param game_id: game id of selected Yahoo fantasy game corresponding to a specific year, and defaulting
             to the current year
         :param game_code: game code of selected Yahoo fantasy game corresponding to a specific year, and defaulting
-            to "nfl" for fantasy football
+            to "nfl" (fantasy football), "nhl" (fantasy hockey), "mlb" (fantasy baseball), or "nba" (fantasy basketball)
         :param offline: boolean to run in offline mode (ONLY WORKS IF ALL NEEDED YAHOO FANTASY DATA HAS BEEN
             PREVIOUSLY SAVED LOCALLY USING data.py)
         :param consumer_key: user defined consumer key to use instead of values stored in private.json (MUST BE PAIRED
@@ -92,7 +92,7 @@ class YahooFantasyFootballQuery(object):
                 list containing only key strings: ["game", "stat_categories"]
                 list containing key strings and lists of key strings: ["team", ["team_points", "team_projected_points"]]
         :param data_type_class: highest level data model type (if one exists for the specific retrieved data
-        :return: object from yffpy/models.py, dict, or list (depending on query) with unpacked and parsed response data
+        :return: object from yfpy/models.py, dict, or list (depending on query) with unpacked and parsed response data
         """
         if not self.offline:
             response = self.oauth.session.get(url, params={"format": "json"})
@@ -118,10 +118,10 @@ class YahooFantasyFootballQuery(object):
             else:
                 raw_response_data = response_json.get("fantasy_content")
 
-            print("RAW RESPONSE JSON:")
-            import pprint
-            pprint.pprint(raw_response_data)
-            print("~" * 100)
+            # print("RAW RESPONSE JSON:")
+            # import pprint
+            # pprint.pprint(raw_response_data)
+            # print("~" * 100)
 
             # extract data from "fantasy_content" field if it exists
             if raw_response_data:
@@ -181,7 +181,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve all Yahoo fantasy game keys (from year of inception to present), sorted by season/year.
 
         :rtype: list
-        :return: list of yffpy Game objects
+        :return: list of yfpy Game objects
             Example:
                 [
                   {
@@ -221,7 +221,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve game info for current fantasy season.
 
         :rtype: Game
-        :return: yffpy Game object
+        :return: yfpy Game object
             Example:
                 {
                   "code": "nfl",
@@ -286,7 +286,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve game metadata for current fantasy season.
 
         :rtype: Game
-        :return: yffpy Game object
+        :return: yfpy Game object
             Example:
                 {
                   "code": "nfl",
@@ -310,7 +310,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: Game
-        :return: yffpy Game object
+        :return: yfpy Game object
             Example:
                 {
                   "code": "nfl",
@@ -376,7 +376,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: Game
-        :return: yffpy Game object
+        :return: yfpy Game object
             Example:
                 {
                   "code": "nfl",
@@ -399,7 +399,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: list
-        :return: list of yffpy GameWeek objects
+        :return: list of yfpy GameWeek objects
             Example:
                 [
                   {
@@ -429,7 +429,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: StatCategories
-        :return: yffpy StatCategories object
+        :return: yfpy StatCategories object
             Example:
                 {
                   "stats": [
@@ -462,7 +462,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: list
-        :return: list of yffpy PositionType objects
+        :return: list of yfpy PositionType objects
             Example:
                 [
                   {
@@ -500,7 +500,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_id: game_id for specific Yahoo fantasy game
         :rtype: list
-        :return: list of yffpy RosterPosition objects
+        :return: list of yfpy RosterPosition objects
             Example:
                 [
                   {
@@ -546,7 +546,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve metadata for current logged-in user.
 
         :rtype: User
-        :return: yffpy User object
+        :return: yfpy User object
             Example:
                 {
                   "guid": "USER_GUID_STRING"
@@ -560,7 +560,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve game history for current logged-in user sorted by season/year.
 
         :rtype: list
-        :return: list of yffpy Game objects
+        :return: list of yfpy Game objects
             Example:
                 [
                   {
@@ -589,7 +589,7 @@ class YahooFantasyFootballQuery(object):
 
         :param game_key: game_id for specific Yahoo fantasy game
         :rtype: list
-        :return: list of yffpy League objects
+        :return: list of yfpy League objects
             Example:
                 [
                   {
@@ -638,7 +638,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
 
         :rtype: list
-        :return: list of yffpy Game objects with "teams" field containing list of yffpy Team objects
+        :return: list of yfpy Game objects with "teams" field containing list of yfpy Team objects
             Example:
                 [
                   {
@@ -706,7 +706,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve info for chosen league.
 
         :rtype: League
-        :return: yffpy League object
+        :return: yfpy League object
             Example:
                 {
                   "allow_add_to_dl_extra_pos": 0,
@@ -762,7 +762,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve metadata for chosen league.
 
         :rtype: League
-        :return: yffpy League object
+        :return: yfpy League object
             Example:
                 {
                   "allow_add_to_dl_extra_pos": 0,
@@ -801,7 +801,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve settings (rules) for chosen league.
 
         :rtype: Settings
-        :return: yffpy Settings object
+        :return: yfpy Settings object
             Example:
                 {
                   "cant_cut_list": "yahoo",
@@ -881,7 +881,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve standings for chosen league.
 
         :rtype: Standings
-        :return: yffpy Standings object
+        :return: yfpy Standings object
             Example:
                 {
                   "teams": [
@@ -954,7 +954,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve teams for chosen league.
 
         :rtype: list
-        :return: list of yffpy Team objects
+        :return: list of yfpy Team objects
             Example:
                 [
                   {
@@ -1004,7 +1004,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve valid players for chosen league.
 
         :rtype: list
-        :return: list of yffpy Player objects
+        :return: list of yfpy Player objects
             Example:
                 [
                   {
@@ -1055,7 +1055,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve draft results for chosen league.
 
         :rtype: list
-        :return: list of yffpy DraftResult objects
+        :return: list of yfpy DraftResult objects
             Example:
                 [
                   {
@@ -1077,7 +1077,7 @@ class YahooFantasyFootballQuery(object):
         """Retrieve transactions for chosen league.
 
         :rtype: list
-        :return: list of yffpy Transaction objects
+        :return: list of yfpy Transaction objects
             Example:
                 [
                   {
@@ -1126,7 +1126,7 @@ class YahooFantasyFootballQuery(object):
 
         :param chosen_week: selected week for which to retrieve data
         :rtype: Scoreboard
-        :return: yffpy Scoreboard object
+        :return: yfpy Scoreboard object
             Example:
                 {
                   "week": "1",
@@ -1187,7 +1187,7 @@ class YahooFantasyFootballQuery(object):
 
         :param chosen_week: selected week for which to retrieve data
         :rtype: list
-        :return: list of yffpy Matchup objects
+        :return: list of yfpy Matchup objects
             Examples:
                 [
                     "matchup": {
@@ -1244,7 +1244,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id:
         :rtype: Team
-        :return: yffpy Team object
+        :return: yfpy Team object
             Example:
                 {
                   "clinched_playoffs": 1,
@@ -1320,7 +1320,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id:
         :rtype: Team
-        :return: yffpy Team object
+        :return: yfpy Team object
             Example:
                 {
                   "team_key": "331.l.729259.t.1",
@@ -1365,7 +1365,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: TeamPoints
-        :return: yffpy TeamPoints objects
+        :return: yfpy TeamPoints objects
             Example:
                 {
                   "coverage_type": "season",
@@ -1384,7 +1384,7 @@ class YahooFantasyFootballQuery(object):
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_week: selected week for which to retrieve data
         :rtype: dict
-        :return: dictionary containing both a yffpy TeamPoints object and a yffpy TeamProjectedPoints object with
+        :return: dictionary containing both a yfpy TeamPoints object and a yfpy TeamProjectedPoints object with
         respective keys "team_points" and "team_projected_points"
             Example:
                 {
@@ -1410,7 +1410,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: TeamStandings
-        :return: yffpy TeamStandings object
+        :return: yfpy TeamStandings object
             Example:
                 {
                   "rank": 2,
@@ -1440,7 +1440,7 @@ class YahooFantasyFootballQuery(object):
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_week: selected week for which to retrieve data
         :rtype: Roster
-        :return: yffpy Roster object
+        :return: yfpy Roster object
             Example:
                 {
                   "coverage_type": "week",
@@ -1504,8 +1504,8 @@ class YahooFantasyFootballQuery(object):
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_week: selected week for which to retrieve data
         :rtype: list
-        :return: yffpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
-            "player_stats" and respective yffpy objects
+        :return: yfpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
+            "player_stats" and respective yfpy objects
             Example:
                 [
                   {
@@ -1601,8 +1601,8 @@ class YahooFantasyFootballQuery(object):
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
         :rtype: list
-        :return: yffpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
-            "player_stats" and respective yffpy objects
+        :return: yfpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
+            "player_stats" and respective yfpy objects
             Example:
                 [
                   {
@@ -1699,8 +1699,8 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: list
-        :return: yffpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
-            "player_stats" and respective yffpy objects
+        :return: yfpy Player object containing the keys "draft_analysis", "ownership", "percent_owned", and
+            "player_stats" and respective yfpy objects
             Example:
                 [
                   {
@@ -1782,7 +1782,7 @@ class YahooFantasyFootballQuery(object):
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_week: selected week for which to retrieve data
         :rtype: list
-        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+        :return: yfpy Player object containing the "player_stats" key and respective yfpy PlayerStats object
             Example:
                 [
                   {
@@ -1858,7 +1858,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: list
-        :return: list of yffpy DraftResult objects
+        :return: list of yfpy DraftResult objects
             Example:
                 [
                   {
@@ -1882,7 +1882,7 @@ class YahooFantasyFootballQuery(object):
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: list
-        :return: list of yffpy Matchup objects
+        :return: list of yfpy Matchup objects
             Example:
                 [
                     {
@@ -1902,7 +1902,7 @@ class YahooFantasyFootballQuery(object):
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
         :rtype: Player
-        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+        :return: yfpy Player object containing the "player_stats" key and respective yfpy PlayerStats object
             Example:
                 {
                   "bye_weeks": {
@@ -1965,7 +1965,7 @@ class YahooFantasyFootballQuery(object):
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
         :param chosen_week: selected week for which to retrieve data
         :rtype: Player
-        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+        :return: yfpy Player object containing the "player_stats" key and respective yfpy PlayerStats object
             Example:
                 {
                   "bye_weeks": {
@@ -2031,7 +2031,7 @@ class YahooFantasyFootballQuery(object):
         :param player_key: player_key for chosen player
         :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
         :rtype: Player
-        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+        :return: yfpy Player object containing the "player_stats" key and respective yfpy PlayerStats object
             Example:
                 {
                   "display_position": "G",
@@ -2121,7 +2121,7 @@ class YahooFantasyFootballQuery(object):
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
         :rtype: Player
-        :return: yffpy Player object containing the "ownership" key and respective yffpy Ownership object
+        :return: yfpy Player object containing the "ownership" key and respective yfpy Ownership object
             Example:
                 {
                   "bye_weeks": {
@@ -2209,7 +2209,7 @@ class YahooFantasyFootballQuery(object):
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
         :param chosen_week: selected week for which to retrieve data
         :rtype: Player
-        :return: yffpy Player object containing the "percent_owned" key and respective yffpy PercentOwned object
+        :return: yfpy Player object containing the "percent_owned" key and respective yfpy PercentOwned object
             Example:
                 {
                   "bye_weeks": {
@@ -2262,7 +2262,7 @@ class YahooFantasyFootballQuery(object):
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
         :rtype: Player
-        :return: yffpy Player object containing the "draft_analysis" key and respective yffpy DraftAnalysis object
+        :return: yfpy Player object containing the "draft_analysis" key and respective yfpy DraftAnalysis object
             Example:
                 {
                   "bye_weeks": {
