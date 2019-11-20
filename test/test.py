@@ -52,9 +52,11 @@ class QueryTestCase(TestCase):
         # Test vars
         self.chosen_week = 1
         self.chosen_date = "2013-04-15"  # NHL
+        # self.chosen_date = "2013-04-16"  # NHL
         self.team_id = 1
         self.team_name = "Legion"
-        self.player_id = "7200"  # Aaron Rodgers
+        self.player_id = "7200"  # NFL: Aaron Rodgers
+        # self.player_id = "4588"  # NHL: Braden Holtby
         self.player_key = self.game_id + ".p." + self.player_id
 
         # Instantiate yffpy objects
@@ -880,6 +882,31 @@ class QueryTestCase(TestCase):
                                                  self.yahoo_query.get_player_stats_by_week,
                                                  params={"player_key": str(self.player_key),
                                                          "chosen_week": str(self.chosen_week)},
+                                                 new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(query_result_data)
+            print("-" * 100)
+            print()
+
+        loaded_result_data = self.yahoo_data.load(str(self.player_id) + "-player-stats", Player,
+                                                  new_data_dir=new_data_dir)
+        if self.print_output:
+            pprint.pprint(loaded_result_data)
+            print("-" * 100)
+            print()
+
+        self.assertEqual(query_result_data, loaded_result_data)
+
+    @skip  # skip because this is only for NHL/NBA/MLB, not NFL
+    def test_get_player_stats_by_date(self):
+        """Retrieve stats of specific player by player_key and by date for chosen league.
+        """
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+                                    str(self.chosen_date), "players")
+        query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-stats",
+                                                 self.yahoo_query.get_player_stats_by_date,
+                                                 params={"player_key": str(self.player_key),
+                                                         "chosen_date": self.chosen_date},
                                                  new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
