@@ -118,10 +118,10 @@ class YahooFantasyFootballQuery(object):
             else:
                 raw_response_data = response_json.get("fantasy_content")
 
-            # print("RAW RESPONSE JSON:")
-            # import pprint
-            # pprint.pprint(raw_response_data)
-            # print("~" * 100)
+            print("RAW RESPONSE JSON:")
+            import pprint
+            pprint.pprint(raw_response_data)
+            print("~" * 100)
 
             # extract data from "fantasy_content" field if it exists
             if raw_response_data:
@@ -1596,7 +1596,7 @@ class YahooFantasyFootballQuery(object):
 
     def get_team_roster_player_info_by_date(self, team_id, chosen_date=None):
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
-        This applies to MLB, NBA, and NHL leauges, NOT NFL
+        This applies to MLB, NBA, and NHL leagues, NOT NFL
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
@@ -2023,6 +2023,98 @@ class YahooFantasyFootballQuery(object):
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
             str(player_key) + "/stats;type=week;week=" + str(chosen_week), ["league", "players", "0", "player"], Player)
+
+    def get_player_stats_by_date(self, player_key, chosen_date=None):
+        """Retrieve player stats by player_key and by date for chosen league.
+        This applies to MLB, NBA, and NHL leagues, NOT NFL
+
+        :param player_key: player_key for chosen player
+        :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
+        :rtype: Player
+        :return: yffpy Player object containing the "player_stats" key and respective yffpy PlayerStats object
+            Example:
+                {
+                  "display_position": "G",
+                  "editorial_player_key": "nhl.p.4588",
+                  "editorial_team_abbr": "Was",
+                  "editorial_team_full_name": "Washington Capitals",
+                  "editorial_team_key": "nhl.t.23",
+                  "eligible_positions": {
+                    "position": "G"
+                  },
+                  "has_player_notes": 1,
+                  "headshot": {
+                    "size": "small",
+                    "url": "https://s.yimg.com/iu/api/res/1.2/CzntDh_d59voTqU6fhQy3g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2
+                    NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/
+                    xe/i/us/sp/v/nhl_cutout/players_l/10182019/4588.png"
+                  },
+                  "is_undroppable": "0",
+                  "name": {
+                    "ascii_first": "Braden",
+                    "ascii_last": "Holtby",
+                    "first": "Braden",
+                    "full": "Braden Holtby",
+                    "last": "Holtby"
+                  },
+                  "player_id": "4588",
+                  "player_key": "303.p.4588",
+                  "player_notes_last_timestamp": 1574133600,
+                  "player_stats": {
+                    "coverage_type": "date",
+                    "stats": [
+                      {
+                        "stat": {
+                          "stat_id": "19",
+                          "value": "1"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "22",
+                          "value": "1"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "23",
+                          "value": "1.00"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "25",
+                          "value": "29"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "24",
+                          "value": "30"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "26",
+                          "value": ".967"
+                        }
+                      },
+                      {
+                        "stat": {
+                          "stat_id": "27",
+                          "value": "0"
+                        }
+                      }
+                    ]
+                  },
+                  "position_type": "G",
+                  "primary_position": "G",
+                  "uniform_number": "70"
+                }
+        """
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
+            str(player_key) + "/stats;type=date;date=" + str(chosen_date), ["league", "players", "0", "player"], Player)
 
     def get_player_ownership(self, player_key):
         """Retrieve ownership of specific player by player_key for chosen league.
