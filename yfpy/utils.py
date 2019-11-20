@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # noinspection PyTypeChecker
 def unpack_data(json_obj, parent_class=None):
-    """Recursive utility to parse, clean, and assign custom data types to retrieved Yahoo fantasy football data.
+    """Recursive utility to parse, clean, and assign custom data types to retrieved Yahoo fantasy sports data.
 
     :param json_obj: json object for parsing; can be dict, list, or primitive
     :param parent_class: parent class type used to extract custom subclass type options for casting
@@ -180,7 +180,7 @@ def reorganize_json_dict(json_dict, obj_key, val_to_key):
 
 
 def complex_json_handler(obj):
-    """Custom handler to allow custom yffpy objects to be serialized into json.
+    """Custom handler to allow custom yfpy objects to be serialized into json.
 
     :param obj: custom object to be serialized into json
     :return: serializable version of the custom object

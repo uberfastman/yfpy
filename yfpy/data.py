@@ -5,8 +5,8 @@ import json
 import logging
 import os
 
-from yffpy.models import YahooFantasyObject
-from yffpy.utils import complex_json_handler, unpack_data
+from yfpy.models import YahooFantasyObject
+from yfpy.utils import complex_json_handler, unpack_data
 
 logger = logging.getLogger(__name__)
 
@@ -32,24 +32,24 @@ class Data(object):
         self.data_dir = new_save_dir
 
     @staticmethod
-    def get(yff_query, params=None):
+    def get(yf_query, params=None):
         """Run query to retrieve Yahoo fantasy football data.
 
-        :param yff_query: chosen yffpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yffpy query function
-        :return: result of the yffpy query
+        :param yf_query: chosen yfpy query method to run
+        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
+        :return: result of the yfpy query
         """
         if params:
-            return yff_query(**params)
+            return yf_query(**params)
         else:
-            return yff_query()
+            return yf_query()
 
-    def save(self, file_name, yff_query, params=None, new_data_dir=None):
+    def save(self, file_name, yf_query, params=None, new_data_dir=None):
         """Retrieve and save Yahoo fantasy football data locally.
 
         :param file_name: name of file to which data will be saved
-        :param yff_query: chosen yffpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yffpy query function
+        :param yf_query: chosen yfpy query method to run
+        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
         :param new_data_dir: (optional) full path to new desired directory to which data will be saved
         :return:
         """
@@ -62,8 +62,8 @@ class Data(object):
         if not os.path.exists(self.data_dir):
             os.makedirs(self.data_dir)
 
-        # run the actual yffpy query and retrieve the query results
-        data = self.get(yff_query, params)
+        # run the actual yfpy query and retrieve the query results
+        data = self.get(yf_query, params)
 
         # save the retrieved data locally
         saved_data_file_path = os.path.join(self.data_dir, file_name + ".json")
@@ -76,7 +76,7 @@ class Data(object):
         """Load Yahoo fantasy football data already stored locally (CANNOT BE RUN IF save METHOD HAS NEVER BEEN RUN).
 
         :param file_name: name of file from which data will be loaded
-        :param data_type_class: (optional) yffpy models.py class for data casting
+        :param data_type_class: (optional) yfpy models.py class for data casting
         :param new_data_dir: (optional) full path to new desired directory from which data will be loaded
         :return:
         """
@@ -97,13 +97,13 @@ class Data(object):
                     saved_data_file_path))
         return data
 
-    def retrieve(self, file_name, yff_query, params=None, data_type_class=None, new_data_dir=None):
+    def retrieve(self, file_name, yf_query, params=None, data_type_class=None, new_data_dir=None):
         """Fetch data from the web or load it locally (combination of the save and load methods).
 
         :param file_name: name of file to/from which data will be saved/loaded
-        :param yff_query: chosen yffpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yffpy query function
-        :param data_type_class: (optional) yffpy models.py class for data casting
+        :param yf_query: chosen yfpy query method to run
+        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
+        :param data_type_class: (optional) yfpy models.py class for data casting
         :param new_data_dir: (optional) full path to new desired directory to/from which data will be saved/loaded
         :return:
         """
@@ -111,6 +111,6 @@ class Data(object):
             return self.load(file_name, data_type_class, new_data_dir)
         else:
             if self.save_data:
-                return self.save(file_name, yff_query, params, new_data_dir)
+                return self.save(file_name, yf_query, params, new_data_dir)
             else:
-                return self.get(yff_query, params)
+                return self.get(yf_query, params)
