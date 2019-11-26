@@ -5,8 +5,9 @@ import json
 import logging
 import os
 import sys
-from requests.exceptions import HTTPError
+import time
 
+from requests.exceptions import HTTPError
 from yahoo_oauth import OAuth2
 
 from yfpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
@@ -82,6 +83,30 @@ class YahooFantasySportsQuery(object):
             if not self.oauth.token_is_valid():
                 self.oauth.refresh_access_token()
 
+    def get_response(self, url, retries=0):
+        response = self.oauth.session.get(url, params={"format": "json"})
+
+        try:
+            response.raise_for_status()
+            # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
+            if response.status_code == 999:
+                raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
+        except HTTPError as e:
+            # retry with incremental back-off
+            if retries < 3:
+                retries += 1
+                logger.warning("Request for URL {} failed with status code {}. Retrying {} more times...".format(
+                    url, response.status_code, 4 - retries
+                ))
+                time.sleep(0.3 * retries)
+                response = self.get_response(url, retries)
+            else:
+                # log error and terminate query if status code is not 200 after 3 retries
+                logger.error("REQUEST FAILED WITH STATUS CODE: {} - {}".format(response.status_code, e))
+                sys.exit()
+
+        return response
+
     def query(self, url, data_key_list, data_type_class=None):
         """Base query class to retrieve requested data from the Yahoo fantasy sports REST API.
 
@@ -95,18 +120,7 @@ class YahooFantasySportsQuery(object):
         :return: object from yfpy/models.py, dict, or list (depending on query) with unpacked and parsed response data
         """
         if not self.offline:
-            response = self.oauth.session.get(url, params={"format": "json"})
-
-            try:
-                response.raise_for_status()
-                # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
-                if response.status_code == 999:
-                    raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
-            except HTTPError as e:
-                # log error and terminate query if status code is not 200
-                logger.error("REQUEST FAILED WITH STATUS CODE: {} - {}".format(response.status_code, e))
-                sys.exit()
-
+            response = self.get_response(url)
             response_json = response.json()
             logger.debug("Response (JSON): {}".format(response_json))
 
