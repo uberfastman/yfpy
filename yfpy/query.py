@@ -12,7 +12,7 @@ from yahoo_oauth import OAuth2
 
 from yfpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
     Scoreboard, Team, TeamPoints, TeamStandings, Roster
-from yfpy.utils import reformat_json_list, unpack_data
+from yfpy.utils import reformat_json_list, unpack_data, complex_json_handler
 
 logger = logging.getLogger(__name__)
 # suppress yahoo-oauth debug logging
@@ -23,8 +23,8 @@ class YahooFantasySportsQuery(object):
     """Yahoo fantasy sports query to retrieve all types of fantasy sports data
     """
 
-    def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False, consumer_key=None,
-                 consumer_secret=None):
+    def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False, all_output_as_json=False,
+                 consumer_key=None, consumer_secret=None):
         """Instantiate a Yahoo query object for running queries against the Yahoo fantasy REST API.
 
         :param auth_dir: location of both private.json (containing Yahoo dev app consumer_key and consumer_secret) and
@@ -36,6 +36,7 @@ class YahooFantasySportsQuery(object):
             to "nfl" (fantasy football), "nhl" (fantasy hockey), "mlb" (fantasy baseball), or "nba" (fantasy basketball)
         :param offline: boolean to run in offline mode (ONLY WORKS IF ALL NEEDED YAHOO FANTASY DATA HAS BEEN
             PREVIOUSLY SAVED LOCALLY USING data.py)
+        :param all_output_as_json: option to automatically convert all query output to a JSON string
         :param consumer_key: user defined consumer key to use instead of values stored in private.json (MUST BE PAIRED
             WITH USER DEFINED CONSUMER SECRET)
         :param consumer_secret: user defined consumer secret to use instead of values stored in private.json (MUST BE
@@ -44,7 +45,9 @@ class YahooFantasySportsQuery(object):
         self.league_id = league_id
         self.game_id = game_id
         self.game_code = game_code
+
         self.offline = offline
+        self.all_output_as_json = all_output_as_json
 
         self.league_key = None
         self.executed_queries = []
@@ -186,7 +189,11 @@ class YahooFantasySportsQuery(object):
             })
 
             # cast highest level of data to type corresponding to query (if type exists)
-            return data_type_class(unpacked) if data_type_class else unpacked
+            query_data = data_type_class(unpacked) if data_type_class else unpacked
+            if self.all_output_as_json:
+                return json.dumps(query_data, indent=2, default=complex_json_handler, ensure_ascii=False)
+            else:
+                return query_data
 
         else:
             logger.error("CANNOT RUN YAHOO QUERY WHILE USING OFFLINE MODE!")

@@ -62,7 +62,7 @@ class QueryTestCase(TestCase):
         # Instantiate yfpy objects
         self.yahoo_data = Data(self.data_dir)
         self.yahoo_query = YahooFantasySportsQuery(auth_dir, self.league_id, game_id=self.game_id,
-                                                   game_code=self.game_code, offline=False)
+                                                   game_code=self.game_code, offline=False, all_output_as_json=False)
 
         # Manually override league key for example code to work
         self.yahoo_query.league_key = self.game_id + ".l." + self.league_id
