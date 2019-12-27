@@ -56,7 +56,7 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
     * `Application Type` (**Required**): select the `Installed Application` radio button.
     * `Description` (*Optional*): you *may* write a short description of what the app does.
     * `Home Page URL` (*Optional*): if you have a web address related to your app you *may* add it here.
-    * `Redirect URI(s)` (**Required**): this field must contain a valid redirect address, so you can use `localhost:8080`
+    * `Redirect URI(s)` (**Required**): this field must contain a valid redirect address, so you can use `https://localhost:8080`
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
