@@ -231,7 +231,7 @@ class Team(YahooFantasyObject):
         self.team_key = self.extracted_data.get("team_key", "")
         self.team_logos = self.extracted_data.get("team_logos", "")
         self.team_points = self.extracted_data.get("team_points", TeamPoints({}))  # type: TeamPoints
-        self.points = float(self.team_points.total)
+        self.points = self.team_points.total
         self.team_projected_points = self.extracted_data.get("team_projected_points",
                                                              TeamProjectedPoints({}))  # type: TeamProjectedPoints
         self.projected_points = float(self.team_projected_points.total)
