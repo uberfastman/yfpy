@@ -15,10 +15,10 @@ if os.path.exists("yfpy.egg-info"):
     print("Removing stale \"yfpy.egg-info\" directory before packaging...")
     shutil.rmtree("yfpy.egg-info")
 
-with open("README.md", "r") as docs:
+with open("README.md", "r", encoding="utf8") as docs:
     long_description = docs.read()
 
-with open("requirements.txt") as reqs:
+with open("requirements.txt", "r", encoding="utf8") as reqs:
     required = reqs.read().splitlines()
 
 setuptools.setup(
