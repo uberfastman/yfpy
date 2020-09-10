@@ -231,10 +231,10 @@ class Team(YahooFantasyObject):
         self.team_key = self.extracted_data.get("team_key", "")
         self.team_logos = self.extracted_data.get("team_logos", "")
         self.team_points = self.extracted_data.get("team_points", TeamPoints({}))  # type: TeamPoints
-        self.points = float(self.team_points.total)
+        self.points = float(self.team_points.total) if self.team_points.total else 0.0
         self.team_projected_points = self.extracted_data.get("team_projected_points",
                                                              TeamProjectedPoints({}))  # type: TeamProjectedPoints
-        self.projected_points = float(self.team_projected_points.total)
+        self.projected_points = float(self.team_projected_points.total) if self.team_projected_points.total else 0.0
         self.team_standings = self.extracted_data.get("team_standings", TeamStandings({}))  # type: TeamStandings
         self.wins = int(self.team_standings.outcome_totals.wins)
         self.losses = int(self.team_standings.outcome_totals.losses)
