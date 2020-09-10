@@ -26,27 +26,34 @@ class QueryTestCase(TestCase):
         # Turn on/off example code stdout printing output
         self.print_output = False
 
-        # Put private.json (see README.md) in examples directory
+        # Put private.json (see README.md) in test/ directory
         auth_dir = "."
 
         # Example code will output data here
         self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_output")
 
         # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
-        self.game_id = "331"
-        # self.game_id = "390"
-        # self.game_id = "303"  # NHL
-        # self.game_id = "348"  # divisions
+        self.game_key = "399"
+        # self.game_key = "331"
+        # self.game_key = "390"
+        # self.game_key = "303"  # NHL
+        # self.game_key = "348"  # divisions
+
         self.game_code = "nfl"
         # self.game_code = "nhl"  # NHL
-        self.season = "2014"
+
+        # self.season = "2014"
         # self.season = "2019"
+        self.season = "2020"
         # self.season = "2012"  # NHL
         # self.season = "2015"  # divisions
-        self.league_id = "729259"
+
+        self.league_id = "655434"
+        # self.league_id = "729259"
         # self.league_id = "79230"
         # self.league_id = "69624"  # NHL
         # self.league_id = "907359"  # divisions
+
         # example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
         # Test vars
@@ -57,15 +64,15 @@ class QueryTestCase(TestCase):
         self.team_name = "Legion"
         self.player_id = "7200"  # NFL: Aaron Rodgers
         # self.player_id = "4588"  # NHL: Braden Holtby
-        self.player_key = self.game_id + ".p." + self.player_id
+        self.player_key = self.game_key + ".p." + self.player_id
 
         # Instantiate yfpy objects
         self.yahoo_data = Data(self.data_dir)
-        self.yahoo_query = YahooFantasySportsQuery(auth_dir, self.league_id, game_id=self.game_id,
+        self.yahoo_query = YahooFantasySportsQuery(auth_dir, self.league_id, game_id=self.game_key,
                                                    game_code=self.game_code, offline=False, all_output_as_json=False)
 
         # Manually override league key for example code to work
-        self.yahoo_query.league_key = self.game_id + ".l." + self.league_id
+        self.yahoo_query.league_key = self.game_key + ".l." + self.league_id
 
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
     # ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ SAVING AND LOADING FANTASY FOOTBALL GAME DATA • ~ • ~ • ~ • ~ • ~ • ~ • ~ • ~ •
@@ -98,7 +105,7 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        self.assertEqual(query_result_data, self.game_id)
+        self.assertEqual(query_result_data, self.game_key)
 
     def test_get_current_game_info(self):
         """Retrieve game info for current fantasy season.
@@ -138,15 +145,15 @@ class QueryTestCase(TestCase):
         """Retrieve game info for specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-info",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-info",
                                                  self.yahoo_query.get_game_info_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-info", Game, new_data_dir=new_data_dir)
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-info", Game, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -158,15 +165,15 @@ class QueryTestCase(TestCase):
         """Retrieve game metadata for specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-metadata",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-metadata",
                                                  self.yahoo_query.get_game_metadata_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-metadata", Game, new_data_dir=new_data_dir)
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-metadata", Game, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -183,21 +190,21 @@ class QueryTestCase(TestCase):
             print("-" * 100)
             print()
 
-        self.assertEqual(query_result_data, self.game_id + ".l." + self.league_id)
+        self.assertEqual(query_result_data, self.game_key + ".l." + self.league_id)
 
     def test_get_game_weeks_by_game_id(self):
         """Retrieve all valid weeks of a specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-weeks",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-weeks",
                                                  self.yahoo_query.get_game_weeks_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-weeks", new_data_dir=new_data_dir)
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-weeks", new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -209,15 +216,15 @@ class QueryTestCase(TestCase):
         """Retrieve all valid stat categories of a specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-stat_categories",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-stat_categories",
                                                  self.yahoo_query.get_game_stat_categories_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-stat_categories", StatCategories,
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-stat_categories", StatCategories,
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
@@ -230,15 +237,15 @@ class QueryTestCase(TestCase):
         """Retrieve all valid position types for specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-position_types",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-position_types",
                                                  self.yahoo_query.get_game_position_types_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-position_types", new_data_dir=new_data_dir)
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-position_types", new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
             print("-" * 100)
@@ -250,15 +257,15 @@ class QueryTestCase(TestCase):
         """Retrieve all valid roster positions for specific game by id.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season))
-        query_result_data = self.yahoo_data.save(str(self.game_id) + "-game-roster_positions",
+        query_result_data = self.yahoo_data.save(str(self.game_key) + "-game-roster_positions",
                                                  self.yahoo_query.get_game_roster_positions_by_game_id,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+                                                 params={"game_id": self.game_key}, new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
             print()
 
-        loaded_result_data = self.yahoo_data.load(str(self.game_id) + "-game-roster_positions",
+        loaded_result_data = self.yahoo_data.load(str(self.game_key) + "-game-roster_positions",
                                                   new_data_dir=new_data_dir)
         if self.print_output:
             pprint.pprint(loaded_result_data)
@@ -313,8 +320,13 @@ class QueryTestCase(TestCase):
         """Retrieve league history for current logged-in user for specific game by id.
         """
         new_data_dir = self.data_dir
-        query_result_data = self.yahoo_data.save("user-leagues", self.yahoo_query.get_user_leagues_by_game_key,
-                                                 params={"game_id": self.game_id}, new_data_dir=new_data_dir)
+        query_result_data = self.yahoo_data.save(
+            "user-leagues",
+            self.yahoo_query.get_user_leagues_by_game_key,
+            params={"game_key": self.game_key},
+            new_data_dir=new_data_dir
+        )
+
         if self.print_output:
             pprint.pprint(query_result_data)
             print("-" * 100)
@@ -354,7 +366,7 @@ class QueryTestCase(TestCase):
     def test_get_league_info(self):
         """Retrieve info for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-info",
                                                  self.yahoo_query.get_league_info, new_data_dir=new_data_dir)
         if self.print_output:
@@ -374,7 +386,7 @@ class QueryTestCase(TestCase):
     def test_get_league_metadata(self):
         """Retrieve metadata for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-metadata",
                                                  self.yahoo_query.get_league_metadata, new_data_dir=new_data_dir)
         if self.print_output:
@@ -394,7 +406,7 @@ class QueryTestCase(TestCase):
     def test_get_league_settings(self):
         """Retrieve settings (rules) for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-settings",
                                                  self.yahoo_query.get_league_settings, new_data_dir=new_data_dir)
         if self.print_output:
@@ -414,7 +426,7 @@ class QueryTestCase(TestCase):
     def test_get_league_standings(self):
         """Retrieve standings for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-standings",
                                                  self.yahoo_query.get_league_standings, new_data_dir=new_data_dir)
         if self.print_output:
@@ -434,7 +446,7 @@ class QueryTestCase(TestCase):
     def test_get_league_teams(self):
         """Retrieve teams for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-teams",
                                                  self.yahoo_query.get_league_teams, new_data_dir=new_data_dir)
         if self.print_output:
@@ -453,7 +465,7 @@ class QueryTestCase(TestCase):
     def test_get_league_players(self):
         """Retrieve valid players for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-players",
                                                  self.yahoo_query.get_league_players, new_data_dir=new_data_dir)
         if self.print_output:
@@ -472,7 +484,7 @@ class QueryTestCase(TestCase):
     def test_get_league_draft_results(self):
         """Retrieve draft results for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-draft_results",
                                                  self.yahoo_query.get_league_draft_results, new_data_dir=new_data_dir)
         if self.print_output:
@@ -492,7 +504,7 @@ class QueryTestCase(TestCase):
     def test_get_league_transactions(self):
         """Retrieve transactions for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id))
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id))
         query_result_data = self.yahoo_data.save(str(self.league_id) + "-league-transactions",
                                                  self.yahoo_query.get_league_transactions, new_data_dir=new_data_dir)
         if self.print_output:
@@ -512,7 +524,7 @@ class QueryTestCase(TestCase):
     def test_get_league_scoreboard_by_week(self):
         """Retrieve scoreboard for chosen league by week.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "week_" +
                                     str(self.chosen_week))
         query_result_data = self.yahoo_data.save("week_" + str(self.chosen_week) + "-scoreboard",
@@ -535,7 +547,7 @@ class QueryTestCase(TestCase):
     def test_get_league_matchups_by_week(self):
         """Retrieve matchups for chosen league by week.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "week_" +
                                     str(self.chosen_week))
         query_result_data = self.yahoo_data.save("week_" + str(self.chosen_week) + "-matchups",
@@ -563,7 +575,7 @@ class QueryTestCase(TestCase):
         """Retrieve info of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-info",
                                                  self.yahoo_query.get_team_info,
@@ -586,7 +598,7 @@ class QueryTestCase(TestCase):
         """Retrieve metadata of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-metadata",
                                                  self.yahoo_query.get_team_metadata,
@@ -609,7 +621,7 @@ class QueryTestCase(TestCase):
         """Retrieve stats of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-stats",
                                                  self.yahoo_query.get_team_stats,
@@ -632,7 +644,7 @@ class QueryTestCase(TestCase):
         """Retrieve stats of specific team by team_id and by week for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week))
+                                    str(self.game_key) + ".l." + str(self.league_id), "week_" + str(self.chosen_week))
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-stats",
                                                  self.yahoo_query.get_team_stats_by_week,
                                                  params={"team_id": self.team_id, "chosen_week": self.chosen_week},
@@ -655,7 +667,7 @@ class QueryTestCase(TestCase):
         """Retrieve standings of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-standings",
                                                  self.yahoo_query.get_team_standings,
@@ -677,7 +689,7 @@ class QueryTestCase(TestCase):
         """Retrieve roster of specific team by team_id and by week for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
+                                    str(self.game_key) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster_by_week",
                                                  self.yahoo_query.get_team_roster_by_week,
@@ -701,7 +713,7 @@ class QueryTestCase(TestCase):
         """Retrieve roster with player info of specific team by team_id and by week for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
+                                    str(self.game_key) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
                                                  "-roster-player_info_by_week",
@@ -728,7 +740,7 @@ class QueryTestCase(TestCase):
         """Retrieve roster with player info of specific team by team_id and by date for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), str(self.chosen_date),
+                                    str(self.game_key) + ".l." + str(self.league_id), str(self.chosen_date),
                                     "rosters")
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
                                                  "-roster-player_info_by_date",
@@ -754,7 +766,7 @@ class QueryTestCase(TestCase):
         """Retrieve roster with player info for season of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "rosters")
+                                    str(self.game_key) + ".l." + str(self.league_id), "rosters")
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-roster-player_stats",
                                                  self.yahoo_query.get_team_roster_player_stats,
                                                  params={"team_id": self.team_id},
@@ -777,7 +789,7 @@ class QueryTestCase(TestCase):
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
+                                    str(self.game_key) + ".l." + str(self.league_id), "week_" + str(self.chosen_week),
                                     "rosters")
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name +
                                                  "-roster-player_stats_by_week",
@@ -803,7 +815,7 @@ class QueryTestCase(TestCase):
         """Retrieve draft results of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-draft_results",
                                                  self.yahoo_query.get_team_draft_results,
@@ -826,7 +838,7 @@ class QueryTestCase(TestCase):
         """Retrieve matchups of specific team by team_id for chosen league.
         """
         new_data_dir = os.path.join(self.data_dir, str(self.season),
-                                    str(self.game_id) + ".l." + str(self.league_id), "teams",
+                                    str(self.game_key) + ".l." + str(self.league_id), "teams",
                                     str(self.team_id) + "-" + self.team_name)
         query_result_data = self.yahoo_data.save(str(self.team_id) + "-" + self.team_name + "-matchups",
                                                  self.yahoo_query.get_team_matchups,
@@ -852,7 +864,7 @@ class QueryTestCase(TestCase):
     def test_get_player_stats_for_season(self):
         """Retrieve stats of specific player by player_key for season for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-season-stats",
                                                  self.yahoo_query.get_player_stats_for_season,
@@ -875,7 +887,7 @@ class QueryTestCase(TestCase):
     def test_get_player_stats_by_week(self):
         """Retrieve stats of specific player by player_key and by week for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "week_" +
                                     str(self.chosen_week), "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-stats",
@@ -901,7 +913,7 @@ class QueryTestCase(TestCase):
     def test_get_player_stats_by_date(self):
         """Retrieve stats of specific player by player_key and by date for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     str(self.chosen_date), "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-stats",
                                                  self.yahoo_query.get_player_stats_by_date,
@@ -925,7 +937,7 @@ class QueryTestCase(TestCase):
     def test_get_player_ownership(self):
         """Retrieve ownership of specific player by player_key for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-ownership",
                                                  self.yahoo_query.get_player_ownership,
@@ -948,7 +960,7 @@ class QueryTestCase(TestCase):
     def test_get_player_percent_owned_by_week(self):
         """Retrieve percent-owned of specific player by player_key and by week for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "week_" +
                                     str(self.chosen_week), "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-percent_owned",
@@ -973,7 +985,7 @@ class QueryTestCase(TestCase):
     def test_get_player_draft_analysis(self):
         """Retrieve draft analysis of specific player by player_key for chosen league.
         """
-        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_id) + ".l." + str(self.league_id),
+        new_data_dir = os.path.join(self.data_dir, str(self.season), str(self.game_key) + ".l." + str(self.league_id),
                                     "players")
         query_result_data = self.yahoo_data.save(str(self.player_id) + "-player-draft_analysis",
                                                  self.yahoo_query.get_player_draft_analysis,
