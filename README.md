@@ -10,9 +10,9 @@
 ### Python API wrapper for the Yahoo Fantasy Sports public API
 ##### By Wren J. R. (uberfastman)
 
-[![latest-release.png](resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
+[![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
 
-###### Latest Version: [v3.2.0](https://github.com/uberfastman/fantasy-football-metrics-weekly-report/releases/tag/v3.2.0)
+###### Latest Version: [v3.2.1](https://github.com/uberfastman/yfpy/releases/tag/v3.2.1)
 
 [![Build Status](https://travis-ci.org/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.org/uberfastman/yfpy)
 
@@ -22,15 +22,15 @@
 
 ###### Donate using PayPal or Credit/Debit card:
 
-[![paypal](resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
+[![paypal](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
 
 ##### OR
 
 ###### Donate using cryptocurrency ([Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9)) with [Trust Wallet](https://trustwallet.com):
 
-[![donate-bitcoin](resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9)
+[![donate-bitcoin](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9)
 
-[![trust-wallet-btc](resources/images/trust-wallet-btc.png)](https://share.trustwallet.com/ZoAkTpY1I9)
+[![trust-wallet-btc](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-btc.png)](https://share.trustwallet.com/ZoAkTpY1I9)
 
 BTC Wallet address: `bc1qataspvklhewtswm357m0677q4raag5new2xt3e`
 
@@ -38,9 +38,9 @@ BTC Wallet address: `bc1qataspvklhewtswm357m0677q4raag5new2xt3e`
 
 ###### Donate using cryptocurrency ([Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9)) with [Trust Wallet](https://trustwallet.com):
 
-[![donate-ethereum](resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9)
+[![donate-ethereum](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9)
 
-[![trust-wallet-eth](resources/images/trust-wallet-eth.png)](https://share.trustwallet.com/MF8YBO01I9)
+[![trust-wallet-eth](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-eth.png)](https://share.trustwallet.com/MF8YBO01I9)
 
 ETH Wallet address: `0x5eAa522e66a90577D49e9E72f253EC952CDB4059`
 
@@ -48,9 +48,9 @@ ETH Wallet address: `0x5eAa522e66a90577D49e9E72f253EC952CDB4059`
 
 ###### Donate using cryptocurrency ([Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9)) with [Trust Wallet](https://trustwallet.com):
 
-[![donate-nano](resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
+[![donate-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
 
-[![trust-wallet-nano](resources/images/trust-wallet-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
+[![trust-wallet-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
 
 NANO Wallet address: `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq`
 
