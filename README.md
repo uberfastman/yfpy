@@ -22,37 +22,15 @@
 
 ###### Donate using PayPal or Credit/Debit card:
 
-[![paypal](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
+[![paypal](resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
 
-##### OR
+###### OR donate using cryptocurrency:
 
-###### Donate using cryptocurrency ([Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9)) with [Trust Wallet](https://trustwallet.com):
-
-[![donate-bitcoin](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9)
-
-[![trust-wallet-btc](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-btc.png)](https://share.trustwallet.com/ZoAkTpY1I9)
-
-BTC Wallet address: `bc1qataspvklhewtswm357m0677q4raag5new2xt3e`
-
-##### OR
-
-###### Donate using cryptocurrency ([Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9)) with [Trust Wallet](https://trustwallet.com):
-
-[![donate-ethereum](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9)
-
-[![trust-wallet-eth](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-eth.png)](https://share.trustwallet.com/MF8YBO01I9)
-
-ETH Wallet address: `0x5eAa522e66a90577D49e9E72f253EC952CDB4059`
-
-##### OR
-
-###### Donate using cryptocurrency ([Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9)) with [Trust Wallet](https://trustwallet.com):
-
-[![donate-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
-
-[![trust-wallet-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/trust-wallet-nano.png)](https://share.trustwallet.com/bNXsMA11I9)
-
-NANO Wallet address: `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq`
+| Cryptocurrency | Donation Link ([Trust Wallet](https://trustwallet.com)) | Wallet Address |
+| ---: | :---: | :--- |
+| [Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9) | [![donate-bitcoin](resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` |
+| [Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9) | [![donate-ethereum](resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
+| [Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9) | [![donate-nano](resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9) | `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq` |
 
 ---
 
