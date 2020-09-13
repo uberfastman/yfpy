@@ -56,7 +56,7 @@ class YahooFantasySportsQuery(object):
             if consumer_key and consumer_secret:
                 self._yahoo_consumer_key = str(consumer_key)
                 self._yahoo_consumer_secret = str(consumer_secret)
-                auth_info = {'consumer_key': self._yahoo_consumer_key, 'consumer_secret': self._yahoo_consumer_secret}
+                auth_info = {"consumer_key": self._yahoo_consumer_key, "consumer_secret": self._yahoo_consumer_secret}
             else:
                 if consumer_key or consumer_secret:
                     logger.warning("Must supply both the consumer key AND consumer secret to authenticate with user"

@@ -7,6 +7,7 @@ import pprint
 import warnings
 
 import pytest
+from dotenv import load_dotenv
 
 from yfpy import Data
 from yfpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
@@ -18,6 +19,10 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 
 # Ignore resource warnings from unittest module
 warnings.simplefilter("ignore", ResourceWarning)
+
+# load python-dotenv to parse environment variables
+env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+load_dotenv(dotenv_path=env_path)
 
 # Turn on/off example code stdout printing output
 print_output = False
@@ -64,8 +69,9 @@ player_key = game_key + ".p." + player_id
 
 # Instantiate yfpy objects
 yahoo_data = Data(data_dir)
-yahoo_query = YahooFantasySportsQuery(auth_dir, league_id, game_id=game_key,
-                                      game_code=game_code, offline=False, all_output_as_json=False)
+yahoo_query = YahooFantasySportsQuery(auth_dir, league_id, game_id=game_key, game_code=game_code, offline=False,
+                                      all_output_as_json=False, consumer_key=os.environ["YFPY_CONSUMER_KEY"],
+                                      consumer_secret=os.environ["YFPY_CONSUMER_SECRET"])
 
 # Manually override league key for example code to work
 yahoo_query.league_key = game_key + ".l." + league_id
