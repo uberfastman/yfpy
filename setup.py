@@ -23,7 +23,7 @@ with open("requirements.txt", "r", encoding="utf8") as reqs:
 
 setuptools.setup(
     name="yfpy",
-    version="3.2.4",
+    version="3.2.5",
     author="Wren J. R.",
     author_email="wrenjr@yahoo.com",
     description="Python API wrapper for the Yahoo Fantasy Sports public API.",

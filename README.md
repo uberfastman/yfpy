@@ -12,7 +12,7 @@
 
 [![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
 
-###### Latest Version: [v3.2.4](https://github.com/uberfastman/yfpy/releases/tag/v3.2.4)
+###### Latest Version: [v3.2.5](https://github.com/uberfastman/yfpy/releases/tag/v3.2.5)
 
 [![Build Status](https://travis-ci.org/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.org/uberfastman/yfpy)
 
@@ -22,15 +22,15 @@
 
 ###### Donate using PayPal or Credit/Debit card:
 
-[![paypal](resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
+[![paypal](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
 
 ###### OR donate using cryptocurrency:
 
 | Cryptocurrency | Donation Link ([Trust Wallet](https://trustwallet.com)) | Wallet Address |
 | ---: | :---: | :--- |
-| [Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9) | [![donate-bitcoin](resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` |
-| [Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9) | [![donate-ethereum](resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
-| [Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9) | [![donate-nano](resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9) | `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq` |
+| [Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9) | [![donate-bitcoin](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` |
+| [Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9) | [![donate-ethereum](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
+| [Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9) | [![donate-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9) | `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq` |
 
 ---
 
