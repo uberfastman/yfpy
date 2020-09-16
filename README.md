@@ -14,7 +14,7 @@
 
 ###### Latest Version: [v3.2.5](https://github.com/uberfastman/yfpy/releases/tag/v3.2.5)
 
-[![Build Status](https://travis-ci.org/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.org/uberfastman/yfpy)
+[![Build Status](https://travis-ci.com/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.com/uberfastman/yfpy)
 
 ---
 
