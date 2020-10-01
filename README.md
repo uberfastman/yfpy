@@ -12,7 +12,7 @@
 
 [![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
 
-###### Latest Version: [v3.2.5](https://github.com/uberfastman/yfpy/releases/tag/v3.2.5)
+###### Latest Version: [v3.3.0](https://github.com/uberfastman/yfpy/releases/tag/v3.3.0)
 
 [![Build Status](https://travis-ci.com/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.com/uberfastman/yfpy)
 
