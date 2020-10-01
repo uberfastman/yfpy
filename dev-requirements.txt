@@ -2,7 +2,6 @@ attrs==20.2.0
 certifi==2020.6.20
 chardet==3.0.4
 idna==2.10
-importlib-metadata==1.7.0
 iniconfig==1.0.1
 more-itertools==8.5.0
 packaging==20.4
@@ -10,7 +9,7 @@ pluggy==0.13.1
 py==1.9.0
 pyaml==20.4.0
 pyparsing==2.4.7
-pytest==6.0.2
+pytest==6.1.0
 python-dotenv==0.14.0
 PyYAML==5.3.1
 rauth==0.7.3
@@ -19,5 +18,4 @@ six==1.15.0
 stringcase==1.2.0
 toml==0.10.1
 urllib3==1.25.10
-yahoo-oauth==1.0
-zipp==3.1.0
+yahoo-oauth==1.1
