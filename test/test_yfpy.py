@@ -27,6 +27,9 @@ load_dotenv(dotenv_path=env_path)
 # Turn on/off example code stdout printing output
 print_output = False
 
+# Turn on/off automatic opening of browser window for OAuth
+browser_callback = True
+
 # Put private.json (see README.md) in test/ directory
 auth_dir = "."
 
@@ -69,9 +72,17 @@ player_key = game_key + ".p." + player_id
 
 # Instantiate yfpy objects
 yahoo_data = Data(data_dir)
-yahoo_query = YahooFantasySportsQuery(auth_dir, league_id, game_id=game_key, game_code=game_code, offline=False,
-                                      all_output_as_json=False, consumer_key=os.environ["YFPY_CONSUMER_KEY"],
-                                      consumer_secret=os.environ["YFPY_CONSUMER_SECRET"])
+yahoo_query = YahooFantasySportsQuery(
+    auth_dir,
+    league_id,
+    game_id=game_key,
+    game_code=game_code,
+    offline=False,
+    all_output_as_json=False,
+    consumer_key=os.environ["YFPY_CONSUMER_KEY"],
+    consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
+    browser_callback=browser_callback
+)
 
 # Manually override league key for example code to work
 yahoo_query.league_key = game_key + ".l." + league_id

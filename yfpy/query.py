@@ -24,7 +24,7 @@ class YahooFantasySportsQuery(object):
     """
 
     def __init__(self, auth_dir, league_id, game_id=None, game_code="nfl", offline=False, all_output_as_json=False,
-                 consumer_key=None, consumer_secret=None):
+                 consumer_key=None, consumer_secret=None, browser_callback=True):
         """Instantiate a Yahoo query object for running queries against the Yahoo fantasy REST API.
 
         :param auth_dir: location of both private.json (containing Yahoo dev app consumer_key and consumer_secret) and
@@ -41,6 +41,8 @@ class YahooFantasySportsQuery(object):
             WITH USER DEFINED CONSUMER SECRET)
         :param consumer_secret: user defined consumer secret to use instead of values stored in private.json (MUST BE
             PAIRED WITH USER DEFINED CONSUMER KEY)
+        :param browser_callback: enable or disable (enabled by default) whether the yahoo-oauth library automatically
+            opens a browser window to authenticate (if disabled, it will output the callback URL instead)
         """
         self.league_id = league_id
         self.game_id = game_id
@@ -83,7 +85,7 @@ class YahooFantasySportsQuery(object):
 
             # complete OAuth2 3-legged handshake by either refreshing existing token or requesting account access
             # and returning a verification code to input to the command line prompt
-            self.oauth = OAuth2(None, None, from_file=token_file_path)
+            self.oauth = OAuth2(None, None, from_file=token_file_path, browser_callback=browser_callback)
             if not self.oauth.token_is_valid():
                 self.oauth.refresh_access_token()
 
