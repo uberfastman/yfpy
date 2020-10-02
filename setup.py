@@ -8,7 +8,7 @@ version_file = os.path.join(os.path.dirname(__file__), "VERSION")
 
 # noinspection PyBroadException
 try:
-    git_version = subprocess.check_output(["git", "describe"]).decode("utf-8").strip()
+    git_version = subprocess.check_output(["git", "describe", "--tag", "--abbrev=0"]).decode("utf-8").strip()
     pypi_version = git_version[1:]
 except Exception:
     with open(version_file, "r") as vf:
