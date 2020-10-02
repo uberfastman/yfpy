@@ -12,9 +12,11 @@
 
 [![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
 
-###### Latest Version: [v3.3.0](https://github.com/uberfastman/yfpy/releases/tag/v3.3.0)
-
 [![Build Status](https://travis-ci.com/uberfastman/yfpy.svg?branch=develop)](https://travis-ci.com/uberfastman/yfpy)
+[![PyPI](https://img.shields.io/pypi/v/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
+[![PyPI](https://img.shields.io/pypi/dm/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
+[![PyPI](https://img.shields.io/pypi/pyversions/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
+[![PyPI](https://img.shields.io/pypi/l/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 
 ---
 
