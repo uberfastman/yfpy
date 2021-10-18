@@ -2,12 +2,13 @@
 include README.md
 
 # Include the license file
-include LICENSE.txt
+include LICENSE
 
 # Include dependency lists
 include requirements.txt
 include dev-requirements.txt
 
 # Include test code and resources
-include test/test.py
+include test/test_yfpy.py
 include test/EXAMPLE-private.json
+include test/EXAMPLE.env
