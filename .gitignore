@@ -18,4 +18,5 @@ dist/
 test/test_output/
 private*.json
 token*.json
-.env
+test/*.env
+!TEST/EXAMPLE.env
