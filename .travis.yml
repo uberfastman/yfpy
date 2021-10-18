@@ -1,0 +1,17 @@
+language: python
+
+python:
+- "3.6"
+- "3.7"
+- "3.8"
+- "3.9"
+- "3.10"
+
+install:
+  - pip install -r requirements.txt
+
+# Disabled because travis-ci cannot accept dynamic stdin (in order to get Yahoo verifier code for OAuth)
+#script:
+#  - pytest -s
+
+script: "true"

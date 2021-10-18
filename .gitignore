@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Miscelleanous
+.DS_Store
+
 # JetBrains IDE project files
 .idea/*
 
@@ -12,6 +15,8 @@ dist/
 *.egg-info/
 
 # Testing
-examples/test_output/
-examples/private.json
-examples/token.json
+test/test_output/
+private*.json
+token*.json
+test/*.env
+!TEST/EXAMPLE.env
