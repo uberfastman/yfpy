@@ -1,10 +1,11 @@
 __author__ = "Wren J. R. (uberfastman)"
-__email__ = "wrenjr@yahoo.com"
+__email__ = "uberfastman@uberfastman.dev"
 
 import logging
 import os
 import pprint
 import warnings
+from pathlib import Path
 
 import pytest
 from dotenv import load_dotenv
@@ -21,7 +22,7 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 warnings.simplefilter("ignore", ResourceWarning)
 
 # load python-dotenv to parse environment variables
-env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+env_path = Path(__file__).parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 # Turn on/off example code stdout printing output
@@ -31,43 +32,72 @@ print_output = False
 browser_callback = True
 
 # Put private.json (see README.md) in test/ directory
-auth_dir = "."
+auth_dir = Path(".")
 
 # Example code will output data here
-data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_output")
+data_dir = Path(__file__).parent / "test_output"
 
 # Example vars using public Yahoo league (still requires auth through a personal Yahoo account - see README.md)
-game_key = "399"
-# game_key = "331"
-# game_key = "390"
-# game_key = "303"  # NHL
-# game_key = "348"  # divisions
 
-game_code = "nfl"
-# game_code = "nhl"  # NHL
-
-# season = "2014"
-# season = "2019"
-season = "2020"
-# season = "2012"  # NHL
-# season = "2015"  # divisions
-
-league_id = "655434"
-# league_id = "729259"
-# league_id = "79230"
-# league_id = "69624"  # NHL
-# league_id = "907359"  # divisions
+# # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # Yahoo Fantasy Football: NFL # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # #
 
 # example_public_league_url = "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
-# Test vars
+# game_key = "331"  # NFL - 2014
+# game_key = "348"  # NFL - 2015 (testing for league with divisions)
+# game_key = "390"  # NFL - 2019
+game_key = "399"  # NFL - 2020
+# game_key = "406"  # NFL - 2021
+
+game_code = "nfl"
+
+# season = "2014"  # NFL - 2014
+# season = "2015"  # NFL - 2015 (testing for league with divisions)
+# season = "2019"  # NFL - 2019
+season = "2020"  # NFL - 2020
+# season = "2021"  # NFL - 2021
+
+# league_id = "907359"  # NFL - 2015 (testing for league with divisions)
+# league_id = "79230"  # NFL - 2019
+league_id = "655434"  # NFL - 2020
+# league_id = "413954"  # NFL - 2021
+
 chosen_week = 1
-chosen_date = "2013-04-15"  # NHL
-# chosen_date = "2013-04-16"  # NHL
+
 team_id = 1
 team_name = "Legion"
-player_id = "7200"  # NFL: Aaron Rodgers
-# player_id = "4588"  # NHL: Braden Holtby
+player_id = "7200"  # NFL - 2020 for player: Aaron Rodgers
+
+league_player_limit = 101
+# league_player_limit = 2610
+
+# # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # #
+
+# # # # # # # # # # # # # # # # # # # # # # #
+# # # # # Yahoo Fantasy Hockey: NHL # # # # #
+# # # # # # # # # # # # # # # # # # # # # # #
+
+# game_key = "303"  # NHL - 2012
+
+# game_code = "nhl"  # NHL - 2012
+
+# season = "2012"  # NHL - 2012
+
+# league_id = "69624"  # NHL - 2012
+
+chosen_date = "2013-04-15"  # NHL - 2013
+# chosen_date = "2013-04-16"  # NHL - 2013
+
+# player_id = "4588"  # NHL: Braden Holtby - 2012
+
+# # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # #
+
 player_key = game_key + ".p." + player_id
 
 # Instantiate yfpy objects
@@ -162,7 +192,7 @@ def test_get_current_game_metadata():
 def test_get_game_info_by_game_id():
     """Retrieve game info for specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-info",
                                         yahoo_query.get_game_info_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -183,7 +213,7 @@ def test_get_game_info_by_game_id():
 def test_get_game_metadata_by_game_id():
     """Retrieve game metadata for specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-metadata",
                                         yahoo_query.get_game_metadata_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -216,7 +246,7 @@ def test_get_league_key():
 def test_get_game_weeks_by_game_id():
     """Retrieve all valid weeks of a specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-weeks",
                                         yahoo_query.get_game_weeks_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -237,7 +267,7 @@ def test_get_game_weeks_by_game_id():
 def test_get_game_stat_categories_by_game_id():
     """Retrieve all valid stat categories of a specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-stat_categories",
                                         yahoo_query.get_game_stat_categories_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -259,7 +289,7 @@ def test_get_game_stat_categories_by_game_id():
 def test_get_game_position_types_by_game_id():
     """Retrieve all valid position types for specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-position_types",
                                         yahoo_query.get_game_position_types_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -280,7 +310,7 @@ def test_get_game_position_types_by_game_id():
 def test_get_game_roster_positions_by_game_id():
     """Retrieve all valid roster positions for specific game by id.
     """
-    new_data_dir = os.path.join(data_dir, str(season))
+    new_data_dir = data_dir / str(season)
     query_result_data = yahoo_data.save(str(game_key) + "-game-roster_positions",
                                         yahoo_query.get_game_roster_positions_by_game_id,
                                         params={"game_id": game_key}, new_data_dir=new_data_dir)
@@ -343,7 +373,7 @@ def test_get_user_games():
 
 
 @pytest.mark.skip(
-    reason="skipping get_user_leagues_by_game_key when current logged-in user has no leagues from test season/year"
+    reason="Skipping get_user_leagues_by_game_key: current logged-in user must have leagues from test season/year."
 )
 def test_get_user_leagues_by_game_id():
     """Retrieve league history for current logged-in user for specific game by id.
@@ -397,7 +427,7 @@ def test_get_user_teams():
 def test_get_league_info():
     """Retrieve info for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-info",
                                         yahoo_query.get_league_info, new_data_dir=new_data_dir)
     if print_output:
@@ -418,7 +448,7 @@ def test_get_league_info():
 def test_get_league_metadata():
     """Retrieve metadata for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-metadata",
                                         yahoo_query.get_league_metadata, new_data_dir=new_data_dir)
     if print_output:
@@ -439,7 +469,7 @@ def test_get_league_metadata():
 def test_get_league_settings():
     """Retrieve settings (rules) for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-settings",
                                         yahoo_query.get_league_settings, new_data_dir=new_data_dir)
     if print_output:
@@ -460,7 +490,7 @@ def test_get_league_settings():
 def test_get_league_standings():
     """Retrieve standings for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-standings",
                                         yahoo_query.get_league_standings, new_data_dir=new_data_dir)
     if print_output:
@@ -481,7 +511,7 @@ def test_get_league_standings():
 def test_get_league_teams():
     """Retrieve teams for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-teams",
                                         yahoo_query.get_league_teams, new_data_dir=new_data_dir)
     if print_output:
@@ -498,12 +528,38 @@ def test_get_league_teams():
     assert query_result_data == loaded_result_data
 
 
+@pytest.mark.skip(
+    reason="Skipping test_get_league_players: high player volume slows down tests. Run this test separately."
+)
 def test_get_league_players():
     """Retrieve valid players for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-players",
                                         yahoo_query.get_league_players, new_data_dir=new_data_dir)
+
+    if print_output:
+        pprint.pprint(query_result_data)
+        print("-" * 100)
+        print()
+
+    loaded_result_data = yahoo_data.load(str(league_id) + "-league-players", new_data_dir=new_data_dir)
+    if print_output:
+        pprint.pprint(loaded_result_data)
+        print("-" * 100)
+        print()
+
+    assert query_result_data == loaded_result_data
+
+
+def test_get_league_players_with_limit():
+    """Retrieve valid players for chosen league.
+    """
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
+    query_result_data = yahoo_data.save(str(league_id) + "-league-players",
+                                        yahoo_query.get_league_players,
+                                        params={"player_count_limit": league_player_limit}, new_data_dir=new_data_dir)
+
     if print_output:
         pprint.pprint(query_result_data)
         print("-" * 100)
@@ -521,7 +577,7 @@ def test_get_league_players():
 def test_get_league_draft_results():
     """Retrieve draft results for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-draft_results",
                                         yahoo_query.get_league_draft_results, new_data_dir=new_data_dir)
     if print_output:
@@ -542,7 +598,7 @@ def test_get_league_draft_results():
 def test_get_league_transactions():
     """Retrieve transactions for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id))
     query_result_data = yahoo_data.save(str(league_id) + "-league-transactions",
                                         yahoo_query.get_league_transactions, new_data_dir=new_data_dir)
     if print_output:
@@ -563,9 +619,7 @@ def test_get_league_transactions():
 def test_get_league_scoreboard_by_week():
     """Retrieve scoreboard for chosen league by week.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "week_" +
-                                str(chosen_week))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
     query_result_data = yahoo_data.save("week_" + str(chosen_week) + "-scoreboard",
                                         yahoo_query.get_league_scoreboard_by_week,
                                         params={"chosen_week": chosen_week}, new_data_dir=new_data_dir)
@@ -587,9 +641,7 @@ def test_get_league_scoreboard_by_week():
 def test_get_league_matchups_by_week():
     """Retrieve matchups for chosen league by week.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "week_" +
-                                str(chosen_week))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
     query_result_data = yahoo_data.save("week_" + str(chosen_week) + "-matchups",
                                         yahoo_query.get_league_matchups_by_week,
                                         params={"chosen_week": chosen_week}, new_data_dir=new_data_dir)
@@ -615,9 +667,8 @@ def test_get_league_matchups_by_week():
 def test_get_team_info():
     """Retrieve info of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-info",
                                         yahoo_query.get_team_info,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -639,9 +690,8 @@ def test_get_team_info():
 def test_get_team_metadata():
     """Retrieve metadata of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-metadata",
                                         yahoo_query.get_team_metadata,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -663,9 +713,8 @@ def test_get_team_metadata():
 def test_get_team_stats():
     """Retrieve stats of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-stats",
                                         yahoo_query.get_team_stats,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -687,8 +736,7 @@ def test_get_team_stats():
 def test_get_team_stats_by_week():
     """Retrieve stats of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "week_" + str(chosen_week))
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-stats",
                                         yahoo_query.get_team_stats_by_week,
                                         params={"team_id": team_id, "chosen_week": chosen_week},
@@ -711,9 +759,8 @@ def test_get_team_stats_by_week():
 def test_get_team_standings():
     """Retrieve standings of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-standings",
                                         yahoo_query.get_team_standings,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -735,9 +782,8 @@ def test_get_team_standings():
 def test_get_team_roster_by_week():
     """Retrieve roster of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "week_" + str(chosen_week),
-                                "rosters")
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week)) /
+                    "rosters")
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-roster_by_week",
                                         yahoo_query.get_team_roster_by_week,
                                         params={"team_id": team_id, "chosen_week": chosen_week},
@@ -760,9 +806,8 @@ def test_get_team_roster_by_week():
 def test_get_team_roster_player_info_by_week():
     """Retrieve roster with player info of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "week_" + str(chosen_week),
-                                "rosters")
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week)) /
+                    "rosters")
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name +
                                         "-roster-player_info_by_week",
                                         yahoo_query.get_team_roster_player_info_by_week,
@@ -784,13 +829,13 @@ def test_get_team_roster_player_info_by_week():
     assert query_result_data == loaded_result_data
 
 
-@pytest.mark.skip(reason="skip because this is only for NHL/NBA/MLB, not NFL")
+@pytest.mark.skip(
+    reason="Skipping test_get_team_roster_player_info_by_date: retrieval by date supported by NHL/NBA/MLB, not NFL."
+)
 def test_get_team_roster_player_info_by_date():
     """Retrieve roster with player info of specific team by team_id and by date for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), str(chosen_date),
-                                "rosters")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / str(chosen_date) / "rosters"
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name +
                                         "-roster-player_info_by_date",
                                         yahoo_query.get_team_roster_player_info_by_date,
@@ -815,8 +860,7 @@ def test_get_team_roster_player_info_by_date():
 def test_get_team_roster_player_stats():
     """Retrieve roster with player info for season of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "rosters")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "rosters"
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-roster-player_stats",
                                         yahoo_query.get_team_roster_player_stats,
                                         params={"team_id": team_id},
@@ -839,9 +883,9 @@ def test_get_team_roster_player_stats():
 def test_get_team_roster_player_stats_by_week():
     """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "week_" + str(chosen_week),
-                                "rosters")
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week)) /
+                    "rosters")
+
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name +
                                         "-roster-player_stats_by_week",
                                         yahoo_query.get_team_roster_player_stats_by_week,
@@ -866,9 +910,8 @@ def test_get_team_roster_player_stats_by_week():
 def test_get_team_draft_results():
     """Retrieve draft results of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-draft_results",
                                         yahoo_query.get_team_draft_results,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -890,9 +933,8 @@ def test_get_team_draft_results():
 def test_get_team_matchups():
     """Retrieve matchups of specific team by team_id for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season),
-                                str(game_key) + ".l." + str(league_id), "teams",
-                                str(team_id) + "-" + team_name)
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams" /
+                    (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-matchups",
                                         yahoo_query.get_team_matchups,
                                         params={"team_id": team_id}, new_data_dir=new_data_dir)
@@ -918,8 +960,7 @@ def test_get_team_matchups():
 def test_get_player_stats_for_season():
     """Retrieve stats of specific player by player_key for season for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "players")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "players"
     query_result_data = yahoo_data.save(str(player_id) + "-player-season-stats",
                                         yahoo_query.get_player_stats_for_season,
                                         params={"player_key": str(player_key)},
@@ -942,9 +983,8 @@ def test_get_player_stats_for_season():
 def test_get_player_stats_by_week():
     """Retrieve stats of specific player by player_key and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "week_" +
-                                str(chosen_week), "players")
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week)) /
+                    "players")
     query_result_data = yahoo_data.save(str(player_id) + "-player-stats",
                                         yahoo_query.get_player_stats_by_week,
                                         params={"player_key": str(player_key),
@@ -965,12 +1005,13 @@ def test_get_player_stats_by_week():
     assert query_result_data == loaded_result_data
 
 
-@pytest.mark.skip(reason="skip because this is only for NHL/NBA/MLB, not NFL")
+@pytest.mark.skip(
+    reason="Skipping test_get_player_stats_by_date: retrieval by date supported by NHL/NBA/MLB, not NFL."
+)
 def test_get_player_stats_by_date():
     """Retrieve stats of specific player by player_key and by date for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                str(chosen_date), "players")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / str(chosen_date) / "players"
     query_result_data = yahoo_data.save(str(player_id) + "-player-stats",
                                         yahoo_query.get_player_stats_by_date,
                                         params={"player_key": str(player_key),
@@ -994,8 +1035,7 @@ def test_get_player_stats_by_date():
 def test_get_player_ownership():
     """Retrieve ownership of specific player by player_key for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "players")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "players"
     query_result_data = yahoo_data.save(str(player_id) + "-player-ownership",
                                         yahoo_query.get_player_ownership,
                                         params={"player_key": str(player_key)},
@@ -1018,9 +1058,8 @@ def test_get_player_ownership():
 def test_get_player_percent_owned_by_week():
     """Retrieve percent-owned of specific player by player_key and by week for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "week_" +
-                                str(chosen_week), "players")
+    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week)) /
+                    "players")
     query_result_data = yahoo_data.save(str(player_id) + "-player-percent_owned",
                                         yahoo_query.get_player_percent_owned_by_week,
                                         params={"player_key": str(player_key),
@@ -1044,8 +1083,7 @@ def test_get_player_percent_owned_by_week():
 def test_get_player_draft_analysis():
     """Retrieve draft analysis of specific player by player_key for chosen league.
     """
-    new_data_dir = os.path.join(data_dir, str(season), str(game_key) + ".l." + str(league_id),
-                                "players")
+    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "players"
     query_result_data = yahoo_data.save(str(player_id) + "-player-draft_analysis",
                                         yahoo_query.get_player_draft_analysis,
                                         params={"player_key": str(player_key)},
@@ -1063,3 +1101,7 @@ def test_get_player_draft_analysis():
         print()
 
     assert query_result_data == loaded_result_data
+
+
+if __name__ == "__main__":
+    pass
