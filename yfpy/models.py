@@ -2,14 +2,15 @@ __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import json
-import logging
 
 import stringcase
 
+from yfpy.logger import get_logger
 from yfpy.utils import complex_json_handler
+
 # from yfpy.utils import flatten_to_objects
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class YahooFantasyObject(object):

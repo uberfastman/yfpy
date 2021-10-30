@@ -1,12 +1,17 @@
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
-import logging
 from collections import ChainMap, OrderedDict
-
+import json
 import stringcase
 
-logger = logging.getLogger(__name__)
+from yfpy.logger import get_logger
+
+logger = get_logger(__name__)
+
+
+def prettify_data(data):
+    return f"\n{json.dumps(data, indent=2, default=complex_json_handler, ensure_ascii=False)}\n"
 
 
 # noinspection PyTypeChecker
