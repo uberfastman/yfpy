@@ -2,13 +2,13 @@ __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import json
-import logging
 from pathlib import Path
 
+from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
 from yfpy.utils import complex_json_handler, unpack_data
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class Data(object):
