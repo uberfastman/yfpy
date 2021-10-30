@@ -4,17 +4,21 @@ __email__ = "uberfastman@uberfastman.dev"
 import json
 import logging
 import time
+from json import JSONDecodeError
 from pathlib import Path
 
+from requests import Response
 from requests.exceptions import HTTPError
 from yahoo_oauth import OAuth2
 
 from yfpy.exceptions import YahooFantasySportsDataNotFound
+from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
     Scoreboard, Team, TeamPoints, TeamStandings, Roster
-from yfpy.utils import reformat_json_list, unpack_data, complex_json_handler
+from yfpy.utils import reformat_json_list, unpack_data, complex_json_handler, prettify_data
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+
 # suppress yahoo-oauth debug logging
 logging.getLogger("yahoo_oauth").setLevel(level=logging.INFO)
 
@@ -44,6 +48,14 @@ class YahooFantasySportsQuery(object):
         :param browser_callback: enable or disable (enabled by default) whether the yahoo-oauth library automatically
             opens a browser window to authenticate (if disabled, it will output the callback URL instead)
         """
+        self._auth_dir = auth_dir
+        self._yahoo_consumer_key = consumer_key
+        self._yahoo_consumer_secret = consumer_secret
+        self._yahoo_access_token = None
+        self._browser_callback = browser_callback
+
+        self.fantasy_content_data_field = "fantasy_content"
+
         self.league_id = league_id
         self.game_id = game_id
         self.game_code = game_code
@@ -55,48 +67,78 @@ class YahooFantasySportsQuery(object):
         self.executed_queries = []
 
         if not self.offline:
-            if consumer_key and consumer_secret:
-                self._yahoo_consumer_key = str(consumer_key)
-                self._yahoo_consumer_secret = str(consumer_secret)
-                auth_info = {"consumer_key": self._yahoo_consumer_key, "consumer_secret": self._yahoo_consumer_secret}
-            else:
-                private_json_path = auth_dir / "private.json"
-                if consumer_key or consumer_secret:
-                    logger.warning(f"Must supply both the consumer key AND consumer secret to authenticate with user"
-                                   f"defined credentials. Defaulting to credentials located in {private_json_path}.")
+            self._authenticate()
 
-                # load credentials
-                with open(private_json_path) as yahoo_app_credentials:
-                    auth_info = json.load(yahoo_app_credentials)
-                self._yahoo_consumer_key = auth_info["consumer_key"]
-                self._yahoo_consumer_secret = auth_info["consumer_secret"]
+    def _authenticate(self):
+        logger.debug("Authenticating with Yahoo.")
 
-            # load or create OAuth2 refresh token
-            token_file_path = auth_dir / "token.json"
-            if token_file_path.is_file():
-                with open(token_file_path) as yahoo_oauth_token:
-                    auth_info = json.load(yahoo_oauth_token)
-            else:
-                with open(token_file_path, "w") as yahoo_oauth_token:
-                    json.dump(auth_info, yahoo_oauth_token)
+        if self._yahoo_consumer_key and self._yahoo_consumer_secret:
+            self._yahoo_consumer_key = str(self._yahoo_consumer_key)
+            self._yahoo_consumer_secret = str(self._yahoo_consumer_secret)
+            auth_info = {"consumer_key": self._yahoo_consumer_key, "consumer_secret": self._yahoo_consumer_secret}
+        else:
+            private_json_path = self._auth_dir / "private.json"
+            if self._yahoo_consumer_key or self._yahoo_consumer_secret:
+                logger.warning(f"Must supply both the consumer key AND consumer secret to authenticate with user"
+                               f"defined credentials. Defaulting to credentials located in {private_json_path}.")
 
-            if "access_token" in auth_info.keys():
-                self._yahoo_access_token = auth_info["access_token"]
+            # load credentials
+            with open(private_json_path) as yahoo_app_credentials:
+                auth_info = json.load(yahoo_app_credentials)
+            self._yahoo_consumer_key = auth_info["consumer_key"]
+            self._yahoo_consumer_secret = auth_info["consumer_secret"]
 
-            # complete OAuth2 3-legged handshake by either refreshing existing token or requesting account access
-            # and returning a verification code to input to the command line prompt
-            self.oauth = OAuth2(None, None, from_file=token_file_path, browser_callback=browser_callback)
-            if not self.oauth.token_is_valid():
-                self.oauth.refresh_access_token()
+        # load or create OAuth2 refresh token
+        token_file_path = self._auth_dir / "token.json"
+        if token_file_path.is_file():
+            with open(token_file_path) as yahoo_oauth_token:
+                auth_info = json.load(yahoo_oauth_token)
+        else:
+            with open(token_file_path, "w") as yahoo_oauth_token:
+                json.dump(auth_info, yahoo_oauth_token)
+
+        if "access_token" in auth_info.keys():
+            self._yahoo_access_token = auth_info["access_token"]
+
+        # complete OAuth2 3-legged handshake by either refreshing existing token or requesting account access
+        # and returning a verification code to input to the command line prompt
+        self.oauth = OAuth2(None, None, from_file=token_file_path, browser_callback=self._browser_callback)
+        if not self.oauth.token_is_valid():
+            self.oauth.refresh_access_token()
 
     def get_response(self, url, retries=0):
-        response = self.oauth.session.get(url, params={"format": "json"})
+        logger.debug(f"Making request to URL: {url}")
+        response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
+
+        status_code = response.status_code
+        # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
+        if status_code == 999:
+            raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
+
+        status_code = 401
+
+        if status_code == 401:
+            self._authenticate()
+
+        response_json = []
+        try:
+            response_json = response.json()
+            logger.debug(f"Response (JSON): {response_json}")
+        except JSONDecodeError:
+            response.raise_for_status()
 
         try:
+            if (status_code // 100) != 2:
+                # handle if the yahoo query returns an error
+                if response_json.get("error"):
+                    response_error_msg = response_json.get("error").get("description")
+                    error_msg = f"Attempt to retrieve data at URL {response.url} failed with error: " \
+                                f"\"{response_error_msg}\""
+                    logger.error(error_msg)
+                    raise YahooFantasySportsDataNotFound(error_msg, url=response.url)
+
             response.raise_for_status()
-            # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
-            if response.status_code == 999:
-                raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
+
         except HTTPError as e:
             # retry with incremental back-off
             if retries < 3:
@@ -109,6 +151,21 @@ class YahooFantasySportsQuery(object):
                 # log error and terminate query if status code is not 200 after 3 retries
                 logger.error(f"Request failed with status code: {response.status_code} - {e}")
                 response.raise_for_status()
+
+        raw_response_data = response_json.get(self.fantasy_content_data_field)
+
+        # extract data from "fantasy_content" field if it exists
+        if raw_response_data:
+            logger.debug(f"Data fetched with query URL: {response.url}")
+            logger.debug(
+                f"Response (Yahoo fantasy data extracted from: "
+                f"\"{self.fantasy_content_data_field}\"): {raw_response_data}"
+            )
+        else:
+            error_msg = f"No data found at URL {response.url} when attempting extraction from field: " \
+                        f"\"{self.fantasy_content_data_field}\""
+            logger.error(error_msg)
+            raise YahooFantasySportsDataNotFound(error_msg, url=response.url)
 
         return response
 
@@ -126,26 +183,7 @@ class YahooFantasySportsQuery(object):
         """
         if not self.offline:
             response = self.get_response(url)
-            response_json = response.json()
-            logger.debug(f"Response (JSON): {response_json}")
-
-            # handle if the yahoo query returns an error
-            if response_json.get("error"):
-                response_error_msg = response_json.get("error").get("description")
-                error_msg = f"Attempt to retrieve data failed with error: \"{response_error_msg}\""
-                logger.error(error_msg)
-                raise YahooFantasySportsDataNotFound(error_msg)
-            else:
-                raw_response_data = response_json.get("fantasy_content")
-
-            # extract data from "fantasy_content" field if it exists
-            if raw_response_data:
-                logger.debug(f"Data fetched with query URL: {response.url}")
-                logger.debug(f"Response (Yahoo fantasy data extracted from: \"fantasy_content\"): {raw_response_data}")
-            else:
-                error_msg = "No data found when attempting extraction from field \"fantasy_content\""
-                logger.error(error_msg)
-                raise YahooFantasySportsDataNotFound(error_msg)
+            raw_response_data = response.json().get(self.fantasy_content_data_field)
 
             # iterate through list of data keys and drill down to final desired data field
             for i in range(len(data_key_list)):
@@ -170,9 +208,9 @@ class YahooFantasySportsQuery(object):
             if raw_response_data:
                 logger.debug(f"Response (Yahoo fantasy data extracted from: {data_key_list}): {raw_response_data}")
             else:
-                error_msg = f"No data found when attempting extraction from fields {data_key_list}"
+                error_msg = f"No data found when attempting extraction from fields: {data_key_list}"
                 logger.error(error_msg)
-                raise YahooFantasySportsDataNotFound(error_msg)
+                raise YahooFantasySportsDataNotFound(error_msg, payload=data_key_list, url=response.url)
 
             # unpack, parse, and assign data types to all retrieved data content
             unpacked = unpack_data(raw_response_data, YahooFantasyObject)
@@ -1018,7 +1056,7 @@ class YahooFantasySportsQuery(object):
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/teams",
             ["league", "teams"])
 
-    def get_league_players(self, player_count_limit=None):
+    def get_league_players(self, player_count_limit=None, player_count_start=0, is_retry=False):
         """Retrieve valid players for chosen league.
 
         :rtype: list
@@ -1066,22 +1104,26 @@ class YahooFantasySportsQuery(object):
                 ]
         """
 
-        league_player_count = 0
+        league_player_count = player_count_start
         all_players_retrieved = False
         league_player_data = []
-        while not league_player_count % 25 and not all_players_retrieved:
+        league_player_retrieval_limit = 25
+        # while not league_player_count % league_player_retrieval_limit and not all_players_retrieved:
+        while not all_players_retrieved:
 
             try:
-                league_players = self.query(
-                    "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() +
-                    "/players;start=" + str(league_player_count),
+                league_player_query_data = self.query(
+                    "https://fantasysports.yahooapis.com/fantasy/v2/league/" +
+                    self.get_league_key() +
+                    "/players;start=" + str(league_player_count) +
+                    ";count=" + str(league_player_retrieval_limit if not is_retry else 1),
                     ["league", "players"])
 
+                league_players = league_player_query_data if type(league_player_query_data) == list else [league_player_query_data]
                 league_player_count_from_query = len(league_players)
 
                 if player_count_limit:
-
-                    if (league_player_count + league_player_count_from_query) <= player_count_limit:
+                    if (league_player_count + league_player_count_from_query) < player_count_limit:
                         league_player_count += league_player_count_from_query
                         league_player_data.extend(league_players)
 
@@ -1095,9 +1137,43 @@ class YahooFantasySportsQuery(object):
                     league_player_count += league_player_count_from_query
                     league_player_data.extend(league_players)
 
-            except YahooFantasySportsDataNotFound:
-                logger.debug("No more league player data available.")
-                all_players_retrieved = True
+            except YahooFantasySportsDataNotFound as yfpy_err:
+                if not is_retry:
+                    payload = yfpy_err.payload
+                    if payload:
+                        logger.debug("No more league player data available.")
+                        all_players_retrieved = True
+                    else:
+                        logger.warning(
+                            f"Error retrieving player batch: "
+                            f"{league_player_count}-{league_player_count + league_player_retrieval_limit - 1}. "
+                            f"Attempting to retrieve individual players from batch.")
+
+                        player_retrieval_successes = []
+                        player_retrieval_failures = []
+                        for i in range(25):
+                            try:
+                                player_data = self.get_league_players(
+                                    player_count_limit=league_player_count + 1,
+                                    player_count_start=league_player_count,
+                                    is_retry=True
+                                )
+                                player_retrieval_successes.extend(player_data)
+
+                            except YahooFantasySportsDataNotFound as nested_yfpy_err:
+                                player_retrieval_failures.append(
+                                    {
+                                        "failed_player_retrieval_index": league_player_count,
+                                        "failed_player_retrieval_url": nested_yfpy_err.url,
+                                        "failed_player_retrieval_message": nested_yfpy_err.message
+                                    }
+                                )
+
+                            league_player_count += 1
+                        logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
+
+                else:
+                    raise yfpy_err
 
             logger.debug(f"League player count: {league_player_count}")
 
