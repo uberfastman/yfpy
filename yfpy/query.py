@@ -115,8 +115,6 @@ class YahooFantasySportsQuery(object):
         if status_code == 999:
             raise HTTPError("Yahoo data unavailable due to rate limiting. Please try again later.")
 
-        status_code = 401
-
         if status_code == 401:
             self._authenticate()
 
