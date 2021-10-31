@@ -1168,6 +1168,9 @@ class YahooFantasySportsQuery(object):
                                 )
 
                             league_player_count += 1
+                          
+                        league_player_data.extend(player_retrieval_successes)
+                        
                         logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
 
                 else:
