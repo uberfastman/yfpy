@@ -12,7 +12,7 @@
 
 [![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
 
-![Build Status](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml/badge.svg?branch=main)
+[![CI Build](https://github.com/uberfastman/yfpy/actions/workflows/CI%20Build/badge.svg?branch=main)](https://github.com/uberfastman/yfpy/actions/workflows/CI%20Build)
 [![PyPI](https://img.shields.io/pypi/v/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 [![PyPI](https://img.shields.io/pypi/dm/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 [![PyPI](https://img.shields.io/pypi/pyversions/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
