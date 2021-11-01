@@ -10,5 +10,5 @@ include dev-requirements.txt
 
 # Include test code and resources
 include test/test_yfpy.py
-include test/EXAMPLE-private.json
+include test/EXAMPLE.private.json
 include test/EXAMPLE.env

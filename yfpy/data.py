@@ -17,8 +17,8 @@ class Data(object):
         """Instantiate data object to retrieve, save, and load Yahoo fantasy football data.
 
         :param data_dir: directory path where data will be saved/loaded
-        :param save_data: (optional) boolean determining whether or not data is saved after retrieval from the Yahoo FF API
-        :param dev_offline: (optional) boolean for offline development (requires a prior online run with save_data = True
+        :param save_data: (optional) bool determining whether or not data is saved after retrieval from the Yahoo FF API
+        :param dev_offline: (optional) bool for offline development (requires a prior online run with save_data = True
         """
         self.data_dir = data_dir  # type: Path
         self.save_data = save_data  # type: bool
