@@ -255,8 +255,13 @@ class YahooFantasySportsQuery(object):
                   ...
                 ]
         """
-        return sorted(self.query("https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=" + self.game_code,
-                                 ["games"]), key=lambda x: x.get("game").season)
+        return sorted(
+            self.query(
+                "https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=" + self.game_code,
+                ["games"]
+            ),
+            key=lambda x: x.get("game").season
+        )
 
     def get_game_key_by_season(self, season):
         """Retrieve specific game key by season.
@@ -268,8 +273,10 @@ class YahooFantasySportsQuery(object):
                 "338"
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=" + self.game_code + ";seasons=" +
-            str(season), ["games"]).get("game").game_key
+            "https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=" + self.game_code + ";seasons="
+            + str(season),
+            ["games"]
+        ).get("game").game_key
 
     def get_current_game_info(self):
         """Retrieve game info for current fantasy season.
@@ -333,8 +340,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code +
-            ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions", ["game"], Game)
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code
+            + ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions",
+            ["game"],
+            Game
+        )
 
     def get_current_game_metadata(self):
         """Retrieve game metadata for current fantasy season.
@@ -357,7 +367,10 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code + "/metadata", ["game"], Game)
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + self.game_code + "/metadata",
+            ["game"],
+            Game
+        )
 
     def get_game_info_by_game_id(self, game_id):
         """Retrieve game info for specific game by id.
@@ -422,8 +435,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) +
-            ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions", ["game"], Game)
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id)
+            + ";out=metadata,players,game_weeks,stat_categories,position_types,roster_positions",
+            ["game"],
+            Game
+        )
 
     def get_game_metadata_by_game_id(self, game_id):
         """Retrieve game metadata for specific game by id.
@@ -446,7 +462,10 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/metadata", ["game"], Game)
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/metadata",
+            ["game"],
+            Game
+        )
 
     def get_game_weeks_by_game_id(self, game_id):
         """Retrieve all valid weeks of a specific game by id.
@@ -475,8 +494,10 @@ class YahooFantasySportsQuery(object):
                   }
                 ]
         """
-        return self.query("https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/game_weeks",
-                          ["game", "game_weeks"])
+        return self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/game_weeks",
+            ["game", "game_weeks"]
+        )
 
     def get_game_stat_categories_by_game_id(self, game_id):
         """Retrieve all valid stat categories of a specific game by id.
@@ -509,7 +530,9 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/stat_categories",
-            ["game", "stat_categories"], StatCategories)
+            ["game", "stat_categories"],
+            StatCategories
+        )
 
     def get_game_position_types_by_game_id(self, game_id):
         """Retrieve all valid position types for specific game by id sorted alphabetically by type.
@@ -545,9 +568,13 @@ class YahooFantasySportsQuery(object):
                   }
                 ]
         """
-        return sorted(self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/position_types",
-            ["game", "position_types"]), key=lambda x: x.get("position_type").type)
+        return sorted(
+            self.query(
+                "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/position_types",
+                ["game", "position_types"]
+            ),
+            key=lambda x: x.get("position_type").type
+        )
 
     def get_game_roster_positions_by_game_id(self, game_id):
         """Retrieve all valid roster positions for specific game by id sorted alphabetically by position.
@@ -571,9 +598,13 @@ class YahooFantasySportsQuery(object):
                   }
                 ]
         """
-        return sorted(self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/roster_positions",
-            ["game", "roster_positions"]), key=lambda x: x.get("roster_position").position)
+        return sorted(
+            self.query(
+                "https://fantasysports.yahooapis.com/fantasy/v2/game/" + str(game_id) + "/roster_positions",
+                ["game", "roster_positions"]
+            ),
+            key=lambda x: x.get("roster_position").position
+        )
 
     def get_league_key(self, season=None):
         """Retrieve league key for selected league.
@@ -608,7 +639,9 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/",
-            ["users", "0", "user"], User)
+            ["users", "0", "user"],
+            User
+        )
 
     def get_user_games(self):
         """Retrieve game history for current logged-in user sorted by season/year.
@@ -635,8 +668,13 @@ class YahooFantasySportsQuery(object):
                 ]
         """
         return sorted(
-            self.query("https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=" +
-                       self.game_code + "/", ["users", "0", "user", "games"]), key=lambda x: x.get("game").season)
+            self.query(
+                "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes="
+                + self.game_code + "/",
+                ["users", "0", "user", "games"]
+            ),
+            key=lambda x: x.get("game").season
+        )
 
     def get_user_leagues_by_game_key(self, game_key):
         """Retrieve league history for current logged-in user for specific game by id sorted by season/year.
@@ -681,8 +719,11 @@ class YahooFantasySportsQuery(object):
                   ...
         """
 
-        leagues = self.query("https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=" +
-                             str(game_key) + "/leagues/", ["users", "0", "user", "games", "0", "game", "leagues"])
+        leagues = self.query(
+            "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys="
+            + str(game_key) + "/leagues/",
+            ["users", "0", "user", "games", "0", "game", "leagues"]
+        )
         if isinstance(leagues, list):
             return sorted(leagues, key=lambda x: x.get("league").season)
         else:
@@ -752,9 +793,14 @@ class YahooFantasySportsQuery(object):
                     }
                   },
         """
-        return sorted(self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=" + self.game_code +
-            "/teams/", ["users", "0", "user", "games"]), key=lambda x: x.get("game").season)
+        return sorted(
+            self.query(
+                "https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=" + self.game_code
+                + "/teams/",
+                ["users", "0", "user", "games"]
+            ),
+            key=lambda x: x.get("game").season
+        )
 
     def get_league_info(self):
         """Retrieve info for chosen league.
@@ -808,9 +854,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() +
-            ";out=metadata,settings,standings,scoreboard,teams,players,draftresults,transactions", ["league"],
-            League)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key()
+            + ";out=metadata,settings,standings,scoreboard,teams,players,draftresults,transactions",
+            ["league"],
+            League
+        )
 
     def get_league_metadata(self):
         """Retrieve metadata for chosen league.
@@ -848,8 +896,10 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/metadata", ["league"],
-            League)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/metadata",
+            ["league"],
+            League
+        )
 
     def get_league_settings(self):
         """Retrieve settings (rules) for chosen league.
@@ -929,7 +979,9 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/settings",
-            ["league", "settings"], Settings)
+            ["league", "settings"],
+            Settings
+        )
 
     def get_league_standings(self):
         """Retrieve standings for chosen league.
@@ -1002,7 +1054,9 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/standings",
-            ["league", "standings"], Standings)
+            ["league", "standings"],
+            Standings
+        )
 
     def get_league_teams(self):
         """Retrieve teams for chosen league.
@@ -1052,7 +1106,8 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/teams",
-            ["league", "teams"])
+            ["league", "teams"]
+        )
 
     def get_league_players(self, player_count_limit=None, player_count_start=0, is_retry=False):
         """Retrieve valid players for chosen league.
@@ -1106,18 +1161,18 @@ class YahooFantasySportsQuery(object):
         all_players_retrieved = False
         league_player_data = []
         league_player_retrieval_limit = 25
-        # while not league_player_count % league_player_retrieval_limit and not all_players_retrieved:
         while not all_players_retrieved:
 
             try:
                 league_player_query_data = self.query(
-                    "https://fantasysports.yahooapis.com/fantasy/v2/league/" +
-                    self.get_league_key() +
-                    "/players;start=" + str(league_player_count) +
-                    ";count=" + str(league_player_retrieval_limit if not is_retry else 1),
-                    ["league", "players"])
+                    "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key()
+                    + "/players;start=" + str(league_player_count) + ";count="
+                    + str(league_player_retrieval_limit if not is_retry else 1),
+                    ["league", "players"]
+                )
 
-                league_players = league_player_query_data if type(league_player_query_data) == list else [league_player_query_data]
+                league_players = (league_player_query_data if type(league_player_query_data) == list else
+                                  [league_player_query_data])
                 league_player_count_from_query = len(league_players)
 
                 if player_count_limit:
@@ -1168,9 +1223,8 @@ class YahooFantasySportsQuery(object):
                                 )
 
                             league_player_count += 1
-                          
+
                         league_player_data.extend(player_retrieval_successes)
-                        
                         logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
 
                 else:
@@ -1200,7 +1254,8 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/draftresults",
-            ["league", "draft_results"])
+            ["league", "draft_results"]
+        )
 
     def get_league_transactions(self):
         """Retrieve transactions for chosen league.
@@ -1248,7 +1303,8 @@ class YahooFantasySportsQuery(object):
         """
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/transactions",
-            ["league", "transactions"])
+            ["league", "transactions"]
+        )
 
     def get_league_scoreboard_by_week(self, chosen_week):
         """Retrieve scoreboard for chosen league by week.
@@ -1308,8 +1364,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week=" +
-            str(chosen_week), ["league", "scoreboard"], Scoreboard)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week="
+            + str(chosen_week),
+            ["league", "scoreboard"],
+            Scoreboard
+        )
 
     def get_league_matchups_by_week(self, chosen_week):
         """Retrieve matchups for chosen league by week.
@@ -1365,8 +1424,10 @@ class YahooFantasySportsQuery(object):
                 ]
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week=" +
-            str(chosen_week), ["league", "scoreboard", "0", "matchups"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/scoreboard;week="
+            + str(chosen_week),
+            ["league", "scoreboard", "0", "matchups"]
+        )
 
     def get_team_info(self, team_id):
         """Retrieve info of specific team by team_id for chosen league.
@@ -1441,8 +1502,11 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) +
-            ";out=metadata,stats,standings,roster,draftresults,matchups", ["team"], Team)
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key)
+            + ";out=metadata,stats,standings,roster,draftresults,matchups",
+            ["team"],
+            Team
+        )
 
     def get_team_metadata(self, team_id):
         """Retrieve metadata of specific team by team_id for chosen league.
@@ -1487,7 +1551,10 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/metadata", ["team"], Team)
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/metadata",
+            ["team"],
+            Team
+        )
 
     def get_team_stats(self, team_id):
         """Retrieve stats of specific team by team_id for chosen league.
@@ -1505,7 +1572,9 @@ class YahooFantasySportsQuery(object):
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/stats",
-            ["team", "team_points"], TeamPoints)
+            ["team", "team_points"],
+            TeamPoints
+        )
 
     def get_team_stats_by_week(self, team_id, chosen_week="current"):
         """Retrieve stats of specific team by team_id and by week for chosen league.
@@ -1531,8 +1600,10 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/stats;type=week;week=" +
-            str(chosen_week), ["team", ["team_points", "team_projected_points"]])
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/stats;type=week;week="
+            + str(chosen_week),
+            ["team", ["team_points", "team_projected_points"]]
+        )
 
     def get_team_standings(self, team_id):
         """Retrieve standings of specific team by team_id for chosen league.
@@ -1561,7 +1632,9 @@ class YahooFantasySportsQuery(object):
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/standings",
-            ["team", "team_standings"], TeamStandings)
+            ["team", "team_standings"],
+            TeamStandings
+        )
 
     def get_team_roster_by_week(self, team_id, chosen_week="current"):
         """Retrieve roster of specific team by team_id and by week for chosen league.
@@ -1624,8 +1697,11 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
-            str(chosen_week), ["team", "roster"], Roster)
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week="
+            + str(chosen_week),
+            ["team", "roster"],
+            Roster
+        )
 
     def get_team_roster_player_info_by_week(self, team_id, chosen_week="current"):
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
@@ -1719,9 +1795,10 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
-            str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
-            ["team", "roster", "0", "players"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week="
+            + str(chosen_week) + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
+            ["team", "roster", "0", "players"]
+        )
 
     def get_team_roster_player_info_by_date(self, team_id, chosen_date=None):
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
@@ -1816,10 +1893,11 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster" +
-            (";date=" + str(chosen_date) if chosen_date else "") +
-            "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
-            ["team", "roster", "0", "players"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster"
+            + (";date=" + str(chosen_date) if chosen_date else "")
+            + "/players;out=metadata,stats,ownership,percent_owned,draft_analysis",
+            ["team", "roster", "0", "players"]
+        )
 
     def get_team_roster_player_stats(self, team_id):
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
@@ -1901,9 +1979,10 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) +
-            "/roster/players/stats;type=season",
-            ["team", "roster", "0", "players"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key)
+            + "/roster/players/stats;type=season",
+            ["team", "roster", "0", "players"]
+        )
 
     def get_team_roster_player_stats_by_week(self, team_id, chosen_week="current"):
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
@@ -1979,8 +2058,10 @@ class YahooFantasySportsQuery(object):
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week=" +
-            str(chosen_week) + "/players/stats", ["team", "roster", "0", "players"])
+            "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/roster;week="
+            + str(chosen_week) + "/players/stats",
+            ["team", "roster", "0", "players"]
+        )
 
     def get_team_draft_results(self, team_id):
         """Retrieve draft results of specific team by team_id for chosen league.
@@ -2004,7 +2085,8 @@ class YahooFantasySportsQuery(object):
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/draftresults",
-            ["team", "draft_results"])
+            ["team", "draft_results"]
+        )
 
     def get_team_matchups(self, team_id):
         """Retrieve matchups of specific team by team_id for chosen league.
@@ -2024,7 +2106,8 @@ class YahooFantasySportsQuery(object):
         team_key = self.get_league_key() + ".t." + str(team_id)
         return self.query(
             "https://fantasysports.yahooapis.com/fantasy/v2/team/" + str(team_key) + "/matchups",
-            ["team", "matchups"])
+            ["team", "matchups"]
+        )
 
     def get_player_stats_for_season(self, player_key):
         """Retrieve stats of specific player by player_key for the entire season for chosen league.
@@ -2085,8 +2168,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/stats", ["league", "players", "0", "player"], Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/stats",
+            ["league", "players", "0", "player"],
+            Player
+        )
 
     def get_player_stats_by_week(self, player_key, chosen_week="current"):
         """Retrieve stats of specific player by player_key and by week for chosen league.
@@ -2150,8 +2236,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/stats;type=week;week=" + str(chosen_week), ["league", "players", "0", "player"], Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/stats;type=week;week=" + str(chosen_week),
+            ["league", "players", "0", "player"],
+            Player
+        )
 
     def get_player_stats_by_date(self, player_key, chosen_date=None):
         """Retrieve player stats by player_key and by date for chosen league.
@@ -2242,8 +2331,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/stats;type=date;date=" + str(chosen_date), ["league", "players", "0", "player"], Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/stats;type=date;date=" + str(chosen_date),
+            ["league", "players", "0", "player"],
+            Player
+        )
 
     def get_player_ownership(self, player_key):
         """Retrieve ownership of specific player by player_key for chosen league.
@@ -2329,8 +2421,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/ownership", ["league", "players", "0", "player"], Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/ownership",
+            ["league", "players", "0", "player"],
+            Player
+        )
 
     def get_player_percent_owned_by_week(self, player_key, chosen_week="current"):
         """Retrieve percent-owned of specific player by player_key and by week for chosen league.
@@ -2382,9 +2477,11 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/percent_owned;type=week;week=" + str(chosen_week), ["league", "players", "0", "player"],
-            Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/percent_owned;type=week;week=" + str(chosen_week),
+            ["league", "players", "0", "player"],
+            Player
+        )
 
     def get_player_draft_analysis(self, player_key):
         """Retrieve draft analysis of specific player by player_key for chosen league.
@@ -2435,5 +2532,8 @@ class YahooFantasySportsQuery(object):
                 }
         """
         return self.query(
-            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys=" +
-            str(player_key) + "/draft_analysis", ["league", "players", "0", "player"], Player)
+            "https://fantasysports.yahooapis.com/fantasy/v2/league/" + self.get_league_key() + "/players;player_keys="
+            + str(player_key) + "/draft_analysis",
+            ["league", "players", "0", "player"],
+            Player
+        )
