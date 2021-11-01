@@ -10,9 +10,10 @@
 ### Python API wrapper for the Yahoo Fantasy Sports public API
 ##### By Wren J. R. (uberfastman)
 
-[![latest-release.png](https://github.com/uberfastman/yfpy/raw/develop/resources/images/latest-release.png)](https://github.com/uberfastman/yfpy/releases/latest)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/uberfastman/yfpy?color=yellowgreen&label=latest%20release&sort=semver)](https://github.com/uberfastman/yfpy/releases/latest)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/uberfastman/yfpy?color=yellowgreen&label=latest%20version&sort=semver)](https://github.com/uberfastman/yfpy/tags)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/uberfastman/yfpy/CI%20Build/main?color=brightgreen&label=build)](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml)
 
-[![CI Build](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml/badge.svg?&branch=main)](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml)
 [![PyPI](https://img.shields.io/pypi/v/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 [![PyPI](https://img.shields.io/pypi/dm/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 [![PyPI](https://img.shields.io/pypi/pyversions/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
@@ -20,19 +21,14 @@
 
 ---
 
-#### Do you like the YFPY API wrapper? Star the repository here on GitHub and please consider helping support its development:
+#### Do you like the YFPY API wrapper? Star the repository here on GitHub and please consider helping support its ongoing development:
 
-###### Donate using PayPal or Credit/Debit card:
+[<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="100"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="100"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="100"/>](https://share.trustwallet.com/MF8YBO01I9)
 
-[![paypal](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS)
-
-###### OR donate using cryptocurrency:
-
-| Cryptocurrency | Donation Link ([Trust Wallet](https://trustwallet.com)) | Wallet Address |
-| ---: | :---: | :--- |
-| [Bitcoin - BTC](https://share.trustwallet.com/ZoAkTpY1I9) | [![donate-bitcoin](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png)](https://share.trustwallet.com/ZoAkTpY1I9) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` |
-| [Ethereum - ETH](https://share.trustwallet.com/MF8YBO01I9) | [![donate-ethereum](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png)](https://share.trustwallet.com/MF8YBO01I9) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
-| [Nano Currency - NANO](https://share.trustwallet.com/bNXsMA11I9) | [![donate-nano](https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-nano.png)](https://share.trustwallet.com/bNXsMA11I9) | `nano_3ug3o6yy983jsqdsc773izhr3jfz4dq8bz7yfhhzkkeq7s8ern1ws7dng4pq` |
+| Cryptocurrency | Address |
+| ---: | :---: |
+| Bitcoin (BTC) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` | 
+| Ethereum (ETH) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
 
 ---
 
