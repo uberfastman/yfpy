@@ -9,6 +9,12 @@ include requirements.txt
 include dev-requirements.txt
 
 # Include test code and resources
-include test/test_yfpy.py
-include test/EXAMPLE.private.json
-include test/EXAMPLE.env
+include test/conftest.py
+include test/integration/conftest.py
+include test/integration/test_api_game_data.py
+include test/integration/test_api_league_data.py
+include test/integration/test_api_player_data.py
+include test/integration/test_api_team_data.py
+include test/integration/test_api_user_data.py
+include test/integration/EXAMPLE.private.json
+include test/integration/EXAMPLE.env

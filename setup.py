@@ -5,7 +5,7 @@ from pathlib import Path
 
 import setuptools
 
-version_file = Path(__file__).parent / "VERSION"
+version_file = Path(__file__).parent / "VERSION.py"
 
 # noinspection PyBroadException
 try:
