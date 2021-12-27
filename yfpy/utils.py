@@ -1,8 +1,9 @@
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
-from collections import ChainMap, OrderedDict
 import json
+from collections import ChainMap, OrderedDict
+
 import stringcase
 
 from yfpy.logger import get_logger

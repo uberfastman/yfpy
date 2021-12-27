@@ -25,9 +25,9 @@
 
 [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="100"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="100"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="100"/>](https://share.trustwallet.com/MF8YBO01I9)
 
-| Cryptocurrency | Address |
-| ---: | :---: |
-| Bitcoin (BTC) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` | 
+| Cryptocurrency |                   Address                    |
+|---------------:|:--------------------------------------------:|
+|  Bitcoin (BTC) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` | 
 | Ethereum (ETH) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
 
 ---
@@ -133,4 +133,4 @@ Traceback (most recent call last):
 IndexError: list index out of range
 ```
 
-Typically when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.
+Typically, when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.

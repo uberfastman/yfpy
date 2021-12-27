@@ -2,7 +2,8 @@ __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import json
-from pathlib import Path
+from pathlib import Path, PosixPath
+from typing import Union, List, Dict, Callable, Type
 
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
@@ -13,26 +14,28 @@ logger = get_logger(__name__)
 
 class Data(object):
 
-    def __init__(self, data_dir: Path, save_data=False, dev_offline=False):
+    def __init__(self, data_dir: Union[Path, str], save_data: bool = False, dev_offline: bool = False):
         """Instantiate data object to retrieve, save, and load Yahoo fantasy football data.
 
         :param data_dir: directory path where data will be saved/loaded
         :param save_data: (optional) bool determining whether or not data is saved after retrieval from the Yahoo FF API
         :param dev_offline: (optional) bool for offline development (requires a prior online run with save_data = True
         """
-        self.data_dir = data_dir  # type: Path
+        self.data_dir = data_dir if type(data_dir) == PosixPath else Path(data_dir)  # type: Path
         self.save_data = save_data  # type: bool
         self.dev_offline = dev_offline  # type: bool
 
-    def update_data_dir(self, new_save_dir: Path):
+    def update_data_dir(self, new_save_dir: Union[Path, str]) -> None:
         """Modify the data storage directory if it needs to be updated.
 
         :param new_save_dir: full path to new desired directory where data will be saved/loaded
         """
-        self.data_dir = new_save_dir  # type: Path
+        self.data_dir = new_save_dir if type(new_save_dir) == PosixPath else Path(new_save_dir)  # type: Path
 
     @staticmethod
-    def get(yf_query, params=None):
+    def get(yf_query: Callable, params: Union[Dict[str, str], None] = None) -> Union[str, YahooFantasyObject,
+                                                                                     List[YahooFantasyObject],
+                                                                                     Dict[str, YahooFantasyObject]]:
         """Run query to retrieve Yahoo fantasy football data.
 
         :param yf_query: chosen yfpy query method to run
@@ -44,7 +47,9 @@ class Data(object):
         else:
             return yf_query()
 
-    def save(self, file_name, yf_query, params=None, new_data_dir: Path = None):
+    def save(self, file_name: str, yf_query: Callable, params: Union[Dict[str, str], None] = None,
+             new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
+                                                                   Dict[str, YahooFantasyObject]]:
         """Retrieve and save Yahoo fantasy football data locally.
 
         :param file_name: name of file to which data will be saved
@@ -55,6 +60,7 @@ class Data(object):
         """
         # change data save directory
         if new_data_dir:
+            new_data_dir = new_data_dir if type(new_data_dir) == PosixPath else Path(new_data_dir)
             logger.debug(f"Data directory changed from {self.data_dir} to {new_data_dir}.")
             self.update_data_dir(new_data_dir)
 
@@ -72,7 +78,9 @@ class Data(object):
         logger.debug(f"Data saved locally to: {saved_data_file_path}")
         return data
 
-    def load(self, file_name, data_type_class=None, new_data_dir=None):
+    def load(self, file_name: str, data_type_class: Type[YahooFantasyObject] = None,
+             new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
+                                                                   Dict[str, YahooFantasyObject]]:
         """Load Yahoo fantasy football data already stored locally (CANNOT BE RUN IF save METHOD HAS NEVER BEEN RUN).
 
         :param file_name: name of file from which data will be loaded
@@ -82,6 +90,7 @@ class Data(object):
         """
         # change data load directory
         if new_data_dir:
+            new_data_dir = new_data_dir if type(new_data_dir) == PosixPath else Path(new_data_dir)
             self.update_data_dir(new_data_dir)
 
         # load selected data file
@@ -96,7 +105,11 @@ class Data(object):
                                     f"having previously saved data.")
         return data
 
-    def retrieve(self, file_name, yf_query, params=None, data_type_class=None, new_data_dir=None):
+    def retrieve(self, file_name: str, yf_query: Callable, params: Union[Dict[str, str], None] = None,
+                 data_type_class: Type[YahooFantasyObject] = None,
+                 new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject,
+                                                                       List[YahooFantasyObject],
+                                                                       Dict[str, YahooFantasyObject]]:
         """Fetch data from the web or load it locally (combination of the save and load methods).
 
         :param file_name: name of file to/from which data will be saved/loaded
