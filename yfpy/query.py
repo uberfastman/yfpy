@@ -6,6 +6,7 @@ import logging
 import time
 from json import JSONDecodeError
 from pathlib import Path
+from typing import Union, List, Dict
 
 from requests import Response
 from requests.exceptions import HTTPError
@@ -13,8 +14,9 @@ from yahoo_oauth import OAuth2
 
 from yfpy.exceptions import YahooFantasySportsDataNotFound
 from yfpy.logger import get_logger
-from yfpy.models import YahooFantasyObject, Game, User, League, Standings, Settings, Player, StatCategories, \
-    Scoreboard, Team, TeamPoints, TeamStandings, Roster
+from yfpy.models import YahooFantasyObject, DraftResult, Game, GameWeek, User, League, Standings, Settings, Player, \
+    PositionType, StatCategories, Transaction, Scoreboard, Team, TeamPoints, TeamProjectedPoints, TeamStandings, \
+    Roster, RosterPosition, Matchup
 from yfpy.utils import reformat_json_list, unpack_data, complex_json_handler, prettify_data
 
 logger = get_logger(__name__)
@@ -23,6 +25,7 @@ logger = get_logger(__name__)
 logging.getLogger("yahoo_oauth").setLevel(level=logging.INFO)
 
 
+# noinspection PyTypeChecker
 class YahooFantasySportsQuery(object):
     """Yahoo fantasy sports query to retrieve all types of fantasy sports data
     """
@@ -69,7 +72,7 @@ class YahooFantasySportsQuery(object):
         if not self.offline:
             self._authenticate()
 
-    def _authenticate(self):
+    def _authenticate(self) -> None:
         logger.debug("Authenticating with Yahoo.")
 
         if self._yahoo_consumer_key and self._yahoo_consumer_secret:
@@ -106,7 +109,7 @@ class YahooFantasySportsQuery(object):
         if not self.oauth.token_is_valid():
             self.oauth.refresh_access_token()
 
-    def get_response(self, url, retries=0):
+    def get_response(self, url: str, retries=0) -> Response:
         logger.debug(f"Making request to URL: {url}")
         response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
 
@@ -167,7 +170,8 @@ class YahooFantasySportsQuery(object):
 
         return response
 
-    def query(self, url, data_key_list, data_type_class=None):
+    def query(self, url: str, data_key_list: Union[List[str], List[List[str]]], data_type_class=None) -> (
+            Union[str, YahooFantasyObject, List[YahooFantasyObject], Dict[str, YahooFantasyObject]]):
         """Base query class to retrieve requested data from the Yahoo fantasy sports REST API.
 
         :param url: web url for desired Yahoo fantasy data
@@ -221,7 +225,7 @@ class YahooFantasySportsQuery(object):
                 "response": response
             })
 
-            # cast highest level of data to type corresponding to query (if type exists)
+            # cast the highest level of data to type corresponding to query (if type exists)
             query_data = data_type_class(unpacked) if data_type_class else unpacked
             if self.all_output_as_json:
                 return json.dumps(query_data, indent=2, default=complex_json_handler, ensure_ascii=False)
@@ -231,7 +235,7 @@ class YahooFantasySportsQuery(object):
         else:
             logger.error("Cannot run Yahoo query while using offline mode! Please try again with offline=False.")
 
-    def get_all_yahoo_fantasy_game_keys(self):
+    def get_all_yahoo_fantasy_game_keys(self) -> List[Game]:
         """Retrieve all Yahoo fantasy game keys (from year of inception to present), sorted by season/year.
 
         :rtype: list
@@ -263,7 +267,8 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("game").season
         )
 
-    def get_game_key_by_season(self, season):
+    # noinspection PyUnresolvedReferences
+    def get_game_key_by_season(self, season: str) -> str:
         """Retrieve specific game key by season.
 
         :param season: User defined season/year for which to retrieve the Yahoo game.
@@ -278,7 +283,7 @@ class YahooFantasySportsQuery(object):
             ["games"]
         ).get("game").game_key
 
-    def get_current_game_info(self):
+    def get_current_game_info(self) -> Game:
         """Retrieve game info for current fantasy season.
 
         :rtype: Game
@@ -346,7 +351,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_current_game_metadata(self):
+    def get_current_game_metadata(self) -> Game:
         """Retrieve game metadata for current fantasy season.
 
         :rtype: Game
@@ -372,7 +377,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_game_info_by_game_id(self, game_id):
+    def get_game_info_by_game_id(self, game_id: str) -> Game:
         """Retrieve game info for specific game by id.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -441,7 +446,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_game_metadata_by_game_id(self, game_id):
+    def get_game_metadata_by_game_id(self, game_id: str) -> Game:
         """Retrieve game metadata for specific game by id.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -467,7 +472,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_game_weeks_by_game_id(self, game_id):
+    def get_game_weeks_by_game_id(self, game_id: str) -> List[GameWeek]:
         """Retrieve all valid weeks of a specific game by id.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -499,7 +504,7 @@ class YahooFantasySportsQuery(object):
             ["game", "game_weeks"]
         )
 
-    def get_game_stat_categories_by_game_id(self, game_id):
+    def get_game_stat_categories_by_game_id(self, game_id: str) -> StatCategories:
         """Retrieve all valid stat categories of a specific game by id.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -534,7 +539,7 @@ class YahooFantasySportsQuery(object):
             StatCategories
         )
 
-    def get_game_position_types_by_game_id(self, game_id):
+    def get_game_position_types_by_game_id(self, game_id: str) -> List[PositionType]:
         """Retrieve all valid position types for specific game by id sorted alphabetically by type.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -576,7 +581,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("position_type").type
         )
 
-    def get_game_roster_positions_by_game_id(self, game_id):
+    def get_game_roster_positions_by_game_id(self, game_id: str) -> List[RosterPosition]:
         """Retrieve all valid roster positions for specific game by id sorted alphabetically by position.
 
         :param game_id: game_id for specific Yahoo fantasy game
@@ -606,7 +611,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("roster_position").position
         )
 
-    def get_league_key(self, season=None):
+    def get_league_key(self, season: str = None) -> str:
         """Retrieve league key for selected league.
 
         :param season:
@@ -627,7 +632,7 @@ class YahooFantasySportsQuery(object):
         else:
             return self.league_key
 
-    def get_current_user(self):
+    def get_current_user(self) -> User:
         """Retrieve metadata for current logged-in user.
 
         :rtype: User
@@ -643,7 +648,7 @@ class YahooFantasySportsQuery(object):
             User
         )
 
-    def get_user_games(self):
+    def get_user_games(self) -> List[Game]:
         """Retrieve game history for current logged-in user sorted by season/year.
 
         :rtype: list
@@ -676,7 +681,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("game").season
         )
 
-    def get_user_leagues_by_game_key(self, game_key):
+    def get_user_leagues_by_game_key(self, game_key: str) -> List[League]:
         """Retrieve league history for current logged-in user for specific game by id sorted by season/year.
 
         :param game_key: game_id for specific Yahoo fantasy game
@@ -729,7 +734,7 @@ class YahooFantasySportsQuery(object):
         else:
             return list(leagues)
 
-    def get_user_teams(self):
+    def get_user_teams(self) -> List[Game]:
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
 
         :rtype: list
@@ -802,7 +807,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("game").season
         )
 
-    def get_league_info(self):
+    def get_league_info(self) -> League:
         """Retrieve info for chosen league.
 
         :rtype: League
@@ -860,7 +865,7 @@ class YahooFantasySportsQuery(object):
             League
         )
 
-    def get_league_metadata(self):
+    def get_league_metadata(self) -> League:
         """Retrieve metadata for chosen league.
 
         :rtype: League
@@ -901,7 +906,7 @@ class YahooFantasySportsQuery(object):
             League
         )
 
-    def get_league_settings(self):
+    def get_league_settings(self) -> Settings:
         """Retrieve settings (rules) for chosen league.
 
         :rtype: Settings
@@ -983,7 +988,7 @@ class YahooFantasySportsQuery(object):
             Settings
         )
 
-    def get_league_standings(self):
+    def get_league_standings(self) -> Standings:
         """Retrieve standings for chosen league.
 
         :rtype: Standings
@@ -1058,7 +1063,7 @@ class YahooFantasySportsQuery(object):
             Standings
         )
 
-    def get_league_teams(self):
+    def get_league_teams(self) -> List[Team]:
         """Retrieve teams for chosen league.
 
         :rtype: list
@@ -1109,7 +1114,8 @@ class YahooFantasySportsQuery(object):
             ["league", "teams"]
         )
 
-    def get_league_players(self, player_count_limit=None, player_count_start=0, is_retry=False):
+    def get_league_players(self, player_count_limit: int = None, player_count_start: int = 0,
+                           is_retry: bool = False) -> List[Player]:
         """Retrieve valid players for chosen league.
 
         :rtype: list
@@ -1234,7 +1240,7 @@ class YahooFantasySportsQuery(object):
 
         return league_player_data
 
-    def get_league_draft_results(self):
+    def get_league_draft_results(self) -> List[DraftResult]:
         """Retrieve draft results for chosen league.
 
         :rtype: list
@@ -1257,7 +1263,7 @@ class YahooFantasySportsQuery(object):
             ["league", "draft_results"]
         )
 
-    def get_league_transactions(self):
+    def get_league_transactions(self) -> List[Transaction]:
         """Retrieve transactions for chosen league.
 
         :rtype: list
@@ -1306,7 +1312,7 @@ class YahooFantasySportsQuery(object):
             ["league", "transactions"]
         )
 
-    def get_league_scoreboard_by_week(self, chosen_week):
+    def get_league_scoreboard_by_week(self, chosen_week: int) -> Scoreboard:
         """Retrieve scoreboard for chosen league by week.
 
         :param chosen_week: selected week for which to retrieve data
@@ -1370,7 +1376,7 @@ class YahooFantasySportsQuery(object):
             Scoreboard
         )
 
-    def get_league_matchups_by_week(self, chosen_week):
+    def get_league_matchups_by_week(self, chosen_week: int) -> List[Matchup]:
         """Retrieve matchups for chosen league by week.
 
         :param chosen_week: selected week for which to retrieve data
@@ -1429,7 +1435,7 @@ class YahooFantasySportsQuery(object):
             ["league", "scoreboard", "0", "matchups"]
         )
 
-    def get_team_info(self, team_id):
+    def get_team_info(self, team_id: str) -> Team:
         """Retrieve info of specific team by team_id for chosen league.
 
         :param team_id:
@@ -1508,7 +1514,7 @@ class YahooFantasySportsQuery(object):
             Team
         )
 
-    def get_team_metadata(self, team_id):
+    def get_team_metadata(self, team_id: str) -> Team:
         """Retrieve metadata of specific team by team_id for chosen league.
 
         :param team_id:
@@ -1556,7 +1562,7 @@ class YahooFantasySportsQuery(object):
             Team
         )
 
-    def get_team_stats(self, team_id):
+    def get_team_stats(self, team_id: str) -> TeamPoints:
         """Retrieve stats of specific team by team_id for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -1576,7 +1582,8 @@ class YahooFantasySportsQuery(object):
             TeamPoints
         )
 
-    def get_team_stats_by_week(self, team_id, chosen_week="current"):
+    def get_team_stats_by_week(self, team_id: str, chosen_week: Union[int, str] = "current") -> (
+            Dict[str, Dict[str, Union[TeamPoints, TeamProjectedPoints]]]):
         """Retrieve stats of specific team by team_id and by week for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -1605,7 +1612,7 @@ class YahooFantasySportsQuery(object):
             ["team", ["team_points", "team_projected_points"]]
         )
 
-    def get_team_standings(self, team_id):
+    def get_team_standings(self, team_id: str) -> TeamStandings:
         """Retrieve standings of specific team by team_id for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -1636,7 +1643,7 @@ class YahooFantasySportsQuery(object):
             TeamStandings
         )
 
-    def get_team_roster_by_week(self, team_id, chosen_week="current"):
+    def get_team_roster_by_week(self, team_id: str, chosen_week: Union[int, str] = "current") -> Roster:
         """Retrieve roster of specific team by team_id and by week for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -1703,7 +1710,8 @@ class YahooFantasySportsQuery(object):
             Roster
         )
 
-    def get_team_roster_player_info_by_week(self, team_id, chosen_week="current"):
+    def get_team_roster_player_info_by_week(self, team_id: str,
+                                            chosen_week: Union[int, str] = "current") -> List[Player]:
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -1800,9 +1808,11 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_info_by_date(self, team_id, chosen_date=None):
+    def get_team_roster_player_info_by_date(self, team_id: str, chosen_date: str = None) -> List[Player]:
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
         This applies to MLB, NBA, and NHL leagues, NOT NFL
+
+        THIS QUERY WILL FAIL IF YOU PASS IT AN INVALID DATE!
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
@@ -1899,10 +1909,8 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats(self, team_id):
+    def get_team_roster_player_stats(self, team_id: str) -> List[Player]:
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
-
-        THIS QUERY WILL FAIL IF YOU PASS IT AN INVALID DATE!
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
         :rtype: list
@@ -1984,7 +1992,8 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats_by_week(self, team_id, chosen_week="current"):
+    def get_team_roster_player_stats_by_week(self, team_id: str,
+                                             chosen_week: Union[int, str] = "current") -> List[Player]:
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -2063,7 +2072,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_draft_results(self, team_id):
+    def get_team_draft_results(self, team_id: str) -> List[DraftResult]:
         """Retrieve draft results of specific team by team_id for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -2088,7 +2097,7 @@ class YahooFantasySportsQuery(object):
             ["team", "draft_results"]
         )
 
-    def get_team_matchups(self, team_id):
+    def get_team_matchups(self, team_id: str) -> List[Matchup]:
         """Retrieve matchups of specific team by team_id for chosen league.
 
         :param team_id: team id of chosen team (can be integers 1 through n where n = number of teams in the league)
@@ -2109,7 +2118,7 @@ class YahooFantasySportsQuery(object):
             ["team", "matchups"]
         )
 
-    def get_player_stats_for_season(self, player_key):
+    def get_player_stats_for_season(self, player_key: str) -> Player:
         """Retrieve stats of specific player by player_key for the entire season for chosen league.
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
@@ -2174,7 +2183,7 @@ class YahooFantasySportsQuery(object):
             Player
         )
 
-    def get_player_stats_by_week(self, player_key, chosen_week="current"):
+    def get_player_stats_by_week(self, player_key: str, chosen_week: Union[int, str] = "current") -> Player:
         """Retrieve stats of specific player by player_key and by week for chosen league.
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
@@ -2242,9 +2251,11 @@ class YahooFantasySportsQuery(object):
             Player
         )
 
-    def get_player_stats_by_date(self, player_key, chosen_date=None):
+    def get_player_stats_by_date(self, player_key: str, chosen_date: str = None) -> Player:
         """Retrieve player stats by player_key and by date for chosen league.
         This applies to MLB, NBA, and NHL leagues, NOT NFL
+
+        THIS QUERY WILL FAIL IF YOU PASS IT AN INVALID DATE!
 
         :param player_key: player_key for chosen player
         :param chosen_date: selected date for which to retrieve data: REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
@@ -2337,7 +2348,7 @@ class YahooFantasySportsQuery(object):
             Player
         )
 
-    def get_player_ownership(self, player_key):
+    def get_player_ownership(self, player_key: str) -> Player:
         """Retrieve ownership of specific player by player_key for chosen league.
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
@@ -2427,7 +2438,7 @@ class YahooFantasySportsQuery(object):
             Player
         )
 
-    def get_player_percent_owned_by_week(self, player_key, chosen_week="current"):
+    def get_player_percent_owned_by_week(self, player_key: str, chosen_week: Union[int, str] = "current") -> Player:
         """Retrieve percent-owned of specific player by player_key and by week for chosen league.
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
@@ -2483,7 +2494,7 @@ class YahooFantasySportsQuery(object):
             Player
         )
 
-    def get_player_draft_analysis(self, player_key):
+    def get_player_draft_analysis(self, player_key: str) -> Player:
         """Retrieve draft analysis of specific player by player_key for chosen league.
 
         :param player_key: player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>)
