@@ -1,27 +1,39 @@
 # YFPY Deployment
 
-1. Build the package:
+1. Update the git tag:
+
+    `git tag -a [tag_name/version] -m [message]`
+
+    ```shell
+    git tag -a v1.0.0 -m 'first release'    
+    ```
+   
+    ```shell
+    git push origin --tags    
+    ```
+   
+2. Push updates to git.
+
+3. Build the package (will also auto-update the version based on teh above git tag):
 
     ```shell
     python setup.py sdist bdist_wheel
     ```
 
-2. Check packages before distribution:
+4. Check packages before distribution:
 
    ```shell
    twine check dist/*
    ```
 
-4. Update the git tag:
+5. Deploy to Test PyPI to check:
 
     ```shell
-    
+    twine upload -r testpypi dist/*
     ```
 
-5. Deploy to PyPI:
+6. Deploy to PyPI:
 
     ```shell
-    
+    twine upload dist/*
     ```
-
-6. The
