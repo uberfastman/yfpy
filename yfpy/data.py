@@ -1,25 +1,62 @@
+# -*- coding: utf-8 -*-
+"""YFPY module for retrieving, saving, and loading all Yahoo Fantasy Sports data.
+
+This module is designed to allow for easy data management, such that both retrieving and managing Yahoo Fantasy Sports
+data can be done in one place without the need to manually run the queries and manage data saved to JSON files.
+
+Example:
+    The Data module can be used as follows::
+
+        auth_directory = Path(__file__).parent / "auth"
+        yahoo_query = YahooFantasySportsQuery(
+            auth_directory,
+            "<league_id>",
+            game_id="<game_key>",
+            game_code="<game_code>",
+            offline=False,
+            all_output_as_json=False,
+            consumer_key=os.environ["YFPY_CONSUMER_KEY"],
+            consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
+            browser_callback=True
+        )
+
+        data_directory = Path(__file__).parent / "output"
+        data = Data(data_dir)
+        data.save("file_name", yahoo_query.get_all_yahoo_fantasy_game_keys)
+        data.load("file_name")
+
+Attributes:
+    logger (Logger): Module level logger for usage and debugging.
+
+"""
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import json
 from pathlib import Path, PosixPath
-from typing import Union, List, Dict, Callable, Type
+from typing import Union, List, Dict, Callable, Type, Any
 
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
+from yfpy.query import YahooFantasySportsQuery
 from yfpy.utils import complex_json_handler, unpack_data
 
 logger = get_logger(__name__)
 
 
 class Data(object):
+    """YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.
+    """
 
     def __init__(self, data_dir: Union[Path, str], save_data: bool = False, dev_offline: bool = False):
-        """Instantiate data object to retrieve, save, and load Yahoo fantasy football data.
+        """Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.
 
-        :param data_dir: directory path where data will be saved/loaded
-        :param save_data: (optional) bool determining whether or not data is saved after retrieval from the Yahoo FF API
-        :param dev_offline: (optional) bool for offline development (requires a prior online run with save_data = True
+        Args:
+            data_dir (Path | str): Directory path where data will be saved/loaded.
+            save_data (bool, optional): Boolean determining whether data is saved after retrieval from the Yahoo FF API.
+            dev_offline (bool, optional): Boolean for offline development (requires a prior online run with
+                save_data = True).
+
         """
         self.data_dir = data_dir if type(data_dir) == PosixPath else Path(data_dir)  # type: Path
         self.save_data = save_data  # type: bool
@@ -28,7 +65,12 @@ class Data(object):
     def update_data_dir(self, new_save_dir: Union[Path, str]) -> None:
         """Modify the data storage directory if it needs to be updated.
 
-        :param new_save_dir: full path to new desired directory where data will be saved/loaded
+        Args:
+            new_save_dir (str | Path): Full path to new desired directory where data will be saved/loaded.
+
+        Returns:
+            None
+
         """
         self.data_dir = new_save_dir if type(new_save_dir) == PosixPath else Path(new_save_dir)  # type: Path
 
@@ -36,27 +78,35 @@ class Data(object):
     def get(yf_query: Callable, params: Union[Dict[str, str], None] = None) -> Union[str, YahooFantasyObject,
                                                                                      List[YahooFantasyObject],
                                                                                      Dict[str, YahooFantasyObject]]:
-        """Run query to retrieve Yahoo fantasy football data.
+        """Run query to retrieve Yahoo Fantasy Sports data.
 
-        :param yf_query: chosen yfpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
-        :return: result of the yfpy query
+        Args:
+            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
+            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+
+        Returns:
+            Data retrieved by the yfpy query.
+
         """
         if params:
             return yf_query(**params)
         else:
             return yf_query()
 
-    def save(self, file_name: str, yf_query: Callable, params: Union[Dict[str, str], None] = None,
+    def save(self, file_name: str, yf_query: Callable, params: Union[Dict[str, Any], None] = None,
              new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
                                                                    Dict[str, YahooFantasyObject]]:
-        """Retrieve and save Yahoo fantasy football data locally.
+        """Retrieve and save Yahoo Fantasy Sports data locally.
 
-        :param file_name: name of file to which data will be saved
-        :param yf_query: chosen yfpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
-        :param new_data_dir: (optional) full path to new desired directory to which data will be saved
-        :return:
+        Args:
+            file_name (str): Name of file to which data will be saved.
+            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
+            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+            new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.
+
+        Returns:
+            Data retrieved by the yfpy query.
+
         """
         # change data save directory
         if new_data_dir:
@@ -81,12 +131,19 @@ class Data(object):
     def load(self, file_name: str, data_type_class: Type[YahooFantasyObject] = None,
              new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
                                                                    Dict[str, YahooFantasyObject]]:
-        """Load Yahoo fantasy football data already stored locally (CANNOT BE RUN IF save METHOD HAS NEVER BEEN RUN).
+        """Load Yahoo Fantasy Sports data already stored locally.
 
-        :param file_name: name of file from which data will be loaded
-        :param data_type_class: (optional) yfpy models.py class for data casting
-        :param new_data_dir: (optional) full path to new desired directory from which data will be loaded
-        :return:
+        Note:
+            This method will fail if the `save` method has not been called previously.
+
+        Args:
+            file_name (str): Name of file from which data will be loaded.
+            data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.
+            new_data_dir (str | Path, optional): Full path to new desired directory from which data will be loaded.
+
+        Returns:
+            Data loaded from the selected JSON file.
+
         """
         # change data load directory
         if new_data_dir:
@@ -112,12 +169,17 @@ class Data(object):
                                                                        Dict[str, YahooFantasyObject]]:
         """Fetch data from the web or load it locally (combination of the save and load methods).
 
-        :param file_name: name of file to/from which data will be saved/loaded
-        :param yf_query: chosen yfpy query method to run
-        :param params: (optional) dict of parameters to be passed to chosen yfpy query function
-        :param data_type_class: (optional) yfpy models.py class for data casting
-        :param new_data_dir: (optional) full path to new desired directory to/from which data will be saved/loaded
-        :return:
+        Args:
+            file_name (str): Name of file to/from which data will be saved/loaded.
+            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
+            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+            data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.
+            new_data_dir (str | Path, optional): Full path to new desired directory to/from which data will be
+                saved/loaded.
+
+        Returns:
+            Data retrieved by the yfpy query OR loaded from the selected JSON file.
+
         """
         if self.dev_offline:
             return self.load(file_name, data_type_class, new_data_dir)

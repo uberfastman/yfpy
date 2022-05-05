@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+"""YFPY module for managing complex JSON data structures.
+
+Attributes:
+    logger (Logger): Module level logger for usage and debugging.
+
+"""
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import json
+import re
 from collections import ChainMap, OrderedDict
+from typing import Any, Union, Type, Dict, List
 
 import stringcase
 
@@ -11,19 +20,31 @@ from yfpy.logger import get_logger
 logger = get_logger(__name__)
 
 
-def prettify_data(data):
+def prettify_data(data: str) -> str:
+    """Function to return pretty formatted JSON strings for easily readable output.
+
+    Args:
+        data (str): Data formatted as a JSON string.
+
+    Returns:
+        The return value. True for success, False otherwise.
+
+    """
     return f"\n{json.dumps(data, indent=2, default=complex_json_handler, ensure_ascii=False)}\n"
 
 
 # noinspection PyTypeChecker
-def unpack_data(json_obj, parent_class=None):
-    """Recursive utility to parse, clean, and assign custom data types to retrieved Yahoo fantasy sports data.
+def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
+    """Recursive function to parse, clean, and assign custom data types to retrieved Yahoo Fantasy Sports data.
 
-    :param json_obj: json object for parsing; can be dict, list, or primitive
-    :param parent_class: parent class type used to extract custom subclass type options for casting
-    :return: recursively returns json objects until data is completely parsed, cleaned, and typed (where applicable)
+    Args:
+        json_obj (Any): JSON object for parsing (can be a dictionary, list, or primitive).
+        parent_class (Type): Parent class type used to extract custom subclass type options for casting.
+
+    Returns:
+        Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).
+
     """
-
     # extract subclasses from parent class for typing
     subclasses = {}
     if parent_class:
@@ -58,44 +79,83 @@ def unpack_data(json_obj, parent_class=None):
             # eliminate data obj counts (except in player_position dicts, which have position counts in league settings)
             if "count" in json_obj.keys() and "position" in json_obj.keys():
                 # assign/cast data type where applicable
-                return get_type({k: unpack_data(v, parent_class) for k, v in json_obj.items()}, parent_class,
-                                subclasses)
+                return get_type(
+                    {k: unpack_data(v, parent_class) for k, v in json_obj.items()},
+                    parent_class,
+                    subclasses
+                )
             else:
                 # assign/cast data type where applicable
                 json_obj = get_type(
                     dict({k: unpack_data(v, parent_class) for k, v in json_obj.items() if k != "count"}),
-                    parent_class, subclasses)
+                    parent_class,
+                    subclasses
+                )
 
                 # flatten dicts with keys "0", "1",..., "n" to a list of objects
                 if "0" in json_obj.keys() and "1" in json_obj.keys():
                     json_obj = flatten_to_list(json_obj)
                 return json_obj
         else:
+            return convert_strings_to_numeric_equivalents(json_obj)
+
+
+def convert_strings_to_numeric_equivalents(json_obj: Any) -> Union[int, float, Any]:
+    """Convert JSON strings with integer or float numeric representations to their respective integer or float values.
+
+    Args:
+        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
+
+    Returns:
+        The numeric representation of any JSON strings that can be represented as integers or floats, else the
+            original JSON object.
+
+    """
+    if type(json_obj) == str:
+
+        if len(json_obj) > 1 and str.startswith(json_obj, "0"):
             return json_obj
+        else:
+            if str.isdigit(json_obj):
+                return int(json_obj)
+            elif str.isdigit(re.sub("[-]", "", re.sub("[.]", "", json_obj, count=1), count=1)):
+                return float(json_obj)
+            else:
+                return json_obj
+    else:
+        return json_obj
 
 
-def get_type(json_obj_dict, parent_class, subclasses):
-    """Cast json obj to custom subclass type extracted from parent class.
+def get_type(json_obj_dict: Dict[str, Any], parent_class: Type, subclasses: Dict[str, Type]) -> Dict[str, Any]:
+    """Cast JSON object to custom subclass type extracted from parent class.
 
-    :param json_obj_dict: json dictionary with strings of data type as keys and json objects as values
-    :param parent_class: parent class from which to derive subclasses for casting
-    :param subclasses: dictionary of subclasses with strings that match the json dict keys as keys and classes for
-    casting as values
-    :return: type-assigned/cast json object
+    Args:
+        json_obj_dict (dict of str: Any): JSON dictionary with strings of data type as keys and JSON objects as values.
+        parent_class (Type): Parent class from which to derive subclasses for casting.
+        subclasses (dict of str: Type): Dictionary of subclasses with strings that match the json dict keys as keys
+            and classes for casting as values.
+
+    Returns:
+        A Python object (representing the original JSON object) that has been cast to the specified types.
+
     """
     for k, v in json_obj_dict.items():
         # check if key is in the provided subclasses dict, that the object isn't already cast
-        if k in subclasses.keys() and isinstance(v, dict) and not isinstance(v, subclasses[k]):
+        if k in subclasses.keys() and isinstance(v, dict) and not isinstance(v, subclasses.get(k)):
             json_obj_dict[k] = subclasses[k](unpack_data(v, parent_class))
     return json_obj_dict
 
 
-def flatten_json_dict_list(json_obj_dict_list, parent_class):
-    """Recursive utility to flatten lists containing all disparate dicts with no overlapping keys.
+def flatten_json_dict_list(json_obj_dict_list: List[Dict[str, Any]], parent_class: Type) -> Any:
+    """Recursive function to flatten JSON lists containing all disparate JSON dictionaries with no overlapping keys.
 
-    :param json_obj_dict_list: list of json dicts
-    :param parent_class: parent class type used to extract custom subclass type options
-    :return: returns a dict if list was flattened, else returns a cleaned list
+    Args:
+        json_obj_dict_list (list of dict of str: Any): List of JSON dictionaries.
+        parent_class (Type): Parent class type used to extract custom subclass type options.
+
+    Returns:
+        Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.
+
     """
     # filter out empty lists and dicts but include when value = 0
     json_obj_dict_list = [obj for obj in json_obj_dict_list if (obj == 0 or obj)]
@@ -120,11 +180,16 @@ def flatten_json_dict_list(json_obj_dict_list, parent_class):
         return [unpack_data(obj, parent_class) for obj in json_obj_dict_list if (obj == 0 or obj)]
 
 
-def flatten_to_list(json_obj):
-    """Utility to flatten json dictionaries with unnecessary keys to a list of objects.
+def flatten_to_list(json_obj: Any) -> Any:
+    """Function to flatten JSON dictionaries with unnecessary keys to a list of objects.
 
-    :param json_obj: json object (dict or list)
-    :return: list made from flattened dictionary if json_obj was dictionary, else the original list if json_obj was list
+    Args:
+        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
+
+    Returns:
+        A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a list,
+            or the original value if json_obj was a primitive.
+
     """
     if isinstance(json_obj, dict):
         out = []
@@ -135,11 +200,15 @@ def flatten_to_list(json_obj):
         return json_obj
 
 
-def flatten_to_objects(json_obj):
-    """Utility to flatten a json dictionary to a dictionary of cast objects, or do the same to a json dict in a list.
+def flatten_to_objects(json_obj: Any) -> Any:
+    """Function to flatten a JSON dictionary (or a JSON dictionary in a list) to a dictionary of cast objects.
 
-    :param json_obj: json object (dict or list)
-    :return: json dictionary/list with contents cast to objects.
+    Args:
+        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
+
+    Returns:
+        JSON dictionary/list/primitive with contents cast to Python objects.
+
     """
     if isinstance(json_obj, dict):
         return dict_to_list(json_obj)
@@ -150,11 +219,15 @@ def flatten_to_objects(json_obj):
         return json_obj
 
 
-def dict_to_list(json_dict):
-    """Utility to convert a json dictionary to a list.
+def dict_to_list(json_dict: Dict[str, Any]) -> Any:
+    """Function to convert a JSON dictionary to a list.
 
-    :param json_dict: json dictionary
-    :return: list derived from json dictionary, or the original dictionary if it does not contain dictionaries
+    Args:
+        json_dict (dict of str: Any): JSON dictionary.
+
+    Returns:
+        A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as values.
+
     """
     first_key = list(json_dict.keys())[0]
     if isinstance(json_dict.get(first_key), dict):
@@ -167,14 +240,19 @@ def dict_to_list(json_dict):
     return json_dict
 
 
-def reorganize_json_dict(json_dict, obj_key, val_to_key):
-    """Utility to reorganize a json dictionary of dictionaries into an ordered dictionary sorted by a specific
-    attribute of the value dictionaries.
+def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: str) -> OrderedDict[str, Any]:
+    """Function to reorganize a JSON dictionary of dictionaries.
 
-    :param json_dict: json dictionary of dictionaries
-    :param obj_key: key to access the dictionaries contained in the json_dict
-    :param val_to_key: key used to sort the dictionaries contained in the json_dict
-    :return: ordered dictionary of dictionaries sorted by val_to_key
+    The reorganized JSON dictionary is an ordered dictionary sorted by a specific attribute of the value dictionaries.
+
+    Args:
+        json_dict (dict of str: Any): JSON dictionary.
+        obj_key (str): Key to access the dictionaries contained in json_dict.
+        val_to_key (str): Key used to sort the dictionaries contained in json_dict.
+
+    Returns:
+        An ordered dictionary of dictionaries sorted by val_to_key.
+
     """
     out = {}
     for k, v in json_dict.items():
@@ -185,11 +263,15 @@ def reorganize_json_dict(json_dict, obj_key, val_to_key):
             [int(k_v) if isinstance(k_v, int) else k_v for k_v in out.keys()]))
 
 
-def complex_json_handler(obj):
-    """Custom handler to allow custom yfpy objects to be serialized into json.
+def complex_json_handler(obj: Any) -> Any:
+    """Custom handler to allow custom YFPY objects to be serialized into JSON.
 
-    :param obj: custom object to be serialized into json
-    :return: serializable version of the custom object
+    Args:
+        obj (Any): Unserializable Python object to be serialized into JSON.
+
+    Returns:
+        Serializable version of the Python object.
+
     """
     if hasattr(obj, "serialized"):
         return obj.serialized()
@@ -200,11 +282,15 @@ def complex_json_handler(obj):
             raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
 
 
-def reformat_json_list(json_obj):
-    """Utility to clean and reformat json lists to eliminate empty values and unnecessarily nested lists.
+def reformat_json_list(json_obj: Any) -> Any:
+    """Function to clean and reformat JSON lists to eliminate empty values and unnecessarily nested lists.
 
-    :param json_obj: json object to be cleaned
-    :return: reformatted list derived from original json object
+    Args:
+        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive) to be cleaned.
+
+    Returns:
+        Reformatted JSON list derived from original JSON object.
+
     """
     if isinstance(json_obj[0], list):
         if len(json_obj) > 1:

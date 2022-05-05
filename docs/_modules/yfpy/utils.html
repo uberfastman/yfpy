@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yfpy.utils &mdash; YFPY v4.1.4 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/readthedocs-custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> YFPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">YFPY</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">YFPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>yfpy.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for yfpy.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;YFPY module for managing complex JSON data structures.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    logger (Logger): Module level logger for usage and debugging.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Wren J. R. (uberfastman)&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;uberfastman@uberfastman.dev&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span><span class="p">,</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">stringcase</span>
+
+<span class="kn">from</span> <span class="nn">yfpy.logger</span> <span class="kn">import</span> <span class="n">get_logger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="prettify_data"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.prettify_data.html#yfpy.utils.prettify_data">[docs]</a><span class="k">def</span> <span class="nf">prettify_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to return pretty formatted JSON strings for easily readable output.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (str): Data formatted as a JSON string.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value. True for success, False otherwise.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span></div>
+
+
+<span class="c1"># noinspection PyTypeChecker</span>
+<div class="viewcode-block" id="unpack_data"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.unpack_data.html#yfpy.utils.unpack_data">[docs]</a><span class="k">def</span> <span class="nf">unpack_data</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Recursive function to parse, clean, and assign custom data types to retrieved Yahoo Fantasy Sports data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj (Any): JSON object for parsing (can be a dictionary, list, or primitive).</span>
+<span class="sd">        parent_class (Type): Parent class type used to extract custom subclass type options for casting.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># extract subclasses from parent class for typing</span>
+    <span class="n">subclasses</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">parent_class</span><span class="p">:</span>
+        <span class="n">subclasses</span> <span class="o">=</span> <span class="p">{</span><span class="n">stringcase</span><span class="o">.</span><span class="n">snakecase</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">):</span> <span class="bp">cls</span> <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">parent_class</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+
+    <span class="c1"># discard empty lists and dictionaries and include when json value = 0</span>
+    <span class="k">if</span> <span class="n">json_obj</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">json_obj</span><span class="p">:</span>
+        <span class="c1"># handle lists</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">json_obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">json_obj</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">obj</span><span class="p">)]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parent_class</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># flatten list of dicts if any objects in the list are dicts</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">flatten_json_dict_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="p">[</span><span class="n">unpack_data</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">json_obj</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">obj</span><span class="p">)]</span>
+
+        <span class="c1"># handle dictionaries</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+
+            <span class="c1"># eliminate odd single-key Yahoo dicts with key = &quot;0&quot; and value = &lt;next layer of desired data&gt;</span>
+            <span class="k">if</span> <span class="s2">&quot;0&quot;</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;1&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">json_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="n">parent_class</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">json_obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">json_obj</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">))</span>
+
+            <span class="c1"># eliminate data obj counts (except in player_position dicts, which have position counts in league settings)</span>
+            <span class="k">if</span> <span class="s2">&quot;count&quot;</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;position&quot;</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="c1"># assign/cast data type where applicable</span>
+                <span class="k">return</span> <span class="n">get_type</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+                    <span class="n">parent_class</span><span class="p">,</span>
+                    <span class="n">subclasses</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># assign/cast data type where applicable</span>
+                <span class="n">json_obj</span> <span class="o">=</span> <span class="n">get_type</span><span class="p">(</span>
+                    <span class="nb">dict</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;count&quot;</span><span class="p">}),</span>
+                    <span class="n">parent_class</span><span class="p">,</span>
+                    <span class="n">subclasses</span>
+                <span class="p">)</span>
+
+                <span class="c1"># flatten dicts with keys &quot;0&quot;, &quot;1&quot;,..., &quot;n&quot; to a list of objects</span>
+                <span class="k">if</span> <span class="s2">&quot;0&quot;</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;1&quot;</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">json_obj</span> <span class="o">=</span> <span class="n">flatten_to_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">json_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">convert_strings_to_numeric_equivalents</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="convert_strings_to_numeric_equivalents"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.convert_strings_to_numeric_equivalents.html#yfpy.utils.convert_strings_to_numeric_equivalents">[docs]</a><span class="k">def</span> <span class="nf">convert_strings_to_numeric_equivalents</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert JSON strings with integer or float numeric representations to their respective integer or float values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The numeric representation of any JSON strings that can be represented as integers or floats, else the</span>
+<span class="sd">            original JSON object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">json_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">(</span><span class="n">json_obj</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[-]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[.]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">json_obj</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json_obj</span></div>
+
+
+<div class="viewcode-block" id="get_type"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.get_type.html#yfpy.utils.get_type">[docs]</a><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="n">json_obj_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">parent_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span> <span class="n">subclasses</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Cast JSON object to custom subclass type extracted from parent class.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj_dict (dict of str: Any): JSON dictionary with strings of data type as keys and JSON objects as values.</span>
+<span class="sd">        parent_class (Type): Parent class from which to derive subclasses for casting.</span>
+<span class="sd">        subclasses (dict of str: Type): Dictionary of subclasses with strings that match the json dict keys as keys</span>
+<span class="sd">            and classes for casting as values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A Python object (representing the original JSON object) that has been cast to the specified types.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># check if key is in the provided subclasses dict, that the object isn&#39;t already cast</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">subclasses</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">subclasses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)):</span>
+            <span class="n">json_obj_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">subclasses</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="n">unpack_data</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">json_obj_dict</span></div>
+
+
+<div class="viewcode-block" id="flatten_json_dict_list"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.flatten_json_dict_list.html#yfpy.utils.flatten_json_dict_list">[docs]</a><span class="k">def</span> <span class="nf">flatten_json_dict_list</span><span class="p">(</span><span class="n">json_obj_dict_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">parent_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Recursive function to flatten JSON lists containing all disparate JSON dictionaries with no overlapping keys.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj_dict_list (list of dict of str: Any): List of JSON dictionaries.</span>
+<span class="sd">        parent_class (Type): Parent class type used to extract custom subclass type options.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># filter out empty lists and dicts but include when value = 0</span>
+    <span class="n">json_obj_dict_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">json_obj_dict_list</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">obj</span><span class="p">)]</span>
+    <span class="n">item_keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ndx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">json_obj_dict_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">flattened_item</span> <span class="o">=</span> <span class="n">flatten_json_dict_list</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span>
+            <span class="n">json_obj_dict_list</span><span class="p">[</span><span class="n">ndx</span><span class="p">]</span> <span class="o">=</span> <span class="n">flattened_item</span>
+            <span class="n">item_keys</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">flattened_item</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">item_keys</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="n">ndx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item_keys</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">item_keys</span><span class="p">)):</span>
+        <span class="n">agg_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">dict_item</span> <span class="ow">in</span> <span class="n">json_obj_dict_list</span><span class="p">:</span>
+            <span class="n">agg_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_item</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">agg_dict</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">unpack_data</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">parent_class</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">json_obj_dict_list</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">obj</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="flatten_to_list"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.flatten_to_list.html#yfpy.utils.flatten_to_list">[docs]</a><span class="k">def</span> <span class="nf">flatten_to_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to flatten JSON dictionaries with unnecessary keys to a list of objects.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a list,</span>
+<span class="sd">            or the original value if json_obj was a primitive.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json_obj</span></div>
+
+
+<div class="viewcode-block" id="flatten_to_objects"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.flatten_to_objects.html#yfpy.utils.flatten_to_objects">[docs]</a><span class="k">def</span> <span class="nf">flatten_to_objects</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to flatten a JSON dictionary (or a JSON dictionary in a list) to a dictionary of cast objects.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON dictionary/list/primitive with contents cast to Python objects.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dict_to_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">dict_to_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json_obj</span></div>
+
+
+<div class="viewcode-block" id="dict_to_list"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.dict_to_list.html#yfpy.utils.dict_to_list">[docs]</a><span class="k">def</span> <span class="nf">dict_to_list</span><span class="p">(</span><span class="n">json_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to convert a JSON dictionary to a list.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_dict (dict of str: Any): JSON dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">first_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_key</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">first_val_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_key</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">first_key</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">first_val_key</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_val_key</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">out</span>
+    <span class="k">return</span> <span class="n">json_dict</span></div>
+
+
+<div class="viewcode-block" id="reorganize_json_dict"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html#yfpy.utils.reorganize_json_dict">[docs]</a><span class="k">def</span> <span class="nf">reorganize_json_dict</span><span class="p">(</span><span class="n">json_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">obj_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val_to_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrderedDict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Function to reorganize a JSON dictionary of dictionaries.</span>
+
+<span class="sd">    The reorganized JSON dictionary is an ordered dictionary sorted by a specific attribute of the value dictionaries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_dict (dict of str: Any): JSON dictionary.</span>
+<span class="sd">        obj_key (str): Key to access the dictionaries contained in json_dict.</span>
+<span class="sd">        val_to_key (str): Key used to sort the dictionaries contained in json_dict.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An ordered dictionary of dictionaries sorted by val_to_key.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">out</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">obj_key</span><span class="p">),</span> <span class="n">val_to_key</span><span class="p">))]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">obj_key</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">(</span>
+        <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">out</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k_v</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k_v</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">k_v</span> <span class="k">for</span> <span class="n">k_v</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span></div>
+
+
+<div class="viewcode-block" id="complex_json_handler"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.complex_json_handler.html#yfpy.utils.complex_json_handler">[docs]</a><span class="k">def</span> <span class="nf">complex_json_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Custom handler to allow custom YFPY objects to be serialized into JSON.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj (Any): Unserializable Python object to be serialized into JSON.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Serializable version of the Python object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;serialized&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">serialized</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Object of type </span><span class="si">%s</span><span class="s1"> with value of </span><span class="si">%s</span><span class="s1"> is not JSON serializable&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="reformat_json_list"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.reformat_json_list.html#yfpy.utils.reformat_json_list">[docs]</a><span class="k">def</span> <span class="nf">reformat_json_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to clean and reformat JSON lists to eliminate empty values and unnecessarily nested lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive) to be cleaned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Reformatted JSON list derived from original JSON object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reformat_json_list</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">reformat_json_list</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">json_obj</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reformat_json_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># create chain map that filters out empty lists/dicts but leaves objects where value = 0</span>
+        <span class="k">return</span> <span class="n">ChainMap</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">json_obj</span> <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">value</span><span class="p">)])</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Wren J. R. (uberfastman).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

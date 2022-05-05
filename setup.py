@@ -32,6 +32,14 @@ if Path("yfpy.egg-info").exists():
     print("Removing stale \"yfpy.egg-info\" directory before packaging...")
     shutil.rmtree("yfpy.egg-info")
 
+docs_path = Path("docs")
+docs_index_path = docs_path / "index.html"
+if docs_index_path.exists():
+    print("Removing stale \"sphinx docs\" content before packaging...")
+    shutil.rmtree(docs_path)
+    sphinx_docs_path = Path("docs-sphinx") / "build" / "html"
+    shutil.copytree(sphinx_docs_path, docs_path)
+
 with open("README.md", "r", encoding="utf8") as docs:
     long_description = docs.read()
 

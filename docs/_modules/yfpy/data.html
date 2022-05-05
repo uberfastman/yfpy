@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yfpy.data &mdash; YFPY v4.1.4 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/readthedocs-custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> YFPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">YFPY</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">YFPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>yfpy.data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for yfpy.data</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;YFPY module for retrieving, saving, and loading all Yahoo Fantasy Sports data.</span>
+
+<span class="sd">This module is designed to allow for easy data management, such that both retrieving and managing Yahoo Fantasy Sports</span>
+<span class="sd">data can be done in one place without the need to manually run the queries and manage data saved to JSON files.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    The Data module can be used as follows::</span>
+
+<span class="sd">        auth_directory = Path(__file__).parent / &quot;auth&quot;</span>
+<span class="sd">        yahoo_query = YahooFantasySportsQuery(</span>
+<span class="sd">            auth_directory,</span>
+<span class="sd">            &quot;&lt;league_id&gt;&quot;,</span>
+<span class="sd">            game_id=&quot;&lt;game_key&gt;&quot;,</span>
+<span class="sd">            game_code=&quot;&lt;game_code&gt;&quot;,</span>
+<span class="sd">            offline=False,</span>
+<span class="sd">            all_output_as_json=False,</span>
+<span class="sd">            consumer_key=os.environ[&quot;YFPY_CONSUMER_KEY&quot;],</span>
+<span class="sd">            consumer_secret=os.environ[&quot;YFPY_CONSUMER_SECRET&quot;],</span>
+<span class="sd">            browser_callback=True</span>
+<span class="sd">        )</span>
+
+<span class="sd">        data_directory = Path(__file__).parent / &quot;output&quot;</span>
+<span class="sd">        data = Data(data_dir)</span>
+<span class="sd">        data.save(&quot;file_name&quot;, yahoo_query.get_all_yahoo_fantasy_game_keys)</span>
+<span class="sd">        data.load(&quot;file_name&quot;)</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    logger (Logger): Module level logger for usage and debugging.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Wren J. R. (uberfastman)&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;uberfastman@uberfastman.dev&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PosixPath</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">yfpy.logger</span> <span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">yfpy.models</span> <span class="kn">import</span> <span class="n">YahooFantasyObject</span>
+<span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+<span class="kn">from</span> <span class="nn">yfpy.utils</span> <span class="kn">import</span> <span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">unpack_data</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Data"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data">[docs]</a><span class="k">class</span> <span class="nc">Data</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_dir (Path | str): Directory path where data will be saved/loaded.</span>
+<span class="sd">            save_data (bool, optional): Boolean determining whether data is saved after retrieval from the Yahoo FF API.</span>
+<span class="sd">            dev_offline (bool, optional): Boolean for offline development (requires a prior online run with</span>
+<span class="sd">                save_data = True).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">==</span> <span class="n">PosixPath</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>  <span class="c1"># type: Path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_data</span> <span class="o">=</span> <span class="n">save_data</span>  <span class="c1"># type: bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dev_offline</span> <span class="o">=</span> <span class="n">dev_offline</span>  <span class="c1"># type: bool</span>
+
+<div class="viewcode-block" id="Data.update_data_dir"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data.update_data_dir">[docs]</a>    <span class="k">def</span> <span class="nf">update_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_save_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Modify the data storage directory if it needs to be updated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_save_dir (str | Path): Full path to new desired directory where data will be saved/loaded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">new_save_dir</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_save_dir</span><span class="p">)</span> <span class="o">==</span> <span class="n">PosixPath</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">new_save_dir</span><span class="p">)</span>  <span class="c1"># type: Path</span></div>
+
+<div class="viewcode-block" id="Data.get"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data.get">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">,</span>
+                                                                                     <span class="n">List</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">],</span>
+                                                                                     <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Run query to retrieve Yahoo Fantasy Sports data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
+<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data retrieved by the yfpy query.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">yf_query</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">yf_query</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Data.save"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">],</span>
+                                                                   <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve and save Yahoo Fantasy Sports data locally.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_name (str): Name of file to which data will be saved.</span>
+<span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
+<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">            new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data retrieved by the yfpy query.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># change data save directory</span>
+        <span class="k">if</span> <span class="n">new_data_dir</span><span class="p">:</span>
+            <span class="n">new_data_dir</span> <span class="o">=</span> <span class="n">new_data_dir</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span> <span class="o">==</span> <span class="n">PosixPath</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data directory changed from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_data_dir</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_data_dir</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span>
+
+        <span class="c1"># create full directory path if any directories in it do not already exist</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># run the actual yfpy query and retrieve the query results</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">yf_query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># save the retrieved data locally</span>
+        <span class="n">saved_data_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="p">(</span><span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">saved_data_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved locally to: </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="Data.load"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">],</span>
+                                                                   <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Load Yahoo Fantasy Sports data already stored locally.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            This method will fail if the `save` method has not been called previously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_name (str): Name of file from which data will be loaded.</span>
+<span class="sd">            data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.</span>
+<span class="sd">            new_data_dir (str | Path, optional): Full path to new desired directory from which data will be loaded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data loaded from the selected JSON file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># change data load directory</span>
+        <span class="k">if</span> <span class="n">new_data_dir</span><span class="p">:</span>
+            <span class="n">new_data_dir</span> <span class="o">=</span> <span class="n">new_data_dir</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span> <span class="o">==</span> <span class="n">PosixPath</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_data_dir</span><span class="p">(</span><span class="n">new_data_dir</span><span class="p">)</span>
+
+        <span class="c1"># load selected data file</span>
+        <span class="n">saved_data_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="p">(</span><span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">saved_data_file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">saved_data_file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
+                <span class="n">unpacked</span> <span class="o">=</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_file</span><span class="p">),</span> <span class="n">YahooFantasyObject</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">data_type_class</span><span class="p">(</span><span class="n">unpacked</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_type_class</span> <span class="k">else</span> <span class="n">unpacked</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data loaded locally from: </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2"> does not exist. Cannot load data locally without &quot;</span>
+                                    <span class="sa">f</span><span class="s2">&quot;having previously saved data.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="Data.retrieve"><a class="viewcode-back" href="../../_autosummary/yfpy.data.Data.html#yfpy.data.Data.retrieve">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">,</span>
+                                                                       <span class="n">List</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">],</span>
+                                                                       <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch data from the web or load it locally (combination of the save and load methods).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_name (str): Name of file to/from which data will be saved/loaded.</span>
+<span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
+<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">            data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.</span>
+<span class="sd">            new_data_dir (str | Path, optional): Full path to new desired directory to/from which data will be</span>
+<span class="sd">                saved/loaded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data retrieved by the yfpy query OR loaded from the selected JSON file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_offline</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">,</span> <span class="n">new_data_dir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_data</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">new_data_dir</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">yf_query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Wren J. R. (uberfastman).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

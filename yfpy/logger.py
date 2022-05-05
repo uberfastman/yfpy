@@ -1,10 +1,24 @@
+# -*- coding: utf-8 -*-
+"""YFPY module for configuring and formatting the custom logger.
+"""
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 from logging import getLogger, Logger, Formatter, StreamHandler
+from typing import Union
 
 
-def get_logger(name, level=None) -> Logger:
+def get_logger(name: str, level: Union[int, None] = None) -> Logger:
+    """Get custom YFPY logger object.
+
+    Args:
+        name (str): The module name for the logger.
+        level (int): The log level for the logger.
+
+    Returns:
+        A Python Logger object with custom configuration and formatting.
+
+    """
     logger = getLogger(name)
     if len(logger.handlers) > 0:
         logger.handlers = []

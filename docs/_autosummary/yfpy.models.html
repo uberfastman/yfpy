@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yfpy.models &mdash; YFPY v4.1.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/readthedocs-custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="yfpy.models.Bonus" href="yfpy.models.Bonus.html" />
+    <link rel="prev" title="yfpy.logger.get_logger" href="yfpy.logger.get_logger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> YFPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">YFPY</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">yfpy.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Division.html">yfpy.models.Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DivisionalOutcomeTotals.html">yfpy.models.DivisionalOutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftAnalysis.html">yfpy.models.DraftAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftResult.html">yfpy.models.DraftResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Game.html">yfpy.models.Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.GameWeek.html">yfpy.models.GameWeek</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Headshot.html">yfpy.models.Headshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.League.html">yfpy.models.League</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Manager.html">yfpy.models.Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Matchup.html">yfpy.models.Matchup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.MatchupGrade.html">yfpy.models.MatchupGrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Name.html">yfpy.models.Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.OutcomeTotals.html">yfpy.models.OutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Ownership.html">yfpy.models.Ownership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PercentOwned.html">yfpy.models.PercentOwned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Player.html">yfpy.models.Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PositionType.html">yfpy.models.PositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Roster.html">yfpy.models.Roster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterAdds.html">yfpy.models.RosterAdds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Scoreboard.html">yfpy.models.Scoreboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Settings.html">yfpy.models.Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Standings.html">yfpy.models.Standings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Stat.html">yfpy.models.Stat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatCategories.html">yfpy.models.StatCategories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatModifiers.html">yfpy.models.StatModifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatPositionType.html">yfpy.models.StatPositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Streak.html">yfpy.models.Streak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Team.html">yfpy.models.Team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamLogo.html">yfpy.models.TeamLogo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamPoints.html">yfpy.models.TeamPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamProjectedPoints.html">yfpy.models.TeamProjectedPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamStandings.html">yfpy.models.TeamStandings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Transaction.html">yfpy.models.Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TransactionData.html">yfpy.models.TransactionData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.User.html">yfpy.models.User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">YFPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="yfpy.html">yfpy</a> &raquo;</li>
+      <li>yfpy.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-yfpy.models">
+<span id="yfpy-models"></span><h1>yfpy.models<a class="headerlink" href="#module-yfpy.models" title="Permalink to this headline">¶</a></h1>
+<p>YFPY module containing Python object models representing all currently known Yahoo Fantasy Sports REST API data.</p>
+<p>This module is built to abstract away the intricacies of parsing the complex and oftentimes messy data returned by the
+Yahoo Fantasy Sports REST API, and instead provide the user with a collection of custom classes making it easy and
+intuitive to access the data content.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="yfpy.models.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#yfpy.models.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Module level logger for usage and debugging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Bonus.html#yfpy.models.Bonus" title="yfpy.models.Bonus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Bonus</span></code></a></p></td>
+<td><p>Model class for &quot;bonus&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.ByeWeeks.html#yfpy.models.ByeWeeks" title="yfpy.models.ByeWeeks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ByeWeeks</span></code></a></p></td>
+<td><p>Model class for &quot;bye_weeks&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Division.html#yfpy.models.Division" title="yfpy.models.Division"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Division</span></code></a></p></td>
+<td><p>Model class for &quot;division&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.DivisionalOutcomeTotals.html#yfpy.models.DivisionalOutcomeTotals" title="yfpy.models.DivisionalOutcomeTotals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DivisionalOutcomeTotals</span></code></a></p></td>
+<td><p>Model class for &quot;divisional_outcome_totals&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis" title="yfpy.models.DraftAnalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DraftAnalysis</span></code></a></p></td>
+<td><p>Model class for &quot;draft_analysis&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult" title="yfpy.models.DraftResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DraftResult</span></code></a></p></td>
+<td><p>Model class for &quot;draft_result&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Game</span></code></a></p></td>
+<td><p>Model class for &quot;game&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.GameWeek.html#yfpy.models.GameWeek" title="yfpy.models.GameWeek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GameWeek</span></code></a></p></td>
+<td><p>Model class for &quot;game_week&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot" title="yfpy.models.Headshot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Headshot</span></code></a></p></td>
+<td><p>Model class for &quot;headshot&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League" title="yfpy.models.League"><code class="xref py py-obj docutils literal notranslate"><span class="pre">League</span></code></a></p></td>
+<td><p>Model class for &quot;league&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager" title="yfpy.models.Manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Manager</span></code></a></p></td>
+<td><p>Model class for &quot;manager&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Matchup.html#yfpy.models.Matchup" title="yfpy.models.Matchup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Matchup</span></code></a></p></td>
+<td><p>Model class for &quot;matchup&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.MatchupGrade.html#yfpy.models.MatchupGrade" title="yfpy.models.MatchupGrade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatchupGrade</span></code></a></p></td>
+<td><p>Model class for &quot;matchup_grade&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Name.html#yfpy.models.Name" title="yfpy.models.Name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Name</span></code></a></p></td>
+<td><p>Model class for &quot;name&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.OutcomeTotals.html#yfpy.models.OutcomeTotals" title="yfpy.models.OutcomeTotals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutcomeTotals</span></code></a></p></td>
+<td><p>Model class for &quot;outcome_totals&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership" title="yfpy.models.Ownership"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ownership</span></code></a></p></td>
+<td><p>Model class for &quot;ownership&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned" title="yfpy.models.PercentOwned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PercentOwned</span></code></a></p></td>
+<td><p>Model class for &quot;percent_owned&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Player</span></code></a></p></td>
+<td><p>Model class for &quot;player&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints" title="yfpy.models.PlayerPoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayerPoints</span></code></a></p></td>
+<td><p>Model class for &quot;player_points&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats" title="yfpy.models.PlayerStats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlayerStats</span></code></a></p></td>
+<td><p>Model class for &quot;player_stats&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.PositionType.html#yfpy.models.PositionType" title="yfpy.models.PositionType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PositionType</span></code></a></p></td>
+<td><p>Model class for &quot;position_type&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Roster.html#yfpy.models.Roster" title="yfpy.models.Roster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Roster</span></code></a></p></td>
+<td><p>Model class for &quot;roster&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.RosterAdds.html#yfpy.models.RosterAdds" title="yfpy.models.RosterAdds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RosterAdds</span></code></a></p></td>
+<td><p>Model class for &quot;roster_adds&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition" title="yfpy.models.RosterPosition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RosterPosition</span></code></a></p></td>
+<td><p>Model class for &quot;roster_position&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Scoreboard.html#yfpy.models.Scoreboard" title="yfpy.models.Scoreboard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Scoreboard</span></code></a></p></td>
+<td><p>Model class for &quot;scoreboard&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition" title="yfpy.models.SelectedPosition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectedPosition</span></code></a></p></td>
+<td><p>Model class for &quot;selected_position&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings" title="yfpy.models.Settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Settings</span></code></a></p></td>
+<td><p>Model class for &quot;settings&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Standings.html#yfpy.models.Standings" title="yfpy.models.Standings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Standings</span></code></a></p></td>
+<td><p>Model class for &quot;standings&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat" title="yfpy.models.Stat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stat</span></code></a></p></td>
+<td><p>Model class for &quot;stat&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories" title="yfpy.models.StatCategories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatCategories</span></code></a></p></td>
+<td><p>Model class for &quot;stat_categories&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.StatModifiers.html#yfpy.models.StatModifiers" title="yfpy.models.StatModifiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatModifiers</span></code></a></p></td>
+<td><p>Model class for &quot;stat_modifiers&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.StatPositionType.html#yfpy.models.StatPositionType" title="yfpy.models.StatPositionType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatPositionType</span></code></a></p></td>
+<td><p>Model class for &quot;stat_position_type&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Streak.html#yfpy.models.Streak" title="yfpy.models.Streak"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Streak</span></code></a></p></td>
+<td><p>Model class for &quot;streak&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team" title="yfpy.models.Team"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Team</span></code></a></p></td>
+<td><p>Model class for &quot;team&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.TeamLogo.html#yfpy.models.TeamLogo" title="yfpy.models.TeamLogo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TeamLogo</span></code></a></p></td>
+<td><p>Model class for &quot;team_logo&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.TeamPoints.html#yfpy.models.TeamPoints" title="yfpy.models.TeamPoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TeamPoints</span></code></a></p></td>
+<td><p>Model class for &quot;team_points&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.TeamProjectedPoints.html#yfpy.models.TeamProjectedPoints" title="yfpy.models.TeamProjectedPoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TeamProjectedPoints</span></code></a></p></td>
+<td><p>Model class for &quot;team_projected_points&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.TeamStandings.html#yfpy.models.TeamStandings" title="yfpy.models.TeamStandings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TeamStandings</span></code></a></p></td>
+<td><p>Model class for &quot;team_standings&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.Transaction.html#yfpy.models.Transaction" title="yfpy.models.Transaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transaction</span></code></a></p></td>
+<td><p>Model class for &quot;transaction&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.TransactionData.html#yfpy.models.TransactionData" title="yfpy.models.TransactionData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransactionData</span></code></a></p></td>
+<td><p>Model class for &quot;transaction_data&quot; data key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="yfpy.models.User.html#yfpy.models.User" title="yfpy.models.User"><code class="xref py py-obj docutils literal notranslate"><span class="pre">User</span></code></a></p></td>
+<td><p>Model class for &quot;user&quot; data key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="yfpy.models.YahooFantasyObject.html#yfpy.models.YahooFantasyObject" title="yfpy.models.YahooFantasyObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YahooFantasyObject</span></code></a></p></td>
+<td><p>Base Yahoo Fantasy Sports data object from which all model classes inherit their methods and attributes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="yfpy.logger.get_logger.html" class="btn btn-neutral float-left" title="yfpy.logger.get_logger" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yfpy.models.Bonus.html" class="btn btn-neutral float-right" title="yfpy.models.Bonus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Wren J. R. (uberfastman).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
