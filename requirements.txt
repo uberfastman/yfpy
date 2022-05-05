@@ -1,12 +1,7 @@
-yahoo-oauth==1.1
-stringcase==1.2.0
-requests==2.27.1
-python-dotenv==0.20.0
-flake8==4.0.1
 bandit==1.7.4
+flake8==4.0.1
 pytest==7.1.2
-sphinx==4.5.0
-sphinx-rtd-theme==1.0.0
-sphinx-autodoc-typehints==1.18.1
-pydata-sphinx-theme==0.8.1
-myst-parser==0.17.2
+python-dotenv==0.20.0
+requests==2.27.1
+stringcase==1.2.0
+yahoo-oauth==1.1
