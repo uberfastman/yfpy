@@ -5,6 +5,8 @@ from pathlib import Path
 
 import setuptools
 
+from VERSION_PYTHON import __version_minimum_python__, __version_maximum_python__
+
 version_file = Path(__file__).parent / "VERSION.py"
 
 # noinspection PyBroadException
@@ -53,6 +55,11 @@ with open("README.md", "r", encoding="utf8") as docs:
 with open("requirements.txt", "r", encoding="utf8") as reqs:
     required = reqs.read().splitlines()
 
+supported_python_minor_versions = [
+    version for version in
+    range(int(__version_minimum_python__.split(".")[-1]), (int(__version_maximum_python__.split(".")[-1]) + 1))
+]
+
 setuptools.setup(
     name="yfpy",
     version=pypi_version,
@@ -67,11 +74,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
+        *[f"Programming Language :: Python :: 3.{version}" for version in supported_python_minor_versions],
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Development Status :: 5 - Production/Stable",
@@ -79,6 +82,6 @@ setuptools.setup(
         "Environment :: Console",
         "Intended Audience :: Developers"
     ],
-    python_requires=">=3.6",
+    python_requires=f">={__version_minimum_python__}",
     install_requires=required
 )
