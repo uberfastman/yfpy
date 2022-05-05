@@ -116,7 +116,7 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 <a name="dependencies"></a>
 ### Dependencies
 
-YFPY has only been tested on macOS, but is written to be platform-agnostic. It runs only in Python 3, and has only been tested from Python 3.6 through Python 3.10.
+YFPY has only been tested on macOS, but is written to be platform-agnostic. It runs only in Python 3.7 and later, and has been tested through Python 3.10.
 
 Direct project dependencies can be viewed in `requirements.txt`, and all dependencies, including transitive dependencies, can be viewed in `dev-requirements.txt`.
 
