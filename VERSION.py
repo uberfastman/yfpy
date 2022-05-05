@@ -1,2 +1,2 @@
 # DO NOT EDIT - VERSIONING CONTROLLED BY GIT TAGS
-__version__ = "v5.0.2"
+__version__ = "v6.0.0"

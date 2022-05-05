@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.models &mdash; YFPY v4.1.4 documentation</title>
+  <title>yfpy.models &mdash; YFPY v5.0.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/readthedocs-custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
-    <![endif]-->
+  <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
@@ -1202,12 +1201,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">editorial_team_full_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;editorial_team_full_name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">editorial_team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;editorial_team_key&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">eligible_positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eligible_positions&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eligible_positions</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eligible_positions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">eligible_positions</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">eligible_positions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">position</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eligible_positions</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">eligible_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eligible_positions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_player_notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;has_player_notes&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headshot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;headshot&quot;</span><span class="p">,</span> <span class="n">Headshot</span><span class="p">({}))</span>  <span class="c1"># type: Headshot</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headshot_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headshot</span><span class="o">.</span><span class="n">size</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
@@ -1275,10 +1279,22 @@
 <span class="sd">            percent_drafted (float):</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">average_pick</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_pick&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">average_round</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_round&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">average_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_cost&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">percent_drafted</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;percent_drafted&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_pick</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_pick&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_pick</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_round</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_round&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_round</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;average_cost&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">average_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">percent_drafted</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;percent_drafted&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">percent_drafted</span> <span class="o">=</span> <span class="mf">0.0</span></div>
 
 
 <span class="c1"># noinspection PyUnresolvedReferences</span>

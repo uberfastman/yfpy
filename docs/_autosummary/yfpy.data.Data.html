@@ -4,13 +4,12 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.data.Data &mdash; YFPY v4.1.4 documentation</title>
+  <title>yfpy.data.Data &mdash; YFPY v5.0.2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/readthedocs-custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
-    <![endif]-->
+  <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
@@ -80,10 +79,10 @@
            <div itemprop="articleBody">
              
   <section id="yfpy-data-data">
-<h1>yfpy.data.Data<a class="headerlink" href="#yfpy-data-data" title="Permalink to this headline">¶</a></h1>
+<h1>yfpy.data.Data<a class="headerlink" href="#yfpy-data-data" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="yfpy.data.Data">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.</p>
 <p>Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.</p>
@@ -123,7 +122,7 @@ save_data = True).</p></li>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.get">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.get" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.get" title="Permalink to this definition"></a></dt>
 <dd><p>Run query to retrieve Yahoo Fantasy Sports data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -143,7 +142,7 @@ save_data = True).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.load" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.load" title="Permalink to this definition"></a></dt>
 <dd><p>Load Yahoo Fantasy Sports data already stored locally.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -168,7 +167,7 @@ save_data = True).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.retrieve">
-<span class="sig-name descname"><span class="pre">retrieve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.retrieve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.retrieve" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">retrieve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.retrieve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.retrieve" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch data from the web or load it locally (combination of the save and load methods).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -192,7 +191,7 @@ saved/loaded.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.save" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.save" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve and save Yahoo Fantasy Sports data locally.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,7 +213,7 @@ saved/loaded.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.update_data_dir">
-<span class="sig-name descname"><span class="pre">update_data_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_save_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.update_data_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.update_data_dir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_data_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_save_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.update_data_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.update_data_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Modify the data storage directory if it needs to be updated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

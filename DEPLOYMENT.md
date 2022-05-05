@@ -89,7 +89,9 @@
      cd ..    
      ```
 
-16. Update the git tag:
+16. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
+
+17. Update the git tag:
 
      `git tag -a [tag_name/version] -m [message]`
 
@@ -100,8 +102,6 @@
      ```shell
      git push origin --tags    
      ```
-   
-17. Push updates to git.
 
 18. Build the package (will also auto-update the version based on teh above git tag):
 
@@ -109,19 +109,21 @@
      python setup.py sdist bdist_wheel
      ```
 
-19. Check packages before distribution:
+19. Once more execute `git add .`, `git commit -m 'commit message'`, and `git push`.
+
+20. Check packages before distribution:
 
     ```shell
     twine check dist/*
     ```
 
-20. Deploy to Test PyPI to check:
+21. Deploy to Test PyPI to check:
 
      ```shell
      twine upload -r testpypi dist/*
      ```
 
-21. Deploy to PyPI:
+22. Deploy to PyPI:
 
      ```shell
      twine upload dist/*
