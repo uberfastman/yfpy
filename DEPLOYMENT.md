@@ -13,7 +13,7 @@
     pip install -r requirements.txt    
     ```
 
-4. Update `dev-requirements.txt`:
+4. (Optional) Update a `dev-requirements.txt` file:
 
     ```shell
     pip freeze > dev-requirements.txt
@@ -111,19 +111,25 @@
 
 19. Once more execute `git add .`, `git commit -m 'commit message'`, and `git push`.
 
-20. Check packages before distribution:
+20. Install `twine` (if not already installed):
+
+     ```shell
+     pip install twine
+     ```
+
+21. Check packages before distribution:
 
     ```shell
     twine check dist/*
     ```
 
-21. Deploy to Test PyPI to check:
+22. Deploy to Test PyPI to check:
 
      ```shell
      twine upload -r testpypi dist/*
      ```
 
-22. Deploy to PyPI:
+23. Deploy to PyPI:
 
      ```shell
      twine upload dist/*
