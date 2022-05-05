@@ -30,7 +30,7 @@ TEST SAVING AND LOADING FANTASY GAME DATA
 
 
 @pytest.mark.integration
-def test_get_all_yahoo_fantasy_game_keys(yahoo_query, yahoo_data, game_code, game_key, show_log_output):
+def test_get_all_yahoo_fantasy_game_keys(yahoo_query, yahoo_data, game_code, game_id, show_log_output):
     """Retrieve all Yahoo fantasy football game keys.
     """
     query_result_data = yahoo_data.save(game_code + "-game_keys",
@@ -46,18 +46,18 @@ def test_get_all_yahoo_fantasy_game_keys(yahoo_query, yahoo_data, game_code, gam
 
 
 @pytest.mark.integration
-def test_get_game_key_by_season(yahoo_query, season, game_key, show_log_output):
+def test_get_game_key_by_season(yahoo_query, season, game_id, show_log_output):
     """Retrieve specific game key by season.
     """
     query_result_data = yahoo_query.get_game_key_by_season(season=season)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    assert query_result_data == game_key
+    assert query_result_data == game_id
 
 
 @pytest.mark.integration
-def test_get_current_game_info(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_current_game_info(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve game info for current fantasy season.
     """
     query_result_data = yahoo_data.save("current-game-info", yahoo_query.get_current_game_info)
@@ -72,7 +72,7 @@ def test_get_current_game_info(yahoo_query, yahoo_data, data_dir, season, game_k
 
 
 @pytest.mark.integration
-def test_get_current_game_metadata(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_current_game_metadata(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve game metadata for current fantasy season.
     """
     query_result_data = yahoo_data.save("current-game-metadata", yahoo_query.get_current_game_metadata)
@@ -87,17 +87,17 @@ def test_get_current_game_metadata(yahoo_query, yahoo_data, data_dir, season, ga
 
 
 @pytest.mark.integration
-def test_get_game_info_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_info_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve game info for specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-info",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-info",
                                         yahoo_query.get_game_info_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-info", Game, new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-info", Game, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -105,17 +105,17 @@ def test_get_game_info_by_game_id(yahoo_query, yahoo_data, data_dir, season, gam
 
 
 @pytest.mark.integration
-def test_get_game_metadata_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_metadata_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve game metadata for specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-metadata",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-metadata",
                                         yahoo_query.get_game_metadata_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-metadata", Game, new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-metadata", Game, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -123,28 +123,28 @@ def test_get_game_metadata_by_game_id(yahoo_query, yahoo_data, data_dir, season,
 
 
 @pytest.mark.integration
-def test_get_league_key(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, show_log_output):
+def test_get_league_key(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, show_log_output):
     """Retrieve league key for selected league.
     """
     query_result_data = yahoo_query.get_league_key()
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    assert query_result_data == game_key + ".l." + league_id
+    assert query_result_data == f"{game_id}.l.{league_id}"
 
 
 @pytest.mark.integration
-def test_get_game_weeks_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_weeks_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve all valid weeks of a specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-weeks",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-weeks",
                                         yahoo_query.get_game_weeks_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-weeks", new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-weeks", new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -152,17 +152,17 @@ def test_get_game_weeks_by_game_id(yahoo_query, yahoo_data, data_dir, season, ga
 
 
 @pytest.mark.integration
-def test_get_game_stat_categories_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_stat_categories_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve all valid stat categories of a specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-stat_categories",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-stat_categories",
                                         yahoo_query.get_game_stat_categories_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-stat_categories", StatCategories,
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-stat_categories", StatCategories,
                                          new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
@@ -171,17 +171,17 @@ def test_get_game_stat_categories_by_game_id(yahoo_query, yahoo_data, data_dir, 
 
 
 @pytest.mark.integration
-def test_get_game_position_types_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_position_types_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve all valid position types for specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-position_types",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-position_types",
                                         yahoo_query.get_game_position_types_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-position_types", new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-position_types", new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -189,17 +189,17 @@ def test_get_game_position_types_by_game_id(yahoo_query, yahoo_data, data_dir, s
 
 
 @pytest.mark.integration
-def test_get_game_roster_positions_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_game_roster_positions_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve all valid roster positions for specific game by id.
     """
     new_data_dir = data_dir / str(season)
-    query_result_data = yahoo_data.save(str(game_key) + "-game-roster_positions",
+    query_result_data = yahoo_data.save(str(game_id) + "-game-roster_positions",
                                         yahoo_query.get_game_roster_positions_by_game_id,
-                                        params={"game_id": game_key}, new_data_dir=new_data_dir)
+                                        params={"game_id": game_id}, new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(game_key) + "-game-roster_positions",
+    loaded_result_data = yahoo_data.load(str(game_id) + "-game-roster_positions",
                                          new_data_dir=new_data_dir)
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))

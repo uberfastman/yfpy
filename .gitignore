@@ -15,6 +15,7 @@ dist/
 *.egg-info/
 
 # Testing
+.pytest_cache/
 test_output/
 private*.json
 token*.json

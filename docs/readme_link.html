@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python API wrapper for the Yahoo Fantasy Sports public API &mdash; YFPY v4.1.4 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/readthedocs-custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> YFPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/yfpy.html">YFPY</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">YFPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Python API wrapper for the Yahoo Fantasy Sports public API</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">__</span>     <span class="n">________</span> <span class="n">_______</span>     <span class="n">__</span>
+ \ \   <span class="o">/</span> <span class="o">/</span>  <span class="n">____</span><span class="o">|</span>  <span class="n">__</span> \ \   <span class="o">/</span> <span class="o">/</span>
+  \ \<span class="n">_</span><span class="o">/</span> <span class="o">/|</span> <span class="o">|</span><span class="n">__</span>  <span class="o">|</span> <span class="o">|</span><span class="n">__</span><span class="p">)</span> \ \<span class="n">_</span><span class="o">/</span> <span class="o">/</span> 
+   \   <span class="o">/</span> <span class="o">|</span>  <span class="n">__</span><span class="o">|</span> <span class="o">|</span>  <span class="n">___</span><span class="o">/</span> \   <span class="o">/</span>  
+    <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>    <span class="o">|</span> <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>   
+    <span class="o">|</span><span class="n">_</span><span class="o">|</span>  <span class="o">|</span><span class="n">_</span><span class="o">|</span>    <span class="o">|</span><span class="n">_</span><span class="o">|</span>      <span class="o">|</span><span class="n">_</span><span class="o">|</span>   
+</pre></div>
+</div>
+<section id="python-api-wrapper-for-the-yahoo-fantasy-sports-public-api">
+<h1>Python API wrapper for the Yahoo Fantasy Sports public API<a class="headerlink" href="#python-api-wrapper-for-the-yahoo-fantasy-sports-public-api" title="Permalink to this headline">¶</a></h1>
+<section id="by-wren-j-r-uberfastman">
+<h2>By Wren J. R. (uberfastman)<a class="headerlink" href="#by-wren-j-r-uberfastman" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/uberfastman/yfpy/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/uberfastman/yfpy?color=yellowgreen&amp;label=latest%20release&amp;sort=semver" /></a>
+<a class="reference external" href="https://github.com/uberfastman/yfpy/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/uberfastman/yfpy?color=yellowgreen&amp;label=latest%20version&amp;sort=semver" /></a>
+<a class="reference external" href="https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml"><img alt="GitHub Workflow Status (branch)" src="https://img.shields.io/github/workflow/status/uberfastman/yfpy/CI%20Build/main?color=brightgreen&amp;label=build" /></a></p>
+<p><a class="reference external" href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/v/yfpy.svg?style=flat" /></a>
+<a class="reference external" href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/dm/yfpy.svg?style=flat" /></a>
+<a class="reference external" href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/pyversions/yfpy.svg?style=flat" /></a>
+<a class="reference external" href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/l/yfpy.svg?style=flat" /></a></p>
+</section>
+<hr class="docutils" />
+<section id="do-you-like-the-yfpy-api-wrapper-star-the-repository-here-on-github-and-please-consider-helping-support-its-ongoing-development">
+<h2>Do you like the YFPY API wrapper? Star the repository here on GitHub and please consider helping support its ongoing development:<a class="headerlink" href="#do-you-like-the-yfpy-api-wrapper-star-the-repository-here-on-github-and-please-consider-helping-support-its-ongoing-development" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VZZCNLRHH9BQS"><img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="100"/></a> <a class="reference external" href="https://share.trustwallet.com/ZoAkTpY1I9"><img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="100"/></a> <a class="reference external" href="https://share.trustwallet.com/MF8YBO01I9"><img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="100"/></a></p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-right head"><p>Cryptocurrency</p></th>
+<th class="text-center head"><p>Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>Bitcoin (BTC)</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">bc1qataspvklhewtswm357m0677q4raag5new2xt3e</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>Ethereum (ETH)</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">0x5eAa522e66a90577D49e9E72f253EC952CDB4059</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="yahoo-fantasy-sports-api-wrapper-yfpy">
+<h1>Yahoo Fantasy Sports API Wrapper (YFPY)<a class="headerlink" href="#yahoo-fantasy-sports-api-wrapper-yfpy" title="Permalink to this headline">¶</a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#about"><span class="std std-doc">About</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="std std-doc">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#setup"><span class="std std-doc">Setup</span></a></p></li>
+<li><p><a class="reference internal" href="#usage"><span class="std std-doc">Usage</span></a></p></li>
+<li><p><a class="reference internal" href="#testing"><span class="std std-doc">Testing</span></a></p></li>
+<li><p><a class="reference internal" href="#dependencies"><span class="std std-doc">Dependencies</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="std std-doc">Troubleshooting</span></a></p></li>
+</ul>
+<hr class="docutils" />
+<p><a name="about"></a></p>
+</section>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows for easy retrieval and parsing of almost any data you might wish to extract and use from any Yahoo fantasy league to which your Yahoo account has access (or for public leagues). The primary focus of this wrapper is on fantasy football (NFL), but it also supports usage with fantasy hockey (NHL), fantasy baseball (MLB), and fantasy basketball (NBA).</p>
+<hr class="docutils" />
+<p><a name="installation"></a></p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>If you wish to use YFPY within another project, from within your project directory, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install yfpy
+</pre></div>
+</div>
+<p>or add <code class="docutils literal notranslate"><span class="pre">yfpy</span></code> to your project <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+</li>
+<li><p>If you wish to download and use YFPY locally, clone the git repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:uberfastman/yfpy.git
+</pre></div>
+</div>
+</li>
+</ul>
+<hr class="docutils" />
+<p><a name="setup"></a></p>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Log in to a Yahoo account with access to whatever fantasy leagues from which you wish to retrieve data.</p></li>
+<li><p>Go to <a class="reference external" href="https://developer.yahoo.com/apps/create/">https://developer.yahoo.com/apps/create/</a> and create an app (you must be logged into your Yahoo account as stated above). For the app, select the following options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Name</span></code> (<strong>Required</strong>): <code class="docutils literal notranslate"><span class="pre">yfpy</span></code> (you can name your app whatever you want, but this is just an example).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Type</span></code> (<strong>Required</strong>): select the <code class="docutils literal notranslate"><span class="pre">Installed</span> <span class="pre">Application</span></code> radio button.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> (<em>Optional</em>): you <em>may</em> write a short description of what the app does.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Home</span> <span class="pre">Page</span> <span class="pre">URL</span></code> (<em>Optional</em>): if you have a web address related to your app you <em>may</em> add it here.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Redirect</span> <span class="pre">URI(s)</span></code> (<strong>Required</strong>): this field must contain a valid redirect address, so you can use <code class="docutils literal notranslate"><span class="pre">https://localhost:8080</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Permissions</span></code> (<strong>Required</strong>): check the <code class="docutils literal notranslate"><span class="pre">Fantasy</span> <span class="pre">Sports</span></code> checkbox. You can leave the <code class="docutils literal notranslate"><span class="pre">Read</span></code> option selected (appears in an accordion expansion underneath the <code class="docutils literal notranslate"><span class="pre">Fantasy</span> <span class="pre">Sports</span></code> checkbox once you select it).</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">App</span></code> button.</p></li>
+<li><p>Once the app is created, it should redirect you to a page for your app, which will show both a <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code>.</p></li>
+<li><p>Make a copy of <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.private.json</span></code></span>, rename it to just <code class="docutils literal notranslate"><span class="pre">private.json</span></code>, and copy the <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> values to their respective fields (make sure the strings are wrapped regular quotes (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>), NOT formatted quotes (<code class="docutils literal notranslate"><span class="pre">“”</span></code>)). The path to this file will be needed to point YFPY to your credentials.</p></li>
+<li><p>Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<p><a name="usage"></a></p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Follow the instructions in the <a class="reference internal" href="#installation"><span class="std std-doc">Installation</span></a> and <a class="reference internal" href="#setup"><span class="std std-doc">Setup</span></a> sections.</p></li>
+<li><p>The <em><strong>first</strong></em> time you use YFPY, a browser window will open up asking you to allow your app to access your Yahoo fantasy sports data. You <em><strong>MUST</strong></em> hit allow, and then copy the verification code that pops up into the command line prompt where it will now be asking for verification, hit enter, and the OAuth2 three-legged handshake should be complete and your data should have been successfully retrieved.</p></li>
+<li><p>YFPY should have now generated a <code class="docutils literal notranslate"><span class="pre">token.json</span></code> for you in the same directory where you stored your <code class="docutils literal notranslate"><span class="pre">private.json</span></code> credentials, and for all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same <code class="docutils literal notranslate"><span class="pre">token.json</span></code> file to authenticate your app.</p></li>
+</ul>
+<hr class="docutils" />
+<p><a name="testing"></a></p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>YFPY has a collection of fully functional code snippets that can be run using <a class="reference external" href="https://docs.pytest.org/en/6.2.x/">pytest</a>. These snippets demonstrate how to use YFPY to retrieve your Yahoo Fantasy Sports data.</p>
+<ul class="simple">
+<li><p>See the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></span> directory for the example code snippets.</p></li>
+<li><p>Before running any tests, make a copy of <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.env</span></code></span> in the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></span> directory and rename it to <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p></li>
+<li><p>Copy your Yahoo <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> into the environment variables in <code class="docutils literal notranslate"><span class="pre">.env</span></code> so that pytest can use them when hitting the Yahoo Fantasy Sports API.</p></li>
+<li><p>If this is the first time running pytest with your Yahoo API credentials, you <em><strong>MUST</strong></em> allow interactive prompts within pytest by using the <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag.</p></li>
+<li><p>You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-v</span> <span class="pre">-s</span></code></p></li>
+</ul>
+</li>
+<li><p>If you want to run only the integration tests, you can run:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-v</span> <span class="pre">-s</span> <span class="pre">-m</span> <span class="pre">integration</span></code></p></li>
+</ul>
+</li>
+<li><p>If you want to run only the unit tests, you can run:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-v</span> <span class="pre">-s</span> <span class="pre">-m</span> <span class="pre">unit</span></code></p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<p><a name="dependencies"></a></p>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>YFPY has only been tested on macOS, but is written to be platform-agnostic. It runs only in Python 3, and has only been tested from Python 3.6 through Python 3.10.</p>
+<p>Direct project dependencies can be viewed in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, and all dependencies, including transitive dependencies, can be viewed in <code class="docutils literal notranslate"><span class="pre">dev-requirements.txt</span></code>.</p>
+<hr class="docutils" />
+<p><a name="troubleshooting"></a></p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally when you use the Yahoo fantasy sports API, there are hangups on the other end that can cause data not to transmit, and you might encounter an error similar to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;yfpy-app.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">114</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/Users/your_username/PATH/T0/LOCAL/PROJECT/yfpy-app.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">429</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run</span>
+    <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">team_standings</span><span class="p">:</span>
+<span class="ne">IndexError</span><span class="p">:</span> <span class="nb">list</span> <span class="n">index</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span>
+</pre></div>
+</div>
+<p>Typically, when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Wren J. R. (uberfastman).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

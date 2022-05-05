@@ -31,11 +31,11 @@ TEST SAVING AND LOADING FANTASY TEAM DATA
 
 
 @pytest.mark.integration
-def test_get_team_info(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_info(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                        show_log_output):
     """Retrieve info of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-info",
                                         yahoo_query.get_team_info,
@@ -52,11 +52,11 @@ def test_get_team_info(yahoo_query, yahoo_data, data_dir, season, game_key, leag
 
 
 @pytest.mark.integration
-def test_get_team_metadata(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_metadata(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                            show_log_output):
     """Retrieve metadata of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-metadata",
                                         yahoo_query.get_team_metadata,
@@ -73,11 +73,11 @@ def test_get_team_metadata(yahoo_query, yahoo_data, data_dir, season, game_key, 
 
 
 @pytest.mark.integration
-def test_get_team_stats(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_stats(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                         show_log_output):
     """Retrieve stats of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-stats",
                                         yahoo_query.get_team_stats,
@@ -94,11 +94,11 @@ def test_get_team_stats(yahoo_query, yahoo_data, data_dir, season, game_key, lea
 
 
 @pytest.mark.integration
-def test_get_team_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_key, league_id, team_id,
+def test_get_team_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id, team_id,
                                 team_name, show_log_output):
     """Retrieve stats of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
+    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-stats",
                                         yahoo_query.get_team_stats_by_week,
                                         params={"team_id": team_id, "chosen_week": chosen_week},
@@ -115,11 +115,11 @@ def test_get_team_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chose
 
 
 @pytest.mark.integration
-def test_get_team_standings(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_standings(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                             show_log_output):
     """Retrieve standings of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-standings",
                                         yahoo_query.get_team_standings,
@@ -136,11 +136,11 @@ def test_get_team_standings(yahoo_query, yahoo_data, data_dir, season, game_key,
 
 
 @pytest.mark.integration
-def test_get_team_roster_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_key, league_id, team_id,
+def test_get_team_roster_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id, team_id,
                                  team_name, show_log_output):
     """Retrieve roster of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
                     / "rosters")
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-roster_by_week",
                                         yahoo_query.get_team_roster_by_week,
@@ -158,11 +158,11 @@ def test_get_team_roster_by_week(yahoo_query, yahoo_data, data_dir, season, chos
 
 
 @pytest.mark.integration
-def test_get_team_roster_player_info_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_key,
+def test_get_team_roster_player_info_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id,
                                              league_id, team_id, team_name, show_log_output):
     """Retrieve roster with player info of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
                     / "rosters")
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name
                                         + "-roster-player_info_by_week",
@@ -185,11 +185,11 @@ def test_get_team_roster_player_info_by_week(yahoo_query, yahoo_data, data_dir, 
     reason="Skipping test_get_team_roster_player_info_by_date: retrieval by date supported by NHL/NBA/MLB, not NFL."
 )
 @pytest.mark.integration
-def test_get_team_roster_player_info_by_date(yahoo_query, yahoo_data, data_dir, season, chosen_date, game_key,
+def test_get_team_roster_player_info_by_date(yahoo_query, yahoo_data, data_dir, season, chosen_date, game_id,
                                              league_id, team_id, team_name, show_log_output):
     """Retrieve roster with player info of specific team by team_id and by date for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / str(chosen_date) / "rosters"
+    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / str(chosen_date) / "rosters"
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name
                                         + "-roster-player_info_by_date",
                                         yahoo_query.get_team_roster_player_info_by_date,
@@ -208,11 +208,11 @@ def test_get_team_roster_player_info_by_date(yahoo_query, yahoo_data, data_dir, 
 
 
 @pytest.mark.integration
-def test_get_team_roster_player_stats(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id,
+def test_get_team_roster_player_stats(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id,
                                       team_name, show_log_output):
     """Retrieve roster with player info for season of specific team by team_id for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "rosters"
+    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "rosters"
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-roster-player_stats",
                                         yahoo_query.get_team_roster_player_stats,
                                         params={"team_id": team_id},
@@ -229,11 +229,11 @@ def test_get_team_roster_player_stats(yahoo_query, yahoo_data, data_dir, season,
 
 
 @pytest.mark.integration
-def test_get_team_roster_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_key,
+def test_get_team_roster_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id,
                                               league_id, team_id, team_name, show_log_output):
     """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
                     / "rosters")
 
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name
@@ -254,11 +254,11 @@ def test_get_team_roster_player_stats_by_week(yahoo_query, yahoo_data, data_dir,
 
 
 @pytest.mark.integration
-def test_get_team_draft_results(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_draft_results(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                                 show_log_output):
     """Retrieve draft results of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-draft_results",
                                         yahoo_query.get_team_draft_results,
@@ -275,11 +275,11 @@ def test_get_team_draft_results(yahoo_query, yahoo_data, data_dir, season, game_
 
 
 @pytest.mark.integration
-def test_get_team_matchups(yahoo_query, yahoo_data, data_dir, season, game_key, league_id, team_id, team_name,
+def test_get_team_matchups(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                            show_log_output):
     """Retrieve matchups of specific team by team_id for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_key) + ".l." + str(league_id)) / "teams"
+    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "teams"
                     / (str(team_id) + "-" + team_name))
     query_result_data = yahoo_data.save(str(team_id) + "-" + team_name + "-matchups",
                                         yahoo_query.get_team_matchups,

@@ -31,7 +31,7 @@ TEST SAVING AND LOADING FANTASY USER DATA
 
 
 @pytest.mark.integration
-def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve metadata for current logged-in user.
     """
     new_data_dir = data_dir
@@ -47,7 +47,7 @@ def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_key, s
 
 
 @pytest.mark.integration
-def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve game history for current logged-in user.
     """
     new_data_dir = data_dir
@@ -67,14 +67,14 @@ def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_key, sho
     reason="Skipping get_user_leagues_by_game_key: current logged-in user must have leagues from test season/year."
 )
 @pytest.mark.integration
-def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve league history for current logged-in user for specific game by id.
     """
     new_data_dir = data_dir
     query_result_data = yahoo_data.save(
         "user-leagues",
         yahoo_query.get_user_leagues_by_game_key,
-        params={"game_key": game_key},
+        params={"game_key": game_id},
         new_data_dir=new_data_dir
     )
 
@@ -89,7 +89,7 @@ def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, 
 
 
 @pytest.mark.integration
-def test_get_user_teams(yahoo_query, yahoo_data, data_dir, season, game_key, show_log_output):
+def test_get_user_teams(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
     """Retrieve teams for all leagues for current logged-in user for current game.
     """
     new_data_dir = data_dir

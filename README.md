@@ -103,11 +103,13 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 * See the [`test/integration`](test/integration) directory for the example code snippets.
 * Before running any tests, make a copy of [`test/integration/EXAMPLE.env`](test/integration/EXAMPLE.env) in the [`test/integration`](test/integration) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
-* You can invoke the pytest tests by first changing to the test directory from the root of the YFPY repository:
-  * `cd test`
-  * `pytest test_yfpy.py`
-* If you want to run the tests from elsewhere, you will need to allow pytest to use interactive prompts:
-  * `pytest -s test/test_yfpy.py`
+* If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
+* You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:
+  * `pytest -v -s`
+* If you want to run only the integration tests, you can run:
+  * `pytest -v -s -m integration`
+* If you want to run only the unit tests, you can run:
+  * `pytest -v -s -m unit`
 
 ---
 
