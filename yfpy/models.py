@@ -1135,12 +1135,17 @@ class Player(YahooFantasyObject):
         self.editorial_team_full_name = self.extracted_data.get("editorial_team_full_name", "")
         self.editorial_team_key = self.extracted_data.get("editorial_team_key", "")
         eligible_positions = self.extracted_data.get("eligible_positions")
+        self.eligible_positions = []
         if isinstance(eligible_positions, dict):
-            self.eligible_positions = [eligible_positions.get("position")]
+            self.eligible_positions.append(eligible_positions.get("position"))
         elif isinstance(eligible_positions, list):
-            self.eligible_positions = [position.get("position") for position in eligible_positions]
-        else:
-            self.eligible_positions = []
+            for position in eligible_positions:
+                if isinstance(position, dict):
+                    self.eligible_positions.append(position.get("position"))
+                else:
+                    self.eligible_positions.append(position)
+        elif isinstance(eligible_positions, str):
+            self.eligible_positions.append(eligible_positions)
         self.has_player_notes = self.extracted_data.get("has_player_notes", 0)
         self.headshot = self.extracted_data.get("headshot", Headshot({}))  # type: Headshot
         self.headshot_size = self.headshot.size or ""
@@ -1208,10 +1213,22 @@ class DraftAnalysis(YahooFantasyObject):
             percent_drafted (float):
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.average_pick = float(self.extracted_data.get("average_pick", 0) or 0)
-        self.average_round = float(self.extracted_data.get("average_round", 0) or 0)
-        self.average_cost = float(self.extracted_data.get("average_cost", 0) or 0)
-        self.percent_drafted = float(self.extracted_data.get("percent_drafted", 0) or 0)
+        try:
+            self.average_pick = float(self.extracted_data.get("average_pick", 0) or 0)
+        except ValueError:
+            self.average_pick = 0.0
+        try:
+            self.average_round = float(self.extracted_data.get("average_round", 0) or 0)
+        except ValueError:
+            self.average_round = 0.0
+        try:
+            self.average_cost = float(self.extracted_data.get("average_cost", 0) or 0)
+        except ValueError:
+            self.average_cost = 0.0
+        try:
+            self.percent_drafted = float(self.extracted_data.get("percent_drafted", 0) or 0)
+        except ValueError:
+            self.percent_drafted = 0.0
 
 
 # noinspection PyUnresolvedReferences

@@ -1,27 +1,33 @@
-# Credit for sphynx documentation setup help: https://github.com/JamesALeedham/Sphinx-Autosummary-Recursion
-
-from VERSION import __version__
-from datetime import date
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+# -- Sphynx Setup ------------------------------------------------------------
+# Credit for sphynx documentation setup help: https://github.com/JamesALeedham/Sphinx-Autosummary-Recursion
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-import os
+
 import sys
+from datetime import date
 from pathlib import Path
-package_path = str(Path(__file__).parent.parent.parent / "yfpy")
-sys.path.insert(0, package_path)
+
+root_path = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(root_path))
+package_path = root_path / "yfpy"
+sys.path.insert(0, str(package_path))
+
+from VERSION import __version__  # noqa
 
 # -- Project information -----------------------------------------------------
 
 project = "YFPY"
+# noinspection PyShadowingBuiltins
 copyright = f"{date.today().year}, Wren J. R. (uberfastman)"
 author = "Wren J. R. (uberfastman)"
 
@@ -34,12 +40,12 @@ release = __version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.autosummary",
-    'sphinx.ext.intersphinx',  # Link to other project's documentation (see mapping below)
-    'sphinx.ext.viewcode',  # Add a link to the Python source code for classes, functions etc.
-    'sphinx_autodoc_typehints',  # Automatically document param types (less noise in class signature)
+    "sphinx.ext.autodoc",  # autogenerate documentation from docstrings
+    "sphinx.ext.napoleon",  # support google style docstrings
+    "sphinx.ext.autosummary",  # recursively generate documentation from dynamic nested modules
+    'sphinx.ext.intersphinx',  # link to external documentation (must also use sphinx generated docs: .inv file)
+    'sphinx.ext.viewcode',  # add links to the Python source code for classes, functions etc.
+    'sphinx_autodoc_typehints',  # automatically document param types (less noise in class signature)
     "myst_parser"  # markdown parsing
 ]
 
@@ -49,9 +55,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [
-]
-
+exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -70,27 +74,19 @@ html_static_path = [
 
 # -- Extension configuration -------------------------------------------------
 
-# Mappings for sphinx.ext.intersphinx. Projects have to have Sphinx-generated doc! (.inv file)
+# configure sphinx.ext.intersphinx
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
 }
 
-autosummary_generate = True  # Turn on sphinx.ext.autosummary
-autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
-html_show_sourcelink = False  # Remove 'view source code' from top of page (for html, not python)
-autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
-set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
-# autodoc_typehints = "description" # Sphinx-native method. Not as good as sphinx_autodoc_typehints
-add_module_names = False  # Remove namespaces from class/method signatures
+# configure sphinx.ext.autosummary & sphinx_autodoc_typehints
+autosummary_generate = True  # activate sphinx.ext.autosummary
+autoclass_content = "both"  # add __init__ documentation (params, attributes) to class summaries
+html_show_sourcelink = False  # remove 'view source code' from top of html pages
+autodoc_inherit_docstrings = True  # inherit docstrings from base class if no docstring is supplied
+set_type_checking_flag = True  # enable 'expensive' imports for sphinx_autodoc_typehints
+add_module_names = False  # remove the Python namespaces from class/method signatures
 
+# configure myst_parser
 myst_heading_anchors = 5
 suppress_warnings = ["myst.header"]
-
-# Readthedocs theme
-# on_rtd is whether on readthedocs.org, this line of code grabbed from docs.readthedocs.org...
-on_rtd = os.environ.get("READTHEDOCS", None) == "True"
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-    html_theme = "sphinx_rtd_theme"
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-html_css_files = ["readthedocs-custom.css"]  # Override some CSS settings
