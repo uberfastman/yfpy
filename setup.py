@@ -37,8 +37,15 @@ docs_index_path = docs_path / "index.html"
 if docs_index_path.exists():
     print("Removing stale \"sphinx docs\" content before packaging...")
     shutil.rmtree(docs_path)
+
     sphinx_docs_path = Path("docs-sphinx") / "build" / "html"
     shutil.copytree(sphinx_docs_path, docs_path)
+
+    cname_file_path = Path("resources") / "documentation" / "CNAME"
+    shutil.copyfile(cname_file_path, docs_path / "CNAME")
+
+    theme_file_path = Path("resources") / "documentation" / ".nojekyll"
+    shutil.copyfile(theme_file_path, docs_path / ".nojekyll")
 
 with open("README.md", "r", encoding="utf8") as docs:
     long_description = docs.read()
@@ -72,6 +79,6 @@ setuptools.setup(
         "Environment :: Console",
         "Intended Audience :: Developers"
     ],
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     install_requires=required
 )
