@@ -130,6 +130,22 @@ def game_id() -> int:
 
 
 @pytest.fixture
+def game_key() -> str:
+    """Set Yahoo Fantasy Sports game key for testing."""
+
+    # game_key = "331"  # NFL - 2014
+    # game_key = "348"  # NFL - 2015 (testing for league with divisions)
+    # game_key = "390"  # NFL - 2019
+    # game_key = "399"  # NFL - 2020
+    game_key = "406"  # NFL - 2021
+
+    # game_key = "303"  # NHL - 2012
+    # game_key = "411"  # NHL - 2021
+
+    return game_key
+
+
+@pytest.fixture
 def game_code() -> str:
     """Set Yahoo Fantasy Sports game code for testing."""
 

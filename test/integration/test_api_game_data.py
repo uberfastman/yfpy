@@ -46,14 +46,14 @@ def test_get_all_yahoo_fantasy_game_keys(yahoo_query, yahoo_data, game_code, gam
 
 
 @pytest.mark.integration
-def test_get_game_key_by_season(yahoo_query, season, game_id, show_log_output):
+def test_get_game_key_by_season(yahoo_query, season, game_key, show_log_output):
     """Retrieve specific game key by season.
     """
     query_result_data = yahoo_query.get_game_key_by_season(season=season)
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    assert query_result_data == game_id
+    assert query_result_data == game_key
 
 
 @pytest.mark.integration
