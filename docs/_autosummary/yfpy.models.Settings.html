@@ -4,9 +4,12 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.models.Settings &mdash; YFPY v7.0.0 documentation</title>
+  <title>yfpy.models.Settings &mdash; YFPY v5.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,6 +18,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,8 +32,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> YFPY
+            <a href="../index.html">
+            <img src="../_static/yfpy-logo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                v5.0.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -40,9 +49,19 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">YFPY</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="reference internal" href="yfpy.models.html">yfpy.models</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
@@ -88,8 +107,24 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.dict_to_list.html">yfpy.utils.dict_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_json_dict_list.html">yfpy.utils.flatten_json_dict_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.unpack_data.html">yfpy.utils.unpack_data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -104,7 +139,7 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
@@ -113,7 +148,10 @@
       <li>yfpy.models.Settings</li>
       <li class="wy-breadcrumbs-aside">
       </li>
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="yfpy.models.SelectedPosition.html" class="btn btn-neutral float-left" title="yfpy.models.SelectedPosition" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yfpy.models.Standings.html" class="btn btn-neutral float-right" title="yfpy.models.Standings" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -135,7 +173,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.cant_cut_list">
 <span class="sig-name descname"><span class="pre">cant_cut_list</span></span><a class="headerlink" href="#yfpy.models.Settings.cant_cut_list" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league uses the Yahoo “can’t cut list”.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -145,7 +184,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.divisions">
 <span class="sig-name descname"><span class="pre">divisions</span></span><a class="headerlink" href="#yfpy.models.Settings.divisions" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league has divisions.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -155,7 +195,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.draft_pick_time">
 <span class="sig-name descname"><span class="pre">draft_pick_time</span></span><a class="headerlink" href="#yfpy.models.Settings.draft_pick_time" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of seconds allowed to make each draft pick.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -165,7 +206,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.draft_time">
 <span class="sig-name descname"><span class="pre">draft_time</span></span><a class="headerlink" href="#yfpy.models.Settings.draft_time" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A timestamp representing when the draft will start.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -175,7 +217,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.draft_type">
 <span class="sig-name descname"><span class="pre">draft_type</span></span><a class="headerlink" href="#yfpy.models.Settings.draft_type" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The type of draft (“live”, “offline”, etc.)</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -185,7 +228,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.has_multiweek_championship">
 <span class="sig-name descname"><span class="pre">has_multiweek_championship</span></span><a class="headerlink" href="#yfpy.models.Settings.has_multiweek_championship" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league has a multi-week
+championship matchup.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -195,7 +240,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.has_playoff_consolation_games">
 <span class="sig-name descname"><span class="pre">has_playoff_consolation_games</span></span><a class="headerlink" href="#yfpy.models.Settings.has_playoff_consolation_games" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league has a consolation
+playoff bracket.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
@@ -205,7 +252,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.is_auction_draft">
 <span class="sig-name descname"><span class="pre">is_auction_draft</span></span><a class="headerlink" href="#yfpy.models.Settings.is_auction_draft" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league uses an auction draft.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -215,7 +263,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.max_teams">
 <span class="sig-name descname"><span class="pre">max_teams</span></span><a class="headerlink" href="#yfpy.models.Settings.max_teams" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The maximum number of teams allowed in the league.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -223,9 +272,10 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="yfpy.models.Settings.num_playoff_consolation_games">
-<span class="sig-name descname"><span class="pre">num_playoff_consolation_games</span></span><a class="headerlink" href="#yfpy.models.Settings.num_playoff_consolation_games" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="yfpy.models.Settings.num_playoff_consolation_teams">
+<span class="sig-name descname"><span class="pre">num_playoff_consolation_teams</span></span><a class="headerlink" href="#yfpy.models.Settings.num_playoff_consolation_teams" title="Permalink to this definition"></a></dt>
+<dd><p>The number of teams that make the consolation playoff bracket.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -235,7 +285,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.num_playoff_teams">
 <span class="sig-name descname"><span class="pre">num_playoff_teams</span></span><a class="headerlink" href="#yfpy.models.Settings.num_playoff_teams" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of teams that make the playoffs.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -245,7 +296,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.pickem_enabled">
 <span class="sig-name descname"><span class="pre">pickem_enabled</span></span><a class="headerlink" href="#yfpy.models.Settings.pickem_enabled" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league has enabled the built-in Yahoo
+“pick ‘em” game that allows managers to pick winners of each fantasy matchup each week in the league.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -255,7 +308,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.player_pool">
 <span class="sig-name descname"><span class="pre">player_pool</span></span><a class="headerlink" href="#yfpy.models.Settings.player_pool" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating what player pool is allowed for the league (“ALL”, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -265,7 +319,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.playoff_start_week">
 <span class="sig-name descname"><span class="pre">playoff_start_week</span></span><a class="headerlink" href="#yfpy.models.Settings.playoff_start_week" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The week number on which the playoffs start.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -275,7 +330,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.post_draft_players">
 <span class="sig-name descname"><span class="pre">post_draft_players</span></span><a class="headerlink" href="#yfpy.models.Settings.post_draft_players" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating what happens to players after the draft (“W” for waivers, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -285,9 +341,10 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.roster_positions">
 <span class="sig-name descname"><span class="pre">roster_positions</span></span><a class="headerlink" href="#yfpy.models.Settings.roster_positions" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A list of YFPY RosterPosition instances.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of RosterPosition</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition" title="yfpy.models.RosterPosition">RosterPosition</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -295,7 +352,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.scoring_type">
 <span class="sig-name descname"><span class="pre">scoring_type</span></span><a class="headerlink" href="#yfpy.models.Settings.scoring_type" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating what type of scoring the league uses (“head” for head-to-head, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -305,7 +363,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.stat_categories">
 <span class="sig-name descname"><span class="pre">stat_categories</span></span><a class="headerlink" href="#yfpy.models.Settings.stat_categories" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY StatCategories instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories" title="yfpy.models.StatCategories">StatCategories</a></p>
 </dd>
@@ -315,7 +374,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.stat_modifiers">
 <span class="sig-name descname"><span class="pre">stat_modifiers</span></span><a class="headerlink" href="#yfpy.models.Settings.stat_modifiers" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY StatModifiers instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.StatModifiers.html#yfpy.models.StatModifiers" title="yfpy.models.StatModifiers">StatModifiers</a></p>
 </dd>
@@ -325,7 +385,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.trade_end_date">
 <span class="sig-name descname"><span class="pre">trade_end_date</span></span><a class="headerlink" href="#yfpy.models.Settings.trade_end_date" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A date string representing when trading is no longer allowed (format: “YYYY-MM-DD”).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -335,7 +396,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.trade_ratify_type">
 <span class="sig-name descname"><span class="pre">trade_ratify_type</span></span><a class="headerlink" href="#yfpy.models.Settings.trade_ratify_type" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating how trades are ratified (“commish” for commissioner, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -345,7 +407,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.trade_reject_time">
 <span class="sig-name descname"><span class="pre">trade_reject_time</span></span><a class="headerlink" href="#yfpy.models.Settings.trade_reject_time" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of days during which a trade can be rejected.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -355,7 +418,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_faab">
 <span class="sig-name descname"><span class="pre">uses_faab</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_faab" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league uses FAAB (Free Agent Acquisition
+Budget).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -365,7 +430,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_fractional_points">
 <span class="sig-name descname"><span class="pre">uses_fractional_points</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_fractional_points" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league allows fractional scoring.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -375,7 +441,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_lock_eliminated_teams">
 <span class="sig-name descname"><span class="pre">uses_lock_eliminated_teams</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_lock_eliminated_teams" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league locks teams
+eliminated from the playoffs.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -385,7 +453,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_negative_points">
 <span class="sig-name descname"><span class="pre">uses_negative_points</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_negative_points" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league allows negative scoring.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -395,7 +464,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_playoffs">
 <span class="sig-name descname"><span class="pre">uses_playoffs</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_playoffs" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league has playoffs.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -405,7 +475,9 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.uses_playoff_reseeding">
 <span class="sig-name descname"><span class="pre">uses_playoff_reseeding</span></span><a class="headerlink" href="#yfpy.models.Settings.uses_playoff_reseeding" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the league reseeds the playoffs once
+the fantasy regular season is complete.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -415,7 +487,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.waiver_rule">
 <span class="sig-name descname"><span class="pre">waiver_rule</span></span><a class="headerlink" href="#yfpy.models.Settings.waiver_rule" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating when players go to waivers (“gametime”, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -425,7 +498,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.waiver_time">
 <span class="sig-name descname"><span class="pre">waiver_time</span></span><a class="headerlink" href="#yfpy.models.Settings.waiver_time" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of days that players remain on waivers.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -435,7 +509,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Settings.waiver_type">
 <span class="sig-name descname"><span class="pre">waiver_type</span></span><a class="headerlink" href="#yfpy.models.Settings.waiver_type" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Value designating what type of waivers are used by the league (“R” for rolling, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -452,8 +527,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.Settings.clean_data_dict" title="yfpy.models.Settings.clean_data_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean_data_dict</span></code></a></p></td>
 <td><p>Recursive method to un-type custom class type objects for serialization.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#yfpy.models.Settings.from_json" title="yfpy.models.Settings.from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></a></p></td>
+<td><p>Deserialize JSON to a class object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.Settings.serialized" title="yfpy.models.Settings.serialized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialized</span></code></a></p></td>
 <td><p>Pack up all object content into nested dictionaries for JSON serialization.</p></td>
@@ -476,6 +551,20 @@
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="yfpy.models.Settings.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#yfpy.models.Settings.from_json" title="Permalink to this definition"></a></dt>
+<dd><p>Deserialize JSON to a class object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Class object derived from JSON data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)">object</a></p>
 </dd>
 </dl>
 </dd></dl>
