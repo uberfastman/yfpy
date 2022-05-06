@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.utils &mdash; YFPY v6.0.0 documentation</title>
+  <title>yfpy.utils &mdash; YFPY v7.0.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,6 +17,8 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -93,7 +98,7 @@
 <span class="sd">        data (str): Data formatted as a JSON string.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The return value. True for success, False otherwise.</span>
+<span class="sd">        str: JSON string that has been formatted with indents (two spaces).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span></div>
@@ -108,7 +113,7 @@
 <span class="sd">        parent_class (Type): Parent class type used to extract custom subclass type options for casting.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).</span>
+<span class="sd">        Any: Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># extract subclasses from parent class for typing</span>
@@ -173,8 +178,8 @@
 <span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The numeric representation of any JSON strings that can be represented as integers or floats, else the</span>
-<span class="sd">            original JSON object.</span>
+<span class="sd">        int | float | Any: The numeric representation of any JSON strings that can be represented as integers or floats,</span>
+<span class="sd">        else the original JSON object.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
@@ -202,7 +207,7 @@
 <span class="sd">            and classes for casting as values.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A Python object (representing the original JSON object) that has been cast to the specified types.</span>
+<span class="sd">        object: A Python object (representing the original JSON object) that has been cast to the specified type.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">json_obj_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -216,11 +221,11 @@
     <span class="sd">&quot;&quot;&quot;Recursive function to flatten JSON lists containing all disparate JSON dictionaries with no overlapping keys.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        json_obj_dict_list (list of dict of str: Any): List of JSON dictionaries.</span>
+<span class="sd">        json_obj_dict_list (list[dict[str, Any]]): List of JSON dictionaries.</span>
 <span class="sd">        parent_class (Type): Parent class type used to extract custom subclass type options.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.</span>
+<span class="sd">        dict | list: Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># filter out empty lists and dicts but include when value = 0</span>
@@ -253,8 +258,8 @@
 <span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a list,</span>
-<span class="sd">            or the original value if json_obj was a primitive.</span>
+<span class="sd">        list: A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a</span>
+<span class="sd">        list, or the original value if json_obj was a primitive.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -273,7 +278,7 @@
 <span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        JSON dictionary/list/primitive with contents cast to Python objects.</span>
+<span class="sd">        dict | list | int | float | str | bool: JSON dictionary/list/primitive with contents cast to Python objects.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -289,10 +294,11 @@
     <span class="sd">&quot;&quot;&quot;Function to convert a JSON dictionary to a list.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        json_dict (dict of str: Any): JSON dictionary.</span>
+<span class="sd">        json_dict (dict[str, Any]): JSON dictionary.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as values.</span>
+<span class="sd">        list: A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as</span>
+<span class="sd">        values.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">first_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
@@ -317,7 +323,7 @@
 <span class="sd">        val_to_key (str): Key used to sort the dictionaries contained in json_dict.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        An ordered dictionary of dictionaries sorted by val_to_key.</span>
+<span class="sd">        dict[str, Any]: An ordered dictionary of dictionaries sorted by val_to_key.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
@@ -336,7 +342,7 @@
 <span class="sd">        obj (Any): Unserializable Python object to be serialized into JSON.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Serializable version of the Python object.</span>
+<span class="sd">        Any: Serializable version of the Python object.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;serialized&quot;</span><span class="p">):</span>
@@ -355,7 +361,7 @@
 <span class="sd">        json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive) to be cleaned.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Reformatted JSON list derived from original JSON object.</span>
+<span class="sd">        Any: Reformatted JSON list derived from original JSON object.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>

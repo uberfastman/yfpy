@@ -4,9 +4,12 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.utils &mdash; YFPY v7.0.0 documentation</title>
+  <title>yfpy.utils &mdash; YFPY v7.0.2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,6 +18,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,8 +32,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> YFPY
+            <a href="../index.html">
+            <img src="../_static/yfpy-logo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                v7.0.2
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -40,11 +49,68 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">YFPY</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.models.html">yfpy.models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.models.html">yfpy.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Division.html">yfpy.models.Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DivisionalOutcomeTotals.html">yfpy.models.DivisionalOutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftAnalysis.html">yfpy.models.DraftAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftResult.html">yfpy.models.DraftResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Game.html">yfpy.models.Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.GameWeek.html">yfpy.models.GameWeek</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Headshot.html">yfpy.models.Headshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.League.html">yfpy.models.League</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Manager.html">yfpy.models.Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Matchup.html">yfpy.models.Matchup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.MatchupGrade.html">yfpy.models.MatchupGrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Name.html">yfpy.models.Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.OutcomeTotals.html">yfpy.models.OutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Ownership.html">yfpy.models.Ownership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PercentOwned.html">yfpy.models.PercentOwned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Player.html">yfpy.models.Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PositionType.html">yfpy.models.PositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Roster.html">yfpy.models.Roster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterAdds.html">yfpy.models.RosterAdds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Scoreboard.html">yfpy.models.Scoreboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Settings.html">yfpy.models.Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Standings.html">yfpy.models.Standings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Stat.html">yfpy.models.Stat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatCategories.html">yfpy.models.StatCategories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatModifiers.html">yfpy.models.StatModifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatPositionType.html">yfpy.models.StatPositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Streak.html">yfpy.models.Streak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Team.html">yfpy.models.Team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamLogo.html">yfpy.models.TeamLogo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamPoints.html">yfpy.models.TeamPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamProjectedPoints.html">yfpy.models.TeamProjectedPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamStandings.html">yfpy.models.TeamStandings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Transaction.html">yfpy.models.Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TransactionData.html">yfpy.models.TransactionData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.User.html">yfpy.models.User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">yfpy.utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
@@ -73,7 +139,7 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
@@ -81,7 +147,10 @@
       <li>yfpy.utils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="yfpy.query.YahooFantasySportsQuery.html" class="btn btn-neutral float-left" title="yfpy.query.YahooFantasySportsQuery" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yfpy.utils.complex_json_handler.html" class="btn btn-neutral float-right" title="yfpy.utils.complex_json_handler" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">

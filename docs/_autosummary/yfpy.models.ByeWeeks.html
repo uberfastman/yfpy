@@ -4,9 +4,12 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.models.ByeWeeks &mdash; YFPY v7.0.0 documentation</title>
+  <title>yfpy.models.ByeWeeks &mdash; YFPY v7.0.2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,6 +18,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,8 +32,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> YFPY
+            <a href="../index.html">
+            <img src="../_static/yfpy-logo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                v7.0.2
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -40,9 +49,19 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">YFPY</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="reference internal" href="yfpy.models.html">yfpy.models</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">yfpy.models.ByeWeeks</a></li>
@@ -88,8 +107,24 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.dict_to_list.html">yfpy.utils.dict_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_json_dict_list.html">yfpy.utils.flatten_json_dict_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.unpack_data.html">yfpy.utils.unpack_data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -104,7 +139,7 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
@@ -113,7 +148,10 @@
       <li>yfpy.models.ByeWeeks</li>
       <li class="wy-breadcrumbs-aside">
       </li>
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="yfpy.models.Bonus.html" class="btn btn-neutral float-left" title="yfpy.models.Bonus" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yfpy.models.Division.html" class="btn btn-neutral float-right" title="yfpy.models.Division" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -135,7 +173,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.ByeWeeks.week">
 <span class="sig-name descname"><span class="pre">week</span></span><a class="headerlink" href="#yfpy.models.ByeWeeks.week" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The week number that the player is on bye.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -152,8 +191,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.ByeWeeks.clean_data_dict" title="yfpy.models.ByeWeeks.clean_data_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean_data_dict</span></code></a></p></td>
 <td><p>Recursive method to un-type custom class type objects for serialization.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#yfpy.models.ByeWeeks.from_json" title="yfpy.models.ByeWeeks.from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></a></p></td>
+<td><p>Deserialize JSON to a class object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.ByeWeeks.serialized" title="yfpy.models.ByeWeeks.serialized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialized</span></code></a></p></td>
 <td><p>Pack up all object content into nested dictionaries for JSON serialization.</p></td>
@@ -176,6 +215,20 @@
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="yfpy.models.ByeWeeks.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#yfpy.models.ByeWeeks.from_json" title="Permalink to this definition"></a></dt>
+<dd><p>Deserialize JSON to a class object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Class object derived from JSON data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)">object</a></p>
 </dd>
 </dl>
 </dd></dl>
