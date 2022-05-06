@@ -63,28 +63,7 @@
      python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
      ```
 
-12. Update the Sphinx documentation:
-
-     ```shell
-     cd docs-sphinx
-     make html    
-     ```
-   
-13. Check Sphinx documentation locally:
-
-     ```shell
-     open build/html/index.html
-     ```
-   
-14. Navigate to root directory:
-
-     ```shell
-     cd ..
-     ```
-
-15. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
-
-16. Update the git tag:
+12. Update the git tag:
 
      `git tag -a [tag_name/version] -m [message]`
 
@@ -93,13 +72,32 @@
      git push origin --tags
      ```
 
-17. Build the package (will also auto-update the version based on teh above git tag):
+13. Build the package (will also auto-update the version based on the above git tag):
 
      ```shell
      python setup.py sdist bdist_wheel
      ```
 
-18. Once more execute `git add .`, `git commit -m 'commit message'`, and `git push`.
+14. Update the Sphinx documentation:
+
+     ```shell
+     cd docs-sphinx
+     make html    
+     ```
+   
+15. Check Sphinx documentation locally:
+
+     ```shell
+     open build/html/index.html
+     ```
+   
+16. Navigate to root directory:
+
+     ```shell
+     cd ..
+     ```
+    
+17. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
 
 19. Install `twine` (if not already installed):
 
