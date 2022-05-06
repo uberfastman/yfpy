@@ -82,6 +82,7 @@
 
      ```shell
      cd docs-sphinx
+     make clean
      make html    
      ```
    
