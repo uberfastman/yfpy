@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.models &mdash; YFPY v6.0.0 documentation</title>
+  <title>yfpy.models &mdash; YFPY v5.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,6 +17,8 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -24,8 +29,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> YFPY
+            <a href="../../index.html">
+            <img src="../../_static/yfpy-logo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                v5.0.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -36,7 +45,85 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">YFPY</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">YFPY</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.models.html">yfpy.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Division.html">yfpy.models.Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.DivisionalOutcomeTotals.html">yfpy.models.DivisionalOutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.DraftAnalysis.html">yfpy.models.DraftAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.DraftResult.html">yfpy.models.DraftResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Game.html">yfpy.models.Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.GameWeek.html">yfpy.models.GameWeek</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Headshot.html">yfpy.models.Headshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.League.html">yfpy.models.League</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Manager.html">yfpy.models.Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Matchup.html">yfpy.models.Matchup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.MatchupGrade.html">yfpy.models.MatchupGrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Name.html">yfpy.models.Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.OutcomeTotals.html">yfpy.models.OutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Ownership.html">yfpy.models.Ownership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.PercentOwned.html">yfpy.models.PercentOwned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Player.html">yfpy.models.Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.PositionType.html">yfpy.models.PositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Roster.html">yfpy.models.Roster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.RosterAdds.html">yfpy.models.RosterAdds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Scoreboard.html">yfpy.models.Scoreboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Settings.html">yfpy.models.Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Standings.html">yfpy.models.Standings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Stat.html">yfpy.models.Stat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.StatCategories.html">yfpy.models.StatCategories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.StatModifiers.html">yfpy.models.StatModifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.StatPositionType.html">yfpy.models.StatPositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Streak.html">yfpy.models.Streak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Team.html">yfpy.models.Team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.TeamLogo.html">yfpy.models.TeamLogo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.TeamPoints.html">yfpy.models.TeamPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.TeamProjectedPoints.html">yfpy.models.TeamProjectedPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.TeamStandings.html">yfpy.models.TeamStandings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.Transaction.html">yfpy.models.Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.TransactionData.html">yfpy.models.TransactionData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.User.html">yfpy.models.User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.utils.html">yfpy.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.dict_to_list.html">yfpy.utils.dict_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_json_dict_list.html">yfpy.utils.flatten_json_dict_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.unpack_data.html">yfpy.utils.unpack_data</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -49,7 +136,7 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
@@ -194,9 +281,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serialized</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="YahooFantasyObject.from_json"><a class="viewcode-back" href="../../_autosummary/yfpy.models.YahooFantasyObject.html#yfpy.models.YahooFantasyObject.from_json">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span></div>
+        <span class="sd">&quot;&quot;&quot;Deserialize JSON to a class object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            object: Class object derived from JSON data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span></div></div>
 
 
 <span class="c1"># noinspection DuplicatedCode, PyUnresolvedReferences</span>
@@ -211,8 +304,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            games (list of Game): List of Yahoo Fantasy games in which the user participates/has participated.</span>
-<span class="sd">            guid (str): Yahoo user ID.</span>
+<span class="sd">            games (list[Game]): The Yahoo Fantasy games in which the user participates/has participated.</span>
+<span class="sd">            guid (str): The Yahoo user ID.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -232,23 +325,23 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            code (str): Yahoo Fantasy game code.</span>
-<span class="sd">            game_id (int): Yahoo Fantasy game ID.</span>
-<span class="sd">            game_key (str): Yahoo Fantasy game key.</span>
-<span class="sd">            game_weeks (list of GameWeek): Yahoo Fantasy GameWeek objects.</span>
-<span class="sd">            is_game_over (int): Numeric boolean (0 or 1) representing if the Yahoo Fantasy Game is complete.</span>
+<span class="sd">            code (str): The Yahoo Fantasy game code.</span>
+<span class="sd">            game_id (int): The Yahoo Fantasy game ID.</span>
+<span class="sd">            game_key (str): The Yahoo Fantasy game key.</span>
+<span class="sd">            game_weeks (list[GameWeek]): A list of YFPY GameWeek instances.</span>
+<span class="sd">            is_game_over (int): Numeric boolean (0 or 1) representing if the Yahoo Fantasy game is complete.</span>
 <span class="sd">            is_live_draft_lobby_active (int): Numeric boolean (0 or 1) representing if the draft lobby is active.</span>
 <span class="sd">            is_offseason (int): Numeric boolean (0 or 1) representing if it is the offseason for the respective sport.</span>
 <span class="sd">            is_registration_over (int): Numeric boolean (0 or 1) representing registration for the fantasy game is over.</span>
-<span class="sd">            leagues (list of League): Yahoo Fantasy League objects.</span>
-<span class="sd">            name (str): Yahoo Fantasy game name.</span>
-<span class="sd">            position_types (list of PositionType): Yahoo Fantasy PositionType objects.</span>
-<span class="sd">            roster_positions (list of RosterPosition): Yahoo Fantasy RosterPosition objects.</span>
-<span class="sd">            season (int): Yahoo Fantasy game year.</span>
-<span class="sd">            stat_categories (StatCategories): Yahoo Fantasy StatCategories object.</span>
-<span class="sd">            teams (list of Team): Yahoo Fantasy Team objects.</span>
-<span class="sd">            type (str): Yahoo Fantasy game type.</span>
-<span class="sd">            url (str): Yahoo Fantasy game URL.</span>
+<span class="sd">            leagues (list[League]): A list of YFPY League instances.</span>
+<span class="sd">            name (str): The name of the Yahoo Fantasy game.</span>
+<span class="sd">            position_types (list[PositionType]): A list of YFPY PositionType instances.</span>
+<span class="sd">            roster_positions (list[RosterPosition]): A list of YFPY RosterPosition instances.</span>
+<span class="sd">            season (int): The Yahoo Fantasy game year.</span>
+<span class="sd">            stat_categories (StatCategories): A YFPY StatCategories instance.</span>
+<span class="sd">            teams (list[Team]): A list of YFPY Team instances.</span>
+<span class="sd">            type (str): The type of the Yahoo Fantasy game.</span>
+<span class="sd">            url (str): The direct URL of the Yahoo Fantasy game.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -283,10 +376,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            display_name (str): Yahoo Fantasy GameWeek display name.</span>
-<span class="sd">            end (str): Yahoo Fantasy GameWeek end date.</span>
-<span class="sd">            start (str): Yahoo Fantasy GameWeek start date.</span>
-<span class="sd">            week (int): Yahoo Fantasy GameWeek week number.</span>
+<span class="sd">            display_name (str): The display name of the Yahoo Fantasy game week.</span>
+<span class="sd">            end (str): The end date of the Yahoo Fantasy game week.</span>
+<span class="sd">            start (str): The start date of the Yahoo Fantasy game week.</span>
+<span class="sd">            week (int): The week number of the Yahoo Fantasy game week.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -308,8 +401,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            type (str):</span>
-<span class="sd">            display_name (str):</span>
+<span class="sd">            type (str): The type of the player position (&quot;offense&quot;, &quot;defense&quot;, etc.).</span>
+<span class="sd">            display_name (str): The full text display of the position type.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -329,45 +422,50 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            allow_add_to_dl_extra_pos (int):</span>
-<span class="sd">            current_week (int):</span>
-<span class="sd">            draft_results (str):</span>
-<span class="sd">            draft_status (str):</span>
-<span class="sd">            display_name (str):</span>
-<span class="sd">            edit_key (int):</span>
-<span class="sd">            end_date (str):</span>
-<span class="sd">            end_week (int):</span>
-<span class="sd">            entry_fee (str):</span>
-<span class="sd">            game_code (str):</span>
-<span class="sd">            iris_group_chat_id (str):</span>
-<span class="sd">            is_cash_league (int):</span>
-<span class="sd">            is_finished (int):</span>
-<span class="sd">            is_pro_league (str):</span>
-<span class="sd">            league_id (str):</span>
-<span class="sd">            league_key (str):</span>
-<span class="sd">            league_type (str):</span>
-<span class="sd">            league_update_timestamp (int):</span>
-<span class="sd">            logo_url (str):</span>
-<span class="sd">            name (str):</span>
-<span class="sd">            num_teams (str):</span>
-<span class="sd">            password (str):</span>
-<span class="sd">            payment_deadline (str):</span>
-<span class="sd">            players (str):</span>
-<span class="sd">            renew (str):</span>
-<span class="sd">            renewed (str):</span>
-<span class="sd">            scoreboard (Scoreboard):</span>
-<span class="sd">            matchups (list of Matchup):</span>
-<span class="sd">            scoring_type (str):</span>
-<span class="sd">            season (int):</span>
-<span class="sd">            settings (Settings):</span>
-<span class="sd">            short_invitation_url (str):</span>
-<span class="sd">            standings (Standings):</span>
-<span class="sd">            teams_ordered_by_standings (list of Team):</span>
-<span class="sd">            start_date (str):</span>
-<span class="sd">            start_week (int):</span>
-<span class="sd">            transactions (list of Transaction):</span>
-<span class="sd">            url (str):</span>
-<span class="sd">            weekly_deadline (str):</span>
+<span class="sd">            allow_add_to_dl_extra_pos (int): Numeric boolean (0 or 1) representing if the leagues allows adding extra</span>
+<span class="sd">                positions to the DL (currently uncertain what this is).</span>
+<span class="sd">            current_week (int): The current week number.</span>
+<span class="sd">            draft_results (list[DraftResult]): A list of YFPY DraftResult instances.</span>
+<span class="sd">            draft_status (str): The status of the draft (&quot;postdraft&quot;, etc.).</span>
+<span class="sd">            display_name (str): The display name of the league.</span>
+<span class="sd">            edit_key (int): The Yahoo edit key for the league.</span>
+<span class="sd">            end_date (str): A date string representing the end date of the league (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            end_week (int): The number of the last week of the league.</span>
+<span class="sd">            entry_fee (str): The entry fee for Yahoo paid leagues (USD).</span>
+<span class="sd">            game_code (str): The Yahoo game code (&quot;nfl&quot;, &quot;nhl&quot;, &quot;nba&quot;, &quot;mlb&quot;).</span>
+<span class="sd">            iris_group_chat_id (str | null): The unique IRIS group chat ID for the league.</span>
+<span class="sd">            is_cash_league (int): Numeric boolean (0 or 1) representing if the league is a Yahoo paid league.</span>
+<span class="sd">            is_finished (int): Numeric boolean (0 or 1) representing if the league season has completed.</span>
+<span class="sd">            is_pro_league (str): Numeric boolean (0 or 1) representing if the league is a Yahoo Pro league.</span>
+<span class="sd">            league_id (str): The unique Yahoo league ID.</span>
+<span class="sd">            league_key (str): The Yahoo league key.</span>
+<span class="sd">            league_type (str): The type of the league (&quot;private&quot;, &quot;public&quot;).</span>
+<span class="sd">            league_update_timestamp (int): A timestamp representing the last time the league was updated.</span>
+<span class="sd">            logo_url (str): The direct URL of the league logo photo.</span>
+<span class="sd">            name (str): The name of the league.</span>
+<span class="sd">            num_teams (str): The number of teams in the league.</span>
+<span class="sd">            password (str | null): The password required to join the league (if applicable).</span>
+<span class="sd">            payment_deadline (str): A date string representing the deadline by which all league dues payments must be</span>
+<span class="sd">                made (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            players (list[Player]): A list of YFPY Player instances.</span>
+<span class="sd">            renew (str | null): A string indicating the previous Yahoo game code and previous Yahoo league ID (Ex.:</span>
+<span class="sd">                &quot;371_811308&quot;) (if applicable).</span>
+<span class="sd">            renewed (str | null): A string indicating the next Yahoo game code and next Yahoo league ID (Ex.:</span>
+<span class="sd">                &quot;390_303233&quot;) (if applicable).</span>
+<span class="sd">            scoreboard (Scoreboard): A YFPY Scoreboard instance.</span>
+<span class="sd">            matchups (list[Matchup]): A list of YFPY Matchup instances.</span>
+<span class="sd">            scoring_type (str): The scoring type of the league (&quot;head&quot; for head-to-head, etc.).</span>
+<span class="sd">            season (int): The season year of the league.</span>
+<span class="sd">            settings (Settings): A YFPY Settings instance.</span>
+<span class="sd">            short_invitation_url (str): The sharable short URL sent by invite allowing players to join the league.</span>
+<span class="sd">            standings (Standings): A YFPY Standings instance.</span>
+<span class="sd">            teams_ordered_by_standings (list[Team]): A list of YFPY Team instances ordered by their ranks in the league</span>
+<span class="sd">                standings.</span>
+<span class="sd">            start_date (str): A date string representing the start date of the league (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            start_week (int): The number of the first week of the league.</span>
+<span class="sd">            transactions (list[Transaction]): A list of YFPY Transaction instances.</span>
+<span class="sd">            url (str): The direct URL of the league.</span>
+<span class="sd">            weekly_deadline (str | null): The weekly deadline of the league (if applicable).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -423,45 +521,48 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            clinched_playoffs (int):</span>
-<span class="sd">            division_id (str):</span>
-<span class="sd">            draft_grade (str):</span>
-<span class="sd">            draft_position (int):</span>
-<span class="sd">            draft_recap_url (str):</span>
-<span class="sd">            draft_results (list of DraftResult):</span>
-<span class="sd">            faab_balance (int):</span>
-<span class="sd">            has_draft_grade (int):</span>
-<span class="sd">            league_scoring_type (str):</span>
-<span class="sd">            managers (list of Manager | dict of str: Manager):</span>
-<span class="sd">            matchups (list of Matchup):</span>
-<span class="sd">            name (str):</span>
-<span class="sd">            number_of_moves (int):</span>
-<span class="sd">            number_of_trades (int):</span>
-<span class="sd">            roster (Roster):</span>
-<span class="sd">            players (list of Player):</span>
-<span class="sd">            roster_adds (RosterAdds):</span>
-<span class="sd">            roster_adds_value (int):</span>
-<span class="sd">            team_id (int):</span>
-<span class="sd">            team_key (str):</span>
-<span class="sd">            team_logos (list of TeamLogo):</span>
-<span class="sd">            team_points (TeamPoints):</span>
-<span class="sd">            points (float):</span>
-<span class="sd">            team_projected_points (TeamProjectedPoints):</span>
-<span class="sd">            projected_points (float):</span>
-<span class="sd">            team_standings (TeamStandings):</span>
-<span class="sd">            wins (int):</span>
-<span class="sd">            losses (int):</span>
-<span class="sd">            ties (int):</span>
-<span class="sd">            percentage (float):</span>
-<span class="sd">            playoff_seed (int):</span>
-<span class="sd">            points_against (float):</span>
-<span class="sd">            points_for (float):</span>
-<span class="sd">            rank (int):</span>
-<span class="sd">            streak_type (str):</span>
-<span class="sd">            streak_length (int):</span>
-<span class="sd">            url (str):</span>
-<span class="sd">            waiver_priority (int):</span>
-<span class="sd">            win_probability (float):</span>
+<span class="sd">            clinched_playoffs (int): Numeric boolean (0 or 1) representing if the team has clinched a playoff berth.</span>
+<span class="sd">            division_id (str): The unique ID number of the division containing the team (if applicable).</span>
+<span class="sd">            draft_grade (str): The letter grade assigned to the draft completed by the team (&quot;A+&quot;, &quot;A&quot;, ..., &quot;F-&quot;).</span>
+<span class="sd">            draft_position (int): The draft order/position of the team.</span>
+<span class="sd">            draft_recap_url (str): The direct URL of the draft recap for the team.</span>
+<span class="sd">            draft_results (list[DraftResult]): A list of YFPY DraftResult instances.</span>
+<span class="sd">            faab_balance (int): The available balance of FAAB (Free Agent Acquisition Budget) (if applicable).</span>
+<span class="sd">            has_draft_grade (int): Numeric boolean (0 or 1) representing if the team has a draft grade available.</span>
+<span class="sd">            league_scoring_type (str): Value designating the type of scoring used by the league (&quot;head&quot; for</span>
+<span class="sd">                head-to-head, etc.).</span>
+<span class="sd">            managers (list[Manager] | dict[str, Manager]): A list or dict (depending on source data) of YFPY Manager</span>
+<span class="sd">                instances.</span>
+<span class="sd">            matchups (list[Matchup]): A list of YFPY Matchup instances.</span>
+<span class="sd">            name (str): The team name.</span>
+<span class="sd">            number_of_moves (int): The number of moves made by the team (adds/drops/trades/etc.).</span>
+<span class="sd">            number_of_trades (int): The number of trades made by the team.</span>
+<span class="sd">            roster (Roster): A YFPY Roster instance.</span>
+<span class="sd">            players (list[Player]): A list of YFPY Player instances.</span>
+<span class="sd">            roster_adds (RosterAdds): A YFPY RosterAdds instance.</span>
+<span class="sd">            roster_adds_value (int): The number of roster adds made by the team.</span>
+<span class="sd">            team_id (int): The unique team ID in the league.</span>
+<span class="sd">            team_key (str): The Yahoo team key.</span>
+<span class="sd">            team_logos (list[TeamLogo]): A list of YFPY TeamLogo instances.</span>
+<span class="sd">            team_points (TeamPoints): A YFPY TeamPoints instance.</span>
+<span class="sd">            points (float): The total points scored by the team.</span>
+<span class="sd">            team_projected_points (TeamProjectedPoints): A YFPY TeamProjectedPoints instance.</span>
+<span class="sd">            projected_points (float): The total projected points for the team.</span>
+<span class="sd">            team_standings (TeamStandings): A YFPY TeamStandings instance.</span>
+<span class="sd">            wins (int): The number of wins by the team.</span>
+<span class="sd">            losses (int): The number of losses by the team.</span>
+<span class="sd">            ties (int): The number of ties by the team.</span>
+<span class="sd">            percentage (float): The win percentage of the team.</span>
+<span class="sd">            playoff_seed (int): The playoff seed of the team.</span>
+<span class="sd">            points_against (float): The total team points against.</span>
+<span class="sd">            points_for (float): The total team points for.</span>
+<span class="sd">            rank (int): The rank of the team in the league standings.</span>
+<span class="sd">            streak_type (str): The active team win/loss/tie streak.</span>
+<span class="sd">            streak_length (int): The length of the streak.</span>
+<span class="sd">            url (str): The direct URL to the team.</span>
+<span class="sd">            waiver_priority (int): The waiver priority of the team.</span>
+<span class="sd">            win_probability (float): The active win probability of the team in its current matchup (ranges from 0.0 to</span>
+<span class="sd">                1.0).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
@@ -519,10 +620,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            pick (int):</span>
-<span class="sd">            round (int):</span>
-<span class="sd">            team_key (str):</span>
-<span class="sd">            player_key (str):</span>
+<span class="sd">            pick (int): The draft pick number.</span>
+<span class="sd">            round (int): The draft round.</span>
+<span class="sd">            team_key (str): The Yahoo team key of the team that made the draft pick.</span>
+<span class="sd">            player_key (str): The Yahoo player key of the player that was drafted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pick</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pick&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -531,7 +632,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">player_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;player_key&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
 
 
-<span class="c1"># noinspection PyUnresolvedReferences</span>
+<span class="c1"># noinspection PyUnresolvedReferences,GrazieInspection</span>
 <div class="viewcode-block" id="Standings"><a class="viewcode-back" href="../../_autosummary/yfpy.models.Standings.html#yfpy.models.Standings">[docs]</a><span class="k">class</span> <span class="nc">Standings</span><span class="p">(</span><span class="n">YahooFantasyObject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Model class for &quot;standings&quot; data key.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -543,7 +644,7 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            teams (list of Team):</span>
+<span class="sd">            teams (list[Team]): A list of YFPY Team instances with standings data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">teams</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teams&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
@@ -561,16 +662,16 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            players (list of Player):</span>
-<span class="sd">            status (str):</span>
-<span class="sd">            timestamp (int):</span>
-<span class="sd">            tradee_team_key (str):</span>
-<span class="sd">            tradee_team_name (str):</span>
-<span class="sd">            trader_team_key (str):</span>
-<span class="sd">            trader_team_name (str):</span>
-<span class="sd">            transaction_id (int):</span>
-<span class="sd">            transaction_key (str):</span>
-<span class="sd">            type (str):</span>
+<span class="sd">            players (list[Player]): A list of YFPY Player instances.</span>
+<span class="sd">            status (str): The transaction status (&quot;successful&quot;, etc.).</span>
+<span class="sd">            timestamp (int): The timestamp of when the transaction occurred.</span>
+<span class="sd">            tradee_team_key (str): The Yahoo team key for the team receiving the player (if applicable).</span>
+<span class="sd">            tradee_team_name (str): The team name of the team receiving the player (if applicable).</span>
+<span class="sd">            trader_team_key (str): The Yahoo team key for the team sending the player (if applicable).</span>
+<span class="sd">            trader_team_name (str): The team name for the team sending the player (if applicable).</span>
+<span class="sd">            transaction_id (int): The unique transaction ID number.</span>
+<span class="sd">            transaction_key (str): The Yahoo transaction key (Ex.: &quot;406.l.413954.tr.555&quot;).</span>
+<span class="sd">            type (str): The type of the transaction (&quot;add&quot;, &quot;drop&quot;, &quot;trade&quot;, etc.).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;players&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -597,12 +698,12 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            email (str):</span>
-<span class="sd">            guid (str):</span>
-<span class="sd">            image_url (str):</span>
-<span class="sd">            is_comanager (int):</span>
-<span class="sd">            manager_id (int):</span>
-<span class="sd">            nickname (str):</span>
+<span class="sd">            email (str): The email address of the manager.</span>
+<span class="sd">            guid (str): The unique Yahoo GUID of the user account associated with manager.</span>
+<span class="sd">            image_url (str): The direct URL of the manager profile image.</span>
+<span class="sd">            is_comanager (int): Numeric boolean (0 or 1) representing if the manager is a co-manager.</span>
+<span class="sd">            manager_id (int): The unique manager ID in the league.</span>
+<span class="sd">            nickname (str): The display nickname of the manager.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -625,10 +726,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            is_editable (int):</span>
-<span class="sd">            players (list of Player):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected roster (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            week (int): The week number.</span>
+<span class="sd">            is_editable (int): Numeric boolean (0 or 1) representing if the roster is editable.</span>
+<span class="sd">            players (list[Player]): A list of YFPY Player instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -649,9 +750,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            coverage_value (int):</span>
-<span class="sd">            value (int):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected roster (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            coverage_value (int): The value of the coverage type (week number, for instance).</span>
+<span class="sd">            value (int): The number of roster adds within the coverage timeframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -671,8 +772,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            size (str):</span>
-<span class="sd">            url (str):</span>
+<span class="sd">            size (str): The size of the team logo photo (&quot;small&quot;, &quot;large&quot;, etc.)</span>
+<span class="sd">            url (str): The direct URL of the team logo photo.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -691,10 +792,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            season (int):</span>
-<span class="sd">            total (float):</span>
-<span class="sd">            week (int):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected team points (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            season (int): The season year.</span>
+<span class="sd">            total (float): The total team points for the coverage timeframe.</span>
+<span class="sd">            week (int): The week number (if applicable).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -715,9 +816,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            total (float):</span>
-<span class="sd">            week (int):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected team projected points (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            total (float): The total team projected points for the coverage timeframe.</span>
+<span class="sd">            week (int): The week number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -737,13 +838,13 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            divisional_outcome_totals (DivisionalOutcomeTotals):</span>
-<span class="sd">            outcome_totals (OutcomeTotals):</span>
-<span class="sd">            playoff_seed (int):</span>
-<span class="sd">            points_against (float):</span>
-<span class="sd">            points_for (float):</span>
-<span class="sd">            rank (int):</span>
-<span class="sd">            streak (Streak):</span>
+<span class="sd">            divisional_outcome_totals (DivisionalOutcomeTotals): A list of YFPY DivisionalOutcomeTotals instances.</span>
+<span class="sd">            outcome_totals (OutcomeTotals): A YFPY OutcomeTotals instance.</span>
+<span class="sd">            playoff_seed (int): The playoff seed position for the team.</span>
+<span class="sd">            points_against (float): The total team points against.</span>
+<span class="sd">            points_for (float): The total team points for.</span>
+<span class="sd">            rank (int): The rank of the team in the league standings.</span>
+<span class="sd">            streak (Streak): A YFPY Streak instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">divisional_outcome_totals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -768,9 +869,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            losses (int):</span>
-<span class="sd">            ties (int):</span>
-<span class="sd">            wins (int):</span>
+<span class="sd">            losses (int): The number of losses by the team within the division.</span>
+<span class="sd">            ties (int): The number of ties by the team within the division.</span>
+<span class="sd">            wins (int): The number of wins by the team within the division.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;losses&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
@@ -790,10 +891,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            losses (int):</span>
-<span class="sd">            percentage (float):</span>
-<span class="sd">            ties (int):</span>
-<span class="sd">            wins (int):</span>
+<span class="sd">            losses (int): The number of losses by the team.</span>
+<span class="sd">            percentage (float): The win percentage of the team.</span>
+<span class="sd">            ties (int): The number of ties by the team.</span>
+<span class="sd">            wins (int): The number of wins by the team.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;losses&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
@@ -814,8 +915,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            type (str):</span>
-<span class="sd">            value (int):</span>
+<span class="sd">            type (str): The streak type (&quot;W&quot; for win, &quot;L&quot; for loss, &quot;T&quot; for tie).</span>
+<span class="sd">            value (int): The length of the streak.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -834,8 +935,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            matchups (list of Matchup):</span>
+<span class="sd">            week (int): The week for which the scoreboard applies.</span>
+<span class="sd">            matchups (list[Matchup]): A list of YFPY Matchup instances representing the matchups for the week.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">week</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;week&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -854,37 +955,43 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            cant_cut_list (str):</span>
-<span class="sd">            divisions (int):</span>
-<span class="sd">            draft_pick_time (int):</span>
-<span class="sd">            draft_time (int):</span>
-<span class="sd">            draft_type (str):</span>
-<span class="sd">            has_multiweek_championship (int):</span>
-<span class="sd">            has_playoff_consolation_games (bool):</span>
-<span class="sd">            is_auction_draft (int):</span>
-<span class="sd">            max_teams (int):</span>
-<span class="sd">            num_playoff_consolation_games (int):</span>
-<span class="sd">            num_playoff_teams (int):</span>
-<span class="sd">            pickem_enabled (int):</span>
-<span class="sd">            player_pool (str):</span>
-<span class="sd">            playoff_start_week (int):</span>
-<span class="sd">            post_draft_players (str):</span>
-<span class="sd">            roster_positions (list of RosterPosition):</span>
-<span class="sd">            scoring_type (str):</span>
-<span class="sd">            stat_categories (StatCategories):</span>
-<span class="sd">            stat_modifiers (StatModifiers):</span>
-<span class="sd">            trade_end_date (str):</span>
-<span class="sd">            trade_ratify_type (str):</span>
-<span class="sd">            trade_reject_time (int):</span>
-<span class="sd">            uses_faab (int):</span>
-<span class="sd">            uses_fractional_points (int):</span>
-<span class="sd">            uses_lock_eliminated_teams (int):</span>
-<span class="sd">            uses_negative_points (int):</span>
-<span class="sd">            uses_playoffs (int):</span>
-<span class="sd">            uses_playoff_reseeding (int):</span>
-<span class="sd">            waiver_rule (str):</span>
-<span class="sd">            waiver_time (int):</span>
-<span class="sd">            waiver_type (str):</span>
+<span class="sd">            cant_cut_list (str): Numeric boolean (0 or 1) representing if the league uses the Yahoo &quot;can&#39;t cut list&quot;.</span>
+<span class="sd">            divisions (int): Numeric boolean (0 or 1) representing if the league has divisions.</span>
+<span class="sd">            draft_pick_time (int): The number of seconds allowed to make each draft pick.</span>
+<span class="sd">            draft_time (int): A timestamp representing when the draft will start.</span>
+<span class="sd">            draft_type (str): The type of draft (&quot;live&quot;, &quot;offline&quot;, etc.)</span>
+<span class="sd">            has_multiweek_championship (int): Numeric boolean (0 or 1) representing if the league has a multi-week</span>
+<span class="sd">                championship matchup.</span>
+<span class="sd">            has_playoff_consolation_games (bool): Numeric boolean (0 or 1) representing if the league has a consolation</span>
+<span class="sd">                playoff bracket.</span>
+<span class="sd">            is_auction_draft (int): Numeric boolean (0 or 1) representing if the league uses an auction draft.</span>
+<span class="sd">            max_teams (int): The maximum number of teams allowed in the league.</span>
+<span class="sd">            num_playoff_consolation_teams (int): The number of teams that make the consolation playoff bracket.</span>
+<span class="sd">            num_playoff_teams (int): The number of teams that make the playoffs.</span>
+<span class="sd">            pickem_enabled (int): Numeric boolean (0 or 1) representing if the league has enabled the built-in Yahoo</span>
+<span class="sd">                &quot;pick &#39;em&quot; game that allows managers to pick winners of each fantasy matchup each week in the league.</span>
+<span class="sd">            player_pool (str): Value designating what player pool is allowed for the league (&quot;ALL&quot;, etc.).</span>
+<span class="sd">            playoff_start_week (int): The week number on which the playoffs start.</span>
+<span class="sd">            post_draft_players (str): Value designating what happens to players after the draft (&quot;W&quot; for waivers, etc.).</span>
+<span class="sd">            roster_positions (list[RosterPosition]): A list of YFPY RosterPosition instances.</span>
+<span class="sd">            scoring_type (str): Value designating what type of scoring the league uses (&quot;head&quot; for head-to-head, etc.).</span>
+<span class="sd">            stat_categories (StatCategories): A YFPY StatCategories instance.</span>
+<span class="sd">            stat_modifiers (StatModifiers): A YFPY StatModifiers instance.</span>
+<span class="sd">            trade_end_date (str): A date string representing when trading is no longer allowed (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            trade_ratify_type (str): Value designating how trades are ratified (&quot;commish&quot; for commissioner, etc.).</span>
+<span class="sd">            trade_reject_time (int): The number of days during which a trade can be rejected.</span>
+<span class="sd">            uses_faab (int): Numeric boolean (0 or 1) representing if the league uses FAAB (Free Agent Acquisition</span>
+<span class="sd">                Budget).</span>
+<span class="sd">            uses_fractional_points (int): Numeric boolean (0 or 1) representing if the league allows fractional scoring.</span>
+<span class="sd">            uses_lock_eliminated_teams (int): Numeric boolean (0 or 1) representing if the league locks teams</span>
+<span class="sd">                eliminated from the playoffs.</span>
+<span class="sd">            uses_negative_points (int): Numeric boolean (0 or 1) representing if the league allows negative scoring.</span>
+<span class="sd">            uses_playoffs (int): Numeric boolean (0 or 1) representing if the league has playoffs.</span>
+<span class="sd">            uses_playoff_reseeding (int): Numeric boolean (0 or 1) representing if the league reseeds the playoffs once</span>
+<span class="sd">                the fantasy regular season is complete.</span>
+<span class="sd">            waiver_rule (str): Value designating when players go to waivers (&quot;gametime&quot;, etc.).</span>
+<span class="sd">            waiver_time (int): The number of days that players remain on waivers.</span>
+<span class="sd">            waiver_type (str): Value designating what type of waivers are used by the league (&quot;R&quot; for rolling, etc.).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cant_cut_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cant_cut_list&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -932,8 +1039,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            division_id (int):</span>
-<span class="sd">            name (str):</span>
+<span class="sd">            division_id (int): The unique division ID number in the league.</span>
+<span class="sd">            name (str): The division name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">division_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;division_id&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -952,9 +1059,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            count (int):</span>
-<span class="sd">            position (str):</span>
-<span class="sd">            position_type (str):</span>
+<span class="sd">            count (int): The number of roster slots available for this position.</span>
+<span class="sd">            position (str): The position string.</span>
+<span class="sd">            position_type (str): The position type (&quot;O&quot; for offense, etc.)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -974,7 +1081,7 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            stats (list of Stat):</span>
+<span class="sd">            stats (list[Stat]): A list of YFPY Stat instances representing the league stat categories.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
@@ -992,7 +1099,7 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            stats (list of Stat):</span>
+<span class="sd">            stats (list[Stat]): A list of YFPY Stat instances containing modifiers for each stat category.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
@@ -1010,15 +1117,16 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            bonuses (list of Bonus):</span>
-<span class="sd">            display_name (str):</span>
-<span class="sd">            enabled (int):</span>
-<span class="sd">            name (str):</span>
-<span class="sd">            position_type (str):</span>
-<span class="sd">            sort_order (int):</span>
-<span class="sd">            stat_id (int):</span>
-<span class="sd">            stat_position_types (list of PositionType):</span>
-<span class="sd">            value (float):</span>
+<span class="sd">            bonuses (list[Bonus]): A list of YFPY Bonus instances available for this stat category.</span>
+<span class="sd">            display_name (str): The abbreviated display name of the stat.</span>
+<span class="sd">            enabled (int): Numeric boolean (0 or 1) representing if this stat is enabled for league scoring.</span>
+<span class="sd">            name (str): The full name of the stat.</span>
+<span class="sd">            position_type (str): The player position type eligible for the stat.</span>
+<span class="sd">            sort_order (int): Numeric boolean (0 or 1) representing if the stat is sorted highest to lowest (1) or</span>
+<span class="sd">                lowest to highest (0).</span>
+<span class="sd">            stat_id (int): The unique stat ID number in the league.</span>
+<span class="sd">            stat_position_types (list[PositionType]): A list of YFPY PositionType instances.</span>
+<span class="sd">            value (float): The value of the stat (if applicable).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bonuses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bonuses&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -1029,7 +1137,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sort_order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sort_order&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stat_id&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stat_position_types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stat_position_types&quot;</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span></div>
 
 
 <span class="c1"># noinspection PyUnresolvedReferences</span>
@@ -1044,8 +1155,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            is_only_display_stat (int):</span>
-<span class="sd">            position_type (str):</span>
+<span class="sd">            is_only_display_stat (int): Numeric boolean (0 or 1) representing if the stat is only for display (such as</span>
+<span class="sd">                if it is just the player position string).</span>
+<span class="sd">            position_type (str): The type of the position (&quot;O&quot; for offense, etc.)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_only_display_stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_only_display_stat&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1064,8 +1176,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            points (int):</span>
-<span class="sd">            target (int):</span>
+<span class="sd">            points (int): The points awarded when the bonus is won.</span>
+<span class="sd">            target (int): The stat value target required to be awarded the bonus.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;points&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1084,19 +1196,19 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            is_consolation (int):</span>
-<span class="sd">            is_matchup_recap_available (int):</span>
-<span class="sd">            is_playoffs (int):</span>
-<span class="sd">            is_tied (int):</span>
-<span class="sd">            matchup_grades (list of MatchupGrade):</span>
-<span class="sd">            matchup_recap_title (str):</span>
-<span class="sd">            matchup_recap_url (str):</span>
-<span class="sd">            status (str):</span>
-<span class="sd">            teams (list of Team):</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            week_end (str):</span>
-<span class="sd">            week_start (str):</span>
-<span class="sd">            winner_team_key (str):</span>
+<span class="sd">            is_consolation (int): Numeric boolean (0 or 1) representing if the matchup is in a consolation bracket.</span>
+<span class="sd">            is_matchup_recap_available (int): Numeric boolean (0 or 1) representing if the matchup recap is available.</span>
+<span class="sd">            is_playoffs (int): Numeric boolean (0 or 1) representing if the matchup is in the playoffs bracket.</span>
+<span class="sd">            is_tied (int): Numeric boolean (0 or 1) representing if the matchup result is tied.</span>
+<span class="sd">            matchup_grades (list[MatchupGrade]): A list of YFPY MatchupGrade instances.</span>
+<span class="sd">            matchup_recap_title (str): The title of the matchup recap.</span>
+<span class="sd">            matchup_recap_url (str): The direct URL of the matchup recap.</span>
+<span class="sd">            status (str): The status of the matchup (&quot;postevent&quot;, etc.).</span>
+<span class="sd">            teams (list[Team]): A list of YFPY Team instances for teams in the matchup.</span>
+<span class="sd">            week (int): The week number of the matchup.</span>
+<span class="sd">            week_end (str): A date string representing the end of the matchup week (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            week_start (str): A date string representing the start of the matchup week (format: &quot;YYYY-MM-DD&quot;).</span>
+<span class="sd">            winner_team_key (str): The Yahoo team key of the team that won the matchup.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_consolation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_consolation&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1126,8 +1238,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            grade (str):</span>
-<span class="sd">            team_key (str):</span>
+<span class="sd">            grade (str): The letter grade assigned to the matchup performance (&quot;A+&quot;, &quot;A&quot;, ..., &quot;F-&quot;).</span>
+<span class="sd">            team_key (str): The Yahoo team key for the team receiving the matchup grade.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;grade&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1146,46 +1258,46 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            bye_weeks (ByeWeeks):</span>
-<span class="sd">            bye (int):</span>
-<span class="sd">            display_position (str):</span>
-<span class="sd">            draft_analysis (DraftAnalysis):</span>
-<span class="sd">            average_draft_pick (float):</span>
-<span class="sd">            average_draft_round (float):</span>
-<span class="sd">            average_draft_cost (float):</span>
-<span class="sd">            percent_drafted (float):</span>
-<span class="sd">            editorial_player_key (str):</span>
-<span class="sd">            editorial_team_abbr (str):</span>
-<span class="sd">            editorial_team_full_name (str):</span>
-<span class="sd">            editorial_team_key (str):</span>
-<span class="sd">            eligible_positions (list of str):</span>
-<span class="sd">            has_player_notes (int):</span>
-<span class="sd">            headshot (Headshot):</span>
-<span class="sd">            headshot_size (str):</span>
-<span class="sd">            headshot_url (str):</span>
-<span class="sd">            is_editable (int):</span>
-<span class="sd">            is_undroppable (int):</span>
-<span class="sd">            name (Name):</span>
-<span class="sd">            first_name (str):</span>
-<span class="sd">            last_name (str):</span>
-<span class="sd">            full_name (str):</span>
-<span class="sd">            ownership (Ownership):</span>
-<span class="sd">            percent_owned (PercentOwned):</span>
-<span class="sd">            percent_owned_value (float):</span>
-<span class="sd">            player_id (int):</span>
-<span class="sd">            player_key (str):</span>
-<span class="sd">            player_notes_last_timestamp (int):</span>
-<span class="sd">            player_points (PlayerPoints):</span>
-<span class="sd">            player_points_value (float):</span>
-<span class="sd">            player_stats (PlayerStats):</span>
-<span class="sd">            stats (list of Stat):</span>
-<span class="sd">            position_type (str):</span>
-<span class="sd">            primary_position (str):</span>
-<span class="sd">            selected_position (SelectedPosition):</span>
-<span class="sd">            selected_position_value (str):</span>
-<span class="sd">            status (str):</span>
-<span class="sd">            transaction_data (TransactionData):</span>
-<span class="sd">            uniform_number (int):</span>
+<span class="sd">            bye_weeks (ByeWeeks): A YFPY ByeWeeks instance.</span>
+<span class="sd">            bye (int): The week number that the player is on bye.</span>
+<span class="sd">            display_position (str): The display string for the player position.</span>
+<span class="sd">            draft_analysis (DraftAnalysis): A YFPY DraftAnalysis instance.</span>
+<span class="sd">            average_draft_pick (float): The average pick at which the player was drafted.</span>
+<span class="sd">            average_draft_round (float): The average round in which the player was drafted.</span>
+<span class="sd">            average_draft_cost (float): The average price paid for the player to be drafted.</span>
+<span class="sd">            percent_drafted (float): The overall percentage the player was drafted.</span>
+<span class="sd">            editorial_player_key (str): The Yahoo player key using the game key.</span>
+<span class="sd">            editorial_team_abbr (str): The abbreviation of the professional team name for which the player plays.</span>
+<span class="sd">            editorial_team_full_name (str): The name of the professional team for which the player plays.</span>
+<span class="sd">            editorial_team_key (str): The Yahoo team key using the game key.</span>
+<span class="sd">            eligible_positions (list[str]): A list of positions for which the player is eligible.</span>
+<span class="sd">            has_player_notes (int): Numeric boolean (0 or 1) representing if the player has any notes.</span>
+<span class="sd">            headshot (Headshot): A YFPY Headshot instance.</span>
+<span class="sd">            headshot_size (str): The headshot photo size (&quot;small&quot;, &quot;large&quot;, etc.)</span>
+<span class="sd">            headshot_url (str): The direct URL of the headshot photo.</span>
+<span class="sd">            is_editable (int): Numeric boolean (0 or 1) representing if the player is editable.</span>
+<span class="sd">            is_undroppable (int): Numeric boolean (0 or 1) representing if the player is undroppable.</span>
+<span class="sd">            name (Name): A YFPY Name instance.</span>
+<span class="sd">            first_name (str): The first name of the player.</span>
+<span class="sd">            last_name (str): The last name of the player.</span>
+<span class="sd">            full_name (str): The full name of the player.</span>
+<span class="sd">            ownership (Ownership): A YFPY Ownership instance.</span>
+<span class="sd">            percent_owned (PercentOwned): A YFPY PercentOwned instanced.</span>
+<span class="sd">            percent_owned_value (float): The percentage value the player is/was owned in the coverage timeframe.</span>
+<span class="sd">            player_id (int): The unique player ID.</span>
+<span class="sd">            player_key (str): The Yahoo player key.</span>
+<span class="sd">            player_notes_last_timestamp (int): A timestamp of the most recent players notes.</span>
+<span class="sd">            player_points (PlayerPoints): A YFPY PlayerPoints instance.</span>
+<span class="sd">            player_points_value (float): The total points for the player within the coverage timeframe.</span>
+<span class="sd">            player_stats (PlayerStats): A YFPY PlayerStats instance.</span>
+<span class="sd">            stats (list[Stat]): A list of YFPY Stat instances.</span>
+<span class="sd">            position_type (str): The position type of the player (&quot;offense&quot;, &quot;defense&quot;, etc.).</span>
+<span class="sd">            primary_position (str): The primary position of the player.</span>
+<span class="sd">            selected_position (SelectedPosition): A YFPY SelectedPosition instance.</span>
+<span class="sd">            selected_position_value (str): The selected position of the player.</span>
+<span class="sd">            status (str): The status of the player (&quot;IR&quot;, &quot;PUP&quot;, &quot;O&quot;, &quot;Q&quot;, etc.).</span>
+<span class="sd">            transaction_data (TransactionData): A YFPY TransactionData instance.</span>
+<span class="sd">            uniform_number (int): The uniform number of the player.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bye_weeks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bye_weeks&quot;</span><span class="p">,</span> <span class="n">ByeWeeks</span><span class="p">({}))</span>  <span class="c1"># type: ByeWeeks</span>
@@ -1255,7 +1367,7 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            week (int):</span>
+<span class="sd">            week (int): The week number that the player is on bye.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">week</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;week&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
@@ -1273,10 +1385,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            average_pick (float):</span>
-<span class="sd">            average_round (float):</span>
-<span class="sd">            average_cost (float):</span>
-<span class="sd">            percent_drafted (float):</span>
+<span class="sd">            average_pick (float): The average pick at which the player was drafted.</span>
+<span class="sd">            average_round (float): The average round in which the player was drafted.</span>
+<span class="sd">            average_cost (float): The average price paid for the player to be drafted.</span>
+<span class="sd">            percent_drafted (float): The overall percentage the player was drafted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1309,8 +1421,8 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            size (str):</span>
-<span class="sd">            url (str):</span>
+<span class="sd">            size (str): The size of the headshot photo (&quot;small&quot;, &quot;large&quot;, etc.)</span>
+<span class="sd">            url (str): The direct URL of the headshot photo.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1329,11 +1441,11 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            ascii_first (str):</span>
-<span class="sd">            ascii_last (str):</span>
-<span class="sd">            first (str):</span>
-<span class="sd">            full (str):</span>
-<span class="sd">            last (str):</span>
+<span class="sd">            ascii_first (str): The ASCII encoded string of the first name of the player.</span>
+<span class="sd">            ascii_last (str): The ASCII encoded string of the last name of the player.</span>
+<span class="sd">            first (str): The first name of the player.</span>
+<span class="sd">            full (str): The full name of the player.</span>
+<span class="sd">            last (str): The last name of teh player.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ascii_first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ascii_first&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1355,10 +1467,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            ownership_type (str):</span>
-<span class="sd">            owner_team_key (str):</span>
-<span class="sd">            owner_team_name (str):</span>
-<span class="sd">            teams (list of Team):</span>
+<span class="sd">            ownership_type (str): The current location of the player in the league (&quot;team&quot;, &quot;waivers&quot;, etc.).</span>
+<span class="sd">            owner_team_key (str): The Yahoo team key for the team that owns the player.</span>
+<span class="sd">            owner_team_name (str): The team name for the team that owns the player.</span>
+<span class="sd">            teams (list[Team]): A list of YFPY Team instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ownership_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ownership_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1379,10 +1491,11 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            value (int):</span>
-<span class="sd">            delta (float):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected player ownership (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            week (int): The week number (when applicable).</span>
+<span class="sd">            value (int): The percentage value the player is/was owned in the coverage timeframe.</span>
+<span class="sd">            delta (float): The change in the percentage value from the previous coverage timeframe to the current</span>
+<span class="sd">                coverage timeframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1403,9 +1516,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            total (float):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected player points (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            week (int): The week number (when applicable).</span>
+<span class="sd">            total (float): The total points for the player within the coverage timeframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1425,9 +1538,9 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            week (int):</span>
-<span class="sd">            stats (list of Stat):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected player stats (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            week (int): The week number (when applicable).</span>
+<span class="sd">            stats (list[Stat]): A list of YFPY Stat instances for the player.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1447,10 +1560,10 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            coverage_type (str):</span>
-<span class="sd">            is_flex (int):</span>
-<span class="sd">            position (str):</span>
-<span class="sd">            week (int):</span>
+<span class="sd">            coverage_type (str): The timeframe for the selected position (&quot;week&quot;, &quot;date&quot;, &quot;season&quot;, etc.).</span>
+<span class="sd">            is_flex (int): Numeric boolean (0 or 1) representing if the selected player is in a flex roster slot.</span>
+<span class="sd">            position (str): The selected position of the player.</span>
+<span class="sd">            week (int): The week number (when applicable).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coverage_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coverage_type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -1471,13 +1584,13 @@
 <span class="sd">            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.</span>
 
 <span class="sd">        Attributes:</span>
-<span class="sd">            destination_team_key (str):</span>
-<span class="sd">            destination_team_name (str):</span>
-<span class="sd">            destination_type (str):</span>
-<span class="sd">            source_team_key (str):</span>
-<span class="sd">            source_team_name (str):</span>
-<span class="sd">            source_type (str):</span>
-<span class="sd">            type (str):</span>
+<span class="sd">            destination_team_key (str): The Yahoo team key for the receiving team.</span>
+<span class="sd">            destination_team_name (str): The name of the receiving team.</span>
+<span class="sd">            destination_type (str): The destination of the player (waivers, free agency, another team, etc.).</span>
+<span class="sd">            source_team_key (str): The Yahoo team key of the sending team.</span>
+<span class="sd">            source_team_name (str): The name of the sending team.</span>
+<span class="sd">            source_type (str): The origin of the player (waivers, free agency, another team, etc.).</span>
+<span class="sd">            type (str): The type of the transaction (&quot;add&quot;, &quot;drop&quot;, &quot;trade&quot;, etc.).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">YahooFantasyObject</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">destination_team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extracted_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;destination_team_key&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>

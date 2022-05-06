@@ -1,0 +1,8 @@
+
+span.sig-name.descname {
+    color: mediumblue !important;
+}
+
+html[data-theme='dark'] .theme-switcher {
+    box-shadow: 0 3px 14px 4px rgba(255, 255, 255, 0.62) !important;
+}
