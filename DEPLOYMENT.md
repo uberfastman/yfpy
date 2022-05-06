@@ -3,16 +3,16 @@
 1. (Optional) Clear virtual machine of old requirements:
 
     ```shell
-    pip uninstall -y -r <(pip freeze)    
+    pip uninstall -y -r <(pip freeze)
     ```
 
 2. (Optional) Check `requirements.txt` and `requirement-dev.txt` for latest dependency versions.
 
-3. Update virtual machine with the latest dependencies:
+3. (Optional) Update virtual machine with the latest dependencies:
 
     ```shell
-    pip install -r requirements.txt    
-    pip install -r requirements-dev.txt    
+    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
     ```
    
 4. Lint code with `flake8`:
@@ -42,13 +42,13 @@
 8. Run `pytest` unit tests:
 
     ```shell
-    python -m pytest -v -s -m unit 
+    python -m pytest -v -s -m unit
     ```
 
 9. Run `pytest` integration tests:
 
     ```shell
-    python -m pytest -v -s -m integration 
+    python -m pytest -v -s -m integration
     ```
 
 10. (Optional) Run all tests from `pytest` file:
@@ -63,43 +63,41 @@
      python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
      ```
 
-12. Update the Sphinx documentation:
+12. Update the git tag:
+
+     `git tag -a [tag_name/version] -m [message]`
+
+     ```shell
+     git tag -a v1.0.0 -m 'first release'
+     git push origin --tags
+     ```
+
+13. Build the package (will also auto-update the version based on the above git tag):
+
+     ```shell
+     python setup.py sdist bdist_wheel
+     ```
+
+14. Update the Sphinx documentation:
 
      ```shell
      cd docs-sphinx
      make html    
      ```
    
-13. Check Sphinx documentation locally:
+15. Check Sphinx documentation locally:
 
      ```shell
-     open build/html/index.html    
+     open build/html/index.html
      ```
    
-14. Navigate to root directory:
+16. Navigate to root directory:
 
      ```shell
-     cd ..    
+     cd ..
      ```
-
-15. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
-
-16. Update the git tag:
-
-     `git tag -a [tag_name/version] -m [message]`
-
-     ```shell
-     git tag -a v1.0.0 -m 'first release'    
-     git push origin --tags    
-     ```
-
-17. Build the package (will also auto-update the version based on teh above git tag):
-
-     ```shell
-     python setup.py sdist bdist_wheel
-     ```
-
-18. Once more execute `git add .`, `git commit -m 'commit message'`, and `git push`.
+    
+17. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
 
 19. Install `twine` (if not already installed):
 

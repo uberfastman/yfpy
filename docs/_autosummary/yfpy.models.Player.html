@@ -4,9 +4,12 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.models.Player &mdash; YFPY v7.0.0 documentation</title>
+  <title>yfpy.models.Player &mdash; YFPY v5.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/dark_mode_css/dark.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,6 +18,8 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/dark_mode_js/default_dark.js"></script>
+        <script src="../_static/dark_mode_js/theme_switcher.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,8 +32,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> YFPY
+            <a href="../index.html">
+            <img src="../_static/yfpy-logo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                v5.0.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -40,9 +49,19 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">YFPY</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="reference internal" href="yfpy.models.html">yfpy.models</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
@@ -88,8 +107,24 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.dict_to_list.html">yfpy.utils.dict_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_json_dict_list.html">yfpy.utils.flatten_json_dict_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.unpack_data.html">yfpy.utils.unpack_data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -104,7 +139,7 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
@@ -113,7 +148,10 @@
       <li>yfpy.models.Player</li>
       <li class="wy-breadcrumbs-aside">
       </li>
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="yfpy.models.PercentOwned.html" class="btn btn-neutral float-left" title="yfpy.models.PercentOwned" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yfpy.models.PlayerPoints.html" class="btn btn-neutral float-right" title="yfpy.models.PlayerPoints" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -135,7 +173,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.bye_weeks">
 <span class="sig-name descname"><span class="pre">bye_weeks</span></span><a class="headerlink" href="#yfpy.models.Player.bye_weeks" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY ByeWeeks instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.ByeWeeks.html#yfpy.models.ByeWeeks" title="yfpy.models.ByeWeeks">ByeWeeks</a></p>
 </dd>
@@ -145,7 +184,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.bye">
 <span class="sig-name descname"><span class="pre">bye</span></span><a class="headerlink" href="#yfpy.models.Player.bye" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The week number that the player is on bye.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -155,7 +195,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.display_position">
 <span class="sig-name descname"><span class="pre">display_position</span></span><a class="headerlink" href="#yfpy.models.Player.display_position" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The display string for the player position.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -165,7 +206,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.draft_analysis">
 <span class="sig-name descname"><span class="pre">draft_analysis</span></span><a class="headerlink" href="#yfpy.models.Player.draft_analysis" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY DraftAnalysis instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis" title="yfpy.models.DraftAnalysis">DraftAnalysis</a></p>
 </dd>
@@ -175,7 +217,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.average_draft_pick">
 <span class="sig-name descname"><span class="pre">average_draft_pick</span></span><a class="headerlink" href="#yfpy.models.Player.average_draft_pick" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The average pick at which the player was drafted.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -185,7 +228,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.average_draft_round">
 <span class="sig-name descname"><span class="pre">average_draft_round</span></span><a class="headerlink" href="#yfpy.models.Player.average_draft_round" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The average round in which the player was drafted.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -195,7 +239,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.average_draft_cost">
 <span class="sig-name descname"><span class="pre">average_draft_cost</span></span><a class="headerlink" href="#yfpy.models.Player.average_draft_cost" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The average price paid for the player to be drafted.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -205,7 +250,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.percent_drafted">
 <span class="sig-name descname"><span class="pre">percent_drafted</span></span><a class="headerlink" href="#yfpy.models.Player.percent_drafted" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The overall percentage the player was drafted.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -215,7 +261,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.editorial_player_key">
 <span class="sig-name descname"><span class="pre">editorial_player_key</span></span><a class="headerlink" href="#yfpy.models.Player.editorial_player_key" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The Yahoo player key using the game key.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -225,7 +272,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.editorial_team_abbr">
 <span class="sig-name descname"><span class="pre">editorial_team_abbr</span></span><a class="headerlink" href="#yfpy.models.Player.editorial_team_abbr" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The abbreviation of the professional team name for which the player plays.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -235,7 +283,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.editorial_team_full_name">
 <span class="sig-name descname"><span class="pre">editorial_team_full_name</span></span><a class="headerlink" href="#yfpy.models.Player.editorial_team_full_name" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The name of the professional team for which the player plays.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -245,7 +294,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.editorial_team_key">
 <span class="sig-name descname"><span class="pre">editorial_team_key</span></span><a class="headerlink" href="#yfpy.models.Player.editorial_team_key" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The Yahoo team key using the game key.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -255,9 +305,10 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.eligible_positions">
 <span class="sig-name descname"><span class="pre">eligible_positions</span></span><a class="headerlink" href="#yfpy.models.Player.eligible_positions" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A list of positions for which the player is eligible.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -265,7 +316,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.has_player_notes">
 <span class="sig-name descname"><span class="pre">has_player_notes</span></span><a class="headerlink" href="#yfpy.models.Player.has_player_notes" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the player has any notes.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -275,7 +327,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.headshot">
 <span class="sig-name descname"><span class="pre">headshot</span></span><a class="headerlink" href="#yfpy.models.Player.headshot" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY Headshot instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot" title="yfpy.models.Headshot">Headshot</a></p>
 </dd>
@@ -285,7 +338,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.headshot_size">
 <span class="sig-name descname"><span class="pre">headshot_size</span></span><a class="headerlink" href="#yfpy.models.Player.headshot_size" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The headshot photo size (“small”, “large”, etc.)</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -295,7 +349,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.headshot_url">
 <span class="sig-name descname"><span class="pre">headshot_url</span></span><a class="headerlink" href="#yfpy.models.Player.headshot_url" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The direct URL of the headshot photo.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -305,7 +360,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.is_editable">
 <span class="sig-name descname"><span class="pre">is_editable</span></span><a class="headerlink" href="#yfpy.models.Player.is_editable" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the player is editable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -315,7 +371,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.is_undroppable">
 <span class="sig-name descname"><span class="pre">is_undroppable</span></span><a class="headerlink" href="#yfpy.models.Player.is_undroppable" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Numeric boolean (0 or 1) representing if the player is undroppable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -325,7 +382,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.name">
 <span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#yfpy.models.Player.name" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY Name instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.Name.html#yfpy.models.Name" title="yfpy.models.Name">Name</a></p>
 </dd>
@@ -335,7 +393,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.first_name">
 <span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#yfpy.models.Player.first_name" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The first name of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -345,7 +404,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.last_name">
 <span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#yfpy.models.Player.last_name" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The last name of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -355,7 +415,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.full_name">
 <span class="sig-name descname"><span class="pre">full_name</span></span><a class="headerlink" href="#yfpy.models.Player.full_name" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The full name of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -365,7 +426,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.ownership">
 <span class="sig-name descname"><span class="pre">ownership</span></span><a class="headerlink" href="#yfpy.models.Player.ownership" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY Ownership instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership" title="yfpy.models.Ownership">Ownership</a></p>
 </dd>
@@ -375,7 +437,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.percent_owned">
 <span class="sig-name descname"><span class="pre">percent_owned</span></span><a class="headerlink" href="#yfpy.models.Player.percent_owned" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY PercentOwned instanced.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned" title="yfpy.models.PercentOwned">PercentOwned</a></p>
 </dd>
@@ -385,7 +448,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.percent_owned_value">
 <span class="sig-name descname"><span class="pre">percent_owned_value</span></span><a class="headerlink" href="#yfpy.models.Player.percent_owned_value" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The percentage value the player is/was owned in the coverage timeframe.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -395,7 +459,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_id">
 <span class="sig-name descname"><span class="pre">player_id</span></span><a class="headerlink" href="#yfpy.models.Player.player_id" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The unique player ID.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -405,7 +470,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_key">
 <span class="sig-name descname"><span class="pre">player_key</span></span><a class="headerlink" href="#yfpy.models.Player.player_key" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The Yahoo player key.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -415,7 +481,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_notes_last_timestamp">
 <span class="sig-name descname"><span class="pre">player_notes_last_timestamp</span></span><a class="headerlink" href="#yfpy.models.Player.player_notes_last_timestamp" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A timestamp of the most recent players notes.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -425,7 +492,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_points">
 <span class="sig-name descname"><span class="pre">player_points</span></span><a class="headerlink" href="#yfpy.models.Player.player_points" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY PlayerPoints instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints" title="yfpy.models.PlayerPoints">PlayerPoints</a></p>
 </dd>
@@ -435,7 +503,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_points_value">
 <span class="sig-name descname"><span class="pre">player_points_value</span></span><a class="headerlink" href="#yfpy.models.Player.player_points_value" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The total points for the player within the coverage timeframe.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
@@ -445,7 +514,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.player_stats">
 <span class="sig-name descname"><span class="pre">player_stats</span></span><a class="headerlink" href="#yfpy.models.Player.player_stats" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY PlayerStats instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats" title="yfpy.models.PlayerStats">PlayerStats</a></p>
 </dd>
@@ -455,9 +525,10 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.stats">
 <span class="sig-name descname"><span class="pre">stats</span></span><a class="headerlink" href="#yfpy.models.Player.stats" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A list of YFPY Stat instances.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of Stat</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat" title="yfpy.models.Stat">Stat</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -465,7 +536,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.position_type">
 <span class="sig-name descname"><span class="pre">position_type</span></span><a class="headerlink" href="#yfpy.models.Player.position_type" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The position type of the player (“offense”, “defense”, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -475,7 +547,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.primary_position">
 <span class="sig-name descname"><span class="pre">primary_position</span></span><a class="headerlink" href="#yfpy.models.Player.primary_position" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The primary position of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -485,7 +558,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.selected_position">
 <span class="sig-name descname"><span class="pre">selected_position</span></span><a class="headerlink" href="#yfpy.models.Player.selected_position" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY SelectedPosition instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition" title="yfpy.models.SelectedPosition">SelectedPosition</a></p>
 </dd>
@@ -495,7 +569,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.selected_position_value">
 <span class="sig-name descname"><span class="pre">selected_position_value</span></span><a class="headerlink" href="#yfpy.models.Player.selected_position_value" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The selected position of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -505,7 +580,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.status">
 <span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#yfpy.models.Player.status" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The status of the player (“IR”, “PUP”, “O”, “Q”, etc.).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
@@ -515,7 +591,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.transaction_data">
 <span class="sig-name descname"><span class="pre">transaction_data</span></span><a class="headerlink" href="#yfpy.models.Player.transaction_data" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>A YFPY TransactionData instance.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="yfpy.models.TransactionData.html#yfpy.models.TransactionData" title="yfpy.models.TransactionData">TransactionData</a></p>
 </dd>
@@ -525,7 +602,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.models.Player.uniform_number">
 <span class="sig-name descname"><span class="pre">uniform_number</span></span><a class="headerlink" href="#yfpy.models.Player.uniform_number" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The uniform number of the player.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
@@ -542,8 +620,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.Player.clean_data_dict" title="yfpy.models.Player.clean_data_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean_data_dict</span></code></a></p></td>
 <td><p>Recursive method to un-type custom class type objects for serialization.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#yfpy.models.Player.from_json" title="yfpy.models.Player.from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></a></p></td>
+<td><p>Deserialize JSON to a class object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.models.Player.serialized" title="yfpy.models.Player.serialized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialized</span></code></a></p></td>
 <td><p>Pack up all object content into nested dictionaries for JSON serialization.</p></td>
@@ -566,6 +644,20 @@
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="yfpy.models.Player.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#yfpy.models.Player.from_json" title="Permalink to this definition"></a></dt>
+<dd><p>Deserialize JSON to a class object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Class object derived from JSON data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)">object</a></p>
 </dd>
 </dl>
 </dd></dl>

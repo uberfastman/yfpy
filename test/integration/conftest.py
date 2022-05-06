@@ -11,7 +11,7 @@ from yfpy import Data
 from yfpy.query import YahooFantasySportsQuery
 
 """
-Example public Yahoo league uRL: "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
+Example public Yahoo league URL: "https://archive.fantasysports.yahoo.com/nfl/2014/729259"
 
 Example vars using public Yahoo leagues still require auth through a personal Yahoo account: see README.md
 """
@@ -91,9 +91,9 @@ def chosen_week() -> int:
 def chosen_date() -> str:
     """Set Yahoo Fantasy Sports chosen date for testing."""
 
-    # chosen_date = "2013-04-15"  # NHL - 2013
+    chosen_date = "2013-04-15"  # NHL - 2013 (for 2012)
     # chosen_date = "2013-04-16"  # NHL - 2013
-    chosen_date = "2021-10-25"  # NHL - 2021
+    # chosen_date = "2021-10-25"  # NHL - 2021
 
     return chosen_date
 
@@ -149,7 +149,7 @@ def game_key() -> str:
 def game_code() -> str:
     """Set Yahoo Fantasy Sports game code for testing."""
 
-    game_code = "nfl"
+    game_code = "nfl"  # NFL
 
     # game_code = "nhl"  # NHL
 
@@ -160,7 +160,9 @@ def game_code() -> str:
 def team_id() -> int:
     """Set Yahoo Fantasy Sports team ID for testing."""
 
-    team_id = 1
+    team_id = 1  # NFL
+
+    # team_id = 2  # NHL (2012)
 
     return team_id
 
@@ -169,7 +171,9 @@ def team_id() -> int:
 def team_name() -> str:
     """Set Yahoo Fantasy Sports team name for testing."""
 
-    team_name = "Legion"
+    team_name = "Legion"  # NFL
+
+    # team_name = "The Bateleurs"  # NHL (2012)
 
     return team_name
 
