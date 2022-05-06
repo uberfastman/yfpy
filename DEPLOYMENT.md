@@ -3,16 +3,16 @@
 1. (Optional) Clear virtual machine of old requirements:
 
     ```shell
-    pip uninstall -y -r <(pip freeze)    
+    pip uninstall -y -r <(pip freeze)
     ```
 
 2. (Optional) Check `requirements.txt` and `requirement-dev.txt` for latest dependency versions.
 
-3. Update virtual machine with the latest dependencies:
+3. (Optional) Update virtual machine with the latest dependencies:
 
     ```shell
-    pip install -r requirements.txt    
-    pip install -r requirements-dev.txt    
+    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
     ```
    
 4. Lint code with `flake8`:
@@ -42,13 +42,13 @@
 8. Run `pytest` unit tests:
 
     ```shell
-    python -m pytest -v -s -m unit 
+    python -m pytest -v -s -m unit
     ```
 
 9. Run `pytest` integration tests:
 
     ```shell
-    python -m pytest -v -s -m integration 
+    python -m pytest -v -s -m integration
     ```
 
 10. (Optional) Run all tests from `pytest` file:
@@ -73,13 +73,13 @@
 13. Check Sphinx documentation locally:
 
      ```shell
-     open build/html/index.html    
+     open build/html/index.html
      ```
    
 14. Navigate to root directory:
 
      ```shell
-     cd ..    
+     cd ..
      ```
 
 15. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
@@ -89,8 +89,8 @@
      `git tag -a [tag_name/version] -m [message]`
 
      ```shell
-     git tag -a v1.0.0 -m 'first release'    
-     git push origin --tags    
+     git tag -a v1.0.0 -m 'first release'
+     git push origin --tags
      ```
 
 17. Build the package (will also auto-update the version based on teh above git tag):
