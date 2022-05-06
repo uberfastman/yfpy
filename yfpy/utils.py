@@ -27,7 +27,7 @@ def prettify_data(data: str) -> str:
         data (str): Data formatted as a JSON string.
 
     Returns:
-        The return value. True for success, False otherwise.
+        str: JSON string that has been formatted with indents (two spaces).
 
     """
     return f"\n{json.dumps(data, indent=2, default=complex_json_handler, ensure_ascii=False)}\n"
@@ -42,7 +42,7 @@ def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
         parent_class (Type): Parent class type used to extract custom subclass type options for casting.
 
     Returns:
-        Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).
+        Any: Recursively returns JSON objects until data is completely parsed, cleaned, and typed (where applicable).
 
     """
     # extract subclasses from parent class for typing
@@ -107,8 +107,8 @@ def convert_strings_to_numeric_equivalents(json_obj: Any) -> Union[int, float, A
         json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
 
     Returns:
-        The numeric representation of any JSON strings that can be represented as integers or floats, else the
-            original JSON object.
+        int | float | Any: The numeric representation of any JSON strings that can be represented as integers or floats,
+        else the original JSON object.
 
     """
     if type(json_obj) == str:
@@ -136,7 +136,7 @@ def get_type(json_obj_dict: Dict[str, Any], parent_class: Type, subclasses: Dict
             and classes for casting as values.
 
     Returns:
-        A Python object (representing the original JSON object) that has been cast to the specified types.
+        object: A Python object (representing the original JSON object) that has been cast to the specified type.
 
     """
     for k, v in json_obj_dict.items():
@@ -150,11 +150,11 @@ def flatten_json_dict_list(json_obj_dict_list: List[Dict[str, Any]], parent_clas
     """Recursive function to flatten JSON lists containing all disparate JSON dictionaries with no overlapping keys.
 
     Args:
-        json_obj_dict_list (list of dict of str: Any): List of JSON dictionaries.
+        json_obj_dict_list (list[dict[str, Any]]): List of JSON dictionaries.
         parent_class (Type): Parent class type used to extract custom subclass type options.
 
     Returns:
-        Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.
+        dict | list: Returns a dictionary if the list was flattened, else a cleaned list if no flattening was needed.
 
     """
     # filter out empty lists and dicts but include when value = 0
@@ -187,8 +187,8 @@ def flatten_to_list(json_obj: Any) -> Any:
         json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
 
     Returns:
-        A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a list,
-            or the original value if json_obj was a primitive.
+        list: A list made from a flattened dictionary if json_obj was a dictionary, the original list if json_obj was a
+        list, or the original value if json_obj was a primitive.
 
     """
     if isinstance(json_obj, dict):
@@ -207,7 +207,7 @@ def flatten_to_objects(json_obj: Any) -> Any:
         json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive).
 
     Returns:
-        JSON dictionary/list/primitive with contents cast to Python objects.
+        dict | list | int | float | str | bool: JSON dictionary/list/primitive with contents cast to Python objects.
 
     """
     if isinstance(json_obj, dict):
@@ -223,10 +223,11 @@ def dict_to_list(json_dict: Dict[str, Any]) -> Any:
     """Function to convert a JSON dictionary to a list.
 
     Args:
-        json_dict (dict of str: Any): JSON dictionary.
+        json_dict (dict[str, Any]): JSON dictionary.
 
     Returns:
-        A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as values.
+        list: A list derived from a JSON dictionary, or the original dictionary if it does not contain dictionaries as
+        values.
 
     """
     first_key = list(json_dict.keys())[0]
@@ -251,7 +252,7 @@ def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: st
         val_to_key (str): Key used to sort the dictionaries contained in json_dict.
 
     Returns:
-        An ordered dictionary of dictionaries sorted by val_to_key.
+        dict[str, Any]: An ordered dictionary of dictionaries sorted by val_to_key.
 
     """
     out = {}
@@ -270,7 +271,7 @@ def complex_json_handler(obj: Any) -> Any:
         obj (Any): Unserializable Python object to be serialized into JSON.
 
     Returns:
-        Serializable version of the Python object.
+        Any: Serializable version of the Python object.
 
     """
     if hasattr(obj, "serialized"):
@@ -289,7 +290,7 @@ def reformat_json_list(json_obj: Any) -> Any:
         json_obj (Any): JSON object (typically a dictionary or list, but can also be a primitive) to be cleaned.
 
     Returns:
-        Reformatted JSON list derived from original JSON object.
+        Any: Reformatted JSON list derived from original JSON object.
 
     """
     if isinstance(json_obj[0], list):

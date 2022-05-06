@@ -31,26 +31,29 @@ project = "YFPY"
 copyright = f"{date.today().year}, Wren J. R. (uberfastman)"
 author = "Wren J. R. (uberfastman)"
 
-# The full version, including alpha/beta/rc tags
+# The short X.Y version.
+version = __version__
+# The full version, including alpha/beta/rc tags.
 release = __version__
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
     "sphinx.ext.autodoc",  # autogenerate documentation from docstrings
     "sphinx.ext.napoleon",  # support google style docstrings
     "sphinx.ext.autosummary",  # recursively generate documentation from dynamic nested modules
-    'sphinx.ext.intersphinx',  # link to external documentation (must also use sphinx generated docs: .inv file)
-    'sphinx.ext.viewcode',  # add links to the Python source code for classes, functions etc.
-    'sphinx_autodoc_typehints',  # automatically document param types (less noise in class signature)
+    "sphinx.ext.intersphinx",  # link to external documentation (must also use sphinx generated docs: .inv file)
+    "sphinx.ext.viewcode",  # add links to the Python source code for classes, functions etc.
+    "sphinx_autodoc_typehints",  # automatically document param types (less noise in class signature)
+    "sphinx_rtd_dark_mode",  # add toggleable dark mode to sphinx ReadTheDocs theme
     "myst_parser"  # markdown parsing
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -68,9 +71,33 @@ html_theme = "sphinx_rtd_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
-    '_static',
+    "_static",
     # "../../test/integration"
 ]
+
+html_logo = "yfpy-logo.png"
+# see https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html for html_theme_options details
+html_theme_options = {
+    # "analytics_id": "G-XXXXXXXXXX",  #  Provided by Google in your dashboard
+    "analytics_anonymize_ip": False,
+    "logo_only": True,
+    "display_version": True,
+    "prev_next_buttons_location": "both",
+    "style_external_links": True,
+    "vcs_pageview_mode": "",
+    # "style_nav_header_background": "white",
+    # Toc options
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "navigation_depth": -1,
+    "includehidden": True,
+    "titles_only": False
+}
+
+
+def setup(app):
+    app.add_css_file("custom.css")
+
 
 # -- Extension configuration -------------------------------------------------
 
@@ -82,9 +109,9 @@ intersphinx_mapping = {
 # configure sphinx.ext.autosummary & sphinx_autodoc_typehints
 autosummary_generate = True  # activate sphinx.ext.autosummary
 autoclass_content = "both"  # add __init__ documentation (params, attributes) to class summaries
-html_show_sourcelink = False  # remove 'view source code' from top of html pages
+html_show_sourcelink = False  # remove "view source code" from top of html pages
 autodoc_inherit_docstrings = True  # inherit docstrings from base class if no docstring is supplied
-set_type_checking_flag = True  # enable 'expensive' imports for sphinx_autodoc_typehints
+set_type_checking_flag = True  # enable "expensive" imports for sphinx_autodoc_typehints
 add_module_names = False  # remove the Python namespaces from class/method signatures
 
 # configure myst_parser
