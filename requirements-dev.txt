@@ -2,5 +2,5 @@ twine==4.0.0
 sphinx==4.5.0
 sphinx-rtd-theme==1.0.0
 sphinx-autodoc-typehints==1.18.1
-pydata-sphinx-theme==0.8.1
+sphinx-rtd-dark-mode==1.2.4
 myst-parser==0.17.2

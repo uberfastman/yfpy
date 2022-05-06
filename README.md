@@ -21,18 +21,23 @@
 
 ---
 
-#### Do you like the YFPY API wrapper? Star the repository here on GitHub and please consider helping support its ongoing development:
+<sub>***Do you like the YFPY API wrapper? Star the repository on GitHub and please consider helping support its ongoing development:***</sub>
 
-[<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="100"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="100"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="100"/>](https://share.trustwallet.com/MF8YBO01I9)
+[<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="75"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="75"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="75"/>](https://share.trustwallet.com/MF8YBO01I9)
 
-| Cryptocurrency |                   Address                    |
-|---------------:|:--------------------------------------------:|
-|  Bitcoin (BTC) | `bc1qataspvklhewtswm357m0677q4raag5new2xt3e` | 
-| Ethereum (ETH) | `0x5eAa522e66a90577D49e9E72f253EC952CDB4059` |
+|                                                                <sub><sup>Cryptocurrency</sup></sub> |                                                      <sub><sup>Address</sup></sub>                                                       |
+|----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------:|
+|                                                                 <sub><sup>Bitcoin (BTC)</sup></sub> |                                    <sub><sup>`bc1qataspvklhewtswm357m0677q4raag5new2xt3e`</sup></sub>                                    | 
+|                                                                <sub><sup>Ethereum (ETH)</sup></sub> |                                    <sub><sup>`0x5eAa522e66a90577D49e9E72f253EC952CDB4059`</sup></sub>                                    |
+
+<sub><sup></sup></sub>
 
 ---
 
 ## Yahoo Fantasy Sports API Wrapper (YFPY)
+
+### [READ THE DOCS HERE!](https://yfpy.uberfastman.com)
+<sup>Detailed documentation on YFPY can be found at [https://yfpy.uberfastman.com](https://yfpy.uberfastman.com).</sup>
 
 ### Table of Contents
 * [About](#about)
@@ -81,7 +86,7 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
-    * Make a copy of [`test/integration/EXAMPLE.private.json`](test/integration/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
+    * Make a copy of [`test/integration/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
     * Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.
 
 ---
@@ -100,16 +105,16 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 
 YFPY has a collection of fully functional code snippets that can be run using [pytest](https://docs.pytest.org/en/6.2.x/). These snippets demonstrate how to use YFPY to retrieve your Yahoo Fantasy Sports data.
 
-* See the [`test/integration`](test/integration) directory for the example code snippets.
-* Before running any tests, make a copy of [`test/integration/EXAMPLE.env`](test/integration/EXAMPLE.env) in the [`test/integration`](test/integration) directory and rename it to `.env`.
+* See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory for the example code snippets.
+* Before running any tests, make a copy of [`test/integration/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.env) in the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
 * You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:
   * `pytest -v -s`
-* If you want to run only the integration tests, you can run:
-  * `pytest -v -s -m integration`
 * If you want to run only the unit tests, you can run:
   * `pytest -v -s -m unit`
+* If you want to run only the integration tests, you can run:
+  * `pytest -v -s -m integration`
 
 ---
 
