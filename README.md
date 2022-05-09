@@ -1,4 +1,4 @@
-[<img src="https://github.com/uberfastman/yfpy/raw/main/docs/images/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
+[<img src="https://github.com/uberfastman/yfpy/raw/main/docs/_static/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
 
 ### Python API wrapper for the Yahoo Fantasy Sports public API
 ##### By Wren J. R. (uberfastman)
