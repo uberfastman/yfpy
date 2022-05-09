@@ -75,7 +75,8 @@ html_static_path = [
     # "../../test/integration"
 ]
 
-html_logo = "yfpy-logo.png"
+# html_logo = "yfpy-logo.png"
+html_logo = "yfpy-logo.svg"
 # see https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html for html_theme_options details
 html_theme_options = {
     # "analytics_id": "G-XXXXXXXXXX",  #  Provided by Google in your dashboard

@@ -1,11 +1,4 @@
-```
- __     ________ _______     __
- \ \   / /  ____|  __ \ \   / /
-  \ \_/ /| |__  | |__) \ \_/ / 
-   \   / |  __| |  ___/ \   /  
-    | |  | |    | |      | |   
-    |_|  |_|    |_|      |_|   
-```
+[<img src="https://github.com/uberfastman/yfpy/raw/main/docs/images/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
 
 ### Python API wrapper for the Yahoo Fantasy Sports public API
 ##### By Wren J. R. (uberfastman)
@@ -23,7 +16,7 @@
 
 <sub>***Do you like the YFPY API wrapper? Star the repository on GitHub and please consider helping support its ongoing development:***</sub>
 
-[<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-paypal.png" width="75"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-bitcoin.png" width="75"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/develop/resources/images/donate-ethereum.png" width="75"/>](https://share.trustwallet.com/MF8YBO01I9)
+[<img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-paypal.png" width="75"/>](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS) [<img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-bitcoin.png" width="75"/>](https://share.trustwallet.com/ZoAkTpY1I9) [<img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-ethereum.png" width="75"/>](https://share.trustwallet.com/MF8YBO01I9)
 
 |                                                                <sub><sup>Cryptocurrency</sup></sub> |                                                      <sub><sup>Address</sup></sub>                                                       |
 |----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------:|
