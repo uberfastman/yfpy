@@ -19,8 +19,12 @@ from pathlib import Path
 
 root_path = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(root_path))
+
 package_path = root_path / "yfpy"
 sys.path.insert(0, str(package_path))
+
+test_path = root_path / "test"
+sys.path.insert(0, str(test_path))
 
 from VERSION import __version__  # noqa
 
@@ -94,6 +98,12 @@ html_theme_options = {
     "includehidden": True,
     "titles_only": False
 }
+
+# see https://pygments.org/docs/styles/ for documentation on pygments styles
+# see https://pygments.org/styles/ for available pygments styles
+# pygments_style = "sphinx"  # default for sphinx docs when no pygments style is specified
+# pygments_style = "gruvbox-dark"
+pygments_style = "colorful"
 
 
 def setup(app):

@@ -305,6 +305,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve all Yahoo Fantasy Sports game keys by ID (from year of inception to present), sorted by season/year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_all_yahoo_fantasy_game_keys()
             [
@@ -345,6 +347,8 @@ class YahooFantasySportsQuery(object):
             season (int): User defined season/year for which to retrieve the Yahoo Fantasy Sports game.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_key_by_season(2021)
             338
@@ -362,6 +366,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve game info for current fantasy season.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_game_info()
             {
@@ -434,6 +440,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve game metadata for current fantasy season.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_game_metadata()
             {
@@ -467,6 +475,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_info_by_game_id(390)
             {
@@ -542,6 +552,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_metadata_by_game_id(331)
             {
@@ -574,6 +586,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_weeks_by_game_id(331)
             [
@@ -612,6 +626,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_stat_categories_by_game_id(331)
             {
@@ -653,6 +669,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_position_types_by_game_id(331)
             [
@@ -701,6 +719,8 @@ class YahooFantasySportsQuery(object):
             game_id (int): Game ID of selected Yahoo Fantasy game corresponding to a specific year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_roster_positions_by_game_id(331)
             [
@@ -737,6 +757,8 @@ class YahooFantasySportsQuery(object):
             season (int): User defined season/year for which to retrieve the Yahoo Fantasy Sports league key.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_key(2021)
             331.l.729259
@@ -761,6 +783,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve metadata for current logged-in user.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_user()
             {
@@ -781,6 +805,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve game history for current logged-in user sorted by season/year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_games()
             [
@@ -820,6 +846,8 @@ class YahooFantasySportsQuery(object):
             game_key (int): The game_id for a specific Yahoo Fantasy game.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_leagues_by_game_key(331)
             [
@@ -874,6 +902,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_teams()
             [
@@ -950,6 +980,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve info for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_info()
             {
@@ -1012,6 +1044,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve metadata for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_metadata()
             {
@@ -1057,6 +1091,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve settings (rules) for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_settings()
             {
@@ -1143,6 +1179,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve standings for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_standings()
             {
@@ -1222,6 +1260,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve teams for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_teams()
             [
@@ -1283,6 +1323,8 @@ class YahooFantasySportsQuery(object):
             is_retry (bool): Boolean to indicate whether the method is being retried during error handling.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_players(50, 25)
             [
@@ -1410,6 +1452,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve draft results for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_draft_results()
             [
@@ -1437,6 +1481,8 @@ class YahooFantasySportsQuery(object):
         """Retrieve transactions for chosen league.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_transactions()
             [
@@ -1493,6 +1539,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_scoreboard_by_week(1)
             {
@@ -1563,6 +1611,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_matchups_by_week(1)
             [
@@ -1629,6 +1679,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_info(1)
             {
@@ -1715,6 +1767,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_metadata(1)
             {
@@ -1770,6 +1824,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_stats(1)
             {
@@ -1799,6 +1855,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_stats_by_week(1, 1)
             {
@@ -1833,6 +1891,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_standings(1)
             {
@@ -1872,6 +1932,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_by_week(1, 1)
             {
@@ -1946,6 +2008,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_info_by_week(1, 1)
             [
@@ -2053,6 +2117,8 @@ class YahooFantasySportsQuery(object):
             chosen_date (str): Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_info_by_date(1, "2011-05-01")
             [
@@ -2148,6 +2214,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_stats(1)
             [
@@ -2238,6 +2306,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_stats_by_week(1, 1)
             [
@@ -2323,6 +2393,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_draft_results(1)
             [
@@ -2355,6 +2427,8 @@ class YahooFantasySportsQuery(object):
                 number of teams in the league).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_matchups(1)
             [
@@ -2382,6 +2456,8 @@ class YahooFantasySportsQuery(object):
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_for_season("331.p.7200")
             {
@@ -2454,6 +2530,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_by_week("331.p.7200", 1)
             {
@@ -2532,6 +2610,8 @@ class YahooFantasySportsQuery(object):
             chosen_date (str): Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_by_date("nhl.p.4588", "2011-05-01")
             {
@@ -2631,6 +2711,8 @@ class YahooFantasySportsQuery(object):
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_ownership("331.p.7200")
             {
@@ -2728,6 +2810,8 @@ class YahooFantasySportsQuery(object):
             chosen_week (int): Selected week for which to retrieve data.
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_percent_owned_by_week("331.p.7200", 1)
             {
@@ -2789,6 +2873,8 @@ class YahooFantasySportsQuery(object):
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
 
         Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_draft_analysis("331.p.7200")
             {

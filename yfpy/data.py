@@ -85,7 +85,7 @@ class Data(object):
             params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
 
         Returns:
-            Data retrieved by the yfpy query.
+            object: Data retrieved by the yfpy query.
 
         """
         if params:
@@ -105,7 +105,7 @@ class Data(object):
             new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.
 
         Returns:
-            Data retrieved by the yfpy query.
+            object: Data retrieved by the yfpy query.
 
         """
         # change data save directory
@@ -142,7 +142,7 @@ class Data(object):
             new_data_dir (str | Path, optional): Full path to new desired directory from which data will be loaded.
 
         Returns:
-            Data loaded from the selected JSON file.
+            object: Data loaded from the selected JSON file.
 
         """
         # change data load directory
@@ -178,7 +178,7 @@ class Data(object):
                 saved/loaded.
 
         Returns:
-            Data retrieved by the yfpy query OR loaded from the selected JSON file.
+            object: Data retrieved by the yfpy query OR loaded from the selected JSON file.
 
         """
         if self.dev_offline:

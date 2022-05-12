@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""Pytest integration test conftest.py.
+
+"""
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
