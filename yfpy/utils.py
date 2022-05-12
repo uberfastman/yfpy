@@ -20,11 +20,11 @@ from yfpy.logger import get_logger
 logger = get_logger(__name__)
 
 
-def prettify_data(data: str) -> str:
-    """Function to return pretty formatted JSON strings for easily readable output.
+def prettify_data(data: object) -> str:
+    """Function to return pretty formatted JSON strings for easily readable output from objects.
 
     Args:
-        data (str): Data formatted as a JSON string.
+        data (object): Data object to be printed as an easily readable JSON string.
 
     Returns:
         str: JSON string that has been formatted with indents (two spaces).

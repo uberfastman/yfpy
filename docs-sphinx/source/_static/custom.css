@@ -1,4 +1,36 @@
 
+.wy-menu-vertical {
+    overflow-x: auto;
+}
+
+.wy-menu-vertical .toctree-l1 {
+    width: 100%;
+    display: table;
+}
+
+.wy-nav-content-wrap {
+    display: flex;
+}
+
+.wy-nav-content {
+    max-width: none;
+    width: 75%;
+    max-height: none;
+}
+
+.wy-nav-content .wy-breadcrumbs li {
+    overflow-x: scroll;
+}
+
+.wy-nav-content .document h1 {
+    word-wrap: break-word;
+    font-size: 1.5em; /* default for h1: 2em */
+}
+
+.wy-nav-content footer {
+    padding-bottom: 25px;
+}
+
 span.sig-name.descname {
     color: mediumblue !important;
 }

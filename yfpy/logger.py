@@ -16,7 +16,7 @@ def get_logger(name: str, level: Union[int, None] = None) -> Logger:
         level (int): The log level for the logger.
 
     Returns:
-        A Python Logger object with custom configuration and formatting.
+        Logger: A Python Logger object with custom configuration and formatting.
 
     """
     logger = getLogger(name)

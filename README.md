@@ -87,9 +87,17 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 <a name="usage"></a>
 ### Usage
 
+#### Authentication
+
 * Follow the instructions in the [Installation](#installation) and [Setup](#setup) sections.
 * The ***first*** time you use YFPY, a browser window will open up asking you to allow your app to access your Yahoo fantasy sports data. You ***MUST*** hit allow, and then copy the verification code that pops up into the command line prompt where it will now be asking for verification, hit enter, and the OAuth2 three-legged handshake should be complete and your data should have been successfully retrieved.
 * YFPY should have now generated a `token.json` for you in the same directory where you stored your `private.json` credentials, and for all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same `token.json` file to authenticate your app.
+
+#### Querying the Yahoo Fantasy Sports API
+
+(My_target)=#yfpy.query.YahooFantasySportsQuery
+
+* See the documentation on the  [`yfpy.query.YahooFantasySportsQuery`](https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery) class for example usage of all available queries.
 
 ---
 
@@ -116,7 +124,7 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 
 YFPY has only been tested on macOS, but is written to be platform-agnostic. It runs only in Python 3.7 and later, and has been tested through Python 3.10.
 
-Direct project dependencies can be viewed in `requirements.txt`, and all dependencies, including transitive dependencies, can be viewed in `dev-requirements.txt`.
+Direct project dependencies can be viewed in `requirements.txt`, and additional development and build dependencies (*not* including transitive dependencies) can be viewed in `requirements-dev.txt`.
 
 ---
 
