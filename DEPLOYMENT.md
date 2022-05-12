@@ -1,14 +1,14 @@
 # YFPY Deployment
 
-1. (Optional) Clear virtual machine of old requirements:
+1. *(Optional)* Clear virtual machine of old requirements:
 
     ```shell
     pip uninstall -y -r <(pip freeze)
     ```
 
-2. (Optional) Check `requirements.txt` and `requirement-dev.txt` for latest dependency versions.
+2. *(Optional)* Check `requirements.txt` and `requirement-dev.txt` for latest dependency versions.
 
-3. (Optional) Update virtual machine with the latest dependencies:
+3. *(Optional)* Update virtual machine with the latest dependencies:
 
     ```shell
     pip install -r requirements.txt
@@ -51,75 +51,63 @@
     python -m pytest -v -s -m integration
     ```
 
-10. (Optional) Run all tests from `pytest` file:
+10. *(Optional)* Run all tests from `pytest` file:
 
-     ```shell
-     python -m pytest -v -s -m integration test/integration/test_api_game_data.py
-     ```
+    ```shell
+    python -m pytest -v -s -m integration test/integration/test_api_game_data.py
+    ```
 
-11. (Optional) Run *specific* test from `pytest` file:
+11. *(Optional)* Run *specific* test from `pytest` file:
 
-     ```shell
-     python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
-     ```
+    ```shell
+    python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
+    ```
 
 12. Update the git tag:
 
-     `git tag -a [tag_name/version] -m [message]`
-
-     ```shell
-     git tag -a v1.0.0 -m 'first release'
-     git push origin --tags
-     ```
-
-13. Build the package (will also auto-update the version based on the above git tag):
-
-     ```shell
-     python setup.py sdist bdist_wheel
-     ```
-
-14. Update the Sphinx documentation:
-
-     ```shell
-     cd docs-sphinx
-     make clean
-     make html
-     ```
-   
-15. Check Sphinx documentation locally:
-
-     ```shell
-     open build/html/index.html
-     ```
-   
-16. Navigate to root directory:
-
-     ```shell
-     cd ..
-     ```
-    
-17. Execute `git add .`, `git commit -m 'commit message'`, and `git push`.
-
-19. Install `twine` (if not already installed):
-
-     ```shell
-     pip install twine
-     ```
-
-20. Check packages before distribution:
+    `git tag -a [tag_name/version] -m [message]`
 
     ```shell
-    twine check dist/*
+    git tag -a v1.0.0 -m 'first release'
+    git push origin --tags
     ```
 
-21. Deploy to Test PyPI to check:
+13. *(Optional)* Build the documentation and PyPI package independent of deployment:
 
-     ```shell
-     twine upload -r testpypi dist/*
-     ```
+    ```shell
+    make -C docs-sphinx docs
+    ```
+    
+    ***Note***: You can run `make -C docs-sphinx docs_no_build` to recreate documentation without building the PyPI package with `setup.py`.
 
-22. Deploy to PyPI:
+14. *(Optional)* Check Sphinx documentation locally:
 
-     ```shell
-     twine upload dist/*
-     ```
+    ```shell
+    make -C docs-sphinx open_local_docs
+    ```
+    
+15. Install `twine` (if not already installed):
+
+    ```shell
+    pip install twine
+    ```
+    
+16. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
+
+    ```shell
+    make -C docs-sphinx test_deploy
+    ```
+
+17. Deploy YFPY by building the PyPI packages, recreating the Sphinx documentation, and deploying to PyPI:
+
+    ```shell
+    make -C docs-sphinx deploy
+    ```
+
+18. Update YFPY GitHub repository:
+
+    ```shell
+    git add .
+    git commit -m 'commit message'
+    git push
+    ```

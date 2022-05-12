@@ -103,7 +103,7 @@ html_theme_options = {
 # see https://pygments.org/styles/ for available pygments styles
 # pygments_style = "sphinx"  # default for sphinx docs when no pygments style is specified
 # pygments_style = "gruvbox-dark"
-pygments_style = "colorful"
+pygments_style = "friendly"
 
 
 def setup(app):
