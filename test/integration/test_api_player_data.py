@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+"""Pytest integration tests for Yahoo Fantasy Sports API player data.
+
+Note:
+    Tests saving and loading all Yahoo Fantasy Sports API player data.
+
+Attributes:
+    logger (Logger): Game data integration tests logger.
+    env_path (Path): Path to the local .env file used to set environment variables at runtime.
+
+"""
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
@@ -23,11 +34,6 @@ warnings.simplefilter("ignore", ResourceWarning)
 # load python-dotenv to parse environment variables
 env_path = Path(__file__).parent / ".env"
 load_dotenv(dotenv_path=env_path)
-
-
-"""
-TEST SAVING AND LOADING FANTASY PLAYER DATA
-"""
 
 
 @pytest.mark.integration
