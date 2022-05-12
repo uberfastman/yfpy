@@ -83,7 +83,7 @@
      ```shell
      cd docs-sphinx
      make clean
-     make html    
+     make html
      ```
    
 15. Check Sphinx documentation locally:
