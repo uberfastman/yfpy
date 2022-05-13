@@ -8,6 +8,14 @@
     display: table;
 }
 
+/* necessary to remove the duplicated toctree entries created by referencing index in the sphinx index.rst */
+.wy-menu-vertical > ul > li:nth-child(1),
+.wy-menu-vertical > ul > li:nth-child(2),
+.wy-nav-content .toctree-wrapper > ul > li:nth-child(1),
+.wy-nav-content .toctree-wrapper > ul > li:nth-child(2) {
+    display: none;
+}
+
 .wy-nav-content-wrap {
     display: flex;
 }
