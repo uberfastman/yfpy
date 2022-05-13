@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>test.integration.conftest.game_code &mdash; YFPY v8.0.4 documentation</title>
+  <title>test.integration.conftest.game_code &mdash; YFPY v8.0.5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,7 +36,7 @@
             <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.4
+                v8.0.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,8 +47,228 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="yfpy.html">YFPY</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="yfpy.html">Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.exceptions.html">yfpy.exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsDataNotFound.html">yfpy.exceptions.YahooFantasySportsDataNotFound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.exceptions.YahooFantasySportsException.html">yfpy.exceptions.YahooFantasySportsException</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.logger.html">yfpy.logger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.logger.get_logger.html">yfpy.logger.get_logger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.models.html">yfpy.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Bonus.html">yfpy.models.Bonus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.ByeWeeks.html">yfpy.models.ByeWeeks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Division.html">yfpy.models.Division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DivisionalOutcomeTotals.html">yfpy.models.DivisionalOutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftAnalysis.html">yfpy.models.DraftAnalysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftResult.html">yfpy.models.DraftResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Game.html">yfpy.models.Game</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.GameWeek.html">yfpy.models.GameWeek</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Headshot.html">yfpy.models.Headshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.League.html">yfpy.models.League</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Manager.html">yfpy.models.Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Matchup.html">yfpy.models.Matchup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.MatchupGrade.html">yfpy.models.MatchupGrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Name.html">yfpy.models.Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.OutcomeTotals.html">yfpy.models.OutcomeTotals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Ownership.html">yfpy.models.Ownership</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PercentOwned.html">yfpy.models.PercentOwned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Player.html">yfpy.models.Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PositionType.html">yfpy.models.PositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Roster.html">yfpy.models.Roster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterAdds.html">yfpy.models.RosterAdds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Scoreboard.html">yfpy.models.Scoreboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Settings.html">yfpy.models.Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Standings.html">yfpy.models.Standings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Stat.html">yfpy.models.Stat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatCategories.html">yfpy.models.StatCategories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatModifiers.html">yfpy.models.StatModifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatPositionType.html">yfpy.models.StatPositionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Streak.html">yfpy.models.Streak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Team.html">yfpy.models.Team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamLogo.html">yfpy.models.TeamLogo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamPoints.html">yfpy.models.TeamPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamProjectedPoints.html">yfpy.models.TeamProjectedPoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TeamStandings.html">yfpy.models.TeamStandings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Transaction.html">yfpy.models.Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.TransactionData.html">yfpy.models.TransactionData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.User.html">yfpy.models.User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.YahooFantasyObject.html">yfpy.models.YahooFantasyObject</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.query.html">yfpy.query</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.query.YahooFantasySportsQuery.html">yfpy.query.YahooFantasySportsQuery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="yfpy.utils.html">yfpy.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.complex_json_handler.html">yfpy.utils.complex_json_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.convert_strings_to_numeric_equivalents.html">yfpy.utils.convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.dict_to_list.html">yfpy.utils.dict_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_json_dict_list.html">yfpy.utils.flatten_json_dict_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.unpack_data.html">yfpy.utils.unpack_data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="test.html">Tests</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.conftest.html">test.conftest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.conftest.show_log_output.html">test.conftest.show_log_output</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="test.integration.html">test.integration</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="test.integration.conftest.html">test.integration.conftest</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.auth_dir.html">test.integration.conftest.auth_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.browser_callback.html">test.integration.conftest.browser_callback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.chosen_date.html">test.integration.conftest.chosen_date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.chosen_week.html">test.integration.conftest.chosen_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.data_dir.html">test.integration.conftest.data_dir</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">test.integration.conftest.game_code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.game_id.html">test.integration.conftest.game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.game_key.html">test.integration.conftest.game_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.league_id.html">test.integration.conftest.league_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.league_player_limit.html">test.integration.conftest.league_player_limit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.player_id.html">test.integration.conftest.player_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.player_key.html">test.integration.conftest.player_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.season.html">test.integration.conftest.season</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.team_id.html">test.integration.conftest.team_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.team_name.html">test.integration.conftest.team_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.yahoo_data.html">test.integration.conftest.yahoo_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.conftest.yahoo_query.html">test.integration.conftest.yahoo_query</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.integration.test_api_game_data.html">test.integration.test_api_game_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_all_yahoo_fantasy_game_keys.html">test.integration.test_api_game_data.test_get_all_yahoo_fantasy_game_keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_current_game_info.html">test.integration.test_api_game_data.test_get_current_game_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_current_game_metadata.html">test.integration.test_api_game_data.test_get_current_game_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_info_by_game_id.html">test.integration.test_api_game_data.test_get_game_info_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_key_by_season.html">test.integration.test_api_game_data.test_get_game_key_by_season</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_metadata_by_game_id.html">test.integration.test_api_game_data.test_get_game_metadata_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_position_types_by_game_id.html">test.integration.test_api_game_data.test_get_game_position_types_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_roster_positions_by_game_id.html">test.integration.test_api_game_data.test_get_game_roster_positions_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_stat_categories_by_game_id.html">test.integration.test_api_game_data.test_get_game_stat_categories_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_game_weeks_by_game_id.html">test.integration.test_api_game_data.test_get_game_weeks_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_game_data.test_get_league_key.html">test.integration.test_api_game_data.test_get_league_key</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.integration.test_api_league_data.html">test.integration.test_api_league_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_draft_results.html">test.integration.test_api_league_data.test_get_league_draft_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_info.html">test.integration.test_api_league_data.test_get_league_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_matchups_by_week.html">test.integration.test_api_league_data.test_get_league_matchups_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_metadata.html">test.integration.test_api_league_data.test_get_league_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_players.html">test.integration.test_api_league_data.test_get_league_players</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_players_with_limit.html">test.integration.test_api_league_data.test_get_league_players_with_limit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_scoreboard_by_week.html">test.integration.test_api_league_data.test_get_league_scoreboard_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_settings.html">test.integration.test_api_league_data.test_get_league_settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_standings.html">test.integration.test_api_league_data.test_get_league_standings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_teams.html">test.integration.test_api_league_data.test_get_league_teams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_league_data.test_get_league_transactions.html">test.integration.test_api_league_data.test_get_league_transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.integration.test_api_player_data.html">test.integration.test_api_player_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_draft_analysis.html">test.integration.test_api_player_data.test_get_player_draft_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_ownership.html">test.integration.test_api_player_data.test_get_player_ownership</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_percent_owned_by_week.html">test.integration.test_api_player_data.test_get_player_percent_owned_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_stats_by_date.html">test.integration.test_api_player_data.test_get_player_stats_by_date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_stats_by_week.html">test.integration.test_api_player_data.test_get_player_stats_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_player_data.test_get_player_stats_for_season.html">test.integration.test_api_player_data.test_get_player_stats_for_season</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.integration.test_api_team_data.html">test.integration.test_api_team_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_draft_results.html">test.integration.test_api_team_data.test_get_team_draft_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_info.html">test.integration.test_api_team_data.test_get_team_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_matchups.html">test.integration.test_api_team_data.test_get_team_matchups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_metadata.html">test.integration.test_api_team_data.test_get_team_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_roster_by_week.html">test.integration.test_api_team_data.test_get_team_roster_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_roster_player_info_by_date.html">test.integration.test_api_team_data.test_get_team_roster_player_info_by_date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_roster_player_info_by_week.html">test.integration.test_api_team_data.test_get_team_roster_player_info_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_roster_player_stats.html">test.integration.test_api_team_data.test_get_team_roster_player_stats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_roster_player_stats_by_week.html">test.integration.test_api_team_data.test_get_team_roster_player_stats_by_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_standings.html">test.integration.test_api_team_data.test_get_team_standings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_stats.html">test.integration.test_api_team_data.test_get_team_stats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_team_data.test_get_team_stats_by_week.html">test.integration.test_api_team_data.test_get_team_stats_by_week</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.integration.test_api_user_data.html">test.integration.test_api_user_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_user_data.test_get_current_user.html">test.integration.test_api_user_data.test_get_current_user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_user_data.test_get_user_games.html">test.integration.test_api_user_data.test_get_user_games</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_user_data.test_get_user_leagues_by_game_id.html">test.integration.test_api_user_data.test_get_user_leagues_by_game_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.integration.test_api_user_data.test_get_user_teams.html">test.integration.test_api_user_data.test_get_user_teams</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.html">test.unit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.conftest.html">test.unit.conftest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.test_utils.html">test.unit.test_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_complex_json_handler.html">test.unit.test_utils.test_complex_json_handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_convert_strings_to_numeric_equivalents.html">test.unit.test_utils.test_convert_strings_to_numeric_equivalents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_dict_to_list.html">test.unit.test_utils.test_dict_to_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_flatten_json_dict_list.html">test.unit.test_utils.test_flatten_json_dict_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_flatten_to_list.html">test.unit.test_utils.test_flatten_to_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_flatten_to_objects.html">test.unit.test_utils.test_flatten_to_objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_get_type.html">test.unit.test_utils.test_get_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_prettify_data.html">test.unit.test_utils.test_prettify_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_reformat_json_list.html">test.unit.test_utils.test_reformat_json_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_reorganize_json_dict.html">test.unit.test_utils.test_reorganize_json_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.test_utils.test_unpack_data.html">test.unit.test_utils.test_unpack_data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">YFPY - Yahoo Fantasy Sports API Wrapper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about">About</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pip">Pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#manual">Manual</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#yahoo-developer-network-app">Yahoo Developer Network App</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#unit">Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#integration">Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#running">Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#platform">Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#development">Development</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#yahoo-fantasy-sports-api">Yahoo Fantasy Sports API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
 </ul>

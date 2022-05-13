@@ -1,7 +1,9 @@
 [<img src="https://github.com/uberfastman/yfpy/raw/main/docs/_static/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
 
-### Python API wrapper for the Yahoo Fantasy Sports public API
-##### By Wren J. R. (uberfastman)
+## YFPY - Yahoo Fantasy Sports API Wrapper
+Python API wrapper for the Yahoo Fantasy Sports public API
+
+*Author: Wren J. R. (uberfastman)*
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/uberfastman/yfpy?color=yellowgreen&label=latest%20release&sort=semver)](https://github.com/uberfastman/yfpy/releases/latest)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/uberfastman/yfpy?color=yellowgreen&label=latest%20version&sort=semver)](https://github.com/uberfastman/yfpy/tags)
@@ -27,9 +29,8 @@
 
 ---
 
-## Yahoo Fantasy Sports API Wrapper (YFPY)
-
-### [READ THE DOCS HERE!](https://yfpy.uberfastman.com)
+**[READ THE DOCS HERE!](https://yfpy.uberfastman.com)**
+<br/>
 <sup>Detailed documentation on YFPY can be found at [https://yfpy.uberfastman.com](https://yfpy.uberfastman.com).</sup>
 
 ### Table of Contents
@@ -53,12 +54,17 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 <a name="installation"></a>
 ### Installation
 
+#### Pip
+
 * If you wish to use YFPY within another project, from within your project directory, run
     ```shell
     pip install yfpy
     ```
     
     or add `yfpy` to your project `requirements.txt`.
+
+#### Manual
+
 * If you wish to download and use YFPY locally, clone the git repository:
   ```shell
   git clone git@github.com:uberfastman/yfpy.git
@@ -68,6 +74,12 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 
 <a name="setup"></a>
 ### Setup
+
+#### Yahoo Developer Network App
+
+In order to use YFPY with private fantasy leagues, you must set up an app on your Yahoo account to allow access. Follow the step-by-step guide below for instructions on how to do so, or see [Getting Started](https://developer.yahoo.com/oauth2/guide/openid_connect/getting_started.html) in the Yahoo Developer Network docs for more details.
+
+**Note:** *If you are only planning on using YFPY to pull "read only" data from public leagues, you do not need to do this.*
 
 * Log in to a Yahoo account with access to whatever fantasy leagues from which you wish to retrieve data.
 * Go to [https://developer.yahoo.com/apps/create/](https://developer.yahoo.com/apps/create/) and create an app (you must be logged into your Yahoo account as stated above). For the app, select the following options:
@@ -106,10 +118,19 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 
 YFPY has a collection of fully functional code snippets that can be run using [pytest](https://docs.pytest.org/en/6.2.x/). These snippets demonstrate how to use YFPY to retrieve your Yahoo Fantasy Sports data.
 
-* See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory for the example code snippets.
-* Before running any tests, make a copy of [`test/integration/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.env) in the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory and rename it to `.env`.
+#### Unit
+
+* See the [`test/unit`](https://github.com/uberfastman/yfpy/blob/develop/test/unit/) directory for example code snippets using pytest.
+
+#### Integration
+
+* See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory for example code snippets using pytest.
+* Before running any integration tests, make a copy of [`test/integration/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.env) in the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
+
+#### Running
+
 * You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:
   * `pytest -v -s`
 * If you want to run only the unit tests, you can run:
@@ -122,7 +143,15 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 <a name="dependencies"></a>
 ### Dependencies
 
-YFPY has only been tested on macOS, but is written to be platform-agnostic. It runs only in Python 3.7 and later, and has been tested through Python 3.10.
+#### Platform
+
+YFPY has only been tested extensively on macOS, but is written to be platform-agnostic, and seems to work without issue on Windows and Linux. 
+
+#### Python
+
+YFPY requires Python 3.7 or later, and has been tested through Python 3.10.
+
+#### Development
 
 Direct project dependencies can be viewed in `requirements.txt`, and additional development and build dependencies (*not* including transitive dependencies) can be viewed in `requirements-dev.txt`.
 
@@ -131,7 +160,9 @@ Direct project dependencies can be viewed in `requirements.txt`, and additional 
 <a name="troubleshooting"></a>
 ### Troubleshooting
 
-Occasionally when you use the Yahoo fantasy sports API, there are hangups on the other end that can cause data not to transmit, and you might encounter an error similar to this:
+#### Yahoo Fantasy Sports API
+
+Occasionally when you use the Yahoo Fantasy Sports API, there are hangups on the other end that can cause data not to transmit, and you might encounter an error similar to this:
 ```
 Traceback (most recent call last):
   File "yfpy-app.py", line 114, in <module>

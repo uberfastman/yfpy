@@ -1,9 +1,13 @@
 .. toctree::
    :hidden:
+   :maxdepth: 2
 
-   Home <self>
-   YFPY <_autosummary/yfpy>
+   index
+   Package <_autosummary/yfpy>
    Tests <_autosummary/test>
 
-.. include:: readme_link.md
+.. swap "self" with "index" if you want to avoid a circular toctree (sacrifices having toctree entries for subsections of the index.rst included content)
+   self
+
+.. include:: ../../README.md
    :parser: myst_parser.sphinx_

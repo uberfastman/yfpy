@@ -42,6 +42,14 @@ release = __version__
 
 # -- General configuration ---------------------------------------------------
 
+# The master toctree document.
+# master_doc = 'readme'
+
+suppress_warnings = [
+    "toc.circular",
+    "myst.header"
+]
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
@@ -76,7 +84,6 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
     "_static",
-    # "../../test/integration"
 ]
 
 # html_logo = "yfpy-logo.png"
@@ -126,5 +133,8 @@ set_type_checking_flag = True  # enable "expensive" imports for sphinx_autodoc_t
 add_module_names = False  # remove the Python namespaces from class/method signatures
 
 # configure myst_parser
-myst_heading_anchors = 5
-suppress_warnings = ["myst.header"]
+myst_heading_anchors = 6
+myst_number_code_blocks = [
+    # "shell",
+    "python"
+]
