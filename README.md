@@ -91,7 +91,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
-    * Make a copy of [`test/integration/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
+    * Make a copy of [`test/integration/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/main/test/integration/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
     * Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.
 
 ---
@@ -120,12 +120,12 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 
 #### Unit
 
-* See the [`test/unit`](https://github.com/uberfastman/yfpy/blob/develop/test/unit/) directory for example code snippets using pytest.
+* See the [`test/unit`](https://github.com/uberfastman/yfpy/blob/main/test/unit/) directory for example code snippets using pytest.
 
 #### Integration
 
-* See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory for example code snippets using pytest.
-* Before running any integration tests, make a copy of [`test/integration/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.env) in the [`test/integration`](https://github.com/uberfastman/yfpy/blob/develop/test/integration/) directory and rename it to `.env`.
+* See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/main/test/integration/) directory for example code snippets using pytest.
+* Before running any integration tests, make a copy of [`test/integration/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/main/test/integration/EXAMPLE.env) in the [`test/integration`](https://github.com/uberfastman/yfpy/blob/main/test/integration/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
 
