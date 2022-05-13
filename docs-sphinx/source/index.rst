@@ -11,3 +11,9 @@
 
 .. include:: ../../README.md
    :parser: myst_parser.sphinx_
+
+.. content for separate readme_link.md if needed
+   ```{include} ../../README.md
+   :relative-docs: docs/
+   :relative-images:
+   ```
