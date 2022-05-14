@@ -107,8 +107,6 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
 
 #### Querying the Yahoo Fantasy Sports API
 
-(My_target)=#yfpy.query.YahooFantasySportsQuery
-
 * See the documentation on the  [`yfpy.query.YahooFantasySportsQuery`](https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery) class for example usage of all available queries.
 
 ---
