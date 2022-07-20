@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v8.0.6 documentation</title>
+  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v8.0.7 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -35,7 +35,7 @@
             <img src="_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.6
+                v8.0.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -581,7 +581,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Permissions</span></code> (<strong>Required</strong>): check the <code class="docutils literal notranslate"><span class="pre">Fantasy</span> <span class="pre">Sports</span></code> checkbox. You can leave the <code class="docutils literal notranslate"><span class="pre">Read</span></code> option selected (appears in an accordion expansion underneath the <code class="docutils literal notranslate"><span class="pre">Fantasy</span> <span class="pre">Sports</span></code> checkbox once you select it).</p></li>
 <li><p>Click the <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">App</span></code> button.</p></li>
 <li><p>Once the app is created, it should redirect you to a page for your app, which will show both a <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code>.</p></li>
-<li><p>Make a copy of <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.private.json"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.private.json</span></code></a>, rename it to just <code class="docutils literal notranslate"><span class="pre">private.json</span></code>, and copy the <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> values to their respective fields (make sure the strings are wrapped regular quotes (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>), NOT formatted quotes (<code class="docutils literal notranslate"><span class="pre">“”</span></code>)). The path to this file will be needed to point YFPY to your credentials.</p></li>
+<li><p>Make a copy of <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/integration/EXAMPLE.private.json"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.private.json</span></code></a>, rename it to just <code class="docutils literal notranslate"><span class="pre">private.json</span></code>, and copy the <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> values to their respective fields (make sure the strings are wrapped regular quotes (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>), NOT formatted quotes (<code class="docutils literal notranslate"><span class="pre">“”</span></code>)). The path to this file will be needed to point YFPY to your credentials.</p></li>
 <li><p>Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.</p></li>
 </ul>
 </li>
@@ -602,7 +602,6 @@
 </section>
 <section id="querying-the-yahoo-fantasy-sports-api">
 <h3>Querying the Yahoo Fantasy Sports API<a class="headerlink" href="#querying-the-yahoo-fantasy-sports-api" title="Permalink to this headline"></a></h3>
-<p>(My_target)=#yfpy.query.YahooFantasySportsQuery</p>
 <ul class="simple">
 <li><p>See the documentation on the  <a class="reference external" href="https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery"><code class="docutils literal notranslate"><span class="pre">yfpy.query.YahooFantasySportsQuery</span></code></a> class for example usage of all available queries.</p></li>
 </ul>
@@ -616,14 +615,14 @@
 <section id="unit">
 <h3>Unit<a class="headerlink" href="#unit" title="Permalink to this headline"></a></h3>
 <ul class="simple">
-<li><p>See the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/develop/test/unit/"><code class="docutils literal notranslate"><span class="pre">test/unit</span></code></a> directory for example code snippets using pytest.</p></li>
+<li><p>See the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/unit/"><code class="docutils literal notranslate"><span class="pre">test/unit</span></code></a> directory for example code snippets using pytest.</p></li>
 </ul>
 </section>
 <section id="integration">
 <h3>Integration<a class="headerlink" href="#integration" title="Permalink to this headline"></a></h3>
 <ul class="simple">
-<li><p>See the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/develop/test/integration/"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></a> directory for example code snippets using pytest.</p></li>
-<li><p>Before running any integration tests, make a copy of <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/develop/test/integration/EXAMPLE.env"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.env</span></code></a> in the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/develop/test/integration/"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></a> directory and rename it to <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p></li>
+<li><p>See the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/integration/"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></a> directory for example code snippets using pytest.</p></li>
+<li><p>Before running any integration tests, make a copy of <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/integration/EXAMPLE.env"><code class="docutils literal notranslate"><span class="pre">test/integration/EXAMPLE.env</span></code></a> in the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/integration/"><code class="docutils literal notranslate"><span class="pre">test/integration</span></code></a> directory and rename it to <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p></li>
 <li><p>Copy your Yahoo <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> into the environment variables in <code class="docutils literal notranslate"><span class="pre">.env</span></code> so that pytest can use them when hitting the Yahoo Fantasy Sports API.</p></li>
 <li><p>If this is the first time running pytest with your Yahoo API credentials, you <em><strong>MUST</strong></em> allow interactive prompts within pytest by using the <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag.</p></li>
 </ul>
