@@ -78,6 +78,7 @@ def season() -> int:
     # season = 2019
     # season = 2020
     season = 2021
+    # season = 2022
 
     return season
 
@@ -99,6 +100,9 @@ def chosen_date() -> str:
     # chosen_date = "2013-04-16"  # NHL - 2013
     # chosen_date = "2021-10-25"  # NHL - 2021
 
+    # chosen_date = "2021-04-01"  # MLB - 2021
+    # chosen_date = "2022-04-10"  # MLB - 2022
+
     return chosen_date
 
 
@@ -113,6 +117,8 @@ def league_id() -> str:
 
     # league_id = "69624"  # NHL - 2012
     # league_id = "101592"  # NHL - 2021
+
+    # league_id = "40134"  # MLB - 2021
 
     return league_id
 
@@ -130,6 +136,9 @@ def game_id() -> int:
     # game_id = 303  # NHL - 2012
     # game_id = 411  # NHL - 2021
 
+    # game_id = 404  # MLB - 2021
+    # game_id = 412  # MLB - 2022
+
     return game_id
 
 
@@ -146,6 +155,9 @@ def game_key() -> str:
     # game_key = "303"  # NHL - 2012
     # game_key = "411"  # NHL - 2021
 
+    # game_key = "404"  # MLB - 2021
+    # game_key = "412"  # MLB - 2022
+
     return game_key
 
 
@@ -156,6 +168,8 @@ def game_code() -> str:
     game_code = "nfl"  # NFL
 
     # game_code = "nhl"  # NHL
+
+    # game_code = "mlb"  # MLB
 
     return game_code
 
@@ -191,6 +205,8 @@ def player_id() -> int:
     # player_id = 4588  # NHL: Braden Holtby - 2012
     # player_id = 8205  # NHL: Jeffrey Viel - 2021
     # player_id = 3637  # NHL: Alex Ovechkin - 2021
+
+    # player_id = 9897  # MLB: Tim Anderson - 2021/2022
 
     return player_id
 
