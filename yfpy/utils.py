@@ -79,6 +79,7 @@ def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
             # eliminate data obj counts (except in player_position dicts, which have position counts in league settings)
             if "count" in json_obj.keys() and "position" in json_obj.keys():
                 # assign/cast data type where applicable
+                # TODO: figure out how to do this without explicit object type keys
                 return get_type(
                     {k: unpack_data(v, parent_class) for k, v in json_obj.items()},
                     parent_class,
@@ -86,6 +87,7 @@ def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
                 )
             else:
                 # assign/cast data type where applicable
+                # TODO: figure out how to do this without explicit object type keys
                 json_obj = get_type(
                     dict({k: unpack_data(v, parent_class) for k, v in json_obj.items() if k != "count"}),
                     parent_class,
@@ -95,6 +97,14 @@ def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
                 # flatten dicts with keys "0", "1",..., "n" to a list of objects
                 if "0" in json_obj.keys() and "1" in json_obj.keys():
                     json_obj = flatten_to_list(json_obj)
+                # TODO: figure out how to do this without breaking the above unpacking using explicit type keys
+                # else:
+                #     # flatten dicts with redundant keys to a list of objects
+                #     if len(json_obj.keys()) == 1 and len(json_obj.values()) == 1:
+                #         key = list(json_obj.keys())[0]
+                #         value = list(json_obj.values())[0]
+                #         json_obj = value
+
                 return json_obj
         else:
             return convert_strings_to_numeric_equivalents(json_obj)
@@ -140,7 +150,7 @@ def get_type(json_obj_dict: Dict[str, Any], parent_class: Type, subclasses: Dict
 
     """
     for k, v in json_obj_dict.items():
-        # check if key is in the provided subclasses dict, that the object isn't already cast
+        # check if key is in the provided subclasses' dict, that the object isn't already cast
         if k in subclasses.keys() and isinstance(v, dict) and not isinstance(v, subclasses.get(k)):
             json_obj_dict[k] = subclasses[k](unpack_data(v, parent_class))
     return json_obj_dict
@@ -241,7 +251,7 @@ def dict_to_list(json_dict: Dict[str, Any]) -> Any:
     return json_dict
 
 
-def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: str) -> OrderedDict[str, Any]:
+def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: str) -> Dict[str, Any]:
     """Function to reorganize a JSON dictionary of dictionaries.
 
     The reorganized JSON dictionary is an ordered dictionary sorted by a specific attribute of the value dictionaries.

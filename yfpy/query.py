@@ -301,7 +301,7 @@ class YahooFantasySportsQuery(object):
         else:
             logger.error("Cannot run Yahoo query while using offline mode! Please try again with offline=False.")
 
-    def get_all_yahoo_fantasy_game_keys(self) -> List[Game]:
+    def get_all_yahoo_fantasy_game_keys(self) -> List[Dict[str, Game]]:
         """Retrieve all Yahoo Fantasy Sports game keys by ID (from year of inception to present), sorted by season/year.
 
         Examples:
@@ -328,7 +328,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Game]: List of YFPY Game instances.
+            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
+            instance.
 
         """
         return sorted(
@@ -579,7 +580,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_game_weeks_by_game_id(self, game_id: int) -> List[GameWeek]:
+    def get_game_weeks_by_game_id(self, game_id: int) -> List[Dict[str, GameWeek]]:
         """Retrieve all valid weeks of a specific game by ID.
 
         Args:
@@ -611,7 +612,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[GameWeek]: List of YFPY GameWeek instances.
+            list[dict[str, GameWeek]]: List of dictionaries containing the single key "game_week" and value of each YFPY
+            GameWeek instance.
 
         """
         return self.query(
@@ -662,7 +664,7 @@ class YahooFantasySportsQuery(object):
             StatCategories
         )
 
-    def get_game_position_types_by_game_id(self, game_id: int) -> List[PositionType]:
+    def get_game_position_types_by_game_id(self, game_id: int) -> List[Dict[str, PositionType]]:
         """Retrieve all valid position types for specific game by ID sorted alphabetically by type.
 
         Args:
@@ -701,7 +703,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[PositionType]: List of YFPY PositionType instances.
+            list[dict[str, PositionType]]: List of dictionaries containing the single key "position_type" and value of
+            each YFPY PositionType instance.
 
         """
         return sorted(
@@ -712,7 +715,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("position_type").type
         )
 
-    def get_game_roster_positions_by_game_id(self, game_id: int) -> List[RosterPosition]:
+    def get_game_roster_positions_by_game_id(self, game_id: int) -> List[Dict[str, RosterPosition]]:
         """Retrieve all valid roster positions for specific game by ID sorted alphabetically by position.
 
         Args:
@@ -739,7 +742,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[RosterPosition]: List of YFPY RosterPosition instances.
+            list[dict[str, RosterPosition]]: List of dictionaries containing the single key "roster_position" and value
+            of each YFPY RosterPosition instance.
 
         """
         return sorted(
@@ -801,7 +805,7 @@ class YahooFantasySportsQuery(object):
             User
         )
 
-    def get_user_games(self) -> List[Game]:
+    def get_user_games(self) -> List[Dict[str, Game]]:
         """Retrieve game history for current logged-in user sorted by season/year.
 
         Examples:
@@ -828,7 +832,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Game]: List of YFPY Game instances.
+            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
+            instance.
 
         """
         return sorted(
@@ -839,7 +844,7 @@ class YahooFantasySportsQuery(object):
             key=lambda x: x.get("game").season
         )
 
-    def get_user_leagues_by_game_key(self, game_key: int) -> List[League]:
+    def get_user_leagues_by_game_key(self, game_key: int) -> List[Dict[str, League]]:
         """Retrieve league history for current logged-in user for specific game by ID sorted by season/year.
 
         Args:
@@ -886,7 +891,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[League]: List of YFPY League instances.
+            list[dict[str, League]]: List of dictionaries containing the single key "league" and value of each YFPY
+            League instance.
 
         """
         leagues = self.query(
@@ -898,7 +904,7 @@ class YahooFantasySportsQuery(object):
         else:
             return list(leagues)
 
-    def get_user_teams(self) -> List[Game]:
+    def get_user_teams(self) -> List[Dict[str, Game]]:
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
 
         Examples:
@@ -965,7 +971,8 @@ class YahooFantasySportsQuery(object):
           ]
 
         Returns:
-            list[Game]: List of YFPY Game instances with "teams" field containing list of YFPY Team instances.
+            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
+            instance with "teams" field containing list of YFPY Team instances.
 
         """
         return sorted(
@@ -1256,7 +1263,7 @@ class YahooFantasySportsQuery(object):
             Standings
         )
 
-    def get_league_teams(self) -> List[Team]:
+    def get_league_teams(self) -> List[Dict[str, Team]]:
         """Retrieve teams for chosen league.
 
         Examples:
@@ -1305,7 +1312,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Team]: List of YFPY Team instances.
+            list[dict[str, Team]]: List of dictionaries containing the single key "team" and value of each YFPY Team
+            instance.
 
         """
         return self.query(
@@ -1314,7 +1322,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_league_players(self, player_count_limit: int = None, player_count_start: int = 0,
-                           is_retry: bool = False) -> List[Player]:
+                           is_retry: bool = False) -> List[Dict[str, Player]]:
         """Retrieve valid players for chosen league.
 
         Args:
@@ -1369,7 +1377,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Player]: List of YFPY Player instances.
+            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
+            Player instance.
 
         """
         league_player_count = player_count_start
@@ -1448,7 +1457,7 @@ class YahooFantasySportsQuery(object):
 
         return league_player_data
 
-    def get_league_draft_results(self) -> List[DraftResult]:
+    def get_league_draft_results(self) -> List[Dict[str, DraftResult]]:
         """Retrieve draft results for chosen league.
 
         Examples:
@@ -1469,7 +1478,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[DraftResult]: List of YFPY DraftResult instances.
+            list[dict[str, DraftResult]]: List of dictionaries containing the single key "draft_result" and value of
+            each YFPY DraftResult instance.
 
         """
         return self.query(
@@ -1477,7 +1487,7 @@ class YahooFantasySportsQuery(object):
             ["league", "draft_results"]
         )
 
-    def get_league_transactions(self) -> List[Transaction]:
+    def get_league_transactions(self) -> List[Dict[str, Transaction]]:
         """Retrieve transactions for chosen league.
 
         Examples:
@@ -1524,7 +1534,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Transaction]: List of YFPY Transaction instances.
+            list[dict[str, Transaction]]: List of dictionaries containing the single key "transaction" and value of each
+            YFPY Transaction instance.
 
         """
         return self.query(
@@ -1604,7 +1615,7 @@ class YahooFantasySportsQuery(object):
             Scoreboard
         )
 
-    def get_league_matchups_by_week(self, chosen_week: int) -> List[Matchup]:
+    def get_league_matchups_by_week(self, chosen_week: int) -> List[Dict[str, Matchup]]:
         """Retrieve matchups for chosen league by week.
 
         Args:
@@ -1662,7 +1673,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Matchup]: List of YFPY Matchup instances.
+            list[dict[str, Matchup]]: List of dictionaries containing the single key "matchup" and value of each YFPY
+            Matchup instance.
 
         """
         return self.query(
@@ -1999,7 +2011,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_team_roster_player_info_by_week(self, team_id: str,
-                                            chosen_week: Union[int, str] = "current") -> List[Player]:
+                                            chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
 
         Args:
@@ -2093,8 +2105,9 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Player]: List of YFPY Player instances containing the keys "draft_analysis", "ownership",
-            "percent_owned", and "player_stats", which each return instances of their respective YFPY objects.
+            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
+            Player instance containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats",
+            which each return instances of their respective YFPY objects.
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
@@ -2104,7 +2117,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_info_by_date(self, team_id: str, chosen_date: str = None) -> List[Player]:
+    def get_team_roster_player_info_by_date(self, team_id: str, chosen_date: str = None) -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
 
         Note:
@@ -2194,8 +2207,9 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Player]: List of YFPY Player instances containing the keys "draft_analysis", "ownership",
-            "percent_owned", and "player_stats", which each return instances of their respective YFPY objects.
+            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
+            Player instance containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats",
+            which each return instances of their respective YFPY objects.
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
@@ -2206,7 +2220,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats(self, team_id: str) -> List[Player]:
+    def get_team_roster_player_stats(self, team_id: str) -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
 
         Args:
@@ -2286,8 +2300,9 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Player]: List of YFPY Player instances containing the keys "draft_analysis", "ownership",
-            "percent_owned", and "player_stats", which each return instances of their respective YFPY objects.
+            list[dict[str, Player]]: List of dictionaries with key = "player" and value = YFPY Player instance
+            containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats", which each
+            return instances of their respective YFPY objects.
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
@@ -2297,7 +2312,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_team_roster_player_stats_by_week(self, team_id: str,
-                                             chosen_week: Union[int, str] = "current") -> List[Player]:
+                                             chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
 
         Args:
@@ -2375,8 +2390,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Player]: List of YFPY Player instances containing the "player_stats" key (returns a YFPY PlayerStats
-            instance).
+            list[dict[str, Player]]: List of dictionaries with key = "player" and value = YFPY Player instance
+            containing the "player_stats" key (returns a YFPY PlayerStats instance).
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
@@ -2385,7 +2400,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_draft_results(self, team_id: str) -> List[DraftResult]:
+    def get_team_draft_results(self, team_id: str) -> List[Dict[str, DraftResult]]:
         """Retrieve draft results of specific team by team_id for chosen league.
 
         Args:
@@ -2410,7 +2425,8 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[DraftResult]: List of YFPY DraftResult instances.
+            list[dict[str, DraftResult]]: List of dictionaries with key = "draft_result" and value = YFPY DraftResult
+            instance.
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
@@ -2419,7 +2435,7 @@ class YahooFantasySportsQuery(object):
             ["team", "draft_results"]
         )
 
-    def get_team_matchups(self, team_id: str) -> List[Matchup]:
+    def get_team_matchups(self, team_id: str) -> List[Dict[str, Matchup]]:
         """Retrieve matchups of specific team by team_id for chosen league.
 
         Args:
@@ -2440,7 +2456,7 @@ class YahooFantasySportsQuery(object):
             ]
 
         Returns:
-            list[Matchup]: List of YFPY Matchup instances.
+            list[dict[str, Matchup]]: List of dictionaries with key = "matchup" and value = YFPY Matchup instance.
 
         """
         team_key = self.get_league_key() + ".t." + str(team_id)
