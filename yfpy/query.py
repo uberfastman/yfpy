@@ -16,7 +16,7 @@ import logging
 import time
 from json import JSONDecodeError
 from pathlib import Path, PosixPath
-from typing import Union, List, Dict, Type
+from typing import Dict, List, Type, TypeVar, Union
 
 from requests import Response
 from requests.exceptions import HTTPError
@@ -39,6 +39,8 @@ logging.getLogger("yahoo_oauth").setLevel(level=logging.INFO)
 class YahooFantasySportsQuery(object):
     """Yahoo Fantasy Sports REST API query CLASS to retrieve all types of fantasy sports data.
     """
+
+    YFO = TypeVar("YFO", bound=YahooFantasyObject)
 
     def __init__(self, auth_dir: Union[Path, str], league_id: str, game_id: int = None, game_code: str = "nfl",
                  offline: bool = False, all_output_as_json: bool = False, consumer_key: str = None,
@@ -232,7 +234,7 @@ class YahooFantasySportsQuery(object):
 
     # noinspection GrazieInspection
     def query(self, url: str, data_key_list: Union[List[str], List[List[str]]], data_type_class: Type = None) -> (
-            Union[str, YahooFantasyObject, List[YahooFantasyObject], Dict[str, YahooFantasyObject]]):
+            Union[str, YFO, List[YFO], Dict[str, YFO]]):
         """Base query class to retrieve requested data from the Yahoo fantasy sports REST API.
 
         Args:

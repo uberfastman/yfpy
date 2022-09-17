@@ -842,7 +842,7 @@ class Settings(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.cant_cut_list = self.extracted_data.get("cant_cut_list", "")
-        self.divisions = self.extracted_data.get("divisions", 0)
+        self.divisions = self.extracted_data.get("divisions", [])
         self.draft_pick_time = self.extracted_data.get("draft_pick_time", 0)
         self.draft_time = self.extracted_data.get("draft_time", 0)
         self.draft_type = self.extracted_data.get("draft_type", "")
