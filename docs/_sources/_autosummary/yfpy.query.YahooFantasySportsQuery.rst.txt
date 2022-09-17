@@ -1,4 +1,4 @@
-yfpy.query.YahooFantasySportsQuery
+﻿yfpy.query.YahooFantasySportsQuery
 ==================================
 
 .. currentmodule:: yfpy.query
@@ -65,5 +65,11 @@ yfpy.query.YahooFantasySportsQuery
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~YahooFantasySportsQuery.YFO
    
    

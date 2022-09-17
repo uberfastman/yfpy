@@ -34,7 +34,7 @@ __email__ = "uberfastman@uberfastman.dev"
 
 import json
 from pathlib import Path, PosixPath
-from typing import Union, List, Dict, Callable, Type, Any
+from typing import Any, Callable, Dict, List, Type, TypeVar, Union
 
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
@@ -47,6 +47,8 @@ logger = get_logger(__name__)
 class Data(object):
     """YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.
     """
+
+    YFO = TypeVar("YFO", bound=YahooFantasyObject)
 
     def __init__(self, data_dir: Union[Path, str], save_data: bool = False, dev_offline: bool = False):
         """Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.
@@ -75,9 +77,8 @@ class Data(object):
         self.data_dir = new_save_dir if type(new_save_dir) == PosixPath else Path(new_save_dir)  # type: Path
 
     @staticmethod
-    def get(yf_query: Callable, params: Union[Dict[str, str], None] = None) -> Union[str, YahooFantasyObject,
-                                                                                     List[YahooFantasyObject],
-                                                                                     Dict[str, YahooFantasyObject]]:
+    def get(yf_query: Callable, params: Union[Dict[str, str], None] = None) -> Union[str, YFO, List[YFO],
+                                                                                     Dict[str, YFO]]:
         """Run query to retrieve Yahoo Fantasy Sports data.
 
         Args:
@@ -94,8 +95,7 @@ class Data(object):
             return yf_query()
 
     def save(self, file_name: str, yf_query: Callable, params: Union[Dict[str, Any], None] = None,
-             new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
-                                                                   Dict[str, YahooFantasyObject]]:
+             new_data_dir: Union[Path, str, None] = None) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
         """Retrieve and save Yahoo Fantasy Sports data locally.
 
         Args:
@@ -129,8 +129,7 @@ class Data(object):
         return data
 
     def load(self, file_name: str, data_type_class: Type[YahooFantasyObject] = None,
-             new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject, List[YahooFantasyObject],
-                                                                   Dict[str, YahooFantasyObject]]:
+             new_data_dir: Union[Path, str, None] = None) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
         """Load Yahoo Fantasy Sports data already stored locally.
 
         Note:
@@ -164,9 +163,7 @@ class Data(object):
 
     def retrieve(self, file_name: str, yf_query: Callable, params: Union[Dict[str, str], None] = None,
                  data_type_class: Type[YahooFantasyObject] = None,
-                 new_data_dir: Union[Path, str, None] = None) -> Union[str, YahooFantasyObject,
-                                                                       List[YahooFantasyObject],
-                                                                       Dict[str, YahooFantasyObject]]:
+                 new_data_dir: Union[Path, str, None] = None) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
         """Fetch data from the web or load it locally (combination of the save and load methods).
 
         Args:

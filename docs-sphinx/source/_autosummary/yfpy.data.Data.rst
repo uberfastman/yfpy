@@ -1,4 +1,4 @@
-yfpy.data.Data
+﻿yfpy.data.Data
 ==============
 
 .. currentmodule:: yfpy.data
@@ -25,5 +25,11 @@ yfpy.data.Data
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Data.YFO
    
    

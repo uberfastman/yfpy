@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query &mdash; YFPY v8.0.8 documentation</title>
+  <title>yfpy.query &mdash; YFPY v8.0.9 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -33,7 +33,7 @@
             <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.8
+                v8.0.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -496,7 +496,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PosixPath</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Response</span>
 <span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="kn">import</span> <span class="n">HTTPError</span>
@@ -519,6 +519,8 @@
 <div class="viewcode-block" id="YahooFantasySportsQuery"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery">[docs]</a><span class="k">class</span> <span class="nc">YahooFantasySportsQuery</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Yahoo Fantasy Sports REST API query CLASS to retrieve all types of fantasy sports data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">YFO</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;YFO&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">YahooFantasyObject</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">game_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nfl&quot;</span><span class="p">,</span>
                  <span class="n">offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">all_output_as_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">consumer_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -712,7 +714,7 @@
 
     <span class="c1"># noinspection GrazieInspection</span>
 <div class="viewcode-block" id="YahooFantasySportsQuery.query"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_key_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
-            <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YahooFantasyObject</span><span class="p">]]):</span>
+            <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]):</span>
         <span class="sd">&quot;&quot;&quot;Base query class to retrieve requested data from the Yahoo fantasy sports REST API.</span>
 
 <span class="sd">        Args:</span>
