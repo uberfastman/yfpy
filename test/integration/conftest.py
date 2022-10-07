@@ -49,7 +49,7 @@ def yahoo_query(auth_dir: Union[Path, str], league_id: str, game_id, game_code: 
         game_id=game_id,
         game_code=game_code,
         offline=False,
-        all_output_as_json=False,
+        all_output_as_json_str=False,
         consumer_key=os.environ["YFPY_CONSUMER_KEY"],
         consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
         browser_callback=browser_callback

@@ -14,7 +14,7 @@ Example:
             game_id="<game_key>",
             game_code="<game_code>",
             offline=False,
-            all_output_as_json=False,
+            all_output_as_json_str=False,
             consumer_key=os.environ["YFPY_CONSUMER_KEY"],
             consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
             browser_callback=True
@@ -32,6 +32,7 @@ Attributes:
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
+import inspect
 import json
 from pathlib import Path, PosixPath
 from typing import Any, Callable, Dict, List, Type, TypeVar, Union
@@ -39,7 +40,7 @@ from typing import Any, Callable, Dict, List, Type, TypeVar, Union
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
 from yfpy.query import YahooFantasySportsQuery
-from yfpy.utils import complex_json_handler, unpack_data
+from yfpy.utils import jsonify_data, jsonify_data_to_file, unpack_data
 
 logger = get_logger(__name__)
 
@@ -77,8 +78,8 @@ class Data(object):
         self.data_dir = new_save_dir if type(new_save_dir) == PosixPath else Path(new_save_dir)  # type: Path
 
     @staticmethod
-    def get(yf_query: Callable, params: Union[Dict[str, str], None] = None) -> Union[str, YFO, List[YFO],
-                                                                                     Dict[str, YFO]]:
+    def fetch(yf_query: Callable,
+              params: Union[Dict[str, str], None] = None) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
         """Run query to retrieve Yahoo Fantasy Sports data.
 
         Args:
@@ -118,18 +119,37 @@ class Data(object):
         if not self.data_dir.exists():
             self.data_dir.mkdir(parents=True, exist_ok=True)
 
+        # check if parent YahooFantasySportsQuery has all_output_as_json_str = True and unset it for data saving
+        all_output_as_json = False
+        if inspect.ismethod(yf_query):
+            # noinspection PyUnresolvedReferences
+            for cls in inspect.getmro(yf_query.__self__.__class__):
+                if yf_query.__name__ in cls.__dict__:
+                    # noinspection PyUnresolvedReferences
+                    yf_query.__self__.all_output_as_json_str = False
+                    all_output_as_json = True
+
         # run the actual yfpy query and retrieve the query results
-        data = self.get(yf_query, params)
+        data = self.fetch(yf_query, params)
 
         # save the retrieved data locally
-        saved_data_file_path = self.data_dir / (file_name + ".json")
+        saved_data_file_path = self.data_dir / f"{file_name}.json"
         with open(saved_data_file_path, "w", encoding="utf-8") as data_file:
-            json.dump(data, data_file, ensure_ascii=False, indent=2, default=complex_json_handler)
+            jsonify_data_to_file(data, data_file)
         logger.debug(f"Data saved locally to: {saved_data_file_path}")
+
+        # reset parent YahooFantasySportsQuery all_output_as_json_str = True and re-run query for json string return
+        if all_output_as_json:
+            # noinspection PyUnresolvedReferences
+            yf_query.__self__.all_output_as_json_str = True
+            # data = self.get(yf_query, params)
+            data = jsonify_data(data)
+
         return data
 
     def load(self, file_name: str, data_type_class: Type[YahooFantasyObject] = None,
-             new_data_dir: Union[Path, str, None] = None) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
+             new_data_dir: Union[Path, str, None] = None,
+             all_output_as_json_str: bool = False) -> Union[str, YFO, List[YFO], Dict[str, YFO]]:
         """Load Yahoo Fantasy Sports data already stored locally.
 
         Note:
@@ -139,6 +159,7 @@ class Data(object):
             file_name (str): Name of file from which data will be loaded.
             data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.
             new_data_dir (str | Path, optional): Full path to new desired directory from which data will be loaded.
+            all_output_as_json_str (bool): Boolean indicating if the output has been requested as a raw JSON string.
 
         Returns:
             object: Data loaded from the selected JSON file.
@@ -150,7 +171,7 @@ class Data(object):
             self.update_data_dir(new_data_dir)
 
         # load selected data file
-        saved_data_file_path = self.data_dir / (file_name + ".json")
+        saved_data_file_path = self.data_dir / f"{file_name}.json"
         if saved_data_file_path.exists():
             with open(saved_data_file_path, "r", encoding="utf-8") as data_file:
                 unpacked = unpack_data(json.load(data_file), YahooFantasyObject)
@@ -159,7 +180,11 @@ class Data(object):
         else:
             raise FileNotFoundError(f"File {saved_data_file_path} does not exist. Cannot load data locally without "
                                     f"having previously saved data.")
-        return data
+
+        if all_output_as_json_str:
+            return jsonify_data(data)
+        else:
+            return data
 
     def retrieve(self, file_name: str, yf_query: Callable, params: Union[Dict[str, str], None] = None,
                  data_type_class: Type[YahooFantasyObject] = None,
@@ -184,4 +209,4 @@ class Data(object):
             if self.save_data:
                 return self.save(file_name, yf_query, params, new_data_dir)
             else:
-                return self.get(yf_query, params)
+                return self.fetch(yf_query, params)

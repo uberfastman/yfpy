@@ -45,7 +45,12 @@ def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_id, sh
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load("user", User, new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        "user",
+        User,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -57,12 +62,19 @@ def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_id, show
     """Retrieve game history for current logged-in user.
     """
     new_data_dir = data_dir
-    query_result_data = yahoo_data.save("user-games", yahoo_query.get_user_games,
-                                        new_data_dir=new_data_dir)
+    query_result_data = yahoo_data.save(
+        "user-games",
+        yahoo_query.get_user_games,
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load("user-games", new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        "user-games",
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -87,7 +99,11 @@ def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, 
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load("user-leagues", new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        "user-leagues",
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -99,12 +115,19 @@ def test_get_user_teams(yahoo_query, yahoo_data, data_dir, season, game_id, show
     """Retrieve teams for all leagues for current logged-in user for current game.
     """
     new_data_dir = data_dir
-    query_result_data = yahoo_data.save("user-teams", yahoo_query.get_user_teams,
-                                        new_data_dir=new_data_dir)
+    query_result_data = yahoo_data.save(
+        "user-teams",
+        yahoo_query.get_user_teams,
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load("user-teams", new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        "user-teams",
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 

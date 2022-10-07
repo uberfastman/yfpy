@@ -4,16 +4,15 @@
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
-from logging import getLogger, Logger, Formatter, StreamHandler
-from typing import Union
+from logging import getLogger, Logger, Formatter, StreamHandler, INFO
 
 
-def get_logger(name: str, level: Union[int, None] = None) -> Logger:
+def get_logger(name: str, level: int = INFO) -> Logger:
     """Get custom YFPY logger object.
 
     Args:
         name (str): The module name for the logger.
-        level (int): The log level for the logger.
+        level (int): The log level for the logger. Default level set to INFO.
 
     Returns:
         Logger: A Python Logger object with custom configuration and formatting.

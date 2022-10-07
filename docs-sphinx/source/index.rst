@@ -3,6 +3,7 @@
    :maxdepth: 2
 
    index
+   Quickstart <yfpy-quickstart>
    Package <_autosummary/yfpy>
    Tests <_autosummary/test>
 

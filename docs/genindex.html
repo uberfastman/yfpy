@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; YFPY v8.0.9 documentation</title>
+  <title>Index &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -33,7 +33,7 @@
             <img src="_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,6 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -115,6 +116,8 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -265,6 +268,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -336,6 +340,8 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -490,6 +496,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
@@ -526,7 +533,7 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.all_output_as_json">all_output_as_json (YahooFantasySportsQuery attribute)</a>
+      <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.all_output_as_json_str">all_output_as_json_str (YahooFantasySportsQuery attribute)</a>
 </li>
       <li><a href="_autosummary/yfpy.models.League.html#yfpy.models.League.allow_add_to_dl_extra_pos">allow_add_to_dl_extra_pos (League attribute)</a>
 </li>
@@ -864,6 +871,8 @@
 </li>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field">fantasy_content_data_field (YahooFantasySportsQuery attribute)</a>
 </li>
+      <li><a href="_autosummary/yfpy.data.Data.html#yfpy.data.Data.fetch">fetch() (Data static method)</a>
+</li>
       <li><a href="_autosummary/yfpy.models.Name.html#yfpy.models.Name.first">first (Name attribute)</a>
 </li>
       <li><a href="_autosummary/yfpy.models.Player.html#yfpy.models.Player.first_name">first_name (Player attribute)</a>
@@ -1012,8 +1021,6 @@
 </li>
       <li><a href="_autosummary/yfpy.models.GameWeek.html#yfpy.models.GameWeek">GameWeek (class in yfpy.models)</a>
 </li>
-      <li><a href="_autosummary/yfpy.data.Data.html#yfpy.data.Data.get">get() (Data static method)</a>
-</li>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_all_yahoo_fantasy_game_keys">get_all_yahoo_fantasy_game_keys() (YahooFantasySportsQuery method)</a>
 </li>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_current_game_info">get_current_game_info() (YahooFantasySportsQuery method)</a>
@@ -1046,10 +1053,10 @@
 </li>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_metadata">get_league_metadata() (YahooFantasySportsQuery method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_players">get_league_players() (YahooFantasySportsQuery method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_scoreboard_by_week">get_league_scoreboard_by_week() (YahooFantasySportsQuery method)</a>
 </li>
       <li><a href="_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_settings">get_league_settings() (YahooFantasySportsQuery method)</a>
@@ -1238,6 +1245,18 @@
       <li><a href="_autosummary/yfpy.models.Matchup.html#yfpy.models.Matchup.is_tied">is_tied (Matchup attribute)</a>
 </li>
       <li><a href="_autosummary/yfpy.models.Player.html#yfpy.models.Player.is_undroppable">is_undroppable (Player attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/yfpy.utils.jsonify_data.html#yfpy.utils.jsonify_data">jsonify_data() (in module yfpy.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/yfpy.utils.jsonify_data_to_file.html#yfpy.utils.jsonify_data_to_file">jsonify_data_to_file() (in module yfpy.utils)</a>
 </li>
   </ul></td>
 </tr></table>
