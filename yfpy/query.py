@@ -16,7 +16,7 @@ import logging
 import time
 from json import JSONDecodeError
 from pathlib import Path, PosixPath
-from typing import Dict, List, Type, TypeVar, Union
+from typing import Callable, Dict, List, Type, TypeVar, Union
 
 from requests import Response
 from requests.exceptions import HTTPError
@@ -27,7 +27,7 @@ from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject, DraftResult, Game, GameWeek, User, League, Standings, Settings, Player, \
     PositionType, StatCategories, Transaction, Scoreboard, Team, TeamPoints, TeamProjectedPoints, TeamStandings, \
     Roster, RosterPosition, Matchup
-from yfpy.utils import reformat_json_list, unpack_data, complex_json_handler, prettify_data
+from yfpy.utils import jsonify_data, prettify_data, reformat_json_list, unpack_data
 
 logger = get_logger(__name__)
 
@@ -43,7 +43,7 @@ class YahooFantasySportsQuery(object):
     YFO = TypeVar("YFO", bound=YahooFantasyObject)
 
     def __init__(self, auth_dir: Union[Path, str], league_id: str, game_id: int = None, game_code: str = "nfl",
-                 offline: bool = False, all_output_as_json: bool = False, consumer_key: str = None,
+                 offline: bool = False, all_output_as_json_str: bool = False, consumer_key: str = None,
                  consumer_secret: str = None, browser_callback: bool = True):
         """Instantiate a YahooQueryObject for running queries against the Yahoo fantasy REST API.
 
@@ -58,7 +58,7 @@ class YahooFantasySportsQuery(object):
                 (fantasy basketball)
             offline (:obj:`bool`, optional): Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data
                 has been previously saved locally using the Data module in data.py).
-            all_output_as_json (:obj:`bool`, optional): Option to automatically convert all query output to JSON
+            all_output_as_json_str (:obj:`bool`, optional): Option to automatically convert all query output to JSON
                 strings.
             consumer_key (:obj:`str`, optional): User defined consumer key to use instead of values stored in the
                 private.json file (must be defined alongside a user defined consumer secret).
@@ -89,7 +89,7 @@ class YahooFantasySportsQuery(object):
                 basketball)
             offline (bool): Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data has been
                 previously saved locally using the Data module in data.py).
-            all_output_as_json (bool): Option to automatically convert all query output to JSON strings.
+            all_output_as_json_str (bool): Option to automatically convert all query output to JSON strings.
             league_key (str): The Yahoo Fantasy Sports league key formatted as <game_id>.l.<league_id>.
             executed_queries (list[dict[str, Any]]): List of completed queries and their responses.
 
@@ -107,7 +107,7 @@ class YahooFantasySportsQuery(object):
         self.game_code = game_code
 
         self.offline = offline
-        self.all_output_as_json = all_output_as_json
+        self.all_output_as_json_str = all_output_as_json_str
 
         self.league_key = None
         self.executed_queries = []
@@ -233,8 +233,8 @@ class YahooFantasySportsQuery(object):
         return response
 
     # noinspection GrazieInspection
-    def query(self, url: str, data_key_list: Union[List[str], List[List[str]]], data_type_class: Type = None) -> (
-            Union[str, YFO, List[YFO], Dict[str, YFO]]):
+    def query(self, url: str, data_key_list: Union[List[str], List[List[str]]], data_type_class: Type = None,
+              sort_function: Callable = None) -> (Union[str, YFO, List[YFO], Dict[str, YFO]]):
         """Base query class to retrieve requested data from the Yahoo fantasy sports REST API.
 
         Args:
@@ -245,6 +245,8 @@ class YahooFantasySportsQuery(object):
                 such as ["team", ["team_points", "team_projected_points"]].
             data_type_class (:obj:`Type`, optional): Highest level data model type (if one exists for the retrieved
                 data).
+            sort_function (Callable of sort function, optional)): Optional lambda function to return sorted query
+                results.
 
         Returns:
             object: Model class instance from yfpy/models.py, dictionary, or list (depending on query), with unpacked
@@ -295,8 +297,10 @@ class YahooFantasySportsQuery(object):
 
             # cast the highest level of data to type corresponding to query (if type exists)
             query_data = data_type_class(unpacked) if data_type_class else unpacked
-            if self.all_output_as_json:
-                return json.dumps(query_data, indent=2, default=complex_json_handler, ensure_ascii=False)
+            if sort_function and not isinstance(query_data, dict):
+                query_data = sorted(query_data, key=sort_function)
+            if self.all_output_as_json_str:
+                return jsonify_data(query_data)
             else:
                 return query_data
 
@@ -334,12 +338,10 @@ class YahooFantasySportsQuery(object):
             instance.
 
         """
-        return sorted(
-            self.query(
-                f"https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes={self.game_code}",
-                ["games"]
-            ),
-            key=lambda x: x.get("game").season
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes={self.game_code}",
+            ["games"],
+            sort_function=lambda x: x.get("game").season
         )
 
     # noinspection PyUnresolvedReferences
@@ -360,10 +362,20 @@ class YahooFantasySportsQuery(object):
             str: The game key for a Yahoo Fantasy Sports game specified by season.
 
         """
-        return self.query(
+        all_output_as_json = False
+        if self.all_output_as_json_str:
+            self.all_output_as_json_str = False
+            all_output_as_json = True
+
+        game_key = self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes={self.game_code};seasons={season}",
             ["games"]
         ).get("game").game_key
+
+        if all_output_as_json:
+            self.all_output_as_json_str = True
+
+        return game_key
 
     def get_current_game_info(self) -> Game:
         """Retrieve game info for current fantasy season.
@@ -709,12 +721,10 @@ class YahooFantasySportsQuery(object):
             each YFPY PositionType instance.
 
         """
-        return sorted(
-            self.query(
-                f"https://fantasysports.yahooapis.com/fantasy/v2/game/{game_id}/position_types",
-                ["game", "position_types"]
-            ),
-            key=lambda x: x.get("position_type").type
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/game/{game_id}/position_types",
+            ["game", "position_types"],
+            sort_function=lambda x: x.get("position_type").type
         )
 
     def get_game_roster_positions_by_game_id(self, game_id: int) -> List[Dict[str, RosterPosition]]:
@@ -748,12 +758,10 @@ class YahooFantasySportsQuery(object):
             of each YFPY RosterPosition instance.
 
         """
-        return sorted(
-            self.query(
-                f"https://fantasysports.yahooapis.com/fantasy/v2/game/{game_id}/roster_positions",
-                ["game", "roster_positions"]
-            ),
-            key=lambda x: x.get("roster_position").position
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/game/{game_id}/roster_positions",
+            ["game", "roster_positions"],
+            sort_function=lambda x: x.get("roster_position").position
         )
 
     def get_league_key(self, season: int = None) -> str:
@@ -775,13 +783,13 @@ class YahooFantasySportsQuery(object):
         """
         if not self.league_key:
             if season:
-                return self.get_game_key_by_season(season) + ".l." + self.league_id
+                return f"{self.get_game_key_by_season(season)}.l.{self.league_id}"
             elif self.game_id:
-                return self.get_game_metadata_by_game_id(self.game_id).game_key + ".l." + self.league_id
+                return f"{self.get_game_metadata_by_game_id(self.game_id).game_key}.l.{self.league_id}"
             else:
                 logger.warning(
                     "No game id or season/year provided, defaulting to current fantasy season.")
-                return self.get_current_game_metadata().game_key + ".l." + self.league_id
+                return f"{self.get_current_game_metadata().game_key}.l.{self.league_id}"
         else:
             return self.league_key
 
@@ -838,19 +846,17 @@ class YahooFantasySportsQuery(object):
             instance.
 
         """
-        return sorted(
-            self.query(
-                f"https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes={self.game_code}/",
-                ["users", "0", "user", "games"]
-            ),
-            key=lambda x: x.get("game").season
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes={self.game_code}/",
+            ["users", "0", "user", "games"],
+            sort_function=lambda x: x.get("game").season
         )
 
-    def get_user_leagues_by_game_key(self, game_key: int) -> List[Dict[str, League]]:
-        """Retrieve league history for current logged-in user for specific game by ID sorted by season/year.
+    def get_user_leagues_by_game_key(self, game_key: Union[int, str]) -> List[Dict[str, League]]:
+        """Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.
 
         Args:
-            game_key (int): The game_id for a specific Yahoo Fantasy game.
+            game_key (int | str): The game_id (int) or game_key (str) for a specific Yahoo Fantasy game.
 
         Examples:
             >>> from pathlib import Path
@@ -899,12 +905,10 @@ class YahooFantasySportsQuery(object):
         """
         leagues = self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys={game_key}/leagues/",
-            ["users", "0", "user", "games", "0", "game", "leagues"]
+            ["users", "0", "user", "games", "0", "game", "leagues"],
+            sort_function=lambda x: x.get("league").season
         )
-        if isinstance(leagues, list):
-            return sorted(leagues, key=lambda x: x.get("league").season)
-        else:
-            return list(leagues)
+        return leagues if isinstance(leagues, list) else [leagues]
 
     def get_user_teams(self) -> List[Dict[str, Game]]:
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
@@ -977,12 +981,10 @@ class YahooFantasySportsQuery(object):
             instance with "teams" field containing list of YFPY Team instances.
 
         """
-        return sorted(
-            self.query(
-                f"https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes={self.game_code}/teams/",
-                ["users", "0", "user", "games"]
-            ),
-            key=lambda x: x.get("game").season
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes={self.game_code}/teams/",
+            ["users", "0", "user", "games"],
+            sort_function=lambda x: x.get("game").season
         )
 
     def get_league_info(self) -> League:
@@ -1685,11 +1687,11 @@ class YahooFantasySportsQuery(object):
             ["league", "scoreboard", "0", "matchups"]
         )
 
-    def get_team_info(self, team_id: str) -> Team:
+    def get_team_info(self, team_id: Union[str, int]) -> Team:
         """Retrieve info of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -1765,7 +1767,7 @@ class YahooFantasySportsQuery(object):
             Team: YFPY Team instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key};"
             f"out=metadata,stats,standings,roster,draftresults,matchups",
@@ -1773,11 +1775,11 @@ class YahooFantasySportsQuery(object):
             Team
         )
 
-    def get_team_metadata(self, team_id: str) -> Team:
+    def get_team_metadata(self, team_id: Union[str, int]) -> Team:
         """Retrieve metadata of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -1823,18 +1825,18 @@ class YahooFantasySportsQuery(object):
             Team: YFPY Team instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/metadata",
             ["team"],
             Team
         )
 
-    def get_team_stats(self, team_id: str) -> TeamPoints:
+    def get_team_stats(self, team_id: Union[str, int]) -> TeamPoints:
         """Retrieve stats of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -1852,19 +1854,19 @@ class YahooFantasySportsQuery(object):
             TeamPoints: YFPY TeamPoints instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/stats",
             ["team", "team_points"],
             TeamPoints
         )
 
-    def get_team_stats_by_week(self, team_id: str, chosen_week: Union[int, str] = "current") -> (
+    def get_team_stats_by_week(self, team_id: Union[str, int], chosen_week: Union[int, str] = "current") -> (
             Dict[str, Dict[str, Union[TeamPoints, TeamProjectedPoints]]]):
         """Retrieve stats of specific team by team_id and by week for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
             chosen_week (int): Selected week for which to retrieve data.
 
@@ -1891,17 +1893,17 @@ class YahooFantasySportsQuery(object):
             YFPY TeamProjectedPoints instance with respective keys "team_points" and "team_projected_points".
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/stats;type=week;week={chosen_week}",
             ["team", ["team_points", "team_projected_points"]]
         )
 
-    def get_team_standings(self, team_id: str) -> TeamStandings:
+    def get_team_standings(self, team_id: Union[str, int]) -> TeamStandings:
         """Retrieve standings of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -1930,18 +1932,18 @@ class YahooFantasySportsQuery(object):
             TeamStandings: YFPY TeamStandings instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/standings",
             ["team", "team_standings"],
             TeamStandings
         )
 
-    def get_team_roster_by_week(self, team_id: str, chosen_week: Union[int, str] = "current") -> Roster:
+    def get_team_roster_by_week(self, team_id: Union[str, int], chosen_week: Union[int, str] = "current") -> Roster:
         """Retrieve roster of specific team by team_id and by week for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
             chosen_week (int): Selected week for which to retrieve data.
 
@@ -2005,19 +2007,19 @@ class YahooFantasySportsQuery(object):
             Roster: YFPY Roster instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster;week={chosen_week}",
             ["team", "roster"],
             Roster
         )
 
-    def get_team_roster_player_info_by_week(self, team_id: str,
+    def get_team_roster_player_info_by_week(self, team_id: Union[str, int],
                                             chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
             chosen_week (int): Selected week for which to retrieve data.
 
@@ -2112,14 +2114,15 @@ class YahooFantasySportsQuery(object):
             which each return instances of their respective YFPY objects.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster;week={chosen_week}/players;"
             f"out=metadata,stats,ownership,percent_owned,draft_analysis",
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_info_by_date(self, team_id: str, chosen_date: str = None) -> List[Dict[str, Player]]:
+    def get_team_roster_player_info_by_date(self, team_id: Union[str, int],
+                                            chosen_date: str = None) -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
 
         Note:
@@ -2127,7 +2130,7 @@ class YahooFantasySportsQuery(object):
             This query will FAIL if you pass it an INVALID date string!
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
             chosen_date (str): Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
 
@@ -2214,7 +2217,7 @@ class YahooFantasySportsQuery(object):
             which each return instances of their respective YFPY objects.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/"
             f"roster{';date=' + str(chosen_date) if chosen_date else ''}/players;"
@@ -2222,11 +2225,11 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats(self, team_id: str) -> List[Dict[str, Player]]:
+    def get_team_roster_player_stats(self, team_id: Union[str, int]) -> List[Dict[str, Player]]:
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -2307,18 +2310,18 @@ class YahooFantasySportsQuery(object):
             return instances of their respective YFPY objects.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster/players/stats;type=season",
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats_by_week(self, team_id: str,
+    def get_team_roster_player_stats_by_week(self, team_id: Union[str, int],
                                              chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
             chosen_week (int): Selected week for which to retrieve data.
 
@@ -2396,17 +2399,17 @@ class YahooFantasySportsQuery(object):
             containing the "player_stats" key (returns a YFPY PlayerStats instance).
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster;week={chosen_week}/players/stats",
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_draft_results(self, team_id: str) -> List[Dict[str, DraftResult]]:
+    def get_team_draft_results(self, team_id: Union[str, int]) -> List[Dict[str, DraftResult]]:
         """Retrieve draft results of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -2431,17 +2434,17 @@ class YahooFantasySportsQuery(object):
             instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/draftresults",
             ["team", "draft_results"]
         )
 
-    def get_team_matchups(self, team_id: str) -> List[Dict[str, Matchup]]:
+    def get_team_matchups(self, team_id: Union[str, int]) -> List[Dict[str, Matchup]]:
         """Retrieve matchups of specific team by team_id for chosen league.
 
         Args:
-            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the
                 number of teams in the league).
 
         Examples:
@@ -2461,7 +2464,7 @@ class YahooFantasySportsQuery(object):
             list[dict[str, Matchup]]: List of dictionaries with key = "matchup" and value = YFPY Matchup instance.
 
         """
-        team_key = self.get_league_key() + ".t." + str(team_id)
+        team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/matchups",
             ["team", "matchups"]

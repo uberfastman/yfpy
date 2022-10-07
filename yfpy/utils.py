@@ -11,13 +11,56 @@ __email__ = "uberfastman@uberfastman.dev"
 import json
 import re
 from collections import ChainMap, OrderedDict
-from typing import Any, Union, Type, Dict, List
+from typing import Any, Dict, IO, List, Type, Union
 
 import stringcase
 
 from yfpy.logger import get_logger
 
 logger = get_logger(__name__)
+
+
+def complex_json_handler(obj: Any) -> Any:
+    """Custom handler to allow custom YFPY objects to be serialized into JSON.
+
+    Args:
+        obj (Any): Unserializable Python object to be serialized into JSON.
+
+    Returns:
+        Any: Serializable version of the Python object.
+
+    """
+    if hasattr(obj, "serialized"):
+        return obj.serialized()
+    else:
+        try:
+            return str(obj, "utf-8")
+        except TypeError:
+            raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
+
+
+def jsonify_data(data: object) -> str:
+    """Function to serialize a YahooFantasyObject to a JSON string.
+
+    Args:
+        data (object): YahooFantasyObject to be serialized to a JSON string.
+
+    Returns:
+        str: JSON string serialized from YahooFantasyObject.
+
+    """
+    return json.dumps(data, indent=2, ensure_ascii=False, default=complex_json_handler)
+
+
+def jsonify_data_to_file(data: object, data_file: IO[str]) -> None:
+    """Function to serialize a YahooFantasyObject to JSON and output it to a file.
+
+    Args:
+        data (object): YahooFantasyObject to be serialized to JSON and output to a file.
+        data_file (IO[str])
+
+    """
+    json.dump(data, data_file, indent=2, ensure_ascii=False, default=complex_json_handler)
 
 
 def prettify_data(data: object) -> str:
@@ -30,7 +73,7 @@ def prettify_data(data: object) -> str:
         str: JSON string that has been formatted with indents (two spaces).
 
     """
-    return f"\n{json.dumps(data, indent=2, default=complex_json_handler, ensure_ascii=False)}\n"
+    return f"\n{jsonify_data(data)}\n"
 
 
 # noinspection PyTypeChecker
@@ -272,25 +315,6 @@ def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: st
     return OrderedDict(
         (str(k), out[str(k)]) for k in sorted(
             [int(k_v) if isinstance(k_v, int) else k_v for k_v in out.keys()]))
-
-
-def complex_json_handler(obj: Any) -> Any:
-    """Custom handler to allow custom YFPY objects to be serialized into JSON.
-
-    Args:
-        obj (Any): Unserializable Python object to be serialized into JSON.
-
-    Returns:
-        Any: Serializable version of the Python object.
-
-    """
-    if hasattr(obj, "serialized"):
-        return obj.serialized()
-    else:
-        try:
-            return str(obj, "utf-8")
-        except TypeError:
-            raise TypeError('Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj)))
 
 
 def reformat_json_list(json_obj: Any) -> Any:
