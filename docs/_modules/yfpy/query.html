@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query &mdash; YFPY v8.0.9 documentation</title>
+  <title>yfpy.query &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -33,7 +33,7 @@
             <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -44,6 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -115,6 +116,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -265,6 +268,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -336,6 +340,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -496,7 +502,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PosixPath</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Response</span>
 <span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="kn">import</span> <span class="n">HTTPError</span>
@@ -507,7 +513,7 @@
 <span class="kn">from</span> <span class="nn">yfpy.models</span> <span class="kn">import</span> <span class="n">YahooFantasyObject</span><span class="p">,</span> <span class="n">DraftResult</span><span class="p">,</span> <span class="n">Game</span><span class="p">,</span> <span class="n">GameWeek</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">League</span><span class="p">,</span> <span class="n">Standings</span><span class="p">,</span> <span class="n">Settings</span><span class="p">,</span> <span class="n">Player</span><span class="p">,</span> \
     <span class="n">PositionType</span><span class="p">,</span> <span class="n">StatCategories</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Scoreboard</span><span class="p">,</span> <span class="n">Team</span><span class="p">,</span> <span class="n">TeamPoints</span><span class="p">,</span> <span class="n">TeamProjectedPoints</span><span class="p">,</span> <span class="n">TeamStandings</span><span class="p">,</span> \
     <span class="n">Roster</span><span class="p">,</span> <span class="n">RosterPosition</span><span class="p">,</span> <span class="n">Matchup</span>
-<span class="kn">from</span> <span class="nn">yfpy.utils</span> <span class="kn">import</span> <span class="n">reformat_json_list</span><span class="p">,</span> <span class="n">unpack_data</span><span class="p">,</span> <span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">prettify_data</span>
+<span class="kn">from</span> <span class="nn">yfpy.utils</span> <span class="kn">import</span> <span class="n">jsonify_data</span><span class="p">,</span> <span class="n">prettify_data</span><span class="p">,</span> <span class="n">reformat_json_list</span><span class="p">,</span> <span class="n">unpack_data</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -523,7 +529,7 @@
     <span class="n">YFO</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;YFO&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">YahooFantasyObject</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">game_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nfl&quot;</span><span class="p">,</span>
-                 <span class="n">offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">all_output_as_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">consumer_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">all_output_as_json_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">consumer_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">consumer_secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">browser_callback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Instantiate a YahooQueryObject for running queries against the Yahoo fantasy REST API.</span>
 
@@ -538,7 +544,7 @@
 <span class="sd">                (fantasy basketball)</span>
 <span class="sd">            offline (:obj:`bool`, optional): Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data</span>
 <span class="sd">                has been previously saved locally using the Data module in data.py).</span>
-<span class="sd">            all_output_as_json (:obj:`bool`, optional): Option to automatically convert all query output to JSON</span>
+<span class="sd">            all_output_as_json_str (:obj:`bool`, optional): Option to automatically convert all query output to JSON</span>
 <span class="sd">                strings.</span>
 <span class="sd">            consumer_key (:obj:`str`, optional): User defined consumer key to use instead of values stored in the</span>
 <span class="sd">                private.json file (must be defined alongside a user defined consumer secret).</span>
@@ -569,7 +575,7 @@
 <span class="sd">                basketball)</span>
 <span class="sd">            offline (bool): Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data has been</span>
 <span class="sd">                previously saved locally using the Data module in data.py).</span>
-<span class="sd">            all_output_as_json (bool): Option to automatically convert all query output to JSON strings.</span>
+<span class="sd">            all_output_as_json_str (bool): Option to automatically convert all query output to JSON strings.</span>
 <span class="sd">            league_key (str): The Yahoo Fantasy Sports league key formatted as &lt;game_id&gt;.l.&lt;league_id&gt;.</span>
 <span class="sd">            executed_queries (list[dict[str, Any]]): List of completed queries and their responses.</span>
 
@@ -587,7 +593,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">game_code</span> <span class="o">=</span> <span class="n">game_code</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">offline</span> <span class="o">=</span> <span class="n">offline</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json</span> <span class="o">=</span> <span class="n">all_output_as_json</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span> <span class="o">=</span> <span class="n">all_output_as_json_str</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">league_key</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">executed_queries</span> <span class="o">=</span> <span class="p">[]</span>
@@ -713,8 +719,8 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
     <span class="c1"># noinspection GrazieInspection</span>
-<div class="viewcode-block" id="YahooFantasySportsQuery.query"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_key_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
-            <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]):</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.query"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_key_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="n">sort_function</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]):</span>
         <span class="sd">&quot;&quot;&quot;Base query class to retrieve requested data from the Yahoo fantasy sports REST API.</span>
 
 <span class="sd">        Args:</span>
@@ -725,6 +731,8 @@
 <span class="sd">                such as [&quot;team&quot;, [&quot;team_points&quot;, &quot;team_projected_points&quot;]].</span>
 <span class="sd">            data_type_class (:obj:`Type`, optional): Highest level data model type (if one exists for the retrieved</span>
 <span class="sd">                data).</span>
+<span class="sd">            sort_function (Callable of sort function, optional)): Optional lambda function to return sorted query</span>
+<span class="sd">                results.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            object: Model class instance from yfpy/models.py, dictionary, or list (depending on query), with unpacked</span>
@@ -775,8 +783,10 @@
 
             <span class="c1"># cast the highest level of data to type corresponding to query (if type exists)</span>
             <span class="n">query_data</span> <span class="o">=</span> <span class="n">data_type_class</span><span class="p">(</span><span class="n">unpacked</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_type_class</span> <span class="k">else</span> <span class="n">unpacked</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sort_function</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">query_data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sort_function</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify_data</span><span class="p">(</span><span class="n">query_data</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">query_data</span>
 
@@ -814,12 +824,10 @@
 <span class="sd">            instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="p">[</span><span class="s2">&quot;games&quot;</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;games&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
         <span class="p">)</span></div>
 
     <span class="c1"># noinspection PyUnresolvedReferences</span>
@@ -840,10 +848,20 @@
 <span class="sd">            str: The game key for a Yahoo Fantasy Sports game specified by season.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">all_output_as_json</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">all_output_as_json</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">game_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/games;game_codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">;seasons=</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;games&quot;</span><span class="p">]</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">game_key</span></div>
+        <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">game_key</span>
+
+        <span class="k">if</span> <span class="n">all_output_as_json</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">game_key</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_current_game_info"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_current_game_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_game_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve game info for current fantasy season.</span>
@@ -1189,12 +1207,10 @@
 <span class="sd">            each YFPY PositionType instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/game/</span><span class="si">{</span><span class="n">game_id</span><span class="si">}</span><span class="s2">/position_types&quot;</span><span class="p">,</span>
-                <span class="p">[</span><span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;position_types&quot;</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position_type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/game/</span><span class="si">{</span><span class="n">game_id</span><span class="si">}</span><span class="s2">/position_types&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;position_types&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position_type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_game_roster_positions_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_roster_positions_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_roster_positions_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RosterPosition</span><span class="p">]]:</span>
@@ -1228,12 +1244,10 @@
 <span class="sd">            of each YFPY RosterPosition instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/game/</span><span class="si">{</span><span class="n">game_id</span><span class="si">}</span><span class="s2">/roster_positions&quot;</span><span class="p">,</span>
-                <span class="p">[</span><span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;roster_positions&quot;</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;roster_position&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">position</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/game/</span><span class="si">{</span><span class="n">game_id</span><span class="si">}</span><span class="s2">/roster_positions&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;roster_positions&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;roster_position&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">position</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_league_key"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1255,13 +1269,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">league_key</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">season</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_game_key_by_season</span><span class="p">(</span><span class="n">season</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.l.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">league_id</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_game_key_by_season</span><span class="p">(</span><span class="n">season</span><span class="p">)</span><span class="si">}</span><span class="s2">.l.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_id</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_game_metadata_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game_id</span><span class="p">)</span><span class="o">.</span><span class="n">game_key</span> <span class="o">+</span> <span class="s2">&quot;.l.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">league_id</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_game_metadata_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game_id</span><span class="p">)</span><span class="o">.</span><span class="n">game_key</span><span class="si">}</span><span class="s2">.l.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                     <span class="s2">&quot;No game id or season/year provided, defaulting to current fantasy season.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_game_metadata</span><span class="p">()</span><span class="o">.</span><span class="n">game_key</span> <span class="o">+</span> <span class="s2">&quot;.l.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">league_id</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_current_game_metadata</span><span class="p">()</span><span class="o">.</span><span class="n">game_key</span><span class="si">}</span><span class="s2">.l.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">league_key</span></div>
 
@@ -1318,19 +1332,17 @@
 <span class="sd">            instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>
-                <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_leagues_by_game_key"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_leagues_by_game_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_key</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">League</span><span class="p">]]:</span>
-        <span class="sd">&quot;&quot;&quot;Retrieve league history for current logged-in user for specific game by ID sorted by season/year.</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_leagues_by_game_key"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_leagues_by_game_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">League</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            game_key (int): The game_id for a specific Yahoo Fantasy game.</span>
+<span class="sd">            game_key (int | str): The game_id (int) or game_key (str) for a specific Yahoo Fantasy game.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; from pathlib import Path</span>
@@ -1379,12 +1391,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">leagues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=</span><span class="si">{</span><span class="n">game_key</span><span class="si">}</span><span class="s2">/leagues/&quot;</span><span class="p">,</span>
-            <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;leagues&quot;</span><span class="p">]</span>
+            <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;game&quot;</span><span class="p">,</span> <span class="s2">&quot;leagues&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;league&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;league&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">leagues</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">leagues</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">leagues</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_user_teams"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_teams">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Game</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.</span>
@@ -1457,12 +1467,10 @@
 <span class="sd">            instance with &quot;teams&quot; field containing list of YFPY Team instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">/teams/&quot;</span><span class="p">,</span>
-                <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">]</span>
-            <span class="p">),</span>
-            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;codes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game_code</span><span class="si">}</span><span class="s2">/teams/&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;games&quot;</span><span class="p">],</span>
+            <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_league_info"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">League</span><span class="p">:</span>
@@ -2165,11 +2173,11 @@
             <span class="p">[</span><span class="s2">&quot;league&quot;</span><span class="p">,</span> <span class="s2">&quot;scoreboard&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;matchups&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_info"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Team</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_info"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Team</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve info of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2245,7 +2253,7 @@
 <span class="sd">            Team: YFPY Team instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">;&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;out=metadata,stats,standings,roster,draftresults,matchups&quot;</span><span class="p">,</span>
@@ -2253,11 +2261,11 @@
             <span class="n">Team</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_metadata"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Team</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_metadata"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Team</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve metadata of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2303,18 +2311,18 @@
 <span class="sd">            Team: YFPY Team instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/metadata&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">],</span>
             <span class="n">Team</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TeamPoints</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TeamPoints</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve stats of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2332,19 +2340,19 @@
 <span class="sd">            TeamPoints: YFPY TeamPoints instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/stats&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;team_points&quot;</span><span class="p">],</span>
             <span class="n">TeamPoints</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
             <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TeamPoints</span><span class="p">,</span> <span class="n">TeamProjectedPoints</span><span class="p">]]]):</span>
         <span class="sd">&quot;&quot;&quot;Retrieve stats of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 <span class="sd">            chosen_week (int): Selected week for which to retrieve data.</span>
 
@@ -2371,17 +2379,17 @@
 <span class="sd">            YFPY TeamProjectedPoints instance with respective keys &quot;team_points&quot; and &quot;team_projected_points&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/stats;type=week;week=</span><span class="si">{</span><span class="n">chosen_week</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;team_points&quot;</span><span class="p">,</span> <span class="s2">&quot;team_projected_points&quot;</span><span class="p">]]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_standings"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_standings">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_standings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TeamStandings</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_standings"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_standings">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_standings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TeamStandings</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve standings of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2410,18 +2418,18 @@
 <span class="sd">            TeamStandings: YFPY TeamStandings instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/standings&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;team_standings&quot;</span><span class="p">],</span>
             <span class="n">TeamStandings</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Roster</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Roster</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve roster of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 <span class="sd">            chosen_week (int): Selected week for which to retrieve data.</span>
 
@@ -2485,19 +2493,19 @@
 <span class="sd">            Roster: YFPY Roster instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/roster;week=</span><span class="si">{</span><span class="n">chosen_week</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">],</span>
             <span class="n">Roster</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
                                             <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 <span class="sd">            chosen_week (int): Selected week for which to retrieve data.</span>
 
@@ -2592,14 +2600,15 @@
 <span class="sd">            which each return instances of their respective YFPY objects.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/roster;week=</span><span class="si">{</span><span class="n">chosen_week</span><span class="si">}</span><span class="s2">/players;&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;out=metadata,stats,ownership,percent_owned,draft_analysis&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_date"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_date">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chosen_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_date"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_date">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+                                            <span class="n">chosen_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.</span>
 
 <span class="sd">        Note:</span>
@@ -2607,7 +2616,7 @@
 <span class="sd">            This query will FAIL if you pass it an INVALID date string!</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 <span class="sd">            chosen_date (str): Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</span>
 
@@ -2694,7 +2703,7 @@
 <span class="sd">            which each return instances of their respective YFPY objects.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;roster</span><span class="si">{</span><span class="s1">&#39;;date=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">chosen_date</span><span class="p">)</span> <span class="k">if</span> <span class="n">chosen_date</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">/players;&quot;</span>
@@ -2702,11 +2711,11 @@
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2787,18 +2796,18 @@
 <span class="sd">            return instances of their respective YFPY objects.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/roster/players/stats;type=season&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
                                              <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve roster with player stats of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 <span class="sd">            chosen_week (int): Selected week for which to retrieve data.</span>
 
@@ -2876,17 +2885,17 @@
 <span class="sd">            containing the &quot;player_stats&quot; key (returns a YFPY PlayerStats instance).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/roster;week=</span><span class="si">{</span><span class="n">chosen_week</span><span class="si">}</span><span class="s2">/players/stats&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DraftResult</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DraftResult</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve draft results of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2911,17 +2920,17 @@
 <span class="sd">            instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/draftresults&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;draft_results&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_matchups"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_matchups">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_matchups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Matchup</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_matchups"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_matchups">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_matchups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Matchup</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Retrieve matchups of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            team_id (str): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
+<span class="sd">            team_id (str | int): Selected team ID for which to retrieva data (can be integers 1 through n where n is the</span>
 <span class="sd">                number of teams in the league).</span>
 
 <span class="sd">        Examples:</span>
@@ -2941,7 +2950,7 @@
 <span class="sd">            list[dict[str, Matchup]]: List of dictionaries with key = &quot;matchup&quot; and value = YFPY Matchup instance.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">team_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.t.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+        <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://fantasysports.yahooapis.com/fantasy/v2/team/</span><span class="si">{</span><span class="n">team_key</span><span class="si">}</span><span class="s2">/matchups&quot;</span><span class="p">,</span>
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;matchups&quot;</span><span class="p">]</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v8.0.9 documentation</title>
+  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,7 +36,7 @@
             <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,6 +47,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -118,6 +119,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -268,6 +271,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -339,6 +343,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -488,7 +494,7 @@
 <h1>yfpy.query.YahooFantasySportsQuery<a class="headerlink" href="#yfpy-query-yahoofantasysportsquery" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">YahooFantasySportsQuery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nfl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_output_as_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">YahooFantasySportsQuery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nfl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_output_as_json_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Yahoo Fantasy Sports REST API query CLASS to retrieve all types of fantasy sports data.</p>
 <p>Instantiate a YahooQueryObject for running queries against the Yahoo fantasy REST API.</p>
@@ -505,7 +511,7 @@ and defaulting to “nfl” (fantasy football), “nhl” (fantasy hockey), “m
 (fantasy basketball)</p></li>
 <li><p><strong>offline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data
 has been previously saved locally using the Data module in data.py).</p></li>
-<li><p><strong>all_output_as_json</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Option to automatically convert all query output to JSON
+<li><p><strong>all_output_as_json_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Option to automatically convert all query output to JSON
 strings.</p></li>
 <li><p><strong>consumer_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – User defined consumer key to use instead of values stored in the
 private.json file (must be defined alongside a user defined consumer secret).</p></li>
@@ -642,8 +648,8 @@ previously saved locally using the Data module in data.py).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.all_output_as_json">
-<span class="sig-name descname"><span class="pre">all_output_as_json</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.all_output_as_json" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.all_output_as_json_str">
+<span class="sig-name descname"><span class="pre">all_output_as_json_str</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.all_output_as_json_str" title="Permalink to this definition"></a></dt>
 <dd><p>Option to automatically convert all query output to JSON strings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -808,7 +814,7 @@ previously saved locally using the Data module in data.py).</p>
 <td><p>Retrieve game history for current logged-in user sorted by season/year.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key" title="yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_leagues_by_game_key</span></code></a></p></td>
-<td><p>Retrieve league history for current logged-in user for specific game by ID sorted by season/year.</p></td>
+<td><p>Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.get_user_teams" title="yfpy.query.YahooFantasySportsQuery.get_user_teams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_teams</span></code></a></p></td>
 <td><p>Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.</p></td>
@@ -2552,7 +2558,7 @@ failed query request.</p></li>
 <dd><p>Retrieve draft results of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -2591,7 +2597,7 @@ instance.</p>
 <dd><p>Retrieve info of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -2681,7 +2687,7 @@ number of teams in the league).</p>
 <dd><p>Retrieve matchups of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -2715,7 +2721,7 @@ number of teams in the league).</p>
 <dd><p>Retrieve metadata of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -2776,7 +2782,7 @@ number of teams in the league).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
 <li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
@@ -2861,7 +2867,7 @@ This query will FAIL if you pass it an INVALID date string!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
 <li><p><strong>chosen_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</p></li>
 </ul>
@@ -2964,7 +2970,7 @@ which each return instances of their respective YFPY objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
 <li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
@@ -3074,7 +3080,7 @@ which each return instances of their respective YFPY objects.</p>
 <dd><p>Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -3170,7 +3176,7 @@ return instances of their respective YFPY objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
 <li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
@@ -3263,7 +3269,7 @@ containing the “player_stats” key (returns a YFPY PlayerStats instance).</p>
 <dd><p>Retrieve standings of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -3306,7 +3312,7 @@ number of teams in the league).</p>
 <dd><p>Retrieve stats of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
@@ -3339,7 +3345,7 @@ number of teams in the league).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
 <li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
@@ -3417,10 +3423,10 @@ instance.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key">
 <span class="sig-name descname"><span class="pre">get_user_leagues_by_game_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery.get_user_leagues_by_game_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key" title="Permalink to this definition"></a></dt>
-<dd><p>Retrieve league history for current logged-in user for specific game by ID sorted by season/year.</p>
+<dd><p>Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>game_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The game_id for a specific Yahoo Fantasy game.</p>
+<dd class="field-odd"><p><strong>game_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The game_id (int) or game_key (str) for a specific Yahoo Fantasy game.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -3558,7 +3564,7 @@ instance with “teams” field containing list of YFPY Team instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.query">
-<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_key_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.query" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_key_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.query" title="Permalink to this definition"></a></dt>
 <dd><p>Base query class to retrieve requested data from the Yahoo fantasy sports REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3570,6 +3576,8 @@ given query (supports strings and lists of strings). Supports lists containing o
 such as [“team”, [“team_points”, “team_projected_points”]].</p></li>
 <li><p><strong>data_type_class</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Type</span></code>, optional) – Highest level data model type (if one exists for the retrieved
 data).</p></li>
+<li><p><strong>sort_function</strong> (<em>Callable of sort function</em><em>, </em><em>optional</em><em>)</em>) – Optional lambda function to return sorted query
+results.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
