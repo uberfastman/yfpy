@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.utils &mdash; YFPY v8.0.9 documentation</title>
+  <title>yfpy.utils &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -33,7 +33,7 @@
             <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -44,6 +44,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -115,6 +116,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -265,6 +268,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/yfpy.html">Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../_autosummary/yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -336,6 +340,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -491,13 +497,56 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span><span class="p">,</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">IO</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">stringcase</span>
 
 <span class="kn">from</span> <span class="nn">yfpy.logger</span> <span class="kn">import</span> <span class="n">get_logger</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="complex_json_handler"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.complex_json_handler.html#yfpy.utils.complex_json_handler">[docs]</a><span class="k">def</span> <span class="nf">complex_json_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Custom handler to allow custom YFPY objects to be serialized into JSON.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj (Any): Unserializable Python object to be serialized into JSON.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: Serializable version of the Python object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;serialized&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">serialized</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Object of type </span><span class="si">%s</span><span class="s1"> with value of </span><span class="si">%s</span><span class="s1"> is not JSON serializable&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="jsonify_data"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.jsonify_data.html#yfpy.utils.jsonify_data">[docs]</a><span class="k">def</span> <span class="nf">jsonify_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to serialize a YahooFantasyObject to a JSON string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (object): YahooFantasyObject to be serialized to a JSON string.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: JSON string serialized from YahooFantasyObject.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jsonify_data_to_file"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.jsonify_data_to_file.html#yfpy.utils.jsonify_data_to_file">[docs]</a><span class="k">def</span> <span class="nf">jsonify_data_to_file</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">data_file</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function to serialize a YahooFantasyObject to JSON and output it to a file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (object): YahooFantasyObject to be serialized to JSON and output to a file.</span>
+<span class="sd">        data_file (IO[str])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="prettify_data"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.prettify_data.html#yfpy.utils.prettify_data">[docs]</a><span class="k">def</span> <span class="nf">prettify_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -510,7 +559,7 @@
 <span class="sd">        str: JSON string that has been formatted with indents (two spaces).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">complex_json_handler</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">jsonify_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span></div>
 
 
 <span class="c1"># noinspection PyTypeChecker</span>
@@ -752,25 +801,6 @@
     <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">(</span>
         <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">out</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
             <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k_v</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k_v</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">k_v</span> <span class="k">for</span> <span class="n">k_v</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span></div>
-
-
-<div class="viewcode-block" id="complex_json_handler"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.complex_json_handler.html#yfpy.utils.complex_json_handler">[docs]</a><span class="k">def</span> <span class="nf">complex_json_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Custom handler to allow custom YFPY objects to be serialized into JSON.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        obj (Any): Unserializable Python object to be serialized into JSON.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Any: Serializable version of the Python object.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;serialized&quot;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">serialized</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Object of type </span><span class="si">%s</span><span class="s1"> with value of </span><span class="si">%s</span><span class="s1"> is not JSON serializable&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span></div>
 
 
 <div class="viewcode-block" id="reformat_json_list"><a class="viewcode-back" href="../../_autosummary/yfpy.utils.reformat_json_list.html#yfpy.utils.reformat_json_list">[docs]</a><span class="k">def</span> <span class="nf">reformat_json_list</span><span class="p">(</span><span class="n">json_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>

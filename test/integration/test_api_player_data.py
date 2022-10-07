@@ -41,16 +41,22 @@ def test_get_player_stats_for_season(yahoo_query, yahoo_data, data_dir, season, 
                                      player_key, show_log_output):
     """Retrieve stats of specific player by player_key for season for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "players"
-    query_result_data = yahoo_data.save(str(player_id) + "-player-season-stats",
-                                        yahoo_query.get_player_stats_for_season,
-                                        params={"player_key": str(player_key)},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-season-stats",
+        yahoo_query.get_player_stats_for_season,
+        params={"player_key": str(player_key)},
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-season-stats", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-season-stats",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -62,18 +68,22 @@ def test_get_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, cho
                                   player_id, player_key, show_log_output):
     """Retrieve stats of specific player by player_key and by week for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
-                    / "players")
-    query_result_data = yahoo_data.save(str(player_id) + "-player-stats",
-                                        yahoo_query.get_player_stats_by_week,
-                                        params={"player_key": str(player_key),
-                                                "chosen_week": str(chosen_week)},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-stats",
+        yahoo_query.get_player_stats_by_week,
+        params={"player_key": str(player_key), "chosen_week": str(chosen_week)},
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-stats", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-stats",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -88,17 +98,22 @@ def test_get_player_stats_by_date(yahoo_query, yahoo_data, data_dir, season, cho
                                   player_id, player_key, show_log_output):
     """Retrieve stats of specific player by player_key and by date for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / str(chosen_date) / "players"
-    query_result_data = yahoo_data.save(str(player_id) + "-player-stats",
-                                        yahoo_query.get_player_stats_by_date,
-                                        params={"player_key": str(player_key),
-                                                "chosen_date": chosen_date},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / str(chosen_date) / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-stats",
+        yahoo_query.get_player_stats_by_date,
+        params={"player_key": str(player_key), "chosen_date": chosen_date},
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-stats", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-stats",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -110,16 +125,22 @@ def test_get_player_ownership(yahoo_query, yahoo_data, data_dir, season, game_id
                               show_log_output):
     """Retrieve ownership of specific player by player_key for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "players"
-    query_result_data = yahoo_data.save(str(player_id) + "-player-ownership",
-                                        yahoo_query.get_player_ownership,
-                                        params={"player_key": str(player_key)},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-ownership",
+        yahoo_query.get_player_ownership,
+        params={"player_key": str(player_key)},
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-ownership", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-ownership",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -131,18 +152,22 @@ def test_get_player_percent_owned_by_week(yahoo_query, yahoo_data, data_dir, sea
                                           player_id, player_key, show_log_output):
     """Retrieve percent-owned of specific player by player_key and by week for chosen league.
     """
-    new_data_dir = (data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / ("week_" + str(chosen_week))
-                    / "players")
-    query_result_data = yahoo_data.save(str(player_id) + "-player-percent_owned",
-                                        yahoo_query.get_player_percent_owned_by_week,
-                                        params={"player_key": str(player_key),
-                                                "chosen_week": str(chosen_week)},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-percent_owned",
+        yahoo_query.get_player_percent_owned_by_week,
+        params={"player_key": str(player_key), "chosen_week": str(chosen_week)},
+        new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-percent_owned", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-percent_owned",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 
@@ -154,16 +179,21 @@ def test_get_player_draft_analysis(yahoo_query, yahoo_data, data_dir, season, ga
                                    player_key, show_log_output):
     """Retrieve draft analysis of specific player by player_key for chosen league.
     """
-    new_data_dir = data_dir / str(season) / (str(game_id) + ".l." + str(league_id)) / "players"
-    query_result_data = yahoo_data.save(str(player_id) + "-player-draft_analysis",
-                                        yahoo_query.get_player_draft_analysis,
-                                        params={"player_key": str(player_key)},
-                                        new_data_dir=new_data_dir)
+    new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
+    query_result_data = yahoo_data.save(
+        f"{player_id}-player-draft_analysis",
+        yahoo_query.get_player_draft_analysis,
+        params={"player_key": str(player_key)}, new_data_dir=new_data_dir
+    )
     if show_log_output:
         logger.info(prettify_data(query_result_data))
 
-    loaded_result_data = yahoo_data.load(str(player_id) + "-player-draft_analysis", Player,
-                                         new_data_dir=new_data_dir)
+    loaded_result_data = yahoo_data.load(
+        f"{player_id}-player-draft_analysis",
+        Player,
+        new_data_dir=new_data_dir,
+        all_output_as_json_str=yahoo_query.all_output_as_json_str
+    )
     if show_log_output:
         logger.info(prettify_data(loaded_result_data))
 

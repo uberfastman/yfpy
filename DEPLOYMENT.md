@@ -63,16 +63,7 @@
     python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
     ```
 
-12. Update the git tag:
-
-    `git tag -a [tag_name/version] -m [message]`
-
-    ```shell
-    git tag -a v1.0.0 -m 'first release'
-    git push origin --tags
-    ```
-
-13. *(Optional)* Build the documentation and PyPI package independent of deployment:
+12. *(Optional)* Build the documentation and PyPI package independent of deployment:
 
     ```shell
     make -C docs-sphinx docs
@@ -80,34 +71,55 @@
     
     ***Note***: You can run `make -C docs-sphinx docs_no_build` to recreate documentation without building the PyPI package with `setup.py`.
 
-14. *(Optional)* Check Sphinx documentation locally:
+13. *(Optional)* Check Sphinx documentation locally:
 
     ```shell
     make -C docs-sphinx open_local_docs
     ```
+
+14. Create a git commit:
+
+    ```shell
+    git add .
+    git commit -m 'commit message'
+    ```
+
+15. Update the git tag with the new version:
+
+    `git tag -a [tag_name/version] -m [message]`
+
+    ```shell
+    git tag -a v1.0.0 -m 'release message'
+    git push origin --tags
+    ```
     
-15. Install `twine` (if not already installed):
+16. Install `twine` (if not already installed):
 
     ```shell
     pip install twine
     ```
     
-16. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
+17. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
 
     ```shell
     make -C docs-sphinx test_deploy
     ```
 
-17. Deploy YFPY by building the PyPI packages, recreating the Sphinx documentation, and deploying to PyPI:
+18. Deploy YFPY by building the PyPI packages, recreating the Sphinx documentation, and deploying to PyPI:
 
     ```shell
     make -C docs-sphinx deploy
     ```
 
-18. Update YFPY GitHub repository:
+19. Create a second git commit with updated version number and documentation:
 
     ```shell
     git add .
-    git commit -m 'commit message'
+    git commit -m 'update version number and docs'
+    ```
+
+20. Update YFPY GitHub repository:
+
+    ```shell
     git push
     ```
