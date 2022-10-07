@@ -16,7 +16,7 @@
    .. autosummary::
       :nosignatures:
    
-      ~Data.get
+      ~Data.fetch
       ~Data.load
       ~Data.retrieve
       ~Data.save

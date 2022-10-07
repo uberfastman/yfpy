@@ -12,13 +12,12 @@ Attributes:
 __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
-import json
 from typing import Dict
 
 import stringcase
 
 from yfpy.logger import get_logger
-from yfpy.utils import complex_json_handler
+from yfpy.utils import jsonify_data
 
 # from yfpy.utils import flatten_to_objects
 
@@ -126,7 +125,7 @@ class YahooFantasyObject(object):
             str: JSON string derived from the serializable version of the class object.
 
         """
-        return json.dumps(self.serialized(), indent=2, default=complex_json_handler, ensure_ascii=False)
+        return jsonify_data(self.serialized())
 
     @classmethod
     def from_json(cls, json_data: Dict):
