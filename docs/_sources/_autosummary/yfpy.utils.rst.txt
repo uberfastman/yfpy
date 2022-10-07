@@ -1,4 +1,4 @@
-yfpy.utils
+﻿yfpy.utils
 ==========
 
 .. automodule:: yfpy.utils
@@ -22,6 +22,8 @@ yfpy.utils
       flatten_to_list
       flatten_to_objects
       get_type
+      jsonify_data
+      jsonify_data_to_file
       prettify_data
       reformat_json_list
       reorganize_json_dict

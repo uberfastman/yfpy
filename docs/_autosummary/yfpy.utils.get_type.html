@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.utils.get_type &mdash; YFPY v8.0.9 documentation</title>
+  <title>yfpy.utils.get_type &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="yfpy.utils.prettify_data" href="yfpy.utils.prettify_data.html" />
+    <link rel="next" title="yfpy.utils.jsonify_data" href="yfpy.utils.jsonify_data.html" />
     <link rel="prev" title="yfpy.utils.flatten_to_objects" href="yfpy.utils.flatten_to_objects.html" /> 
 </head>
 
@@ -36,7 +36,7 @@
             <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,6 +47,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -118,6 +119,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -268,6 +271,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.data.Data.html">yfpy.data.Data</a></li>
@@ -339,6 +343,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -477,7 +483,7 @@
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="yfpy.utils.flatten_to_objects.html" class="btn btn-neutral float-left" title="yfpy.utils.flatten_to_objects" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="yfpy.utils.prettify_data.html" class="btn btn-neutral float-right" title="yfpy.utils.prettify_data" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="yfpy.utils.jsonify_data.html" class="btn btn-neutral float-right" title="yfpy.utils.jsonify_data" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -515,7 +521,7 @@ and classes for casting as values.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="yfpy.utils.flatten_to_objects.html" class="btn btn-neutral float-left" title="yfpy.utils.flatten_to_objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="yfpy.utils.prettify_data.html" class="btn btn-neutral float-right" title="yfpy.utils.prettify_data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="yfpy.utils.jsonify_data.html" class="btn btn-neutral float-right" title="yfpy.utils.jsonify_data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

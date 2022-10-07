@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.data.Data &mdash; YFPY v8.0.9 documentation</title>
+  <title>yfpy.data.Data &mdash; YFPY v9.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,7 +36,7 @@
             <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v8.0.9
+                v9.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,6 +47,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">yfpy.data.Data</a></li>
@@ -118,6 +119,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -268,6 +271,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../yfpy-quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="yfpy.html">Package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="yfpy.data.html">yfpy.data</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">yfpy.data.Data</a></li>
@@ -339,6 +343,8 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_list.html">yfpy.utils.flatten_to_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.flatten_to_objects.html">yfpy.utils.flatten_to_objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.get_type.html">yfpy.utils.get_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data.html">yfpy.utils.jsonify_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.utils.jsonify_data_to_file.html">yfpy.utils.jsonify_data_to_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.prettify_data.html">yfpy.utils.prettify_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reformat_json_list.html">yfpy.utils.reformat_json_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.utils.reorganize_json_dict.html">yfpy.utils.reorganize_json_dict</a></li>
@@ -509,7 +515,7 @@ save_data = True).</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.data.Data.get" title="yfpy.data.Data.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#yfpy.data.Data.fetch" title="yfpy.data.Data.fetch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fetch</span></code></a></p></td>
 <td><p>Run query to retrieve Yahoo Fantasy Sports data.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#yfpy.data.Data.load" title="yfpy.data.Data.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a></p></td>
@@ -539,8 +545,8 @@ save_data = True).</p></li>
 </tbody>
 </table>
 <dl class="py method">
-<dt class="sig sig-object py" id="yfpy.data.Data.get">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.get" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="yfpy.data.Data.fetch">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fetch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yf_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.fetch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.fetch" title="Permalink to this definition"></a></dt>
 <dd><p>Run query to retrieve Yahoo Fantasy Sports data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -560,7 +566,7 @@ save_data = True).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.data.Data.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.load" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_output_as_json_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/data.html#Data.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.data.Data.load" title="Permalink to this definition"></a></dt>
 <dd><p>Load Yahoo Fantasy Sports data already stored locally.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -572,6 +578,7 @@ save_data = True).</p></li>
 <li><p><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of file from which data will be loaded.</p></li>
 <li><p><strong>data_type_class</strong> (<em>Type</em><em>[</em><a class="reference internal" href="yfpy.models.YahooFantasyObject.html#yfpy.models.YahooFantasyObject" title="yfpy.models.YahooFantasyObject"><em>YahooFantasyObject</em></a><em>]</em><em>, </em><em>optional</em>) – YFPY models.py class for data casting.</p></li>
 <li><p><strong>new_data_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><em>Path</em><em>, </em><em>optional</em>) – Full path to new desired directory from which data will be loaded.</p></li>
+<li><p><strong>all_output_as_json_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Boolean indicating if the output has been requested as a raw JSON string.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
