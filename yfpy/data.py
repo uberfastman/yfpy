@@ -119,15 +119,17 @@ class Data(object):
         if not self.data_dir.exists():
             self.data_dir.mkdir(parents=True, exist_ok=True)
 
-        # check if parent YahooFantasySportsQuery has all_output_as_json_str = True and unset it for data saving
+        # check if parent YahooFantasySportsQuery.all_output_as_json_str = True, unset it for data saving, then reset it
         all_output_as_json = False
-        if inspect.ismethod(yf_query):
-            # noinspection PyUnresolvedReferences
-            for cls in inspect.getmro(yf_query.__self__.__class__):
-                if yf_query.__name__ in cls.__dict__:
-                    # noinspection PyUnresolvedReferences
-                    yf_query.__self__.all_output_as_json_str = False
-                    all_output_as_json = True
+        # noinspection PyUnresolvedReferences
+        if yf_query.__self__.all_output_as_json_str:
+            if inspect.ismethod(yf_query):
+                # noinspection PyUnresolvedReferences
+                for cls in inspect.getmro(yf_query.__self__.__class__):
+                    if yf_query.__name__ in cls.__dict__:
+                        # noinspection PyUnresolvedReferences
+                        yf_query.__self__.all_output_as_json_str = False
+                        all_output_as_json = True
 
         # run the actual yfpy query and retrieve the query results
         data = self.fetch(yf_query, params)

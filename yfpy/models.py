@@ -44,10 +44,10 @@ class YahooFantasyObject(object):
             self._keys = list(self.extracted_data.keys())
 
     def __str__(self):
-        return self.to_json()
+        return f"{self.__class__.__name__}({self.to_json()})"
 
     def __repr__(self):
-        return self.to_json()
+        return f"{self.__class__.__name__}({self.to_json()})"
 
     # def __getattribute__(self, item):
     #     return flatten_to_objects(item)
@@ -317,7 +317,7 @@ class League(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.allow_add_to_dl_extra_pos = self.extracted_data.get("allow_add_to_dl_extra_pos", "")
         self.current_week = self.extracted_data.get("current_week", "")
-        self.draft_results = self.extracted_data.get("draft_results", "")
+        self.draft_results = self.extracted_data.get("draft_results", [])
         self.draft_status = self.extracted_data.get("draft_status", "")
         self.edit_key = self.extracted_data.get("edit_key", "")
         self.end_date = self.extracted_data.get("end_date", "")
