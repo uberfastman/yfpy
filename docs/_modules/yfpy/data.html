@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.data &mdash; YFPY v9.0.0 documentation</title>
+  <title>yfpy.data &mdash; YFPY v9.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -33,7 +33,7 @@
             <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v9.0.0
+                v9.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -605,15 +605,17 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># check if parent YahooFantasySportsQuery has all_output_as_json_str = True and unset it for data saving</span>
+        <span class="c1"># check if parent YahooFantasySportsQuery.all_output_as_json_str = True, unset it for data saving, then reset it</span>
         <span class="n">all_output_as_json</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">yf_query</span><span class="p">):</span>
-            <span class="c1"># noinspection PyUnresolvedReferences</span>
-            <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">yf_query</span><span class="o">.</span><span class="vm">__self__</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">yf_query</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
-                    <span class="c1"># noinspection PyUnresolvedReferences</span>
-                    <span class="n">yf_query</span><span class="o">.</span><span class="vm">__self__</span><span class="o">.</span><span class="n">all_output_as_json_str</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="n">all_output_as_json</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># noinspection PyUnresolvedReferences</span>
+        <span class="k">if</span> <span class="n">yf_query</span><span class="o">.</span><span class="vm">__self__</span><span class="o">.</span><span class="n">all_output_as_json_str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">yf_query</span><span class="p">):</span>
+                <span class="c1"># noinspection PyUnresolvedReferences</span>
+                <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">yf_query</span><span class="o">.</span><span class="vm">__self__</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">yf_query</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+                        <span class="c1"># noinspection PyUnresolvedReferences</span>
+                        <span class="n">yf_query</span><span class="o">.</span><span class="vm">__self__</span><span class="o">.</span><span class="n">all_output_as_json_str</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="n">all_output_as_json</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="c1"># run the actual yfpy query and retrieve the query results</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">yf_query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
