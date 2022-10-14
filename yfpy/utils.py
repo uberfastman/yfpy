@@ -132,7 +132,7 @@ def unpack_data(json_obj: Any, parent_class: Type = None) -> Any:
                 # assign/cast data type where applicable
                 # TODO: figure out how to do this without explicit object type keys
                 json_obj = get_type(
-                    dict({k: unpack_data(v, parent_class) for k, v in json_obj.items() if k != "count"}),
+                    {k: unpack_data(v, parent_class) for k, v in json_obj.items() if k != "count"},
                     parent_class,
                     subclasses
                 )
