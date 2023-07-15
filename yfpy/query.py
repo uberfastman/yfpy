@@ -44,7 +44,7 @@ class YahooFantasySportsQuery(object):
 
     def __init__(self, auth_dir: Union[Path, str], league_id: str, game_id: int = None, game_code: str = "nfl",
                  offline: bool = False, all_output_as_json_str: bool = False, consumer_key: str = None,
-                 consumer_secret: str = None, browser_callback: bool = True):
+                 consumer_secret: str = None, browser_callback: bool = True, retries: int = 3, backoff: int = 0):
         """Instantiate a YahooQueryObject for running queries against the Yahoo fantasy REST API.
 
         Args:
@@ -67,6 +67,9 @@ class YahooFantasySportsQuery(object):
             browser_callback (:obj:`bool`, optional): Enable or disable (enabled by default) whether the yahoo-oauth
                 library automatically opens a browser window to authenticate (if disabled, it will output the callback
                 URL).
+            retries (:obj:`int`, optional): Number of times to retry a query if it fails (defaults to 3).
+            backoff (:obj:`int`, optional): Multiplier that incrementally increases the wait time before retrying a
+                failed query request.
 
         Attributes:
             _auth_dir (Path): Location of both private.json (containing Yahoo dev app consumer_key and consumer_secret)
@@ -99,6 +102,8 @@ class YahooFantasySportsQuery(object):
         self._yahoo_consumer_secret = consumer_secret
         self._yahoo_access_token = None
         self._browser_callback = browser_callback
+        self._retries = retries
+        self._backoff = backoff
 
         self.fantasy_content_data_field = "fantasy_content"
 
@@ -158,14 +163,11 @@ class YahooFantasySportsQuery(object):
         if not self.oauth.token_is_valid():
             self.oauth.refresh_access_token()
 
-    def get_response(self, url: str, retries: int = 3, backoff: int = 0) -> Response:
+    def get_response(self, url: str) -> Response:
         """Retrieve Yahoo Fantasy Sports data from the REST API.
 
         Args:
             url (str): REST API request URL string.
-            retries (:obj:`int`, optional): Number of times to retry a query if it fails (defaults to 3).
-            backoff (:obj:`int`, optional): Multiplier that incrementally increases the wait time before retrying a
-                failed query request.
 
         Returns:
             Response: API response from Yahoo Fantasy Sports API request.
@@ -173,6 +175,8 @@ class YahooFantasySportsQuery(object):
         """
         logger.debug(f"Making request to URL: {url}")
         response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
+        retries = self._retries
+        backoff = self._backoff
 
         status_code = response.status_code
         # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
