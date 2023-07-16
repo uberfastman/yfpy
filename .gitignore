@@ -1,27 +1,30 @@
-# Byte-compiled / optimized / DLL files
+# python
 __pycache__/
 *.py[cod]
 
-# Miscelleanous
-.DS_Store
-
-# JetBrains IDE project files
-.idea/*
-
-# Distribution / packaging
+# build
 .Python
 build/
 dist/
 *.egg-info/
 
+# miscelleanous
+.DS_Store
+
+# development
+.idea/*
+.vscode
+
 # Testing
 .pytest_cache/
 test_output/
-private*.json
-token*.json
+
+# Environment
 *.env
 *.venv
 !EXAMPLE.env
-
-.vscode
 .python-version
+
+# Credentials
+private*.json
+token*.json
