@@ -147,7 +147,7 @@ YFPY has only been tested extensively on macOS, but is written to be platform-ag
 
 #### Python
 
-YFPY requires Python 3.7 or later, and has been tested through Python 3.10.
+YFPY requires Python 3.8 or later, and has been tested through Python 3.11.
 
 #### Development
 
