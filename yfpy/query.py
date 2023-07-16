@@ -163,7 +163,7 @@ class YahooFantasySportsQuery(object):
         if not self.oauth.token_is_valid():
             self.oauth.refresh_access_token()
 
-    def get_response(self, url: str, retries: int = self._retries, backoff: int = self._backoff) -> Response:
+    def get_response(self, url: str, retries: Union[None, int] = None, backoff: Union[None, int] = None) -> Response:
         """Retrieve Yahoo Fantasy Sports data from the REST API.
 
         Args:
@@ -178,6 +178,8 @@ class YahooFantasySportsQuery(object):
         """
         logger.debug(f"Making request to URL: {url}")
         response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
+        retries = retries if retries is not None else self._retries
+        backoff = backoff if backoff is not None else self._backoff
 
         status_code = response.status_code
         # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
