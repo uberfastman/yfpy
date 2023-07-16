@@ -1,7 +1,7 @@
-myst-parser==0.17.2
-pygments==2.13.0
-sphinx==4.5.0
-sphinx-autodoc-typehints==1.18.1
+myst-parser==2.0.0
+pygments==2.15.1
+sphinx==7.0.1
+sphinx-autodoc-typehints==1.23.3
 sphinx-rtd-dark-mode==1.2.4
-sphinx-rtd-theme==1.0.0
-twine==4.0.1
+sphinx-rtd-theme==1.2.2
+twine==4.0.2
