@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query &mdash; YFPY v10.0.1 documentation</title>
+  <title>yfpy.query &mdash; YFPY v10.0.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -38,7 +38,7 @@
               <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v10.0.1
+                v10.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -872,6 +872,8 @@
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._yahoo_consumer_secret"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_consumer_secret</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._yahoo_access_token"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_access_token</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._browser_callback"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._browser_callback</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._retries"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._retries</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
@@ -2183,6 +2185,8 @@
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._yahoo_consumer_secret"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_consumer_secret</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._yahoo_access_token"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_access_token</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._browser_callback"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._browser_callback</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._retries"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._retries</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
@@ -2747,6 +2751,9 @@
 <span class="sd">                reauthenticate on every access to the Yahoo Fantasy Sports API.</span>
 <span class="sd">            _browser_callback (bool): Enable or disable (enabled by default) whether the yahoo-oauth library</span>
 <span class="sd">                automatically opens a browser window to authenticate (if disabled, it will output the callback URL).</span>
+<span class="sd">            _retries (int): Number of times to retry a query if it fails (defaults to 3).</span>
+<span class="sd">            _backoff (int): Multiplier that incrementally increases the wait time before retrying a</span>
+<span class="sd">                failed query request.</span>
 <span class="sd">            fantasy_content_data_field (str): The initial JSON field in which all Yahoo Fantasy Sports API responses</span>
 <span class="sd">                store the data output of the submitted query.</span>
 <span class="sd">            league_id (str): League ID of selected Yahoo Fantasy league.</span>
@@ -2828,14 +2835,11 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">oauth</span><span class="o">.</span><span class="n">token_is_valid</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">oauth</span><span class="o">.</span><span class="n">refresh_access_token</span><span class="p">()</span>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_response"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_response">[docs]</a>    <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">retries</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">backoff</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_response"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_response">[docs]</a>    <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve Yahoo Fantasy Sports data from the REST API.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            url (str): REST API request URL string.</span>
-<span class="sd">            retries (:obj:`int`, optional): Number of times to retry a query if it fails (defaults to 3).</span>
-<span class="sd">            backoff (:obj:`int`, optional): Multiplier that incrementally increases the wait time before retrying a</span>
-<span class="sd">                failed query request.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Response: API response from Yahoo Fantasy Sports API request.</span>
@@ -2843,8 +2847,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Making request to URL: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oauth</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">})</span>  <span class="c1"># type: Response</span>
-        <span class="n">retries</span> <span class="o">=</span> <span class="n">retries</span> <span class="k">if</span> <span class="n">retries</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retries</span>
-        <span class="n">backoff</span> <span class="o">=</span> <span class="n">backoff</span> <span class="k">if</span> <span class="n">backoff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backoff</span>
 
         <span class="n">status_code</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
         <span class="c1"># when you exceed Yahoo&#39;s allowed data request limits, they throw a request status code of 999</span>
@@ -2875,13 +2877,13 @@
 
         <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="c1"># retry with incremental back-off</span>
-            <span class="k">if</span> <span class="n">retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">retries</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="n">backoff</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_retries</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_backoff</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for URL </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> failed with status code </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">. &quot;</span>
-                               <span class="sa">f</span><span class="s2">&quot;Retrying </span><span class="si">{</span><span class="n">retries</span><span class="si">}</span><span class="s2"> more time</span><span class="si">{</span><span class="s1">&#39;s&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">retries</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">backoff</span><span class="p">)</span>
-                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">retries</span><span class="p">,</span> <span class="n">backoff</span><span class="p">)</span>
+                               <span class="sa">f</span><span class="s2">&quot;Retrying </span><span class="si">{</span><span class="n">retries</span><span class="si">}</span><span class="s2"> more time</span><span class="si">{</span><span class="s1">&#39;s&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_retries</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backoff</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># log error and terminate query if status code is not 200 after 3 retries</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed with status code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

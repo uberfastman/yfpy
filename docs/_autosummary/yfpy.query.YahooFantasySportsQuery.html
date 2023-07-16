@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v10.0.1 documentation</title>
+  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v10.0.2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -41,7 +41,7 @@
               <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v10.0.1
+                v10.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -875,6 +875,8 @@
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._yahoo_consumer_secret"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_consumer_secret</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._yahoo_access_token"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_access_token</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._browser_callback"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._browser_callback</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._retries"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._retries</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
@@ -2186,6 +2188,8 @@
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._yahoo_consumer_secret"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_consumer_secret</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._yahoo_access_token"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._yahoo_access_token</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._browser_callback"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._browser_callback</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._retries"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._retries</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
@@ -2761,6 +2765,29 @@ automatically opens a browser window to authenticate (if disabled, it will outpu
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery._retries">
+<span class="sig-name descname"><span class="pre">_retries</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery._retries" title="Permalink to this definition"></a></dt>
+<dd><p>Number of times to retry a query if it fails (defaults to 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery._backoff">
+<span class="sig-name descname"><span class="pre">_backoff</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery._backoff" title="Permalink to this definition"></a></dt>
+<dd><p>Multiplier that incrementally increases the wait time before retrying a
+failed query request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4706,16 +4733,11 @@ This query will FAIL if you pass it an INVALID date string!</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.get_response">
-<span class="sig-name descname"><span class="pre">get_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery.get_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.get_response" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery.get_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.get_response" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve Yahoo Fantasy Sports data from the REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – REST API request URL string.</p></li>
-<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Number of times to retry a query if it fails (defaults to 3).</p></li>
-<li><p><strong>backoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Multiplier that incrementally increases the wait time before retrying a
-failed query request.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – REST API request URL string.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>API response from Yahoo Fantasy Sports API request.</p>
