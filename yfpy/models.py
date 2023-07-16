@@ -28,16 +28,18 @@ class YahooFantasyObject(object):
     """Base Yahoo Fantasy Sports data object from which all model classes inherit their methods and attributes.
     """
 
-    def __init__(self, extracted_data: Dict):
+    def __init__(self, yahoo_fantasy_object_type: str, extracted_data: Dict):
         """Instantiate a Yahoo Fantasy Object.
 
         Args:
+            yahoo_fantasy_object_type (str): Capitalized camel case class name specifying YFPY subclass type.
             extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
 
         Attributes:
             extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
 
         """
+        self.yahoo_fantasy_object_type = yahoo_fantasy_object_type
         self.extracted_data = extracted_data
         self._index = 0
         if isinstance(extracted_data, dict):
@@ -135,7 +137,7 @@ class YahooFantasyObject(object):
             object: Class object derived from JSON data.
 
         """
-        return cls(json_data)
+        return cls("YahooFantasyObject", json_data)
 
 
 # noinspection DuplicatedCode, PyUnresolvedReferences
@@ -154,7 +156,7 @@ class User(YahooFantasyObject):
             guid (str): The Yahoo user ID.
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "User", extracted_data)
         self.games = self.extracted_data.get("games", [])
         self.guid = self.extracted_data.get("guid", "")
 
@@ -190,7 +192,7 @@ class Game(YahooFantasyObject):
             url (str): The direct URL of the Yahoo Fantasy game.
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Game", extracted_data)
         self.code = self.extracted_data.get("code", "")
         self.game_id = self.extracted_data.get("game_id", 0)
         self.game_key = str(self.extracted_data.get("game_key", ""))
@@ -228,7 +230,7 @@ class GameWeek(YahooFantasyObject):
             week (int): The week number of the Yahoo Fantasy game week.
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "GameWeek", extracted_data)
         self.display_name = self.extracted_data.get("display_name", "")
         self.end = self.extracted_data.get("end", "")
         self.start = self.extracted_data.get("start", "")
@@ -251,7 +253,7 @@ class PositionType(YahooFantasyObject):
             display_name (str): The full text display of the position type.
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "PositionType", extracted_data)
         self.type = self.extracted_data.get("type", "")
         self.display_name = self.extracted_data.get("display_name", "")
 
@@ -314,7 +316,7 @@ class League(YahooFantasyObject):
             weekly_deadline (str | null): The weekly deadline of the league (if applicable).
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "League", extracted_data)
         self.allow_add_to_dl_extra_pos = self.extracted_data.get("allow_add_to_dl_extra_pos", "")
         self.current_week = self.extracted_data.get("current_week", "")
         self.draft_results = self.extracted_data.get("draft_results", [])
@@ -411,7 +413,7 @@ class Team(YahooFantasyObject):
                 1.0).
 
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Team", extracted_data)
         self.clinched_playoffs = self.extracted_data.get("clinched_playoffs", 0)
         self.division_id = self.extracted_data.get("division_id")
         self.draft_grade = self.extracted_data.get("draft_grade", "")
@@ -471,7 +473,7 @@ class DraftResult(YahooFantasyObject):
             team_key (str): The Yahoo team key of the team that made the draft pick.
             player_key (str): The Yahoo player key of the player that was drafted.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "DraftResult", extracted_data)
         self.pick = self.extracted_data.get("pick", 0)
         self.round = self.extracted_data.get("round", 0)
         self.team_key = self.extracted_data.get("team_key", "")
@@ -492,7 +494,7 @@ class Standings(YahooFantasyObject):
         Attributes:
             teams (list[Team]): A list of YFPY Team instances with standings data.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Standings", extracted_data)
         self.teams = self.extracted_data.get("teams", [])
 
 
@@ -519,7 +521,7 @@ class Transaction(YahooFantasyObject):
             transaction_key (str): The Yahoo transaction key (Ex.: "406.l.413954.tr.555").
             type (str): The type of the transaction ("add", "drop", "trade", etc.).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Transaction", extracted_data)
         self.players = self.extracted_data.get("players", [])
         self.status = self.extracted_data.get("status", "")
         self.timestamp = self.extracted_data.get("timestamp", 0)
@@ -551,7 +553,7 @@ class Manager(YahooFantasyObject):
             manager_id (int): The unique manager ID in the league.
             nickname (str): The display nickname of the manager.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Manager", extracted_data)
         self.email = self.extracted_data.get("email", "")
         self.guid = self.extracted_data.get("guid", "")
         self.image_url = self.extracted_data.get("image_url", "")
@@ -577,7 +579,7 @@ class Roster(YahooFantasyObject):
             is_editable (int): Numeric boolean (0 or 1) representing if the roster is editable.
             players (list[Player]): A list of YFPY Player instances.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Roster", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.week = self.extracted_data.get("week", 0)
         self.is_editable = self.extracted_data.get("is_editable", 0)
@@ -600,7 +602,7 @@ class RosterAdds(YahooFantasyObject):
             coverage_value (int): The value of the coverage type (week number, for instance).
             value (int): The number of roster adds within the coverage timeframe.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "RosterAdds", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.coverage_value = self.extracted_data.get("coverage_value", 0)
         self.value = self.extracted_data.get("value", 0)
@@ -621,7 +623,7 @@ class TeamLogo(YahooFantasyObject):
             size (str): The size of the team logo photo ("small", "large", etc.)
             url (str): The direct URL of the team logo photo.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "TeamLogo", extracted_data)
         self.size = self.extracted_data.get("size", "")
         self.url = self.extracted_data.get("url", "")
 
@@ -643,7 +645,7 @@ class TeamPoints(YahooFantasyObject):
             total (float): The total team points for the coverage timeframe.
             week (int): The week number (if applicable).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "TeamPoints", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.season = self.extracted_data.get("season", 0)
         self.total = float(self.extracted_data.get("total", 0) or 0)
@@ -666,7 +668,7 @@ class TeamProjectedPoints(YahooFantasyObject):
             total (float): The total team projected points for the coverage timeframe.
             week (int): The week number.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "TeamProjectedPoints", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.total = float(self.extracted_data.get("total", 0) or 0)
         self.week = self.extracted_data.get("week", 0)
@@ -692,7 +694,7 @@ class TeamStandings(YahooFantasyObject):
             rank (int): The rank of the team in the league standings.
             streak (Streak): A YFPY Streak instance.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "TeamStandings", extracted_data)
         self.divisional_outcome_totals = self.extracted_data.get(
             "divisional_outcome_totals", DivisionalOutcomeTotals({}))  # type: DivisionalOutcomeTotals
         self.outcome_totals = self.extracted_data.get("outcome_totals", OutcomeTotals({}))  # type: OutcomeTotals
@@ -719,7 +721,7 @@ class DivisionalOutcomeTotals(YahooFantasyObject):
             ties (int): The number of ties by the team within the division.
             wins (int): The number of wins by the team within the division.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "DivisionalOutcomeTotals", extracted_data)
         self.losses = int(self.extracted_data.get("losses", 0) or 0)
         self.ties = int(self.extracted_data.get("ties", 0) or 0)
         self.wins = int(self.extracted_data.get("wins", 0) or 0)
@@ -742,7 +744,7 @@ class OutcomeTotals(YahooFantasyObject):
             ties (int): The number of ties by the team.
             wins (int): The number of wins by the team.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "OutcomeTotals", extracted_data)
         self.losses = int(self.extracted_data.get("losses", 0) or 0)
         self.percentage = float(self.extracted_data.get("percentage", 0) or 0)
         self.ties = int(self.extracted_data.get("ties", 0) or 0)
@@ -764,7 +766,7 @@ class Streak(YahooFantasyObject):
             type (str): The streak type ("W" for win, "L" for loss, "T" for tie).
             value (int): The length of the streak.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Streak", extracted_data)
         self.type = self.extracted_data.get("type", "")
         self.value = self.extracted_data.get("value", 0)
 
@@ -784,7 +786,7 @@ class Scoreboard(YahooFantasyObject):
             week (int): The week for which the scoreboard applies.
             matchups (list[Matchup]): A list of YFPY Matchup instances representing the matchups for the week.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Scoreboard", extracted_data)
         self.week = self.extracted_data.get("week", 0)
         self.matchups = self.extracted_data.get("matchups", [])
 
@@ -839,7 +841,7 @@ class Settings(YahooFantasyObject):
             waiver_time (int): The number of days that players remain on waivers.
             waiver_type (str): Value designating what type of waivers are used by the league ("R" for rolling, etc.).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Settings", extracted_data)
         self.cant_cut_list = self.extracted_data.get("cant_cut_list", "")
         self.divisions = self.extracted_data.get("divisions", [])
         self.draft_pick_time = self.extracted_data.get("draft_pick_time", 0)
@@ -888,7 +890,7 @@ class Division(YahooFantasyObject):
             division_id (int): The unique division ID number in the league.
             name (str): The division name.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Division", extracted_data)
         self.division_id = self.extracted_data.get("division_id", 0)
         self.name = self.extracted_data.get("name", "")
 
@@ -909,7 +911,7 @@ class RosterPosition(YahooFantasyObject):
             position (str): The position string.
             position_type (str): The position type ("O" for offense, etc.)
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "RosterPosition", extracted_data)
         self.count = self.extracted_data.get("count", 0)
         self.position = self.extracted_data.get("position", "")
         self.position_type = self.extracted_data.get("position_type", "")
@@ -929,7 +931,7 @@ class StatCategories(YahooFantasyObject):
         Attributes:
             stats (list[Stat]): A list of YFPY Stat instances representing the league stat categories.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "StatCategories", extracted_data)
         self.stats = self.extracted_data.get("stats", [])
 
 
@@ -947,7 +949,7 @@ class StatModifiers(YahooFantasyObject):
         Attributes:
             stats (list[Stat]): A list of YFPY Stat instances containing modifiers for each stat category.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "StatModifiers", extracted_data)
         self.stats = self.extracted_data.get("stats", [])
 
 
@@ -974,7 +976,7 @@ class Stat(YahooFantasyObject):
             stat_position_types (list[PositionType]): A list of YFPY PositionType instances.
             value (float): The value of the stat (if applicable).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Stat", extracted_data)
         self.bonuses = self.extracted_data.get("bonuses", [])
         self.display_name = self.extracted_data.get("display_name", "")
         self.enabled = self.extracted_data.get("enabled", 0)
@@ -1005,7 +1007,7 @@ class StatPositionType(YahooFantasyObject):
                 if it is just the player position string).
             position_type (str): The type of the position ("O" for offense, etc.)
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "StatPositionType", extracted_data)
         self.is_only_display_stat = self.extracted_data.get("is_only_display_stat", 0)
         self.position_type = self.extracted_data.get("position_type", "")
 
@@ -1025,7 +1027,7 @@ class Bonus(YahooFantasyObject):
             points (int): The points awarded when the bonus is won.
             target (int): The stat value target required to be awarded the bonus.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Bonus", extracted_data)
         self.points = self.extracted_data.get("points", 0)
         self.target = self.extracted_data.get("target", 0)
 
@@ -1056,7 +1058,7 @@ class Matchup(YahooFantasyObject):
             week_start (str): A date string representing the start of the matchup week (format: "YYYY-MM-DD").
             winner_team_key (str): The Yahoo team key of the team that won the matchup.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Matchup", extracted_data)
         self.is_consolation = self.extracted_data.get("is_consolation", 0)
         self.is_matchup_recap_available = self.extracted_data.get("is_matchup_recap_available", 0)
         self.is_playoffs = self.extracted_data.get("is_playoffs", 0)
@@ -1087,7 +1089,7 @@ class MatchupGrade(YahooFantasyObject):
             grade (str): The letter grade assigned to the matchup performance ("A+", "A", ..., "F-").
             team_key (str): The Yahoo team key for the team receiving the matchup grade.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "MatchupGrade", extracted_data)
         self.grade = self.extracted_data.get("grade", "")
         self.team_key = self.extracted_data.get("team_key", "")
 
@@ -1145,7 +1147,7 @@ class Player(YahooFantasyObject):
             transaction_data (TransactionData): A YFPY TransactionData instance.
             uniform_number (int): The uniform number of the player.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Player", extracted_data)
         self.bye_weeks = self.extracted_data.get("bye_weeks", ByeWeeks({}))  # type: ByeWeeks
         self.bye = int(self.bye_weeks.week or 0)
         self.display_position = self.extracted_data.get("display_position", "")
@@ -1215,7 +1217,7 @@ class ByeWeeks(YahooFantasyObject):
         Attributes:
             week (int): The week number that the player is on bye.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "ByeWeeks", extracted_data)
         self.week = self.extracted_data.get("week", 0)
 
 
@@ -1236,7 +1238,7 @@ class DraftAnalysis(YahooFantasyObject):
             average_cost (float): The average price paid for the player to be drafted.
             percent_drafted (float): The overall percentage the player was drafted.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "DraftAnalysis", extracted_data)
         try:
             self.average_pick = float(self.extracted_data.get("average_pick", 0) or 0)
         except ValueError:
@@ -1270,7 +1272,7 @@ class Headshot(YahooFantasyObject):
             size (str): The size of the headshot photo ("small", "large", etc.)
             url (str): The direct URL of the headshot photo.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Headshot", extracted_data)
         self.size = self.extracted_data.get("size", "")
         self.url = self.extracted_data.get("url", "")
 
@@ -1293,7 +1295,7 @@ class Name(YahooFantasyObject):
             full (str): The full name of the player.
             last (str): The last name of teh player.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Name", extracted_data)
         self.ascii_first = self.extracted_data.get("ascii_first", "")
         self.ascii_last = self.extracted_data.get("ascii_last", "")
         self.first = self.extracted_data.get("first", "")
@@ -1318,7 +1320,7 @@ class Ownership(YahooFantasyObject):
             owner_team_name (str): The team name for the team that owns the player.
             teams (list[Team]): A list of YFPY Team instances.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "Ownership", extracted_data)
         self.ownership_type = self.extracted_data.get("ownership_type", "")
         self.owner_team_key = self.extracted_data.get("owner_team_key", "")
         self.owner_team_name = self.extracted_data.get("owner_team_name", "")
@@ -1343,7 +1345,7 @@ class PercentOwned(YahooFantasyObject):
             delta (float): The change in the percentage value from the previous coverage timeframe to the current
                 coverage timeframe.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "PercentOwned", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.week = self.extracted_data.get("week", 0)
         self.value = self.extracted_data.get("value", 0)
@@ -1366,7 +1368,7 @@ class PlayerPoints(YahooFantasyObject):
             week (int): The week number (when applicable).
             total (float): The total points for the player within the coverage timeframe.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "PlayerPoints", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.week = self.extracted_data.get("week", 0)
         self.total = float(self.extracted_data.get("total", 0) or 0)
@@ -1388,7 +1390,7 @@ class PlayerStats(YahooFantasyObject):
             week (int): The week number (when applicable).
             stats (list[Stat]): A list of YFPY Stat instances for the player.
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "PlayerStats", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.week = self.extracted_data.get("week", 0)
         self.stats = self.extracted_data.get("stats", [])
@@ -1411,7 +1413,7 @@ class SelectedPosition(YahooFantasyObject):
             position (str): The selected position of the player.
             week (int): The week number (when applicable).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "SelectedPosition", extracted_data)
         self.coverage_type = self.extracted_data.get("coverage_type", "")
         self.is_flex = self.extracted_data.get("is_flex", 0)
         self.position = self.extracted_data.get("position", "")
@@ -1438,7 +1440,7 @@ class TransactionData(YahooFantasyObject):
             source_type (str): The origin of the player (waivers, free agency, another team, etc.).
             type (str): The type of the transaction ("add", "drop", "trade", etc.).
         """
-        YahooFantasyObject.__init__(self, extracted_data)
+        YahooFantasyObject.__init__(self, "TransactionData", extracted_data)
         self.destination_team_key = self.extracted_data.get("destination_team_key", "")
         self.destination_team_name = self.extracted_data.get("destination_team_name", "")
         self.destination_type = self.extracted_data.get("destination_type", "")
