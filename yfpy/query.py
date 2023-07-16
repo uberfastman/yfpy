@@ -82,6 +82,9 @@ class YahooFantasySportsQuery(object):
                 reauthenticate on every access to the Yahoo Fantasy Sports API.
             _browser_callback (bool): Enable or disable (enabled by default) whether the yahoo-oauth library
                 automatically opens a browser window to authenticate (if disabled, it will output the callback URL).
+            _retries (int): Number of times to retry a query if it fails (defaults to 3).
+            _backoff (int): Multiplier that incrementally increases the wait time before retrying a
+                failed query request.
             fantasy_content_data_field (str): The initial JSON field in which all Yahoo Fantasy Sports API responses
                 store the data output of the submitted query.
             league_id (str): League ID of selected Yahoo Fantasy league.
@@ -163,14 +166,11 @@ class YahooFantasySportsQuery(object):
         if not self.oauth.token_is_valid():
             self.oauth.refresh_access_token()
 
-    def get_response(self, url: str, retries: Union[None, int] = None, backoff: Union[None, int] = None) -> Response:
+    def get_response(self, url: str) -> Response:
         """Retrieve Yahoo Fantasy Sports data from the REST API.
 
         Args:
             url (str): REST API request URL string.
-            retries (:obj:`int`, optional): Number of times to retry a query if it fails (defaults to 3).
-            backoff (:obj:`int`, optional): Multiplier that incrementally increases the wait time before retrying a
-                failed query request.
 
         Returns:
             Response: API response from Yahoo Fantasy Sports API request.
@@ -178,8 +178,6 @@ class YahooFantasySportsQuery(object):
         """
         logger.debug(f"Making request to URL: {url}")
         response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
-        retries = retries if retries is not None else self._retries
-        backoff = backoff if backoff is not None else self._backoff
 
         status_code = response.status_code
         # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
@@ -210,13 +208,13 @@ class YahooFantasySportsQuery(object):
 
         except HTTPError as e:
             # retry with incremental back-off
-            if retries > 0:
-                retries -= 1
-                backoff += 1
+            if self._retries > 0:
+                self._retries -= 1
+                self._backoff += 1
                 logger.warning(f"Request for URL {url} failed with status code {response.status_code}. "
-                               f"Retrying {retries} more time{'s' if retries > 1 else ''}...")
-                time.sleep(0.3 * backoff)
-                response = self.get_response(url, retries, backoff)
+                               f"Retrying {retries} more time{'s' if self._retries > 1 else ''}...")
+                time.sleep(0.3 * self._backoff)
+                response = self.get_response(url)
             else:
                 # log error and terminate query if status code is not 200 after 3 retries
                 logger.error(f"Request failed with status code: {response.status_code} - {e}")
