@@ -20,4 +20,8 @@ test_output/
 private*.json
 token*.json
 *.env
+*.venv
 !EXAMPLE.env
+
+.vscode
+.python-version
