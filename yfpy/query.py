@@ -212,7 +212,7 @@ class YahooFantasySportsQuery(object):
                 self._retries -= 1
                 self._backoff += 1
                 logger.warning(f"Request for URL {url} failed with status code {response.status_code}. "
-                               f"Retrying {retries} more time{'s' if self._retries > 1 else ''}...")
+                               f"Retrying {self._retries} more time{'s' if self._retries > 1 else ''}...")
                 time.sleep(0.3 * self._backoff)
                 response = self.get_response(url)
             else:
