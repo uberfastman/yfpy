@@ -468,12 +468,14 @@ class DraftResult(YahooFantasyObject):
         Attributes:
             pick (int): The draft pick number.
             round (int): The draft round.
+            cost (int): The player cost (for auction drafts)
             team_key (str): The Yahoo team key of the team that made the draft pick.
             player_key (str): The Yahoo player key of the player that was drafted.
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.pick = self.extracted_data.get("pick", 0)
         self.round = self.extracted_data.get("round", 0)
+        self.cost = self.extracted_data.get("cost", 0)
         self.team_key = self.extracted_data.get("team_key", "")
         self.player_key = self.extracted_data.get("player_key", "")
 
