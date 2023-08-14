@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.data &mdash; YFPY v10.0.3 documentation</title>
+  <title>yfpy.data &mdash; YFPY v11.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -41,7 +41,7 @@
               <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v10.0.3
+                v11.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -158,6 +158,10 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.average_round"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.average_round</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.average_cost"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.average_cost</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.percent_drafted"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.percent_drafted</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_cost"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_cost</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_pick"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_pick</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_round"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_round</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_percent_drafted"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_percent_drafted</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.from_json"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.serialized"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.serialized()</span></code></a></li>
@@ -169,6 +173,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftResult.html">yfpy.models.DraftResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult"><code class="docutils literal notranslate"><span class="pre">DraftResult</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.cost"><code class="docutils literal notranslate"><span class="pre">DraftResult.cost</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.pick"><code class="docutils literal notranslate"><span class="pre">DraftResult.pick</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.round"><code class="docutils literal notranslate"><span class="pre">DraftResult.round</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.team_key"><code class="docutils literal notranslate"><span class="pre">DraftResult.team_key</span></code></a></li>
@@ -185,17 +190,25 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Game.html">yfpy.models.Game</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.code"><code class="docutils literal notranslate"><span class="pre">Game.code</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.contest_group_id"><code class="docutils literal notranslate"><span class="pre">Game.contest_group_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.current_week"><code class="docutils literal notranslate"><span class="pre">Game.current_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.editorial_season"><code class="docutils literal notranslate"><span class="pre">Game.editorial_season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_id"><code class="docutils literal notranslate"><span class="pre">Game.game_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_key"><code class="docutils literal notranslate"><span class="pre">Game.game_key</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_weeks"><code class="docutils literal notranslate"><span class="pre">Game.game_weeks</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.has_schedule"><code class="docutils literal notranslate"><span class="pre">Game.has_schedule</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_contest_over"><code class="docutils literal notranslate"><span class="pre">Game.is_contest_over</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_contest_reg_active"><code class="docutils literal notranslate"><span class="pre">Game.is_contest_reg_active</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_game_over"><code class="docutils literal notranslate"><span class="pre">Game.is_game_over</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_live_draft_lobby_active"><code class="docutils literal notranslate"><span class="pre">Game.is_live_draft_lobby_active</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_offseason"><code class="docutils literal notranslate"><span class="pre">Game.is_offseason</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_registration_over"><code class="docutils literal notranslate"><span class="pre">Game.is_registration_over</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.leagues"><code class="docutils literal notranslate"><span class="pre">Game.leagues</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.name"><code class="docutils literal notranslate"><span class="pre">Game.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.picks_status"><code class="docutils literal notranslate"><span class="pre">Game.picks_status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.position_types"><code class="docutils literal notranslate"><span class="pre">Game.position_types</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.roster_positions"><code class="docutils literal notranslate"><span class="pre">Game.roster_positions</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.scenario_generator"><code class="docutils literal notranslate"><span class="pre">Game.scenario_generator</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.season"><code class="docutils literal notranslate"><span class="pre">Game.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.stat_categories"><code class="docutils literal notranslate"><span class="pre">Game.stat_categories</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.teams"><code class="docutils literal notranslate"><span class="pre">Game.teams</span></code></a></li>
@@ -225,6 +238,20 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Group.html">yfpy.models.Group</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group"><code class="docutils literal notranslate"><span class="pre">Group</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_abbr"><code class="docutils literal notranslate"><span class="pre">Group.group_abbr</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_display_name"><code class="docutils literal notranslate"><span class="pre">Group.group_display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_name"><code class="docutils literal notranslate"><span class="pre">Group.group_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Group.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.from_json"><code class="docutils literal notranslate"><span class="pre">Group.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.serialized"><code class="docutils literal notranslate"><span class="pre">Group.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.subclass_dict"><code class="docutils literal notranslate"><span class="pre">Group.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.to_json"><code class="docutils literal notranslate"><span class="pre">Group.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Headshot.html">yfpy.models.Headshot</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot"><code class="docutils literal notranslate"><span class="pre">Headshot</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot.size"><code class="docutils literal notranslate"><span class="pre">Headshot.size</span></code></a></li>
@@ -249,10 +276,12 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.end_date"><code class="docutils literal notranslate"><span class="pre">League.end_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.end_week"><code class="docutils literal notranslate"><span class="pre">League.end_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.entry_fee"><code class="docutils literal notranslate"><span class="pre">League.entry_fee</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.felo_tier"><code class="docutils literal notranslate"><span class="pre">League.felo_tier</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.game_code"><code class="docutils literal notranslate"><span class="pre">League.game_code</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.iris_group_chat_id"><code class="docutils literal notranslate"><span class="pre">League.iris_group_chat_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_cash_league"><code class="docutils literal notranslate"><span class="pre">League.is_cash_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_finished"><code class="docutils literal notranslate"><span class="pre">League.is_finished</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_plus_league"><code class="docutils literal notranslate"><span class="pre">League.is_plus_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_pro_league"><code class="docutils literal notranslate"><span class="pre">League.is_pro_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.league_id"><code class="docutils literal notranslate"><span class="pre">League.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.league_key"><code class="docutils literal notranslate"><span class="pre">League.league_key</span></code></a></li>
@@ -273,6 +302,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.settings"><code class="docutils literal notranslate"><span class="pre">League.settings</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.short_invitation_url"><code class="docutils literal notranslate"><span class="pre">League.short_invitation_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.standings"><code class="docutils literal notranslate"><span class="pre">League.standings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.teams"><code class="docutils literal notranslate"><span class="pre">League.teams</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.teams_ordered_by_standings"><code class="docutils literal notranslate"><span class="pre">League.teams_ordered_by_standings</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.start_date"><code class="docutils literal notranslate"><span class="pre">League.start_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.start_week"><code class="docutils literal notranslate"><span class="pre">League.start_week</span></code></a></li>
@@ -291,11 +321,18 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Manager.html">yfpy.models.Manager</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.email"><code class="docutils literal notranslate"><span class="pre">Manager.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.emails"><code class="docutils literal notranslate"><span class="pre">Manager.emails</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.fantasy_profile_url"><code class="docutils literal notranslate"><span class="pre">Manager.fantasy_profile_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.felo_score"><code class="docutils literal notranslate"><span class="pre">Manager.felo_score</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.felo_tier"><code class="docutils literal notranslate"><span class="pre">Manager.felo_tier</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.guid"><code class="docutils literal notranslate"><span class="pre">Manager.guid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.image_url"><code class="docutils literal notranslate"><span class="pre">Manager.image_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_comanager"><code class="docutils literal notranslate"><span class="pre">Manager.is_comanager</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_commissioner"><code class="docutils literal notranslate"><span class="pre">Manager.is_commissioner</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_current_login"><code class="docutils literal notranslate"><span class="pre">Manager.is_current_login</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.manager_id"><code class="docutils literal notranslate"><span class="pre">Manager.manager_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.nickname"><code class="docutils literal notranslate"><span class="pre">Manager.nickname</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.profile_image_url"><code class="docutils literal notranslate"><span class="pre">Manager.profile_image_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Manager.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.from_json"><code class="docutils literal notranslate"><span class="pre">Manager.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.serialized"><code class="docutils literal notranslate"><span class="pre">Manager.serialized()</span></code></a></li>
@@ -375,10 +412,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Ownership.html">yfpy.models.Ownership</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership"><code class="docutils literal notranslate"><span class="pre">Ownership</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.display_date"><code class="docutils literal notranslate"><span class="pre">Ownership.display_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.ownership_type"><code class="docutils literal notranslate"><span class="pre">Ownership.ownership_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.owner_team_key"><code class="docutils literal notranslate"><span class="pre">Ownership.owner_team_key</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.owner_team_name"><code class="docutils literal notranslate"><span class="pre">Ownership.owner_team_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.teams"><code class="docutils literal notranslate"><span class="pre">Ownership.teams</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.waiver_date"><code class="docutils literal notranslate"><span class="pre">Ownership.waiver_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Ownership.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.from_json"><code class="docutils literal notranslate"><span class="pre">Ownership.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.serialized"><code class="docutils literal notranslate"><span class="pre">Ownership.serialized()</span></code></a></li>
@@ -417,12 +456,17 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_abbr"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_abbr</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_full_name"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_full_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_key"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_url"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.eligible_positions"><code class="docutils literal notranslate"><span class="pre">Player.eligible_positions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.has_player_notes"><code class="docutils literal notranslate"><span class="pre">Player.has_player_notes</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.has_recent_player_notes"><code class="docutils literal notranslate"><span class="pre">Player.has_recent_player_notes</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot"><code class="docutils literal notranslate"><span class="pre">Player.headshot</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot_size"><code class="docutils literal notranslate"><span class="pre">Player.headshot_size</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot_url"><code class="docutils literal notranslate"><span class="pre">Player.headshot_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.image_url"><code class="docutils literal notranslate"><span class="pre">Player.image_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.injury_note"><code class="docutils literal notranslate"><span class="pre">Player.injury_note</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_editable"><code class="docutils literal notranslate"><span class="pre">Player.is_editable</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_keeper"><code class="docutils literal notranslate"><span class="pre">Player.is_keeper</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_undroppable"><code class="docutils literal notranslate"><span class="pre">Player.is_undroppable</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.name"><code class="docutils literal notranslate"><span class="pre">Player.name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.first_name"><code class="docutils literal notranslate"><span class="pre">Player.first_name</span></code></a></li>
@@ -443,8 +487,10 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.selected_position"><code class="docutils literal notranslate"><span class="pre">Player.selected_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.selected_position_value"><code class="docutils literal notranslate"><span class="pre">Player.selected_position_value</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.status"><code class="docutils literal notranslate"><span class="pre">Player.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.status_full"><code class="docutils literal notranslate"><span class="pre">Player.status_full</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.transaction_data"><code class="docutils literal notranslate"><span class="pre">Player.transaction_data</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.uniform_number"><code class="docutils literal notranslate"><span class="pre">Player.uniform_number</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.url"><code class="docutils literal notranslate"><span class="pre">Player.url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Player.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.from_json"><code class="docutils literal notranslate"><span class="pre">Player.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.serialized"><code class="docutils literal notranslate"><span class="pre">Player.serialized()</span></code></a></li>
@@ -454,11 +500,27 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html">yfpy.models.PlayerAdvancedStats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.coverage_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.season"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.season</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.stats"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.stats</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.subclass_dict"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.to_json"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints"><code class="docutils literal notranslate"><span class="pre">PlayerPoints</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.coverage_type</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.week"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.season"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.total"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.total</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.week"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.serialized()</span></code></a></li>
@@ -471,8 +533,10 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats"><code class="docutils literal notranslate"><span class="pre">PlayerStats</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerStats.coverage_type</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerStats.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.date"><code class="docutils literal notranslate"><span class="pre">PlayerStats.date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.season"><code class="docutils literal notranslate"><span class="pre">PlayerStats.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.stats"><code class="docutils literal notranslate"><span class="pre">PlayerStats.stats</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerStats.week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerStats.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerStats.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerStats.serialized()</span></code></a></li>
@@ -526,7 +590,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition"><code class="docutils literal notranslate"><span class="pre">RosterPosition</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.abbreviation"><code class="docutils literal notranslate"><span class="pre">RosterPosition.abbreviation</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.count"><code class="docutils literal notranslate"><span class="pre">RosterPosition.count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.display_name"><code class="docutils literal notranslate"><span class="pre">RosterPosition.display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.is_bench"><code class="docutils literal notranslate"><span class="pre">RosterPosition.is_bench</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.is_starting_position"><code class="docutils literal notranslate"><span class="pre">RosterPosition.is_starting_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.position"><code class="docutils literal notranslate"><span class="pre">RosterPosition.position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.position_type"><code class="docutils literal notranslate"><span class="pre">RosterPosition.position_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">RosterPosition.clean_data_dict()</span></code></a></li>
@@ -554,6 +622,7 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition"><code class="docutils literal notranslate"><span class="pre">SelectedPosition</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.coverage_type"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.coverage_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.date"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.is_flex"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.is_flex</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.position"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.week"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.week</span></code></a></li>
@@ -572,6 +641,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.divisions"><code class="docutils literal notranslate"><span class="pre">Settings.divisions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_pick_time"><code class="docutils literal notranslate"><span class="pre">Settings.draft_pick_time</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_time"><code class="docutils literal notranslate"><span class="pre">Settings.draft_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_together"><code class="docutils literal notranslate"><span class="pre">Settings.draft_together</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_type"><code class="docutils literal notranslate"><span class="pre">Settings.draft_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.has_multiweek_championship"><code class="docutils literal notranslate"><span class="pre">Settings.has_multiweek_championship</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.has_playoff_consolation_games"><code class="docutils literal notranslate"><span class="pre">Settings.has_playoff_consolation_games</span></code></a></li>
@@ -585,6 +655,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.post_draft_players"><code class="docutils literal notranslate"><span class="pre">Settings.post_draft_players</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.roster_positions"><code class="docutils literal notranslate"><span class="pre">Settings.roster_positions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.scoring_type"><code class="docutils literal notranslate"><span class="pre">Settings.scoring_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.sendbird_channel_url"><code class="docutils literal notranslate"><span class="pre">Settings.sendbird_channel_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.stat_categories"><code class="docutils literal notranslate"><span class="pre">Settings.stat_categories</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.stat_modifiers"><code class="docutils literal notranslate"><span class="pre">Settings.stat_modifiers</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.trade_end_date"><code class="docutils literal notranslate"><span class="pre">Settings.trade_end_date</span></code></a></li>
@@ -593,6 +664,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_faab"><code class="docutils literal notranslate"><span class="pre">Settings.uses_faab</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_fractional_points"><code class="docutils literal notranslate"><span class="pre">Settings.uses_fractional_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_lock_eliminated_teams"><code class="docutils literal notranslate"><span class="pre">Settings.uses_lock_eliminated_teams</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_median_score"><code class="docutils literal notranslate"><span class="pre">Settings.uses_median_score</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_negative_points"><code class="docutils literal notranslate"><span class="pre">Settings.uses_negative_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_playoffs"><code class="docutils literal notranslate"><span class="pre">Settings.uses_playoffs</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_playoff_reseeding"><code class="docutils literal notranslate"><span class="pre">Settings.uses_playoff_reseeding</span></code></a></li>
@@ -622,11 +694,16 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Stat.html">yfpy.models.Stat</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat"><code class="docutils literal notranslate"><span class="pre">Stat</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.abbr"><code class="docutils literal notranslate"><span class="pre">Stat.abbr</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.bonuses"><code class="docutils literal notranslate"><span class="pre">Stat.bonuses</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.display_name"><code class="docutils literal notranslate"><span class="pre">Stat.display_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.enabled"><code class="docutils literal notranslate"><span class="pre">Stat.enabled</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.group"><code class="docutils literal notranslate"><span class="pre">Stat.group</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.is_excluded_from_display"><code class="docutils literal notranslate"><span class="pre">Stat.is_excluded_from_display</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.is_only_display_stat"><code class="docutils literal notranslate"><span class="pre">Stat.is_only_display_stat</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.name"><code class="docutils literal notranslate"><span class="pre">Stat.name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.position_type"><code class="docutils literal notranslate"><span class="pre">Stat.position_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.position_types"><code class="docutils literal notranslate"><span class="pre">Stat.position_types</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.sort_order"><code class="docutils literal notranslate"><span class="pre">Stat.sort_order</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.stat_id"><code class="docutils literal notranslate"><span class="pre">Stat.stat_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.stat_position_types"><code class="docutils literal notranslate"><span class="pre">Stat.stat_position_types</span></code></a></li>
@@ -642,6 +719,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatCategories.html">yfpy.models.StatCategories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories"><code class="docutils literal notranslate"><span class="pre">StatCategories</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.groups"><code class="docutils literal notranslate"><span class="pre">StatCategories.groups</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.stats"><code class="docutils literal notranslate"><span class="pre">StatCategories.stats</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">StatCategories.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.from_json"><code class="docutils literal notranslate"><span class="pre">StatCategories.from_json()</span></code></a></li>
@@ -692,15 +770,26 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Team.html">yfpy.models.Team</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.can_edit_current_week"><code class="docutils literal notranslate"><span class="pre">Team.can_edit_current_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.champion_pick"><code class="docutils literal notranslate"><span class="pre">Team.champion_pick</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.champion_status"><code class="docutils literal notranslate"><span class="pre">Team.champion_status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.clinched_playoffs"><code class="docutils literal notranslate"><span class="pre">Team.clinched_playoffs</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.division_id"><code class="docutils literal notranslate"><span class="pre">Team.division_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.done_week"><code class="docutils literal notranslate"><span class="pre">Team.done_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_grade"><code class="docutils literal notranslate"><span class="pre">Team.draft_grade</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_position"><code class="docutils literal notranslate"><span class="pre">Team.draft_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_recap_url"><code class="docutils literal notranslate"><span class="pre">Team.draft_recap_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_results"><code class="docutils literal notranslate"><span class="pre">Team.draft_results</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.elimination_week"><code class="docutils literal notranslate"><span class="pre">Team.elimination_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.email_address"><code class="docutils literal notranslate"><span class="pre">Team.email_address</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.faab_balance"><code class="docutils literal notranslate"><span class="pre">Team.faab_balance</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.has_draft_grade"><code class="docutils literal notranslate"><span class="pre">Team.has_draft_grade</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.is_in_contest"><code class="docutils literal notranslate"><span class="pre">Team.is_in_contest</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.is_owned_by_current_login"><code class="docutils literal notranslate"><span class="pre">Team.is_owned_by_current_login</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.last_editable_week"><code class="docutils literal notranslate"><span class="pre">Team.last_editable_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.league_scoring_type"><code class="docutils literal notranslate"><span class="pre">Team.league_scoring_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.logo_type"><code class="docutils literal notranslate"><span class="pre">Team.logo_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.manager"><code class="docutils literal notranslate"><span class="pre">Team.manager</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.managers"><code class="docutils literal notranslate"><span class="pre">Team.managers</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.matchups"><code class="docutils literal notranslate"><span class="pre">Team.matchups</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.name"><code class="docutils literal notranslate"><span class="pre">Team.name</span></code></a></li>
@@ -712,7 +801,9 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.roster_adds_value"><code class="docutils literal notranslate"><span class="pre">Team.roster_adds_value</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_id"><code class="docutils literal notranslate"><span class="pre">Team.team_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_key"><code class="docutils literal notranslate"><span class="pre">Team.team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_logo"><code class="docutils literal notranslate"><span class="pre">Team.team_logo</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_logos"><code class="docutils literal notranslate"><span class="pre">Team.team_logos</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_paid"><code class="docutils literal notranslate"><span class="pre">Team.team_paid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_points"><code class="docutils literal notranslate"><span class="pre">Team.team_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points"><code class="docutils literal notranslate"><span class="pre">Team.points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_projected_points"><code class="docutils literal notranslate"><span class="pre">Team.team_projected_points</span></code></a></li>
@@ -726,9 +817,13 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points_against"><code class="docutils literal notranslate"><span class="pre">Team.points_against</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points_for"><code class="docutils literal notranslate"><span class="pre">Team.points_for</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.rank"><code class="docutils literal notranslate"><span class="pre">Team.rank</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.status"><code class="docutils literal notranslate"><span class="pre">Team.status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.streak_type"><code class="docutils literal notranslate"><span class="pre">Team.streak_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.streak_length"><code class="docutils literal notranslate"><span class="pre">Team.streak_length</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.total_strikes"><code class="docutils literal notranslate"><span class="pre">Team.total_strikes</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.url"><code class="docutils literal notranslate"><span class="pre">Team.url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.user_display_name"><code class="docutils literal notranslate"><span class="pre">Team.user_display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.user_profile_image"><code class="docutils literal notranslate"><span class="pre">Team.user_profile_image</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.waiver_priority"><code class="docutils literal notranslate"><span class="pre">Team.waiver_priority</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.win_probability"><code class="docutils literal notranslate"><span class="pre">Team.win_probability</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Team.clean_data_dict()</span></code></a></li>
@@ -1471,6 +1566,10 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.average_round"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.average_round</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.average_cost"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.average_cost</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.percent_drafted"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.percent_drafted</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_cost"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_cost</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_pick"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_pick</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_average_round"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_average_round</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.preseason_percent_drafted"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.preseason_percent_drafted</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.from_json"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftAnalysis.html#yfpy.models.DraftAnalysis.serialized"><code class="docutils literal notranslate"><span class="pre">DraftAnalysis.serialized()</span></code></a></li>
@@ -1482,6 +1581,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.DraftResult.html">yfpy.models.DraftResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult"><code class="docutils literal notranslate"><span class="pre">DraftResult</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.cost"><code class="docutils literal notranslate"><span class="pre">DraftResult.cost</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.pick"><code class="docutils literal notranslate"><span class="pre">DraftResult.pick</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.round"><code class="docutils literal notranslate"><span class="pre">DraftResult.round</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult.team_key"><code class="docutils literal notranslate"><span class="pre">DraftResult.team_key</span></code></a></li>
@@ -1498,17 +1598,25 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Game.html">yfpy.models.Game</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game"><code class="docutils literal notranslate"><span class="pre">Game</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.code"><code class="docutils literal notranslate"><span class="pre">Game.code</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.contest_group_id"><code class="docutils literal notranslate"><span class="pre">Game.contest_group_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.current_week"><code class="docutils literal notranslate"><span class="pre">Game.current_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.editorial_season"><code class="docutils literal notranslate"><span class="pre">Game.editorial_season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_id"><code class="docutils literal notranslate"><span class="pre">Game.game_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_key"><code class="docutils literal notranslate"><span class="pre">Game.game_key</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.game_weeks"><code class="docutils literal notranslate"><span class="pre">Game.game_weeks</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.has_schedule"><code class="docutils literal notranslate"><span class="pre">Game.has_schedule</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_contest_over"><code class="docutils literal notranslate"><span class="pre">Game.is_contest_over</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_contest_reg_active"><code class="docutils literal notranslate"><span class="pre">Game.is_contest_reg_active</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_game_over"><code class="docutils literal notranslate"><span class="pre">Game.is_game_over</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_live_draft_lobby_active"><code class="docutils literal notranslate"><span class="pre">Game.is_live_draft_lobby_active</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_offseason"><code class="docutils literal notranslate"><span class="pre">Game.is_offseason</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.is_registration_over"><code class="docutils literal notranslate"><span class="pre">Game.is_registration_over</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.leagues"><code class="docutils literal notranslate"><span class="pre">Game.leagues</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.name"><code class="docutils literal notranslate"><span class="pre">Game.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.picks_status"><code class="docutils literal notranslate"><span class="pre">Game.picks_status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.position_types"><code class="docutils literal notranslate"><span class="pre">Game.position_types</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.roster_positions"><code class="docutils literal notranslate"><span class="pre">Game.roster_positions</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.scenario_generator"><code class="docutils literal notranslate"><span class="pre">Game.scenario_generator</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.season"><code class="docutils literal notranslate"><span class="pre">Game.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.stat_categories"><code class="docutils literal notranslate"><span class="pre">Game.stat_categories</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game.teams"><code class="docutils literal notranslate"><span class="pre">Game.teams</span></code></a></li>
@@ -1538,6 +1646,20 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Group.html">yfpy.models.Group</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group"><code class="docutils literal notranslate"><span class="pre">Group</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_abbr"><code class="docutils literal notranslate"><span class="pre">Group.group_abbr</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_display_name"><code class="docutils literal notranslate"><span class="pre">Group.group_display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.group_name"><code class="docutils literal notranslate"><span class="pre">Group.group_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Group.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.from_json"><code class="docutils literal notranslate"><span class="pre">Group.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.serialized"><code class="docutils literal notranslate"><span class="pre">Group.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.subclass_dict"><code class="docutils literal notranslate"><span class="pre">Group.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Group.html#yfpy.models.Group.to_json"><code class="docutils literal notranslate"><span class="pre">Group.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Headshot.html">yfpy.models.Headshot</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot"><code class="docutils literal notranslate"><span class="pre">Headshot</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Headshot.html#yfpy.models.Headshot.size"><code class="docutils literal notranslate"><span class="pre">Headshot.size</span></code></a></li>
@@ -1562,10 +1684,12 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.end_date"><code class="docutils literal notranslate"><span class="pre">League.end_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.end_week"><code class="docutils literal notranslate"><span class="pre">League.end_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.entry_fee"><code class="docutils literal notranslate"><span class="pre">League.entry_fee</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.felo_tier"><code class="docutils literal notranslate"><span class="pre">League.felo_tier</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.game_code"><code class="docutils literal notranslate"><span class="pre">League.game_code</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.iris_group_chat_id"><code class="docutils literal notranslate"><span class="pre">League.iris_group_chat_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_cash_league"><code class="docutils literal notranslate"><span class="pre">League.is_cash_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_finished"><code class="docutils literal notranslate"><span class="pre">League.is_finished</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_plus_league"><code class="docutils literal notranslate"><span class="pre">League.is_plus_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.is_pro_league"><code class="docutils literal notranslate"><span class="pre">League.is_pro_league</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.league_id"><code class="docutils literal notranslate"><span class="pre">League.league_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.league_key"><code class="docutils literal notranslate"><span class="pre">League.league_key</span></code></a></li>
@@ -1586,6 +1710,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.settings"><code class="docutils literal notranslate"><span class="pre">League.settings</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.short_invitation_url"><code class="docutils literal notranslate"><span class="pre">League.short_invitation_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.standings"><code class="docutils literal notranslate"><span class="pre">League.standings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.teams"><code class="docutils literal notranslate"><span class="pre">League.teams</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.teams_ordered_by_standings"><code class="docutils literal notranslate"><span class="pre">League.teams_ordered_by_standings</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.start_date"><code class="docutils literal notranslate"><span class="pre">League.start_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.League.html#yfpy.models.League.start_week"><code class="docutils literal notranslate"><span class="pre">League.start_week</span></code></a></li>
@@ -1604,11 +1729,18 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Manager.html">yfpy.models.Manager</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.email"><code class="docutils literal notranslate"><span class="pre">Manager.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.emails"><code class="docutils literal notranslate"><span class="pre">Manager.emails</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.fantasy_profile_url"><code class="docutils literal notranslate"><span class="pre">Manager.fantasy_profile_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.felo_score"><code class="docutils literal notranslate"><span class="pre">Manager.felo_score</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.felo_tier"><code class="docutils literal notranslate"><span class="pre">Manager.felo_tier</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.guid"><code class="docutils literal notranslate"><span class="pre">Manager.guid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.image_url"><code class="docutils literal notranslate"><span class="pre">Manager.image_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_comanager"><code class="docutils literal notranslate"><span class="pre">Manager.is_comanager</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_commissioner"><code class="docutils literal notranslate"><span class="pre">Manager.is_commissioner</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.is_current_login"><code class="docutils literal notranslate"><span class="pre">Manager.is_current_login</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.manager_id"><code class="docutils literal notranslate"><span class="pre">Manager.manager_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.nickname"><code class="docutils literal notranslate"><span class="pre">Manager.nickname</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.profile_image_url"><code class="docutils literal notranslate"><span class="pre">Manager.profile_image_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Manager.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.from_json"><code class="docutils literal notranslate"><span class="pre">Manager.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Manager.html#yfpy.models.Manager.serialized"><code class="docutils literal notranslate"><span class="pre">Manager.serialized()</span></code></a></li>
@@ -1688,10 +1820,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Ownership.html">yfpy.models.Ownership</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership"><code class="docutils literal notranslate"><span class="pre">Ownership</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.display_date"><code class="docutils literal notranslate"><span class="pre">Ownership.display_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.ownership_type"><code class="docutils literal notranslate"><span class="pre">Ownership.ownership_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.owner_team_key"><code class="docutils literal notranslate"><span class="pre">Ownership.owner_team_key</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.owner_team_name"><code class="docutils literal notranslate"><span class="pre">Ownership.owner_team_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.teams"><code class="docutils literal notranslate"><span class="pre">Ownership.teams</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.waiver_date"><code class="docutils literal notranslate"><span class="pre">Ownership.waiver_date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Ownership.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.from_json"><code class="docutils literal notranslate"><span class="pre">Ownership.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Ownership.html#yfpy.models.Ownership.serialized"><code class="docutils literal notranslate"><span class="pre">Ownership.serialized()</span></code></a></li>
@@ -1730,12 +1864,17 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_abbr"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_abbr</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_full_name"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_full_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_key"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.editorial_team_url"><code class="docutils literal notranslate"><span class="pre">Player.editorial_team_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.eligible_positions"><code class="docutils literal notranslate"><span class="pre">Player.eligible_positions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.has_player_notes"><code class="docutils literal notranslate"><span class="pre">Player.has_player_notes</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.has_recent_player_notes"><code class="docutils literal notranslate"><span class="pre">Player.has_recent_player_notes</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot"><code class="docutils literal notranslate"><span class="pre">Player.headshot</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot_size"><code class="docutils literal notranslate"><span class="pre">Player.headshot_size</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.headshot_url"><code class="docutils literal notranslate"><span class="pre">Player.headshot_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.image_url"><code class="docutils literal notranslate"><span class="pre">Player.image_url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.injury_note"><code class="docutils literal notranslate"><span class="pre">Player.injury_note</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_editable"><code class="docutils literal notranslate"><span class="pre">Player.is_editable</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_keeper"><code class="docutils literal notranslate"><span class="pre">Player.is_keeper</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.is_undroppable"><code class="docutils literal notranslate"><span class="pre">Player.is_undroppable</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.name"><code class="docutils literal notranslate"><span class="pre">Player.name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.first_name"><code class="docutils literal notranslate"><span class="pre">Player.first_name</span></code></a></li>
@@ -1756,8 +1895,10 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.selected_position"><code class="docutils literal notranslate"><span class="pre">Player.selected_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.selected_position_value"><code class="docutils literal notranslate"><span class="pre">Player.selected_position_value</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.status"><code class="docutils literal notranslate"><span class="pre">Player.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.status_full"><code class="docutils literal notranslate"><span class="pre">Player.status_full</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.transaction_data"><code class="docutils literal notranslate"><span class="pre">Player.transaction_data</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.uniform_number"><code class="docutils literal notranslate"><span class="pre">Player.uniform_number</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.url"><code class="docutils literal notranslate"><span class="pre">Player.url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Player.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.from_json"><code class="docutils literal notranslate"><span class="pre">Player.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player.serialized"><code class="docutils literal notranslate"><span class="pre">Player.serialized()</span></code></a></li>
@@ -1767,11 +1908,27 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html">yfpy.models.PlayerAdvancedStats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.coverage_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.season"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.season</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.stats"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.stats</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.subclass_dict"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerAdvancedStats.html#yfpy.models.PlayerAdvancedStats.to_json"><code class="docutils literal notranslate"><span class="pre">PlayerAdvancedStats.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerPoints.html">yfpy.models.PlayerPoints</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints"><code class="docutils literal notranslate"><span class="pre">PlayerPoints</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.coverage_type</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.week"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.season"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.total"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.total</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.week"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerPoints.html#yfpy.models.PlayerPoints.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerPoints.serialized()</span></code></a></li>
@@ -1784,8 +1941,10 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.PlayerStats.html">yfpy.models.PlayerStats</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats"><code class="docutils literal notranslate"><span class="pre">PlayerStats</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.coverage_type"><code class="docutils literal notranslate"><span class="pre">PlayerStats.coverage_type</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerStats.week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.date"><code class="docutils literal notranslate"><span class="pre">PlayerStats.date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.season"><code class="docutils literal notranslate"><span class="pre">PlayerStats.season</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.stats"><code class="docutils literal notranslate"><span class="pre">PlayerStats.stats</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.week"><code class="docutils literal notranslate"><span class="pre">PlayerStats.week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">PlayerStats.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.from_json"><code class="docutils literal notranslate"><span class="pre">PlayerStats.from_json()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PlayerStats.html#yfpy.models.PlayerStats.serialized"><code class="docutils literal notranslate"><span class="pre">PlayerStats.serialized()</span></code></a></li>
@@ -1839,7 +1998,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.RosterPosition.html">yfpy.models.RosterPosition</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition"><code class="docutils literal notranslate"><span class="pre">RosterPosition</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.abbreviation"><code class="docutils literal notranslate"><span class="pre">RosterPosition.abbreviation</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.count"><code class="docutils literal notranslate"><span class="pre">RosterPosition.count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.display_name"><code class="docutils literal notranslate"><span class="pre">RosterPosition.display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.is_bench"><code class="docutils literal notranslate"><span class="pre">RosterPosition.is_bench</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.is_starting_position"><code class="docutils literal notranslate"><span class="pre">RosterPosition.is_starting_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.position"><code class="docutils literal notranslate"><span class="pre">RosterPosition.position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.position_type"><code class="docutils literal notranslate"><span class="pre">RosterPosition.position_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">RosterPosition.clean_data_dict()</span></code></a></li>
@@ -1867,6 +2030,7 @@
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.SelectedPosition.html">yfpy.models.SelectedPosition</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition"><code class="docutils literal notranslate"><span class="pre">SelectedPosition</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.coverage_type"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.coverage_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.date"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.date</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.is_flex"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.is_flex</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.position"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.SelectedPosition.html#yfpy.models.SelectedPosition.week"><code class="docutils literal notranslate"><span class="pre">SelectedPosition.week</span></code></a></li>
@@ -1885,6 +2049,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.divisions"><code class="docutils literal notranslate"><span class="pre">Settings.divisions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_pick_time"><code class="docutils literal notranslate"><span class="pre">Settings.draft_pick_time</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_time"><code class="docutils literal notranslate"><span class="pre">Settings.draft_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_together"><code class="docutils literal notranslate"><span class="pre">Settings.draft_together</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.draft_type"><code class="docutils literal notranslate"><span class="pre">Settings.draft_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.has_multiweek_championship"><code class="docutils literal notranslate"><span class="pre">Settings.has_multiweek_championship</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.has_playoff_consolation_games"><code class="docutils literal notranslate"><span class="pre">Settings.has_playoff_consolation_games</span></code></a></li>
@@ -1898,6 +2063,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.post_draft_players"><code class="docutils literal notranslate"><span class="pre">Settings.post_draft_players</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.roster_positions"><code class="docutils literal notranslate"><span class="pre">Settings.roster_positions</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.scoring_type"><code class="docutils literal notranslate"><span class="pre">Settings.scoring_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.sendbird_channel_url"><code class="docutils literal notranslate"><span class="pre">Settings.sendbird_channel_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.stat_categories"><code class="docutils literal notranslate"><span class="pre">Settings.stat_categories</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.stat_modifiers"><code class="docutils literal notranslate"><span class="pre">Settings.stat_modifiers</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.trade_end_date"><code class="docutils literal notranslate"><span class="pre">Settings.trade_end_date</span></code></a></li>
@@ -1906,6 +2072,7 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_faab"><code class="docutils literal notranslate"><span class="pre">Settings.uses_faab</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_fractional_points"><code class="docutils literal notranslate"><span class="pre">Settings.uses_fractional_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_lock_eliminated_teams"><code class="docutils literal notranslate"><span class="pre">Settings.uses_lock_eliminated_teams</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_median_score"><code class="docutils literal notranslate"><span class="pre">Settings.uses_median_score</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_negative_points"><code class="docutils literal notranslate"><span class="pre">Settings.uses_negative_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_playoffs"><code class="docutils literal notranslate"><span class="pre">Settings.uses_playoffs</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Settings.html#yfpy.models.Settings.uses_playoff_reseeding"><code class="docutils literal notranslate"><span class="pre">Settings.uses_playoff_reseeding</span></code></a></li>
@@ -1935,11 +2102,16 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Stat.html">yfpy.models.Stat</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat"><code class="docutils literal notranslate"><span class="pre">Stat</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.abbr"><code class="docutils literal notranslate"><span class="pre">Stat.abbr</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.bonuses"><code class="docutils literal notranslate"><span class="pre">Stat.bonuses</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.display_name"><code class="docutils literal notranslate"><span class="pre">Stat.display_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.enabled"><code class="docutils literal notranslate"><span class="pre">Stat.enabled</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.group"><code class="docutils literal notranslate"><span class="pre">Stat.group</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.is_excluded_from_display"><code class="docutils literal notranslate"><span class="pre">Stat.is_excluded_from_display</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.is_only_display_stat"><code class="docutils literal notranslate"><span class="pre">Stat.is_only_display_stat</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.name"><code class="docutils literal notranslate"><span class="pre">Stat.name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.position_type"><code class="docutils literal notranslate"><span class="pre">Stat.position_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.position_types"><code class="docutils literal notranslate"><span class="pre">Stat.position_types</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.sort_order"><code class="docutils literal notranslate"><span class="pre">Stat.sort_order</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.stat_id"><code class="docutils literal notranslate"><span class="pre">Stat.stat_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Stat.html#yfpy.models.Stat.stat_position_types"><code class="docutils literal notranslate"><span class="pre">Stat.stat_position_types</span></code></a></li>
@@ -1955,6 +2127,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.StatCategories.html">yfpy.models.StatCategories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories"><code class="docutils literal notranslate"><span class="pre">StatCategories</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.groups"><code class="docutils literal notranslate"><span class="pre">StatCategories.groups</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.stats"><code class="docutils literal notranslate"><span class="pre">StatCategories.stats</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">StatCategories.clean_data_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.StatCategories.html#yfpy.models.StatCategories.from_json"><code class="docutils literal notranslate"><span class="pre">StatCategories.from_json()</span></code></a></li>
@@ -2005,15 +2178,26 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="yfpy.models.Team.html">yfpy.models.Team</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.can_edit_current_week"><code class="docutils literal notranslate"><span class="pre">Team.can_edit_current_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.champion_pick"><code class="docutils literal notranslate"><span class="pre">Team.champion_pick</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.champion_status"><code class="docutils literal notranslate"><span class="pre">Team.champion_status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.clinched_playoffs"><code class="docutils literal notranslate"><span class="pre">Team.clinched_playoffs</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.division_id"><code class="docutils literal notranslate"><span class="pre">Team.division_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.done_week"><code class="docutils literal notranslate"><span class="pre">Team.done_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_grade"><code class="docutils literal notranslate"><span class="pre">Team.draft_grade</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_position"><code class="docutils literal notranslate"><span class="pre">Team.draft_position</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_recap_url"><code class="docutils literal notranslate"><span class="pre">Team.draft_recap_url</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.draft_results"><code class="docutils literal notranslate"><span class="pre">Team.draft_results</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.elimination_week"><code class="docutils literal notranslate"><span class="pre">Team.elimination_week</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.email_address"><code class="docutils literal notranslate"><span class="pre">Team.email_address</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.faab_balance"><code class="docutils literal notranslate"><span class="pre">Team.faab_balance</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.has_draft_grade"><code class="docutils literal notranslate"><span class="pre">Team.has_draft_grade</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.is_in_contest"><code class="docutils literal notranslate"><span class="pre">Team.is_in_contest</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.is_owned_by_current_login"><code class="docutils literal notranslate"><span class="pre">Team.is_owned_by_current_login</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.last_editable_week"><code class="docutils literal notranslate"><span class="pre">Team.last_editable_week</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.league_scoring_type"><code class="docutils literal notranslate"><span class="pre">Team.league_scoring_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.logo_type"><code class="docutils literal notranslate"><span class="pre">Team.logo_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.manager"><code class="docutils literal notranslate"><span class="pre">Team.manager</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.managers"><code class="docutils literal notranslate"><span class="pre">Team.managers</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.matchups"><code class="docutils literal notranslate"><span class="pre">Team.matchups</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.name"><code class="docutils literal notranslate"><span class="pre">Team.name</span></code></a></li>
@@ -2025,7 +2209,9 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.roster_adds_value"><code class="docutils literal notranslate"><span class="pre">Team.roster_adds_value</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_id"><code class="docutils literal notranslate"><span class="pre">Team.team_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_key"><code class="docutils literal notranslate"><span class="pre">Team.team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_logo"><code class="docutils literal notranslate"><span class="pre">Team.team_logo</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_logos"><code class="docutils literal notranslate"><span class="pre">Team.team_logos</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_paid"><code class="docutils literal notranslate"><span class="pre">Team.team_paid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_points"><code class="docutils literal notranslate"><span class="pre">Team.team_points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points"><code class="docutils literal notranslate"><span class="pre">Team.points</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.team_projected_points"><code class="docutils literal notranslate"><span class="pre">Team.team_projected_points</span></code></a></li>
@@ -2039,9 +2225,13 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points_against"><code class="docutils literal notranslate"><span class="pre">Team.points_against</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.points_for"><code class="docutils literal notranslate"><span class="pre">Team.points_for</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.rank"><code class="docutils literal notranslate"><span class="pre">Team.rank</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.status"><code class="docutils literal notranslate"><span class="pre">Team.status</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.streak_type"><code class="docutils literal notranslate"><span class="pre">Team.streak_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.streak_length"><code class="docutils literal notranslate"><span class="pre">Team.streak_length</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.total_strikes"><code class="docutils literal notranslate"><span class="pre">Team.total_strikes</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.url"><code class="docutils literal notranslate"><span class="pre">Team.url</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.user_display_name"><code class="docutils literal notranslate"><span class="pre">Team.user_display_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.user_profile_image"><code class="docutils literal notranslate"><span class="pre">Team.user_profile_image</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.waiver_priority"><code class="docutils literal notranslate"><span class="pre">Team.waiver_priority</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.win_probability"><code class="docutils literal notranslate"><span class="pre">Team.win_probability</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Team.clean_data_dict()</span></code></a></li>
