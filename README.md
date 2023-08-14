@@ -7,7 +7,7 @@ Python API wrapper for the Yahoo Fantasy Sports public API
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/uberfastman/yfpy?color=yellowgreen&label=latest%20release&sort=semver)](https://github.com/uberfastman/yfpy/releases/latest)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/uberfastman/yfpy?color=yellowgreen&label=latest%20version&sort=semver)](https://github.com/uberfastman/yfpy/tags)
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/uberfastman/yfpy/CI%20Build/main?color=brightgreen&label=build)](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/uberfastman/yfpy/python-package.yml?color=brightgreen&label=build)](https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml)
 
 [![PyPI](https://img.shields.io/pypi/v/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
 [![PyPI](https://img.shields.io/pypi/dm/yfpy.svg?style=flat)](https://pypi.python.org/pypi/yfpy)
