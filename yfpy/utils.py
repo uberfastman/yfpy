@@ -164,7 +164,7 @@ def convert_strings_to_numeric_equivalents(json_obj: Any) -> Union[int, float, A
         else the original JSON object.
 
     """
-    if type(json_obj) == str:
+    if isinstance(json_obj, str):
 
         if len(json_obj) > 1 and str.startswith(json_obj, "0"):
             return json_obj

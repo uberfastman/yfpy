@@ -23,8 +23,8 @@ Example vars using public Yahoo leagues still require auth through a personal Ya
 
 @pytest.fixture
 def auth_dir() -> Path:
-    """Put private.json (see README.md) in yfpy/test/integration/ directory."""
-    return Path(__file__).parent
+    """Put private.json (see README.md) in yfpy/auth/ directory."""
+    return Path(__file__).parent.parent.parent / "auth"
 
 
 @pytest.fixture

@@ -31,9 +31,8 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 # Ignore resource warnings from unittest module
 warnings.simplefilter("ignore", ResourceWarning)
 
-# load python-dotenv to parse environment variables
-env_path = Path(__file__).parent / ".env"
-load_dotenv(dotenv_path=env_path)
+# load .env file in order to read local environment variables
+load_dotenv(dotenv_path=Path(__file__).parent.parent.parent / "auth" / ".env")
 
 
 @pytest.mark.integration
