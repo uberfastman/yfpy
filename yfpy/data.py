@@ -61,7 +61,7 @@ class Data(object):
                 save_data = True).
 
         """
-        self.data_dir = data_dir if type(data_dir) == PosixPath else Path(data_dir)  # type: Path
+        self.data_dir = data_dir if isinstance(data_dir, PosixPath) else Path(data_dir)  # type: Path
         self.save_data = save_data  # type: bool
         self.dev_offline = dev_offline  # type: bool
 
@@ -75,7 +75,7 @@ class Data(object):
             None
 
         """
-        self.data_dir = new_save_dir if type(new_save_dir) == PosixPath else Path(new_save_dir)  # type: Path
+        self.data_dir = new_save_dir if isinstance(new_save_dir, PosixPath) else Path(new_save_dir)  # type: Path
 
     @staticmethod
     def fetch(yf_query: Callable,
@@ -111,7 +111,7 @@ class Data(object):
         """
         # change data save directory
         if new_data_dir:
-            new_data_dir = new_data_dir if type(new_data_dir) == PosixPath else Path(new_data_dir)
+            new_data_dir = new_data_dir if isinstance(new_data_dir, PosixPath) else Path(new_data_dir)
             logger.debug(f"Data directory changed from {self.data_dir} to {new_data_dir}.")
             self.update_data_dir(new_data_dir)
 
@@ -169,7 +169,7 @@ class Data(object):
         """
         # change data load directory
         if new_data_dir:
-            new_data_dir = new_data_dir if type(new_data_dir) == PosixPath else Path(new_data_dir)
+            new_data_dir = new_data_dir if isinstance(new_data_dir, PosixPath) else Path(new_data_dir)
             self.update_data_dir(new_data_dir)
 
         # load selected data file

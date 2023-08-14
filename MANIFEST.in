@@ -8,6 +8,13 @@ include LICENSE
 include requirements.txt
 include dev-requirements.txt
 
+# Include Yahoo Fantasy Sports REST API authentication resources
+include auth/EXAMPLE.private.json
+include auth/EXAMPLE.env
+
+# Include quickstart resources
+include quickstart/quickstart.py
+
 # Include test code and resources
 include test/conftest.py
 include test/integration/conftest.py
@@ -16,5 +23,3 @@ include test/integration/test_api_league_data.py
 include test/integration/test_api_player_data.py
 include test/integration/test_api_team_data.py
 include test/integration/test_api_user_data.py
-include test/integration/EXAMPLE.private.json
-include test/integration/EXAMPLE.env

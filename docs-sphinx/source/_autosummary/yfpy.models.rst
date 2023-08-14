@@ -1,4 +1,4 @@
-yfpy.models
+﻿yfpy.models
 ===========
 
 .. automodule:: yfpy.models
@@ -28,6 +28,7 @@ yfpy.models
       DraftResult
       Game
       GameWeek
+      Group
       Headshot
       League
       Manager
@@ -38,6 +39,7 @@ yfpy.models
       Ownership
       PercentOwned
       Player
+      PlayerAdvancedStats
       PlayerPoints
       PlayerStats
       PositionType

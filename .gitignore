@@ -26,5 +26,6 @@ test_output/
 .python-version
 
 # Credentials
-private*.json
-token*.json
+*private*.json
+!EXAMPLE.private.json
+*token*.json

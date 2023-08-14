@@ -100,7 +100,7 @@ class YahooFantasySportsQuery(object):
             executed_queries (list[dict[str, Any]]): List of completed queries and their responses.
 
         """
-        self._auth_dir = auth_dir if type(auth_dir) == PosixPath else Path(auth_dir)  # type: Path
+        self._auth_dir = auth_dir if isinstance(auth_dir, PosixPath) else Path(auth_dir)  # type: Path
         self._yahoo_consumer_key = consumer_key
         self._yahoo_consumer_secret = consumer_secret
         self._yahoo_access_token = None
@@ -1403,7 +1403,7 @@ class YahooFantasySportsQuery(object):
                     ["league", "players"]
                 )
 
-                league_players = (league_player_query_data if type(league_player_query_data) == list else
+                league_players = (league_player_query_data if isinstance(league_player_query_data, list) else
                                   [league_player_query_data])
                 league_player_count_from_query = len(league_players)
 
@@ -2475,11 +2475,13 @@ class YahooFantasySportsQuery(object):
             ["team", "matchups"]
         )
 
-    def get_player_stats_for_season(self, player_key: str) -> Player:
+    def get_player_stats_for_season(self, player_key: str, limit_to_league_stats: bool = True) -> Player:
         """Retrieve stats of specific player by player_key for the entire season for chosen league.
 
         Args:
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
+            limit_to_league_stats (bool): Boolean (default: True) to limit the retrieved player stats to those for the
+                selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).
 
         Examples:
             >>> from pathlib import Path
@@ -2541,19 +2543,30 @@ class YahooFantasySportsQuery(object):
             Player: YFPY Player instance.
 
         """
-        return self.query(
-            f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
-            f"player_keys={player_key}/stats",
-            ["league", "players", "0", "player"],
-            Player
-        )
+        if limit_to_league_stats:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
+                f"player_keys={player_key}/stats",
+                ["league", "players", "0", "player"],
+                Player
+            )
+        else:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/players;"
+                f"player_keys={player_key}/stats",
+                ["players", "0", "player"],
+                Player
+            )
 
-    def get_player_stats_by_week(self, player_key: str, chosen_week: Union[int, str] = "current") -> Player:
+    def get_player_stats_by_week(self, player_key: str, chosen_week: Union[int, str] = "current",
+                                 limit_to_league_stats: bool = True) -> Player:
         """Retrieve stats of specific player by player_key and by week for chosen league.
 
         Args:
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
             chosen_week (int): Selected week for which to retrieve data.
+            limit_to_league_stats (bool): Boolean (default: True) to limit the retrieved player stats to those for the
+                selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).
 
         Examples:
             >>> from pathlib import Path
@@ -2617,14 +2630,23 @@ class YahooFantasySportsQuery(object):
             Player: YFPY Player instance containing the "player_stats" key (returns a YFPY PlayerStats instance).
 
         """
-        return self.query(
-            f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
-            f"player_keys={player_key}/stats;type=week;week={chosen_week}",
-            ["league", "players", "0", "player"],
-            Player
-        )
+        if limit_to_league_stats:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
+                f"player_keys={player_key}/stats;type=week;week={chosen_week}",
+                ["league", "players", "0", "player"],
+                Player
+            )
+        else:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/players;"
+                f"player_keys={player_key}/stats;type=week;week={chosen_week}",
+                ["players", "0", "player"],
+                Player
+            )
 
-    def get_player_stats_by_date(self, player_key: str, chosen_date: str = None) -> Player:
+    def get_player_stats_by_date(self, player_key: str, chosen_date: str = None,
+                                 limit_to_league_stats: bool = True) -> Player:
         """Retrieve player stats by player_key and by date for chosen league.
 
         Note:
@@ -2634,6 +2656,8 @@ class YahooFantasySportsQuery(object):
         Args:
             player_key (str): The player key of chosen player (example: 331.p.7200 - <game_id>.p.<player_id>).
             chosen_date (str): Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)
+            limit_to_league_stats (bool): Boolean (default: True) to limit the retrieved player stats to those for the
+                selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).
 
         Examples:
             >>> from pathlib import Path
@@ -2723,12 +2747,20 @@ class YahooFantasySportsQuery(object):
             Player: YFPY Player instnace containing the "player_stats" key (returns a YFPY PlayerStats instance).
 
         """
-        return self.query(
-            f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
-            f"player_keys={player_key}/stats;type=date;date={chosen_date}",
-            ["league", "players", "0", "player"],
-            Player
-        )
+        if limit_to_league_stats:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
+                f"player_keys={player_key}/stats;type=date;date={chosen_date}",
+                ["league", "players", "0", "player"],
+                Player
+            )
+        else:
+            return self.query(
+                f"https://fantasysports.yahooapis.com/fantasy/v2/players;"
+                f"player_keys={player_key}/stats;type=date;date={chosen_date}",
+                ["players", "0", "player"],
+                Player
+            )
 
     def get_player_ownership(self, player_key: str) -> Player:
         """Retrieve ownership of specific player by player_key for chosen league.
