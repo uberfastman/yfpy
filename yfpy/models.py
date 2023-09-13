@@ -948,7 +948,7 @@ class Settings(YahooFantasyObject):
 
         Attributes:
             cant_cut_list (int): Numeric boolean (0 or 1) representing if the league uses the Yahoo "can't cut list".
-            divisions (int): Numeric boolean (0 or 1) representing if the league has divisions.
+            divisions (list[Division]): A list of YFPY Division instances for leagues with divisions.
             draft_pick_time (int): The number of seconds allowed to make each draft pick.
             draft_time (int): A timestamp representing when the draft will start.
             draft_together (int): Numeric boolean (0 or 1) representing if the league uses Yahoo Fantasy Draft Together
@@ -992,7 +992,7 @@ class Settings(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.cant_cut_list: int = self._extracted_data.get("cant_cut_list", 0)
-        self.divisions: int = self._extracted_data.get("divisions", 0)
+        self.divisions: List[Division] = self._extracted_data.get("divisions", [])
         self.draft_pick_time: int = self._extracted_data.get("draft_pick_time", None)
         self.draft_time: int = self._extracted_data.get("draft_time", None)
         self.draft_together: int = self._extracted_data.get("draft_together", 0)
