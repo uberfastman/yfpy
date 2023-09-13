@@ -91,7 +91,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
-    * Make a copy of [`test/integration/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/main/test/integration/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
+    * Make a copy of [`auth/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/main/auth/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
     * Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.
 
 ---

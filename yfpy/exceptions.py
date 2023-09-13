@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 class YahooFantasySportsException(Exception):
     """Base YFPY exception class for Yahoo Fantasy Sports API exceptions.
     """
-    def __init__(self, message, payload=None, url=None):
+    def __init__(self, message: str, payload: str = None, url: str = None):
         """Instantiate YFPY exception.
 
         Args:
@@ -30,9 +30,9 @@ class YahooFantasySportsException(Exception):
             url (str): Yahoo Fantasy Sports REST API URL.
 
         """
-        self.message = message
-        self.payload = payload
-        self.url = url
+        self.message: str = message
+        self.payload: str = payload
+        self.url: str = url
 
     def __str__(self):
         return str(self.message)
