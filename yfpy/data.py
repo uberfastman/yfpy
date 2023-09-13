@@ -61,9 +61,9 @@ class Data(object):
                 save_data = True).
 
         """
-        self.data_dir = data_dir if isinstance(data_dir, PosixPath) else Path(data_dir)  # type: Path
-        self.save_data = save_data  # type: bool
-        self.dev_offline = dev_offline  # type: bool
+        self.data_dir: Path = data_dir if isinstance(data_dir, PosixPath) else Path(data_dir)
+        self.save_data: bool = save_data
+        self.dev_offline: bool = dev_offline
 
     def update_data_dir(self, new_save_dir: Union[Path, str]) -> None:
         """Modify the data storage directory if it needs to be updated.
@@ -75,7 +75,7 @@ class Data(object):
             None
 
         """
-        self.data_dir = new_save_dir if isinstance(new_save_dir, PosixPath) else Path(new_save_dir)  # type: Path
+        self.data_dir: Path = new_save_dir if isinstance(new_save_dir, PosixPath) else Path(new_save_dir)
 
     @staticmethod
     def fetch(yf_query: Callable,

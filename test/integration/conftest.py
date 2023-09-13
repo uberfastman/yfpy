@@ -77,8 +77,9 @@ def season() -> int:
     # season = 2015
     # season = 2019
     # season = 2020
-    season = 2021
+    # season = 2021
     # season = 2022
+    season = 2023
 
     return season
 
@@ -113,7 +114,8 @@ def league_id() -> str:
     # league_id = "907359"  # NFL - 2015 (testing for league with divisions)
     # league_id = "79230"  # NFL - 2019
     # league_id = "655434"  # NFL - 2020
-    league_id = "413954"  # NFL - 2021
+    # league_id = "413954"  # NFL - 2021
+    league_id = "321958"  # NFL - 2023
 
     # league_id = "69624"  # NHL - 2012
     # league_id = "101592"  # NHL - 2021
@@ -131,7 +133,8 @@ def game_id() -> int:
     # game_id = 348  # NFL - 2015 (testing for league with divisions)
     # game_id = 390  # NFL - 2019
     # game_id = 399  # NFL - 2020
-    game_id = 406  # NFL - 2021
+    # game_id = 406  # NFL - 2021
+    game_id = 423  # NFL - 2023
 
     # game_id = 303  # NHL - 2012
     # game_id = 411  # NHL - 2021
@@ -150,7 +153,8 @@ def game_key() -> str:
     # game_key = "348"  # NFL - 2015 (testing for league with divisions)
     # game_key = "390"  # NFL - 2019
     # game_key = "399"  # NFL - 2020
-    game_key = "406"  # NFL - 2021
+    # game_key = "406"  # NFL - 2021
+    game_key = "423"  # NFL - 2023
 
     # game_key = "303"  # NHL - 2012
     # game_key = "411"  # NHL - 2021
@@ -200,7 +204,7 @@ def team_name() -> str:
 def player_id() -> int:
     """Create and set Yahoo Fantasy Sports player ID for testing."""
 
-    player_id = 7200  # NFL: Aaron Rodgers - 2020/2021
+    player_id = 30123  # NFL: Patrick Mahomes - 2020/2021/2023
 
     # player_id = 4588  # NHL: Braden Holtby - 2012
     # player_id = 8205  # NHL: Jeffrey Viel - 2021

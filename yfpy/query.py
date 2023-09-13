@@ -16,7 +16,7 @@ import logging
 import time
 from json import JSONDecodeError
 from pathlib import Path, PosixPath
-from typing import Callable, Dict, List, Type, TypeVar, Union
+from typing import Callable, Dict, List, Type, TypeVar, Union, Any
 
 from requests import Response
 from requests.exceptions import HTTPError
@@ -89,7 +89,7 @@ class YahooFantasySportsQuery(object):
                 store the data output of the submitted query.
             league_id (str): League ID of selected Yahoo Fantasy league.
             game_id (int): Game ID of selected Yahoo fantasy game corresponding to a specific year, and defaulting to
-            the current year.
+                the current year.
             game_code (str): Game code of selected Yahoo Fantasy game corresponding to a specific year, and defaulting
                 to "nfl" (fantasy football), "nhl" (fantasy hockey), "mlb" (fantasy baseball), or "nba" (fantasy
                 basketball)
@@ -100,25 +100,25 @@ class YahooFantasySportsQuery(object):
             executed_queries (list[dict[str, Any]]): List of completed queries and their responses.
 
         """
-        self._auth_dir = auth_dir if isinstance(auth_dir, PosixPath) else Path(auth_dir)  # type: Path
-        self._yahoo_consumer_key = consumer_key
-        self._yahoo_consumer_secret = consumer_secret
-        self._yahoo_access_token = None
-        self._browser_callback = browser_callback
-        self._retries = retries
-        self._backoff = backoff
+        self._auth_dir: Path = auth_dir if isinstance(auth_dir, PosixPath) else Path(auth_dir)
+        self._yahoo_consumer_key: str = consumer_key
+        self._yahoo_consumer_secret: str = consumer_secret
+        self._yahoo_access_token: str = None
+        self._browser_callback: bool = browser_callback
+        self._retries: int = retries
+        self._backoff: int = backoff
 
-        self.fantasy_content_data_field = "fantasy_content"
+        self.fantasy_content_data_field: str = "fantasy_content"
 
-        self.league_id = league_id
-        self.game_id = game_id
-        self.game_code = game_code
+        self.league_id: str = league_id
+        self.game_id: int = game_id
+        self.game_code: str = game_code
 
-        self.offline = offline
-        self.all_output_as_json_str = all_output_as_json_str
+        self.offline: bool = offline
+        self.all_output_as_json_str: bool = all_output_as_json_str
 
-        self.league_key = None
-        self.executed_queries = []
+        self.league_key: str = None
+        self.executed_queries: List[Dict[str, Any]] = []
 
         if not self.offline:
             self._authenticate()
@@ -177,7 +177,7 @@ class YahooFantasySportsQuery(object):
 
         """
         logger.debug(f"Making request to URL: {url}")
-        response = self.oauth.session.get(url, params={"format": "json"})  # type: Response
+        response: Response = self.oauth.session.get(url, params={"format": "json"})
 
         status_code = response.status_code
         # when you exceed Yahoo's allowed data request limits, they throw a request status code of 999
@@ -187,7 +187,7 @@ class YahooFantasySportsQuery(object):
         if status_code == 401:
             self._authenticate()
 
-        response_json = []
+        response_json = {}
         try:
             response_json = response.json()
             logger.debug(f"Response (JSON): {response_json}")
