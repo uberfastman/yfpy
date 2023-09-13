@@ -1,6 +1,7 @@
 myst-parser==2.0.0
 pygments==2.16.1
-sphinx==7.2.5
+# TODO: sphinx<=7.1.2 REQUIRED FOR TOC VISIBILITY
+sphinx==7.1.2
 sphinx-autodoc-typehints==1.24.0
 sphinx-rtd-dark-mode==1.2.4
 sphinx-rtd-theme==1.3.0
