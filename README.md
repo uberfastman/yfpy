@@ -109,7 +109,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
 
 * See the documentation on the  [`yfpy.query.YahooFantasySportsQuery`](https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery) class for example usage of all available queries.
 * See [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py) for example usage output.
-  * Uncomment/comment out whichever configuration values with which you wish to experiment.
+  * Uncomment/comment out whichever configuration values in their respective functions with which you wish to experiment.
   * Uncomment/comment out whichever query lines in the `RUN QUERIES` section you wish to run.
   * Uncomment/comment out whichever query lines in the `CHECK FOR MISSING DATA FIELDS` section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.
 
@@ -130,6 +130,7 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 * Before running any integration tests, make a copy of [`auth/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/main/auth/EXAMPLE.env) in the [`auth/`](https://github.com/uberfastman/yfpy/blob/main/auth/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
+* The fixture values in [`test/integration/conftest.py`](https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py) are defined in [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py), and can be changed for testing by uncommenting/commenting out the values inside each respective function.
 
 #### Running
 

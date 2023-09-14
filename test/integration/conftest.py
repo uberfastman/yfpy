@@ -8,6 +8,7 @@ __email__ = "uberfastman@uberfastman.dev"
 import os
 from pathlib import Path
 from typing import Union
+from quickstart import quickstart
 
 import pytest
 
@@ -71,181 +72,61 @@ def browser_callback() -> bool:
 @pytest.fixture
 def season() -> int:
     """Set Yahoo Fantasy Sports season for testing."""
-
-    # season = 2012
-    # season = 2013
-    # season = 2014
-    # season = 2015
-    # season = 2016
-    # season = 2017
-    # season = 2018
-    # season = 2019
-    # season = 2020
-    # season = 2021
-    # season = 2022
-    season = 2023
-
-    return season
+    return quickstart.get_season()
 
 
 @pytest.fixture
 def chosen_week() -> int:
     """Set Yahoo Fantasy Sports chosen week for testing."""
-
-    chosen_week = 1
-
-    return chosen_week
+    return quickstart.get_chosen_week()
 
 
 @pytest.fixture
 def chosen_date() -> str:
     """Set Yahoo Fantasy Sports chosen date for testing."""
-
-    # HOCKEY
-    # chosen_date = "2013-04-15"  # NHL - 2013 (for 2012 season)
-    chosen_date = "2021-10-25"  # NHL - 2021
-
-    # BASEBALL
-    # chosen_date = "2021-04-01"  # MLB - 2021
-    # chosen_date = "2022-04-10"  # MLB - 2022
-
-    return chosen_date
-
-
-@pytest.fixture
-def league_id() -> str:
-    """Set Yahoo Fantasy Sports league ID for testing."""
-
-    # FOOTBALL
-    # league_id = "907359"  # NFL - 2015 (divisions)
-    # league_id = "79230"  # NFL - 2019
-    # league_id = "655434"  # NFL - 2020
-    # league_id = "413954"  # NFL - 2021
-    # league_id = "791337"  # NFL - 2022 (divisions)
-    league_id = "321958"  # NFL - 2023
-
-    # HOCKEY
-    # league_id = "69624"  # NHL - 2012
-    # league_id = "101592"  # NHL - 2021
-
-    # BASEBALL
-    # league_id = "40134"  # MLB - 2021
-
-    return league_id
-
-
-@pytest.fixture
-def game_id() -> int:
-    """Set Yahoo Fantasy Sports game ID for testing."""
-
-    # FOOTBALL
-    # game_id = 331  # NFL - 2014
-    # game_id = 348  # NFL - 2015 (divisions)
-    # game_id = 359  # NFL - 2016
-    # game_id = 371  # NFL - 2017
-    # game_id = 380  # NFL - 2018
-    # game_id = 390  # NFL - 2019
-    # game_id = 399  # NFL - 2020
-    # game_id = 406  # NFL - 2021
-    # game_id = 414  # NFL - 2022 (divisions)
-    game_id = 423  # NFL - 2023
-
-    # HOCKEY
-    # game_id = 303  # NHL - 2012
-    # game_id = 411  # NHL - 2021
-
-    # BASEBALL
-    # game_id = 404  # MLB - 2021
-    # game_id = 412  # MLB - 2022
-
-    return game_id
-
-
-@pytest.fixture
-def game_key() -> str:
-    """Set Yahoo Fantasy Sports game key for testing."""
-
-    # FOOTBALL
-    # game_key = "331"  # NFL - 2014
-    # game_key = "348"  # NFL - 2015 (divisions)
-    # game_key = "359"  # NFL - 2016
-    # game_key = "371"  # NFL - 2017
-    # game_key = "380"  # NFL - 2018
-    # game_key = "390"  # NFL - 2019
-    # game_key = "399"  # NFL - 2020
-    # game_key = "406"  # NFL - 2021
-    # game_key = "414"  # NFL - 2022 (divisions)
-    game_key = "423"  # NFL - 2023
-
-    # HOCKEY
-    # game_key = "303"  # NHL - 2012
-    # game_key = "411"  # NHL - 2021
-
-    # BASEBALL
-    # game_key = "404"  # MLB - 2021
-    # game_key = "412"  # MLB - 2022
-
-    return game_key
+    return quickstart.get_chosen_date()
 
 
 @pytest.fixture
 def game_code() -> str:
     """Set Yahoo Fantasy Sports game code for testing."""
+    return quickstart.get_game_code()
 
-    # FOOTBALL
-    game_code = "nfl"  # NFL
 
-    # HOCKEY
-    # game_code = "nhl"  # NHL
+@pytest.fixture
+def game_id() -> int:
+    """Set Yahoo Fantasy Sports game ID for testing."""
+    return quickstart.get_game_id()
 
-    # BASEBALL
-    # game_code = "mlb"  # MLB
 
-    return game_code
+@pytest.fixture
+def game_key() -> str:
+    """Set Yahoo Fantasy Sports game key for testing."""
+    return quickstart.get_game_key()
+
+
+@pytest.fixture
+def league_id() -> str:
+    """Set Yahoo Fantasy Sports league ID for testing."""
+    return quickstart.get_league_id()
 
 
 @pytest.fixture
 def team_id() -> int:
     """Set Yahoo Fantasy Sports team ID for testing."""
-
-    # FOOTBALL
-    team_id = 1  # NFL
-
-    # HOCKEY
-    # team_id = 2  # NHL (2012)
-
-    return team_id
+    return quickstart.get_team_id()
 
 
 @pytest.fixture
 def team_name() -> str:
     """Set Yahoo Fantasy Sports team name for testing."""
-
-    # FOOTBALL
-    team_name = "Legion"  # NFL
-
-    # HOCKEY
-    # team_name = "The Bateleurs"  # NHL (2012)
-
-    return team_name
+    return quickstart.get_team_name()
 
 
 @pytest.fixture
 def player_id() -> int:
     """Create and set Yahoo Fantasy Sports player ID for testing."""
-
-    # FOOTBALL
-    player_id = 30123  # NFL: Patrick Mahomes - 2020/2021/2023
-
-    # HOCKEY
-    # player_id = 4588  # NHL: Braden Holtby - 2012
-    # player_id = 8205  # NHL: Jeffrey Viel - 2021
-    # player_id = 3637  # NHL: Alex Ovechkin - 2021
-
-    # BASEBALL
-    # player_id = 9897  # MLB: Tim Anderson - 2021/2022
-
-    return player_id
+    return quickstart.get_player_id()
 
 
 @pytest.fixture
@@ -260,7 +141,4 @@ def player_key(game_id, player_id) -> str:
 @pytest.fixture
 def league_player_limit() -> int:
     """Set Yahoo Fantasy Sports league player retrieval limit for testing."""
-
-    league_player_limit = 101
-
-    return league_player_limit
+    return quickstart.get_league_player_limit()
