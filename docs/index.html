@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v12.2.0 documentation</title>
+  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v13.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=0d587dbb"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=1382d64f"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -40,7 +40,7 @@
               <img src="_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v12.2.0
+                v13.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -2987,7 +2987,7 @@
 <li><p>See the documentation on the  <a class="reference external" href="https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery"><code class="docutils literal notranslate"><span class="pre">yfpy.query.YahooFantasySportsQuery</span></code></a> class for example usage of all available queries.</p></li>
 <li><p>See <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code class="docutils literal notranslate"><span class="pre">quickstart/quickstart.py</span></code></a> for example usage output.</p>
 <ul>
-<li><p>Uncomment/comment out whichever configuration values with which you wish to experiment.</p></li>
+<li><p>Uncomment/comment out whichever configuration values in their respective functions with which you wish to experiment.</p></li>
 <li><p>Uncomment/comment out whichever query lines in the <code class="docutils literal notranslate"><span class="pre">RUN</span> <span class="pre">QUERIES</span></code> section you wish to run.</p></li>
 <li><p>Uncomment/comment out whichever query lines in the <code class="docutils literal notranslate"><span class="pre">CHECK</span> <span class="pre">FOR</span> <span class="pre">MISSING</span> <span class="pre">DATA</span> <span class="pre">FIELDS</span></code> section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.</p></li>
 </ul>
@@ -3013,6 +3013,7 @@
 <li><p>Before running any integration tests, make a copy of <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/auth/EXAMPLE.env"><code class="docutils literal notranslate"><span class="pre">auth/EXAMPLE.env</span></code></a> in the <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/auth/"><code class="docutils literal notranslate"><span class="pre">auth/</span></code></a> directory and rename it to <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p></li>
 <li><p>Copy your Yahoo <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span> <span class="pre">Secret</span></code> into the environment variables in <code class="docutils literal notranslate"><span class="pre">.env</span></code> so that pytest can use them when hitting the Yahoo Fantasy Sports API.</p></li>
 <li><p>If this is the first time running pytest with your Yahoo API credentials, you <em><strong>MUST</strong></em> allow interactive prompts within pytest by using the <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag.</p></li>
+<li><p>The fixture values in <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py"><code class="docutils literal notranslate"><span class="pre">test/integration/conftest.py</span></code></a> are defined in <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code class="docutils literal notranslate"><span class="pre">quickstart/quickstart.py</span></code></a>, and can be changed for testing by uncommenting/commenting out the values inside each respective function.</p></li>
 </ul>
 </section>
 <section id="running">

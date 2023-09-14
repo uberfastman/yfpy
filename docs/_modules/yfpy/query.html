@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query &mdash; YFPY v12.2.0 documentation</title>
+  <title>yfpy.query &mdash; YFPY v13.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=0d587dbb"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=1382d64f"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -38,7 +38,7 @@
               <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v12.2.0
+                v13.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -3107,8 +3107,8 @@
 <span class="sd">            url (str): REST API request URL string.</span>
 <span class="sd">            data_key_list (list[str] | list[list[str]]): List of keys used to extract the specific data desired by the</span>
 <span class="sd">                given query (supports strings and lists of strings). Supports lists containing only key strings such as</span>
-<span class="sd">                [&quot;game&quot;, &quot;stat_categories&quot;], and also supports lists containing key strings and lists of key strings</span>
-<span class="sd">                such as [&quot;team&quot;, [&quot;team_points&quot;, &quot;team_projected_points&quot;]].</span>
+<span class="sd">                [&quot;game&quot;, &quot;stat_categories&quot;], and also supports lists containing key strings followed by lists of key</span>
+<span class="sd">                strings such as [&quot;team&quot;, [&quot;team_points&quot;, &quot;team_projected_points&quot;]].</span>
 <span class="sd">            data_type_class (:obj:`Type`, optional): Highest level data model type (if one exists for the retrieved</span>
 <span class="sd">                data).</span>
 <span class="sd">            sort_function (Callable of sort function, optional)): Optional lambda function to return sorted query</span>
@@ -3163,8 +3163,17 @@
 
             <span class="c1"># cast the highest level of data to type corresponding to query (if type exists)</span>
             <span class="n">query_data</span> <span class="o">=</span> <span class="n">data_type_class</span><span class="p">(</span><span class="n">unpacked</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_type_class</span> <span class="k">else</span> <span class="n">unpacked</span>
+
+            <span class="c1"># sort data when applicable</span>
             <span class="k">if</span> <span class="n">sort_function</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="n">query_data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sort_function</span><span class="p">)</span>
+
+            <span class="c1"># flatten lists of single-key dicts of objects into lists of those objects</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">last_data_key</span> <span class="o">=</span> <span class="n">data_key_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">last_data_key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">):</span>
+                    <span class="n">query_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="p">[</span><span class="n">last_data_key</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">query_data</span><span class="p">]</span>
+
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_output_as_json_str</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">jsonify_data</span><span class="p">(</span><span class="n">query_data</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -3173,7 +3182,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot run Yahoo query while using offline mode! Please try again with offline=False.&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_all_yahoo_fantasy_game_keys"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_all_yahoo_fantasy_game_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_yahoo_fantasy_game_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Game</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_all_yahoo_fantasy_game_keys"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_all_yahoo_fantasy_game_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_yahoo_fantasy_game_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Game</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve all Yahoo Fantasy Sports game keys by ID (from year of inception to present), sorted by season/year.</span>
 
 <span class="sd">        Examples:</span>
@@ -3182,26 +3191,24 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_all_yahoo_fantasy_game_keys()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;game&quot;: {</span>
-<span class="sd">                  &quot;code&quot;: &quot;nfl&quot;,</span>
-<span class="sd">                  &quot;game_id&quot;: &quot;50&quot;,</span>
-<span class="sd">                  &quot;game_key&quot;: &quot;50&quot;,</span>
-<span class="sd">                  &quot;is_game_over&quot;: 1,</span>
-<span class="sd">                  &quot;is_offseason&quot;: 1,</span>
-<span class="sd">                  &quot;is_registration_over&quot;: 1,</span>
-<span class="sd">                  &quot;name&quot;: &quot;Football&quot;,</span>
-<span class="sd">                  &quot;season&quot;: &quot;1999&quot;,</span>
-<span class="sd">                  &quot;type&quot;: &quot;full&quot;,</span>
-<span class="sd">                  &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/1999&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Game({</span>
+<span class="sd">                &quot;code&quot;: &quot;nfl&quot;,</span>
+<span class="sd">                &quot;game_id&quot;: &quot;50&quot;,</span>
+<span class="sd">                &quot;game_key&quot;: &quot;50&quot;,</span>
+<span class="sd">                &quot;is_game_over&quot;: 1,</span>
+<span class="sd">                &quot;is_offseason&quot;: 1,</span>
+<span class="sd">                &quot;is_registration_over&quot;: 1,</span>
+<span class="sd">                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                &quot;season&quot;: &quot;1999&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;full&quot;,</span>
+<span class="sd">                &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/1999&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Game({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Game]]: List of dictionaries containing the single key &quot;game&quot; and value of each YFPY Game</span>
-<span class="sd">            instance.</span>
+<span class="sd">            list[Game]: List of YFPY Game instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3251,7 +3258,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_current_game_info()</span>
-<span class="sd">            {</span>
+<span class="sd">            Game({</span>
 <span class="sd">              &quot;code&quot;: &quot;nfl&quot;,</span>
 <span class="sd">              &quot;game_id&quot;: &quot;390&quot;,</span>
 <span class="sd">              &quot;game_key&quot;: &quot;390&quot;,</span>
@@ -3304,7 +3311,7 @@
 <span class="sd">              },</span>
 <span class="sd">              &quot;type&quot;: &quot;full&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/f1&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Game: YFPY Game instance.</span>
@@ -3325,7 +3332,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_current_game_metadata()</span>
-<span class="sd">            {</span>
+<span class="sd">            Game({</span>
 <span class="sd">              &quot;code&quot;: &quot;nfl&quot;,</span>
 <span class="sd">              &quot;game_id&quot;: &quot;390&quot;,</span>
 <span class="sd">              &quot;game_key&quot;: &quot;390&quot;,</span>
@@ -3337,7 +3344,7 @@
 <span class="sd">              &quot;season&quot;: &quot;2019&quot;,</span>
 <span class="sd">              &quot;type&quot;: &quot;full&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/f1&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Game: YFPY Game instance.</span>
@@ -3360,7 +3367,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_info_by_game_id(390)</span>
-<span class="sd">            {</span>
+<span class="sd">            Game({</span>
 <span class="sd">              &quot;code&quot;: &quot;nfl&quot;,</span>
 <span class="sd">              &quot;game_id&quot;: &quot;390&quot;,</span>
 <span class="sd">              &quot;game_key&quot;: &quot;390&quot;,</span>
@@ -3413,7 +3420,7 @@
 <span class="sd">              },</span>
 <span class="sd">              &quot;type&quot;: &quot;full&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/f1&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Game: YFPY Game instance.</span>
@@ -3437,7 +3444,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_metadata_by_game_id(331)</span>
-<span class="sd">            {</span>
+<span class="sd">            Game({</span>
 <span class="sd">              &quot;code&quot;: &quot;nfl&quot;,</span>
 <span class="sd">              &quot;game_id&quot;: &quot;331&quot;,</span>
 <span class="sd">              &quot;game_key&quot;: &quot;331&quot;,</span>
@@ -3448,7 +3455,7 @@
 <span class="sd">              &quot;season&quot;: &quot;2014&quot;,</span>
 <span class="sd">              &quot;type&quot;: &quot;full&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Game: YFPY Game instance.</span>
@@ -3460,7 +3467,7 @@
             <span class="n">Game</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_weeks_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_weeks_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_weeks_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GameWeek</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_weeks_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_weeks_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_weeks_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">GameWeek</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve all valid weeks of a specific game by ID.</span>
 
 <span class="sd">        Args:</span>
@@ -3472,28 +3479,23 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_weeks_by_game_id(331)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;game_week&quot;: {</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;1&quot;,</span>
-<span class="sd">                  &quot;end&quot;: &quot;2014-09-08&quot;,</span>
-<span class="sd">                  &quot;start&quot;: &quot;2014-09-04&quot;,</span>
-<span class="sd">                  &quot;week&quot;: &quot;1&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
+<span class="sd">              GameWeek({</span>
+<span class="sd">                &quot;display_name&quot;: &quot;1&quot;,</span>
+<span class="sd">                &quot;end&quot;: &quot;2014-09-08&quot;,</span>
+<span class="sd">                &quot;start&quot;: &quot;2014-09-04&quot;,</span>
+<span class="sd">                &quot;week&quot;: &quot;1&quot;</span>
+<span class="sd">              }),</span>
 <span class="sd">              ...,</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;game_week&quot;: {</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;17&quot;,</span>
-<span class="sd">                  &quot;end&quot;: &quot;2014-12-28&quot;,</span>
-<span class="sd">                  &quot;start&quot;: &quot;2014-12-23&quot;,</span>
-<span class="sd">                  &quot;week&quot;: &quot;17&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              }</span>
+<span class="sd">              GameWeek({</span>
+<span class="sd">                &quot;display_name&quot;: &quot;17&quot;,</span>
+<span class="sd">                &quot;end&quot;: &quot;2014-12-28&quot;,</span>
+<span class="sd">                &quot;start&quot;: &quot;2014-12-23&quot;,</span>
+<span class="sd">                &quot;week&quot;: &quot;17&quot;</span>
+<span class="sd">              })</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, GameWeek]]: List of dictionaries containing the single key &quot;game_week&quot; and value of each YFPY</span>
-<span class="sd">            GameWeek instance.</span>
+<span class="sd">            list[GameWeek]: List of YFPY GameWeek instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3512,7 +3514,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_stat_categories_by_game_id(331)</span>
-<span class="sd">            {</span>
+<span class="sd">            StatCategories({</span>
 <span class="sd">              &quot;stats&quot;: [</span>
 <span class="sd">                {</span>
 <span class="sd">                  &quot;stat&quot;: {</span>
@@ -3532,7 +3534,7 @@
 <span class="sd">                  }</span>
 <span class="sd">                }</span>
 <span class="sd">              ]</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            StatCategories: YFPY StatCategories instance.</span>
@@ -3544,7 +3546,7 @@
             <span class="n">StatCategories</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_position_types_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_position_types_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_position_types_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PositionType</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_position_types_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_position_types_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_position_types_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">PositionType</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve all valid position types for specific game by ID sorted alphabetically by type.</span>
 
 <span class="sd">        Args:</span>
@@ -3556,35 +3558,19 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_position_types_by_game_id(331)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;position_type&quot;: {</span>
-<span class="sd">                  &quot;type&quot;: &quot;O&quot;,</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;Offense&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;position_type&quot;: {</span>
-<span class="sd">                  &quot;type&quot;: &quot;K&quot;,</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;Kickers&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;position_type&quot;: {</span>
-<span class="sd">                  &quot;type&quot;: &quot;DT&quot;,</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;Defense/Special Teams&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;position_type&quot;: {</span>
-<span class="sd">                  &quot;type&quot;: &quot;DP&quot;,</span>
-<span class="sd">                  &quot;display_name&quot;: &quot;Defensive Players&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              }</span>
+<span class="sd">              PositionType({</span>
+<span class="sd">                &quot;type&quot;: &quot;O&quot;,</span>
+<span class="sd">                &quot;display_name&quot;: &quot;Offense&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              PositionType({</span>
+<span class="sd">                &quot;type&quot;: &quot;K&quot;,</span>
+<span class="sd">                &quot;display_name&quot;: &quot;Kickers&quot;</span>
+<span class="sd">              })</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, PositionType]]: List of dictionaries containing the single key &quot;position_type&quot; and value of</span>
-<span class="sd">            each YFPY PositionType instance.</span>
+<span class="sd">            list[PositionType]: List of YFPY PositionType instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3593,7 +3579,7 @@
             <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;position_type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_roster_positions_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_roster_positions_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_roster_positions_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RosterPosition</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_game_roster_positions_by_game_id"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_game_roster_positions_by_game_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_game_roster_positions_by_game_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">RosterPosition</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve all valid roster positions for specific game by ID sorted alphabetically by position.</span>
 
 <span class="sd">        Args:</span>
@@ -3605,23 +3591,18 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_game_roster_positions_by_game_id(331)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;roster_position&quot;: {</span>
-<span class="sd">                  &quot;position&quot;: &quot;BN&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
+<span class="sd">              {RosterPosition({</span>
+<span class="sd">                &quot;position&quot;: &quot;BN&quot;</span>
+<span class="sd">              }),</span>
 <span class="sd">              ...,</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;roster_position&quot;: {</span>
-<span class="sd">                  &quot;position&quot;: &quot;WR&quot;,</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;O&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              }</span>
+<span class="sd">              RosterPosition({</span>
+<span class="sd">                &quot;position&quot;: &quot;WR&quot;,</span>
+<span class="sd">                &quot;position_type&quot;: &quot;O&quot;</span>
+<span class="sd">              })</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, RosterPosition]]: List of dictionaries containing the single key &quot;roster_position&quot; and value</span>
-<span class="sd">            of each YFPY RosterPosition instance.</span>
+<span class="sd">            list[RosterPosition]: List of YFPY RosterPosition instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3667,9 +3648,9 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_current_user()</span>
-<span class="sd">            {</span>
+<span class="sd">            User({</span>
 <span class="sd">              &quot;guid&quot;: &quot;USER_GUID_STRING&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            User: YFPY User instance.</span>
@@ -3681,7 +3662,7 @@
             <span class="n">User</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_games"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_games">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Game</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_games"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_games">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Game</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve game history for current logged-in user sorted by season/year.</span>
 
 <span class="sd">        Examples:</span>
@@ -3690,8 +3671,7 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_user_games()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;game&quot;: {</span>
+<span class="sd">              Game({</span>
 <span class="sd">                  &quot;code&quot;: &quot;nfl&quot;,</span>
 <span class="sd">                  &quot;game_id&quot;: &quot;359&quot;,</span>
 <span class="sd">                  &quot;game_key&quot;: &quot;359&quot;,</span>
@@ -3702,14 +3682,13 @@
 <span class="sd">                  &quot;season&quot;: &quot;2016&quot;,</span>
 <span class="sd">                  &quot;type&quot;: &quot;full&quot;,</span>
 <span class="sd">                  &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2016&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              })</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Game({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Game]]: List of dictionaries containing the single key &quot;game&quot; and value of each YFPY Game</span>
-<span class="sd">            instance.</span>
+<span class="sd">            list[Game]: List of YFPY Game instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3718,7 +3697,7 @@
             <span class="n">sort_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;game&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">season</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_leagues_by_game_key"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_leagues_by_game_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">League</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_leagues_by_game_key"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_leagues_by_game_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">League</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.</span>
 
 <span class="sd">        Args:</span>
@@ -3730,43 +3709,42 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_user_leagues_by_game_key(331)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;league&quot;: {</span>
-<span class="sd">                  &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
-<span class="sd">                  &quot;current_week&quot;: &quot;16&quot;,</span>
-<span class="sd">                  &quot;draft_status&quot;: &quot;postdraft&quot;,</span>
-<span class="sd">                  &quot;edit_key&quot;: &quot;16&quot;,</span>
-<span class="sd">                  &quot;end_date&quot;: &quot;2018-12-24&quot;,</span>
-<span class="sd">                  &quot;end_week&quot;: &quot;16&quot;,</span>
-<span class="sd">                  &quot;game_code&quot;: &quot;nfl&quot;,</span>
-<span class="sd">                  &quot;iris_group_chat_id&quot;: &quot;&lt;group chat id&gt;&quot;,</span>
-<span class="sd">                  &quot;is_cash_league&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;is_finished&quot;: 1,</span>
-<span class="sd">                  &quot;is_pro_league&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;league_id&quot;: &quot;169896&quot;,</span>
-<span class="sd">                  &quot;league_key&quot;: &quot;380.l.169896&quot;,</span>
-<span class="sd">                  &quot;league_type&quot;: &quot;private&quot;,</span>
-<span class="sd">                  &quot;league_update_timestamp&quot;: &quot;1546498723&quot;,</span>
-<span class="sd">                  &quot;logo_url&quot;: &quot;&lt;logo url&gt;&quot;,</span>
-<span class="sd">                  &quot;name&quot;: &quot;League Name&quot;,</span>
-<span class="sd">                  &quot;num_teams&quot;: 12,</span>
-<span class="sd">                  &quot;password&quot;: null,</span>
-<span class="sd">                  &quot;renew&quot;: &quot;371_52364&quot;,</span>
-<span class="sd">                  &quot;renewed&quot;: &quot;390_78725&quot;,</span>
-<span class="sd">                  &quot;scoring_type&quot;: &quot;head&quot;,</span>
-<span class="sd">                  &quot;season&quot;: &quot;2018&quot;,</span>
-<span class="sd">                  &quot;short_invitation_url&quot;: &quot;&lt;invite url&gt;&quot;,</span>
-<span class="sd">                  &quot;start_date&quot;: &quot;2018-09-06&quot;,</span>
-<span class="sd">                  &quot;start_week&quot;: &quot;1&quot;,</span>
-<span class="sd">                  &quot;url&quot;: &quot;&lt;league url&gt;&quot;,</span>
-<span class="sd">                  &quot;weekly_deadline&quot;: null</span>
-<span class="sd">                }</span>
-<span class="sd">              }</span>
+<span class="sd">              League({</span>
+<span class="sd">                &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
+<span class="sd">                &quot;current_week&quot;: &quot;16&quot;,</span>
+<span class="sd">                &quot;draft_status&quot;: &quot;postdraft&quot;,</span>
+<span class="sd">                &quot;edit_key&quot;: &quot;16&quot;,</span>
+<span class="sd">                &quot;end_date&quot;: &quot;2018-12-24&quot;,</span>
+<span class="sd">                &quot;end_week&quot;: &quot;16&quot;,</span>
+<span class="sd">                &quot;game_code&quot;: &quot;nfl&quot;,</span>
+<span class="sd">                &quot;iris_group_chat_id&quot;: &quot;&lt;group chat id&gt;&quot;,</span>
+<span class="sd">                &quot;is_cash_league&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;is_finished&quot;: 1,</span>
+<span class="sd">                &quot;is_pro_league&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;league_id&quot;: &quot;169896&quot;,</span>
+<span class="sd">                &quot;league_key&quot;: &quot;380.l.169896&quot;,</span>
+<span class="sd">                &quot;league_type&quot;: &quot;private&quot;,</span>
+<span class="sd">                &quot;league_update_timestamp&quot;: &quot;1546498723&quot;,</span>
+<span class="sd">                &quot;logo_url&quot;: &quot;&lt;logo url&gt;&quot;,</span>
+<span class="sd">                &quot;name&quot;: &quot;League Name&quot;,</span>
+<span class="sd">                &quot;num_teams&quot;: 12,</span>
+<span class="sd">                &quot;password&quot;: null,</span>
+<span class="sd">                &quot;renew&quot;: &quot;371_52364&quot;,</span>
+<span class="sd">                &quot;renewed&quot;: &quot;390_78725&quot;,</span>
+<span class="sd">                &quot;scoring_type&quot;: &quot;head&quot;,</span>
+<span class="sd">                &quot;season&quot;: &quot;2018&quot;,</span>
+<span class="sd">                &quot;short_invitation_url&quot;: &quot;&lt;invite url&gt;&quot;,</span>
+<span class="sd">                &quot;start_date&quot;: &quot;2018-09-06&quot;,</span>
+<span class="sd">                &quot;start_week&quot;: &quot;1&quot;,</span>
+<span class="sd">                &quot;url&quot;: &quot;&lt;league url&gt;&quot;,</span>
+<span class="sd">                &quot;weekly_deadline&quot;: null</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              League({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, League]]: List of dictionaries containing the single key &quot;league&quot; and value of each YFPY</span>
-<span class="sd">            League instance.</span>
+<span class="sd">            list[League]: List of YFPY League instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">leagues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3776,7 +3754,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">leagues</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leagues</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">leagues</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_teams"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_teams">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Game</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_user_teams"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_user_teams">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Game</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.</span>
 
 <span class="sd">        Examples:</span>
@@ -3785,66 +3763,65 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_user_teams()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;game&quot;: {</span>
-<span class="sd">                  &quot;code&quot;: &quot;nfl&quot;,</span>
-<span class="sd">                  &quot;game_id&quot;: &quot;359&quot;,</span>
-<span class="sd">                  &quot;game_key&quot;: &quot;359&quot;,</span>
-<span class="sd">                  &quot;is_game_over&quot;: 1,</span>
-<span class="sd">                  &quot;is_offseason&quot;: 1,</span>
-<span class="sd">                  &quot;is_registration_over&quot;: 1,</span>
-<span class="sd">                  &quot;name&quot;: &quot;Football&quot;,</span>
-<span class="sd">                  &quot;season&quot;: &quot;2016&quot;,</span>
-<span class="sd">                  &quot;teams&quot;: [</span>
-<span class="sd">                    {</span>
-<span class="sd">                      &quot;team&quot;: {</span>
-<span class="sd">                        &quot;draft_grade&quot;: &quot;A&quot;,</span>
-<span class="sd">                        &quot;draft_position&quot;: 9,</span>
-<span class="sd">                        &quot;draft_recap_url&quot;: &quot;&lt;draft recap url&gt;&quot;,</span>
-<span class="sd">                        &quot;has_draft_grade&quot;: 1,</span>
-<span class="sd">                        &quot;league_scoring_type&quot;: &quot;head&quot;,</span>
-<span class="sd">                        &quot;managers&quot;: [</span>
-<span class="sd">                          {</span>
-<span class="sd">                            &quot;manager&quot;: {</span>
-<span class="sd">                              &quot;email&quot;: &quot;&lt;manager email&gt;&quot;,</span>
-<span class="sd">                              &quot;guid&quot;: &quot;&lt;manager user guid&gt;&quot;,</span>
-<span class="sd">                              &quot;image_url&quot;: &quot;&lt;manager user image url&gt;&quot;,</span>
-<span class="sd">                              &quot;is_comanager&quot;: &quot;1&quot;,</span>
-<span class="sd">                              &quot;manager_id&quot;: &quot;14&quot;,</span>
-<span class="sd">                              &quot;nickname&quot;: &quot;&lt;manager nickname&gt;&quot;</span>
-<span class="sd">                            }</span>
+<span class="sd">              Game({</span>
+<span class="sd">                &quot;code&quot;: &quot;nfl&quot;,</span>
+<span class="sd">                &quot;game_id&quot;: &quot;359&quot;,</span>
+<span class="sd">                &quot;game_key&quot;: &quot;359&quot;,</span>
+<span class="sd">                &quot;is_game_over&quot;: 1,</span>
+<span class="sd">                &quot;is_offseason&quot;: 1,</span>
+<span class="sd">                &quot;is_registration_over&quot;: 1,</span>
+<span class="sd">                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                &quot;season&quot;: &quot;2016&quot;,</span>
+<span class="sd">                &quot;teams&quot;: [</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;team&quot;: {</span>
+<span class="sd">                      &quot;draft_grade&quot;: &quot;A&quot;,</span>
+<span class="sd">                      &quot;draft_position&quot;: 9,</span>
+<span class="sd">                      &quot;draft_recap_url&quot;: &quot;&lt;draft recap url&gt;&quot;,</span>
+<span class="sd">                      &quot;has_draft_grade&quot;: 1,</span>
+<span class="sd">                      &quot;league_scoring_type&quot;: &quot;head&quot;,</span>
+<span class="sd">                      &quot;managers&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                          &quot;manager&quot;: {</span>
+<span class="sd">                            &quot;email&quot;: &quot;&lt;manager email&gt;&quot;,</span>
+<span class="sd">                            &quot;guid&quot;: &quot;&lt;manager user guid&gt;&quot;,</span>
+<span class="sd">                            &quot;image_url&quot;: &quot;&lt;manager user image url&gt;&quot;,</span>
+<span class="sd">                            &quot;is_comanager&quot;: &quot;1&quot;,</span>
+<span class="sd">                            &quot;manager_id&quot;: &quot;14&quot;,</span>
+<span class="sd">                            &quot;nickname&quot;: &quot;&lt;manager nickname&gt;&quot;</span>
 <span class="sd">                          }</span>
-<span class="sd">                        ],</span>
-<span class="sd">                        &quot;name&quot;: &quot;Legion&quot;,</span>
-<span class="sd">                        &quot;number_of_moves&quot;: &quot;48&quot;,</span>
-<span class="sd">                        &quot;number_of_trades&quot;: &quot;2&quot;,</span>
-<span class="sd">                        &quot;roster_adds&quot;: {</span>
-<span class="sd">                          &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                          &quot;coverage_value&quot;: &quot;17&quot;,</span>
-<span class="sd">                          &quot;value&quot;: &quot;0&quot;</span>
-<span class="sd">                        },</span>
-<span class="sd">                        &quot;team_id&quot;: &quot;1&quot;,</span>
-<span class="sd">                        &quot;team_key&quot;: &quot;359.l.5521.t.1&quot;,</span>
-<span class="sd">                        &quot;team_logos&quot;: {</span>
-<span class="sd">                          &quot;team_logo&quot;: {</span>
-<span class="sd">                            &quot;size&quot;: &quot;large&quot;,</span>
-<span class="sd">                            &quot;url&quot;: &quot;&lt;logo url&gt;&quot;</span>
-<span class="sd">                          }</span>
-<span class="sd">                        },</span>
-<span class="sd">                        &quot;url&quot;: &quot;&lt;team url&gt;&quot;,</span>
-<span class="sd">                        &quot;waiver_priority&quot;: 11</span>
-<span class="sd">                      }</span>
+<span class="sd">                        }</span>
+<span class="sd">                      ],</span>
+<span class="sd">                      &quot;name&quot;: &quot;Legion&quot;,</span>
+<span class="sd">                      &quot;number_of_moves&quot;: &quot;48&quot;,</span>
+<span class="sd">                      &quot;number_of_trades&quot;: &quot;2&quot;,</span>
+<span class="sd">                      &quot;roster_adds&quot;: {</span>
+<span class="sd">                        &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                        &quot;coverage_value&quot;: &quot;17&quot;,</span>
+<span class="sd">                        &quot;value&quot;: &quot;0&quot;</span>
+<span class="sd">                      },</span>
+<span class="sd">                      &quot;team_id&quot;: &quot;1&quot;,</span>
+<span class="sd">                      &quot;team_key&quot;: &quot;359.l.5521.t.1&quot;,</span>
+<span class="sd">                      &quot;team_logos&quot;: {</span>
+<span class="sd">                        &quot;team_logo&quot;: {</span>
+<span class="sd">                          &quot;size&quot;: &quot;large&quot;,</span>
+<span class="sd">                          &quot;url&quot;: &quot;&lt;logo url&gt;&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                      },</span>
+<span class="sd">                      &quot;url&quot;: &quot;&lt;team url&gt;&quot;,</span>
+<span class="sd">                      &quot;waiver_priority&quot;: 11</span>
 <span class="sd">                    }</span>
-<span class="sd">                  ],</span>
-<span class="sd">                  &quot;type&quot;: &quot;full&quot;,</span>
-<span class="sd">                  &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2016&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              }</span>
+<span class="sd">                  }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;type&quot;: &quot;full&quot;,</span>
+<span class="sd">                &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2016&quot;</span>
+<span class="sd">              })</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Game({...})</span>
 <span class="sd">          ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Game]]: List of dictionaries containing the single key &quot;game&quot; and value of each YFPY Game</span>
-<span class="sd">            instance with &quot;teams&quot; field containing list of YFPY Team instances.</span>
+<span class="sd">            list[Game]: List of YFPY Game instances with &quot;teams&quot; attribute containing list of YFPY Team instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -3861,7 +3838,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_info()</span>
-<span class="sd">            {</span>
+<span class="sd">            League({</span>
 <span class="sd">              &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
 <span class="sd">              &quot;current_week&quot;: &quot;16&quot;,</span>
 <span class="sd">              &quot;draft_status&quot;: &quot;postdraft&quot;,</span>
@@ -3904,7 +3881,7 @@
 <span class="sd">              &quot;start_week&quot;: &quot;1&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259&quot;,</span>
 <span class="sd">              &quot;weekly_deadline&quot;: null</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            League: YFPY League instance.</span>
@@ -3925,7 +3902,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_metadata()</span>
-<span class="sd">            {</span>
+<span class="sd">            League({</span>
 <span class="sd">              &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
 <span class="sd">              &quot;current_week&quot;: &quot;16&quot;,</span>
 <span class="sd">              &quot;draft_status&quot;: &quot;postdraft&quot;,</span>
@@ -3952,7 +3929,7 @@
 <span class="sd">              &quot;start_week&quot;: &quot;1&quot;,</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259&quot;,</span>
 <span class="sd">              &quot;weekly_deadline&quot;: null</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            League: YFPY League instance.</span>
@@ -3972,7 +3949,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_settings()</span>
-<span class="sd">            {</span>
+<span class="sd">            Settings({</span>
 <span class="sd">              &quot;cant_cut_list&quot;: &quot;yahoo&quot;,</span>
 <span class="sd">              &quot;draft_time&quot;: &quot;1408410000&quot;,</span>
 <span class="sd">              &quot;draft_type&quot;: &quot;live&quot;,</span>
@@ -4040,7 +4017,7 @@
 <span class="sd">              &quot;waiver_rule&quot;: &quot;gametime&quot;,</span>
 <span class="sd">              &quot;waiver_time&quot;: &quot;2&quot;,</span>
 <span class="sd">              &quot;waiver_type&quot;: &quot;R&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Settings: YFPY Settings instance.</span>
@@ -4060,7 +4037,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_standings()</span>
-<span class="sd">            {</span>
+<span class="sd">            Standings({</span>
 <span class="sd">              &quot;teams&quot;: [</span>
 <span class="sd">                {</span>
 <span class="sd">                  &quot;team&quot;: {</span>
@@ -4121,7 +4098,7 @@
 <span class="sd">                },</span>
 <span class="sd">                ...</span>
 <span class="sd">              ]</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Standings: YFPY Standings instance.</span>
@@ -4133,7 +4110,7 @@
             <span class="n">Standings</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_teams"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_teams">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Team</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_teams"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_teams">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Team</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve teams for chosen league.</span>
 
 <span class="sd">        Examples:</span>
@@ -4142,48 +4119,46 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_teams()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;team&quot;: {</span>
-<span class="sd">                  &quot;clinched_playoffs&quot;: 1,</span>
-<span class="sd">                  &quot;draft_grade&quot;: &quot;B&quot;,</span>
-<span class="sd">                  &quot;draft_position&quot;: 4,</span>
-<span class="sd">                  &quot;draft_recap_url&quot;:</span>
-<span class="sd">                    &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap&quot;,</span>
-<span class="sd">                  &quot;has_draft_grade&quot;: 1,</span>
-<span class="sd">                  &quot;league_scoring_type&quot;: &quot;head&quot;,</span>
-<span class="sd">                  &quot;managers&quot;: {</span>
-<span class="sd">                    &quot;manager&quot;: {</span>
-<span class="sd">                      &quot;guid&quot;: &quot;BMACD7S5UXV7JIQX4PGGUVQJAU&quot;,</span>
-<span class="sd">                      &quot;manager_id&quot;: &quot;1&quot;,</span>
-<span class="sd">                      &quot;nickname&quot;: &quot;--hidden--&quot;</span>
-<span class="sd">                    }</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;name&quot;: &quot;Hellacious Hill 12&quot;,</span>
-<span class="sd">                  &quot;number_of_moves&quot;: &quot;71&quot;,</span>
-<span class="sd">                  &quot;number_of_trades&quot;: 0,</span>
-<span class="sd">                  &quot;roster_adds&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;coverage_value&quot;: &quot;17&quot;,</span>
-<span class="sd">                    &quot;value&quot;: &quot;0&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;team_id&quot;: &quot;1&quot;,</span>
-<span class="sd">                  &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
-<span class="sd">                  &quot;team_logos&quot;: {</span>
-<span class="sd">                    &quot;team_logo&quot;: {</span>
-<span class="sd">                      &quot;size&quot;: &quot;large&quot;,</span>
-<span class="sd">                      &quot;url&quot;: &quot;https://ct.yimg.com/cy/1441/24935131299_a8242dab70_192sq.jpg?ct=fantasy&quot;</span>
-<span class="sd">                    }</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1&quot;,</span>
-<span class="sd">                  &quot;waiver_priority&quot;: 9</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Team({</span>
+<span class="sd">                &quot;clinched_playoffs&quot;: 1,</span>
+<span class="sd">                &quot;draft_grade&quot;: &quot;B&quot;,</span>
+<span class="sd">                &quot;draft_position&quot;: 4,</span>
+<span class="sd">                &quot;draft_recap_url&quot;:</span>
+<span class="sd">                  &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap&quot;,</span>
+<span class="sd">                &quot;has_draft_grade&quot;: 1,</span>
+<span class="sd">                &quot;league_scoring_type&quot;: &quot;head&quot;,</span>
+<span class="sd">                &quot;managers&quot;: {</span>
+<span class="sd">                  &quot;manager&quot;: {</span>
+<span class="sd">                    &quot;guid&quot;: &quot;BMACD7S5UXV7JIQX4PGGUVQJAU&quot;,</span>
+<span class="sd">                    &quot;manager_id&quot;: &quot;1&quot;,</span>
+<span class="sd">                    &quot;nickname&quot;: &quot;--hidden--&quot;</span>
+<span class="sd">                  }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;name&quot;: &quot;Hellacious Hill 12&quot;,</span>
+<span class="sd">                &quot;number_of_moves&quot;: &quot;71&quot;,</span>
+<span class="sd">                &quot;number_of_trades&quot;: 0,</span>
+<span class="sd">                &quot;roster_adds&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;coverage_value&quot;: &quot;17&quot;,</span>
+<span class="sd">                  &quot;value&quot;: &quot;0&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;team_id&quot;: &quot;1&quot;,</span>
+<span class="sd">                &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
+<span class="sd">                &quot;team_logos&quot;: {</span>
+<span class="sd">                  &quot;team_logo&quot;: {</span>
+<span class="sd">                    &quot;size&quot;: &quot;large&quot;,</span>
+<span class="sd">                    &quot;url&quot;: &quot;https://ct.yimg.com/cy/1441/24935131299_a8242dab70_192sq.jpg?ct=fantasy&quot;</span>
+<span class="sd">                  }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1&quot;,</span>
+<span class="sd">                &quot;waiver_priority&quot;: 9</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Team({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Team]]: List of dictionaries containing the single key &quot;team&quot; and value of each YFPY Team</span>
-<span class="sd">            instance.</span>
+<span class="sd">            list[Team]: List of YFPY Team instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -4192,7 +4167,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_league_players"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_players">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_players</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_count_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">player_count_start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                           <span class="n">is_retry</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+                           <span class="n">is_retry</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve valid players for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -4206,49 +4181,47 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_players(50, 25)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;player&quot;: {</span>
-<span class="sd">                  &quot;bye_weeks&quot;: {</span>
-<span class="sd">                    &quot;week&quot;: &quot;10&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;display_position&quot;: &quot;K&quot;,</span>
-<span class="sd">                  &quot;editorial_player_key&quot;: &quot;nfl.p.3727&quot;,</span>
-<span class="sd">                  &quot;editorial_team_abbr&quot;: &quot;Ind&quot;,</span>
-<span class="sd">                  &quot;editorial_team_full_name&quot;: &quot;Indianapolis Colts&quot;,</span>
-<span class="sd">                  &quot;editorial_team_key&quot;: &quot;nfl.t.11&quot;,</span>
-<span class="sd">                  &quot;eligible_positions&quot;: {</span>
-<span class="sd">                    &quot;position&quot;: &quot;K&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;has_player_notes&quot;: 1,</span>
-<span class="sd">                  &quot;headshot&quot;: {</span>
-<span class="sd">                    &quot;size&quot;: &quot;small&quot;,</span>
-<span class="sd">                    &quot;url&quot;:</span>
-<span class="sd">                        &quot;https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C</span>
-<span class="sd">                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt</span>
-<span class="sd">                        3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;is_undroppable&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;name&quot;: {</span>
-<span class="sd">                    &quot;ascii_first&quot;: &quot;Adam&quot;,</span>
-<span class="sd">                    &quot;ascii_last&quot;: &quot;Vinatieri&quot;,</span>
-<span class="sd">                    &quot;first&quot;: &quot;Adam&quot;,</span>
-<span class="sd">                    &quot;full&quot;: &quot;Adam Vinatieri&quot;,</span>
-<span class="sd">                    &quot;last&quot;: &quot;Vinatieri&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_id&quot;: &quot;3727&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.3727&quot;,</span>
-<span class="sd">                  &quot;player_notes_last_timestamp&quot;: 1568758320,</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;K&quot;,</span>
-<span class="sd">                  &quot;primary_position&quot;: &quot;K&quot;,</span>
-<span class="sd">                  &quot;uniform_number&quot;: &quot;4&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Player({</span>
+<span class="sd">                &quot;bye_weeks&quot;: {</span>
+<span class="sd">                  &quot;week&quot;: &quot;10&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;display_position&quot;: &quot;K&quot;,</span>
+<span class="sd">                &quot;editorial_player_key&quot;: &quot;nfl.p.3727&quot;,</span>
+<span class="sd">                &quot;editorial_team_abbr&quot;: &quot;Ind&quot;,</span>
+<span class="sd">                &quot;editorial_team_full_name&quot;: &quot;Indianapolis Colts&quot;,</span>
+<span class="sd">                &quot;editorial_team_key&quot;: &quot;nfl.t.11&quot;,</span>
+<span class="sd">                &quot;eligible_positions&quot;: {</span>
+<span class="sd">                  &quot;position&quot;: &quot;K&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;has_player_notes&quot;: 1,</span>
+<span class="sd">                &quot;headshot&quot;: {</span>
+<span class="sd">                  &quot;size&quot;: &quot;small&quot;,</span>
+<span class="sd">                  &quot;url&quot;:</span>
+<span class="sd">                    &quot;https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C</span>
+<span class="sd">                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt</span>
+<span class="sd">                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;is_undroppable&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;name&quot;: {</span>
+<span class="sd">                  &quot;ascii_first&quot;: &quot;Adam&quot;,</span>
+<span class="sd">                  &quot;ascii_last&quot;: &quot;Vinatieri&quot;,</span>
+<span class="sd">                  &quot;first&quot;: &quot;Adam&quot;,</span>
+<span class="sd">                  &quot;full&quot;: &quot;Adam Vinatieri&quot;,</span>
+<span class="sd">                  &quot;last&quot;: &quot;Vinatieri&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_id&quot;: &quot;3727&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.3727&quot;,</span>
+<span class="sd">                &quot;player_notes_last_timestamp&quot;: 1568758320,</span>
+<span class="sd">                &quot;position_type&quot;: &quot;K&quot;,</span>
+<span class="sd">                &quot;primary_position&quot;: &quot;K&quot;,</span>
+<span class="sd">                &quot;uniform_number&quot;: &quot;4&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Player({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Player]]: List of dictionaries containing the single key &quot;player&quot; and value of each YFPY</span>
-<span class="sd">            Player instance.</span>
+<span class="sd">            list[Player]: List of YFPY Player instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">league_player_count</span> <span class="o">=</span> <span class="n">player_count_start</span>
@@ -4327,7 +4300,7 @@
 
         <span class="k">return</span> <span class="n">league_player_data</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DraftResult</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DraftResult</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve draft results for chosen league.</span>
 
 <span class="sd">        Examples:</span>
@@ -4336,20 +4309,18 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_draft_results()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;draft_result&quot;: {</span>
-<span class="sd">                  &quot;pick&quot;: 1,</span>
-<span class="sd">                  &quot;round&quot;: 1,</span>
-<span class="sd">                  &quot;team_key&quot;: &quot;331.l.729259.t.4&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.9317&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              DraftResult({</span>
+<span class="sd">                &quot;pick&quot;: 1,</span>
+<span class="sd">                &quot;round&quot;: 1,</span>
+<span class="sd">                &quot;team_key&quot;: &quot;331.l.729259.t.4&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.9317&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              DraftResult({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, DraftResult]]: List of dictionaries containing the single key &quot;draft_result&quot; and value of</span>
-<span class="sd">            each YFPY DraftResult instance.</span>
+<span class="sd">            list[DraftResult]: List of YFPY DraftResult instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -4357,7 +4328,7 @@
             <span class="p">[</span><span class="s2">&quot;league&quot;</span><span class="p">,</span> <span class="s2">&quot;draft_results&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_transactions"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_transactions">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_transactions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_transactions"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_transactions">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_transactions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Transaction</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve transactions for chosen league.</span>
 
 <span class="sd">        Examples:</span>
@@ -4366,46 +4337,44 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_transactions()</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;transaction&quot;: {</span>
-<span class="sd">                  &quot;players&quot;: [</span>
-<span class="sd">                    {</span>
-<span class="sd">                      &quot;player&quot;: {</span>
-<span class="sd">                        &quot;display_position&quot;: &quot;RB&quot;,</span>
-<span class="sd">                        &quot;editorial_team_abbr&quot;: &quot;NO&quot;,</span>
-<span class="sd">                        &quot;name&quot;: {</span>
-<span class="sd">                          &quot;ascii_first&quot;: &quot;Kerwynn&quot;,</span>
-<span class="sd">                          &quot;ascii_last&quot;: &quot;Williams&quot;,</span>
-<span class="sd">                          &quot;first&quot;: &quot;Kerwynn&quot;,</span>
-<span class="sd">                          &quot;full&quot;: &quot;Kerwynn Williams&quot;,</span>
-<span class="sd">                          &quot;last&quot;: &quot;Williams&quot;</span>
-<span class="sd">                        },</span>
-<span class="sd">                        &quot;player_id&quot;: &quot;26853&quot;,</span>
-<span class="sd">                        &quot;player_key&quot;: &quot;331.p.26853&quot;,</span>
-<span class="sd">                        &quot;position_type&quot;: &quot;O&quot;,</span>
-<span class="sd">                        &quot;transaction_data&quot;: {</span>
-<span class="sd">                          &quot;destination_team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
-<span class="sd">                          &quot;destination_team_name&quot;: &quot;Hellacious Hill 12&quot;,</span>
-<span class="sd">                          &quot;destination_type&quot;: &quot;team&quot;,</span>
-<span class="sd">                          &quot;source_type&quot;: &quot;freeagents&quot;,</span>
-<span class="sd">                          &quot;type&quot;: &quot;add&quot;</span>
-<span class="sd">                        }</span>
+<span class="sd">              Transaction({</span>
+<span class="sd">                &quot;players&quot;: [</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;player&quot;: {</span>
+<span class="sd">                      &quot;display_position&quot;: &quot;RB&quot;,</span>
+<span class="sd">                      &quot;editorial_team_abbr&quot;: &quot;NO&quot;,</span>
+<span class="sd">                      &quot;name&quot;: {</span>
+<span class="sd">                        &quot;ascii_first&quot;: &quot;Kerwynn&quot;,</span>
+<span class="sd">                        &quot;ascii_last&quot;: &quot;Williams&quot;,</span>
+<span class="sd">                        &quot;first&quot;: &quot;Kerwynn&quot;,</span>
+<span class="sd">                        &quot;full&quot;: &quot;Kerwynn Williams&quot;,</span>
+<span class="sd">                        &quot;last&quot;: &quot;Williams&quot;</span>
+<span class="sd">                      },</span>
+<span class="sd">                      &quot;player_id&quot;: &quot;26853&quot;,</span>
+<span class="sd">                      &quot;player_key&quot;: &quot;331.p.26853&quot;,</span>
+<span class="sd">                      &quot;position_type&quot;: &quot;O&quot;,</span>
+<span class="sd">                      &quot;transaction_data&quot;: {</span>
+<span class="sd">                        &quot;destination_team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
+<span class="sd">                        &quot;destination_team_name&quot;: &quot;Hellacious Hill 12&quot;,</span>
+<span class="sd">                        &quot;destination_type&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;source_type&quot;: &quot;freeagents&quot;,</span>
+<span class="sd">                        &quot;type&quot;: &quot;add&quot;</span>
 <span class="sd">                      }</span>
 <span class="sd">                    }</span>
-<span class="sd">                  ],</span>
-<span class="sd">                  &quot;status&quot;: &quot;successful&quot;,</span>
-<span class="sd">                  &quot;timestamp&quot;: &quot;1419188151&quot;,</span>
-<span class="sd">                  &quot;transaction_id&quot;: &quot;282&quot;,</span>
-<span class="sd">                  &quot;transaction_key&quot;: &quot;331.l.729259.tr.282&quot;,</span>
-<span class="sd">                  &quot;type&quot;: &quot;add/drop&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">                  }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;status&quot;: &quot;successful&quot;,</span>
+<span class="sd">                &quot;timestamp&quot;: &quot;1419188151&quot;,</span>
+<span class="sd">                &quot;transaction_id&quot;: &quot;282&quot;,</span>
+<span class="sd">                &quot;transaction_key&quot;: &quot;331.l.729259.tr.282&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;add/drop&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Transaction({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Transaction]]: List of dictionaries containing the single key &quot;transaction&quot; and value of each</span>
-<span class="sd">            YFPY Transaction instance.</span>
+<span class="sd">            list[Transaction]: List of YFPY Transaction instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -4424,7 +4393,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_scoreboard_by_week(1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Scoreboard({</span>
 <span class="sd">              &quot;week&quot;: &quot;1&quot;,</span>
 <span class="sd">              &quot;matchups&quot;: [</span>
 <span class="sd">                {</span>
@@ -4472,7 +4441,7 @@
 <span class="sd">                },</span>
 <span class="sd">                ...</span>
 <span class="sd">              ]</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Scoreboard: YFPY Scoreboard instance.</span>
@@ -4485,7 +4454,7 @@
             <span class="n">Scoreboard</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_matchups_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_matchups_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_matchups_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Matchup</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_league_matchups_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_league_matchups_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_league_matchups_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Matchup</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve matchups for chosen league by week.</span>
 
 <span class="sd">        Args:</span>
@@ -4497,54 +4466,53 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_league_matchups_by_week(1)</span>
 <span class="sd">            [</span>
-<span class="sd">                &quot;matchup&quot;: {</span>
-<span class="sd">                    &quot;is_consolation&quot;: &quot;0&quot;,</span>
-<span class="sd">                    &quot;is_matchup_recap_available&quot;: 1,</span>
-<span class="sd">                    &quot;is_playoffs&quot;: &quot;0&quot;,</span>
-<span class="sd">                    &quot;is_tied&quot;: 0,</span>
-<span class="sd">                    &quot;matchup_grades&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;matchup_grade&quot;: {</span>
-<span class="sd">                          &quot;grade&quot;: &quot;B&quot;,</span>
-<span class="sd">                          &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;matchup_grade&quot;: {</span>
-<span class="sd">                          &quot;grade&quot;: &quot;B&quot;,</span>
-<span class="sd">                          &quot;team_key&quot;: &quot;331.l.729259.t.2&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      }</span>
-<span class="sd">                    ],</span>
-<span class="sd">                    &quot;matchup_recap_title&quot;: &quot;Wax On Wax Off Gets Victory Against Hellacious Hill 12&quot;,</span>
-<span class="sd">                    &quot;matchup_recap_url&quot;:</span>
-<span class="sd">                        &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?</span>
-<span class="sd">                        week=1&amp;mid1=1&amp;mid2=2&quot;,</span>
-<span class="sd">                    &quot;status&quot;: &quot;postevent&quot;,</span>
-<span class="sd">                    &quot;teams&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;team&quot;: {</span>
-<span class="sd">                            &lt;team data&gt;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;team&quot;: {</span>
-<span class="sd">                            &lt;team data&gt;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      }</span>
-<span class="sd">                    ],</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;,</span>
-<span class="sd">                    &quot;week_end&quot;: &quot;2014-09-08&quot;,</span>
-<span class="sd">                    &quot;week_start&quot;: &quot;2014-09-04&quot;,</span>
-<span class="sd">                    &quot;winner_team_key&quot;: &quot;331.l.729259.t.2&quot;</span>
+<span class="sd">              Matchup({</span>
+<span class="sd">                &quot;is_consolation&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;is_matchup_recap_available&quot;: 1,</span>
+<span class="sd">                &quot;is_playoffs&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;is_tied&quot;: 0,</span>
+<span class="sd">                &quot;matchup_grades&quot;: [</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;matchup_grade&quot;: {</span>
+<span class="sd">                      &quot;grade&quot;: &quot;B&quot;,</span>
+<span class="sd">                      &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                  },</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;matchup_grade&quot;: {</span>
+<span class="sd">                      &quot;grade&quot;: &quot;B&quot;,</span>
+<span class="sd">                      &quot;team_key&quot;: &quot;331.l.729259.t.2&quot;</span>
+<span class="sd">                    }</span>
 <span class="sd">                  }</span>
-<span class="sd">                },</span>
-<span class="sd">                ...</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;matchup_recap_title&quot;: &quot;Wax On Wax Off Gets Victory Against Hellacious Hill 12&quot;,</span>
+<span class="sd">                &quot;matchup_recap_url&quot;:</span>
+<span class="sd">                  &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?</span>
+<span class="sd">                  week=1&amp;mid1=1&amp;mid2=2&quot;,</span>
+<span class="sd">                &quot;status&quot;: &quot;postevent&quot;,</span>
+<span class="sd">                &quot;teams&quot;: [</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;team&quot;: {</span>
+<span class="sd">                      &lt;team data&gt;</span>
+<span class="sd">                    }</span>
+<span class="sd">                  },</span>
+<span class="sd">                  {</span>
+<span class="sd">                    &quot;team&quot;: {</span>
+<span class="sd">                      &lt;team data&gt;</span>
+<span class="sd">                    }</span>
+<span class="sd">                  }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;week&quot;: &quot;1&quot;,</span>
+<span class="sd">                &quot;week_end&quot;: &quot;2014-09-08&quot;,</span>
+<span class="sd">                &quot;week_start&quot;: &quot;2014-09-04&quot;,</span>
+<span class="sd">                &quot;winner_team_key&quot;: &quot;331.l.729259.t.2&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Matchup({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Matchup]]: List of dictionaries containing the single key &quot;matchup&quot; and value of each YFPY</span>
-<span class="sd">            Matchup instance.</span>
+<span class="sd">            list[Matchup]: List of YFPY Matchup instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -4565,7 +4533,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_info(1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Team({</span>
 <span class="sd">              &quot;clinched_playoffs&quot;: 1,</span>
 <span class="sd">              &quot;draft_grade&quot;: &quot;B&quot;,</span>
 <span class="sd">              &quot;draft_position&quot;: 4,</span>
@@ -4627,7 +4595,7 @@
 <span class="sd">              },</span>
 <span class="sd">              &quot;url&quot;: &quot;https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1&quot;,</span>
 <span class="sd">              &quot;waiver_priority&quot;: 9</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Team: YFPY Team instance.</span>
@@ -4653,7 +4621,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_metadata(1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Team({</span>
 <span class="sd">              &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
 <span class="sd">              &quot;team_id&quot;: &quot;1&quot;,</span>
 <span class="sd">              &quot;name&quot;: &quot;Hellacious Hill 12&quot;,</span>
@@ -4685,7 +4653,7 @@
 <span class="sd">                  &quot;nickname&quot;: &quot;--hidden--&quot;</span>
 <span class="sd">                }</span>
 <span class="sd">              }</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Team: YFPY Team instance.</span>
@@ -4710,11 +4678,11 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_stats(1)</span>
-<span class="sd">            {</span>
+<span class="sd">            TeamPoints({</span>
 <span class="sd">              &quot;coverage_type&quot;: &quot;season&quot;,</span>
 <span class="sd">              &quot;season&quot;: &quot;2014&quot;,</span>
 <span class="sd">              &quot;total&quot;: &quot;1409.24&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            TeamPoints: YFPY TeamPoints instance.</span>
@@ -4727,8 +4695,9 @@
             <span class="n">TeamPoints</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
-            <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TeamPoints</span><span class="p">,</span> <span class="n">TeamProjectedPoints</span><span class="p">]]]):</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_stats_by_week</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">TeamPoints</span><span class="p">,</span> <span class="n">TeamProjectedPoints</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve stats of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -4742,21 +4711,21 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_stats_by_week(1, 1)</span>
 <span class="sd">            {</span>
-<span class="sd">              &quot;team_points&quot;: {</span>
+<span class="sd">              &quot;team_points&quot;: TeamPoints({</span>
 <span class="sd">                &quot;coverage_type&quot;: &quot;week&quot;,</span>
 <span class="sd">                &quot;total&quot;: &quot;95.06&quot;,</span>
 <span class="sd">                &quot;week&quot;: &quot;1&quot;</span>
-<span class="sd">              },</span>
-<span class="sd">              &quot;team_projected_points&quot;: {</span>
+<span class="sd">              }),</span>
+<span class="sd">              &quot;team_projected_points&quot;: TeamProjectedPoints({</span>
 <span class="sd">                &quot;coverage_type&quot;: &quot;week&quot;,</span>
 <span class="sd">                &quot;total&quot;: &quot;78.85&quot;,</span>
 <span class="sd">                &quot;week&quot;: &quot;1&quot;</span>
-<span class="sd">              }</span>
+<span class="sd">              })</span>
 <span class="sd">            }</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            dict[str, TeamPoints | TeamProjectedPoints]: Dictionary containing both a YFPY TeamPoints instance and a</span>
-<span class="sd">            YFPY TeamProjectedPoints instance with respective keys &quot;team_points&quot; and &quot;team_projected_points&quot;.</span>
+<span class="sd">            dict[str, TeamPoints | TeamProjectedPoints]: Dictionary containing keys &quot;team_points&quot; and</span>
+<span class="sd">                &quot;team_projected_points&quot; with respective values YFPY TeamPoints and YFPY TeamProjectedPoints instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -4777,7 +4746,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_standings(1)</span>
-<span class="sd">            {</span>
+<span class="sd">            TeamStandings({</span>
 <span class="sd">              &quot;rank&quot;: 2,</span>
 <span class="sd">              &quot;playoff_seed&quot;: &quot;2&quot;,</span>
 <span class="sd">              &quot;outcome_totals&quot;: {</span>
@@ -4792,7 +4761,7 @@
 <span class="sd">              },</span>
 <span class="sd">              &quot;points_for&quot;: &quot;1409.24&quot;,</span>
 <span class="sd">              &quot;points_against&quot;: 1266.6599999999999</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            TeamStandings: YFPY TeamStandings instance.</span>
@@ -4818,7 +4787,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_roster_by_week(1, 1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Roster({</span>
 <span class="sd">              &quot;coverage_type&quot;: &quot;week&quot;,</span>
 <span class="sd">              &quot;week&quot;: &quot;1&quot;,</span>
 <span class="sd">              &quot;is_editable&quot;: 0,</span>
@@ -4867,7 +4836,7 @@
 <span class="sd">                },</span>
 <span class="sd">                ...</span>
 <span class="sd">              ]</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Roster: YFPY Roster instance.</span>
@@ -4881,7 +4850,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-                                            <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+                                            <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -4895,89 +4864,88 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_roster_player_info_by_week(1, 1)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;player&quot;: {</span>
-<span class="sd">                  &quot;bye_weeks&quot;: {</span>
-<span class="sd">                    &quot;week&quot;: &quot;10&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;display_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;draft_analysis&quot;: {</span>
-<span class="sd">                    &quot;average_pick&quot;: &quot;65.9&quot;,</span>
-<span class="sd">                    &quot;average_round&quot;: &quot;7.6&quot;,</span>
-<span class="sd">                    &quot;average_cost&quot;: &quot;5.0&quot;,</span>
-<span class="sd">                    &quot;percent_drafted&quot;: &quot;1.00&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
-<span class="sd">                  &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
-<span class="sd">                  &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
-<span class="sd">                  &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
-<span class="sd">                  &quot;eligible_positions&quot;: {</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;has_player_notes&quot;: 1,</span>
-<span class="sd">                  &quot;headshot&quot;: {</span>
-<span class="sd">                    &quot;size&quot;: &quot;small&quot;,</span>
-<span class="sd">                    &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
-<span class="sd">                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;is_undroppable&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;name&quot;: {</span>
-<span class="sd">                    &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
-<span class="sd">                    &quot;first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;full&quot;: &quot;Tom Brady&quot;,</span>
-<span class="sd">                    &quot;last&quot;: &quot;Brady&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;ownership&quot;: {</span>
-<span class="sd">                    &quot;ownership_type&quot;: &quot;team&quot;,</span>
-<span class="sd">                    &quot;owner_team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
-<span class="sd">                    &quot;owner_team_name&quot;: &quot;Hellacious Hill 12&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;percent_owned&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;17&quot;,</span>
-<span class="sd">                    &quot;value&quot;: 99,</span>
-<span class="sd">                    &quot;delta&quot;: &quot;0&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_id&quot;: &quot;5228&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
-<span class="sd">                  &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
-<span class="sd">                  &quot;player_points&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;,</span>
-<span class="sd">                    &quot;total&quot;: 10.26</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_stats&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;,</span>
-<span class="sd">                    &quot;stats&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;stat&quot;: {</span>
-<span class="sd">                          &quot;stat_id&quot;: &quot;4&quot;,</span>
-<span class="sd">                          &quot;value&quot;: &quot;249&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      ...</span>
-<span class="sd">                    ]</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;O&quot;,</span>
-<span class="sd">                  &quot;primary_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;selected_position&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;is_flex&quot;: 0,</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Player({</span>
+<span class="sd">                &quot;bye_weeks&quot;: {</span>
+<span class="sd">                  &quot;week&quot;: &quot;10&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;display_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;draft_analysis&quot;: {</span>
+<span class="sd">                  &quot;average_pick&quot;: &quot;65.9&quot;,</span>
+<span class="sd">                  &quot;average_round&quot;: &quot;7.6&quot;,</span>
+<span class="sd">                  &quot;average_cost&quot;: &quot;5.0&quot;,</span>
+<span class="sd">                  &quot;percent_drafted&quot;: &quot;1.00&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
+<span class="sd">                &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
+<span class="sd">                &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
+<span class="sd">                &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
+<span class="sd">                &quot;eligible_positions&quot;: {</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;has_player_notes&quot;: 1,</span>
+<span class="sd">                &quot;headshot&quot;: {</span>
+<span class="sd">                  &quot;size&quot;: &quot;small&quot;,</span>
+<span class="sd">                  &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
+<span class="sd">                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/</span>
+<span class="sd">                    https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;is_undroppable&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;name&quot;: {</span>
+<span class="sd">                  &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
+<span class="sd">                  &quot;first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;full&quot;: &quot;Tom Brady&quot;,</span>
+<span class="sd">                  &quot;last&quot;: &quot;Brady&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;ownership&quot;: {</span>
+<span class="sd">                  &quot;ownership_type&quot;: &quot;team&quot;,</span>
+<span class="sd">                  &quot;owner_team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
+<span class="sd">                  &quot;owner_team_name&quot;: &quot;Hellacious Hill 12&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;percent_owned&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;17&quot;,</span>
+<span class="sd">                  &quot;value&quot;: 99,</span>
+<span class="sd">                  &quot;delta&quot;: &quot;0&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_id&quot;: &quot;5228&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
+<span class="sd">                &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
+<span class="sd">                &quot;player_points&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;,</span>
+<span class="sd">                  &quot;total&quot;: 10.26</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_stats&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;,</span>
+<span class="sd">                  &quot;stats&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                      &quot;stat&quot;: {</span>
+<span class="sd">                        &quot;stat_id&quot;: &quot;4&quot;,</span>
+<span class="sd">                        &quot;value&quot;: &quot;249&quot;</span>
+<span class="sd">                      }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                  ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;position_type&quot;: &quot;O&quot;,</span>
+<span class="sd">                &quot;primary_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;selected_position&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;is_flex&quot;: 0,</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniform_number&quot;: &quot;12&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Player({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Player]]: List of dictionaries containing the single key &quot;player&quot; and value of each YFPY</span>
-<span class="sd">            Player instance containing the keys &quot;draft_analysis&quot;, &quot;ownership&quot;, &quot;percent_owned&quot;, and &quot;player_stats&quot;,</span>
-<span class="sd">            which each return instances of their respective YFPY objects.</span>
+<span class="sd">            list[Player]: List of YFPY Player instances containing attributes &quot;draft_analysis&quot;, &quot;ownership&quot;,</span>
+<span class="sd">                &quot;percent_owned&quot;, and &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -4988,7 +4956,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_info_by_date"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_date">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_info_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-                                            <span class="n">chosen_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+                                            <span class="n">chosen_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.</span>
 
 <span class="sd">        Note:</span>
@@ -5006,81 +4974,80 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_roster_player_info_by_date(1, &quot;2011-05-01&quot;)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;player&quot;: {</span>
-<span class="sd">                  &quot;display_position&quot;: &quot;C&quot;,</span>
-<span class="sd">                  &quot;draft_analysis&quot;: {</span>
-<span class="sd">                    &quot;average_pick&quot;: 33.2,</span>
-<span class="sd">                    &quot;average_round&quot;: 3.5,</span>
-<span class="sd">                    &quot;average_cost&quot;: 39.2,</span>
-<span class="sd">                    &quot;percent_drafted&quot;: 1.0</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;editorial_player_key&quot;: &quot;nhl.p.3981&quot;,</span>
-<span class="sd">                  &quot;editorial_team_abbr&quot;: &quot;Chi&quot;,</span>
-<span class="sd">                  &quot;editorial_team_full_name&quot;: &quot;Chicago Blackhawks&quot;,</span>
-<span class="sd">                  &quot;editorial_team_key&quot;: &quot;nhl.t.4&quot;,</span>
-<span class="sd">                  &quot;eligible_positions&quot;: [</span>
-<span class="sd">                    &quot;C&quot;,</span>
-<span class="sd">                    &quot;F&quot;</span>
-<span class="sd">                  ],</span>
-<span class="sd">                  &quot;has_player_notes&quot;: 1,</span>
-<span class="sd">                  &quot;headshot&quot;: {</span>
-<span class="sd">                    &quot;size&quot;: &quot;small&quot;,</span>
-<span class="sd">                    &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/tz.KOMoEiBDch6AJAGaUtg--~C/</span>
-<span class="sd">                    YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nhl_cutout/players_l/11032021/3981.png&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;is_editable&quot;: 0,</span>
-<span class="sd">                  &quot;is_undroppable&quot;: 0,</span>
-<span class="sd">                  &quot;name&quot;: {</span>
-<span class="sd">                    &quot;ascii_first&quot;: &quot;Jonathan&quot;,</span>
-<span class="sd">                    &quot;ascii_last&quot;: &quot;Toews&quot;,</span>
-<span class="sd">                    &quot;first&quot;: &quot;Jonathan&quot;,</span>
-<span class="sd">                    &quot;full&quot;: &quot;Jonathan Toews&quot;,</span>
-<span class="sd">                    &quot;last&quot;: &quot;Toews&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;ownership&quot;: {</span>
-<span class="sd">                    &quot;ownership_type&quot;: &quot;team&quot;,</span>
-<span class="sd">                    &quot;owner_team_key&quot;: &quot;303.l.69624.t.2&quot;,</span>
-<span class="sd">                    &quot;owner_team_name&quot;: &quot;The Bateleurs&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;percent_owned&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: 25,</span>
-<span class="sd">                    &quot;value&quot;: 98,</span>
-<span class="sd">                    &quot;delta&quot;: -1.0</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_id&quot;: 3981,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;303.p.3981&quot;,</span>
-<span class="sd">                  &quot;player_notes_last_timestamp&quot;: 1651606838,</span>
-<span class="sd">                  &quot;player_stats&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;date&quot;,</span>
-<span class="sd">                    &quot;stats&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;stat&quot;: {</span>
-<span class="sd">                          &quot;stat_id&quot;: 1,</span>
-<span class="sd">                          &quot;value&quot;: 1.0</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      ...</span>
-<span class="sd">                    ]</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;P&quot;,</span>
-<span class="sd">                  &quot;primary_position&quot;: &quot;C&quot;,</span>
-<span class="sd">                  &quot;selected_position&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;date&quot;,</span>
-<span class="sd">                    &quot;is_flex&quot;: 0,</span>
-<span class="sd">                    &quot;position&quot;: &quot;C&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;uniform_number&quot;: 19</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Player({</span>
+<span class="sd">                &quot;display_position&quot;: &quot;C&quot;,</span>
+<span class="sd">                &quot;draft_analysis&quot;: {</span>
+<span class="sd">                  &quot;average_pick&quot;: 33.2,</span>
+<span class="sd">                  &quot;average_round&quot;: 3.5,</span>
+<span class="sd">                  &quot;average_cost&quot;: 39.2,</span>
+<span class="sd">                  &quot;percent_drafted&quot;: 1.0</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;editorial_player_key&quot;: &quot;nhl.p.3981&quot;,</span>
+<span class="sd">                &quot;editorial_team_abbr&quot;: &quot;Chi&quot;,</span>
+<span class="sd">                &quot;editorial_team_full_name&quot;: &quot;Chicago Blackhawks&quot;,</span>
+<span class="sd">                &quot;editorial_team_key&quot;: &quot;nhl.t.4&quot;,</span>
+<span class="sd">                &quot;eligible_positions&quot;: [</span>
+<span class="sd">                  &quot;C&quot;,</span>
+<span class="sd">                  &quot;F&quot;</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;has_player_notes&quot;: 1,</span>
+<span class="sd">                &quot;headshot&quot;: {</span>
+<span class="sd">                  &quot;size&quot;: &quot;small&quot;,</span>
+<span class="sd">                  &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/tz.KOMoEiBDch6AJAGaUtg--~C/</span>
+<span class="sd">                    YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/</span>
+<span class="sd">                    https://s.yimg.com/xe/i/us/sp/v/nhl_cutout/players_l/11032021/3981.png&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;is_editable&quot;: 0,</span>
+<span class="sd">                &quot;is_undroppable&quot;: 0,</span>
+<span class="sd">                &quot;name&quot;: {</span>
+<span class="sd">                  &quot;ascii_first&quot;: &quot;Jonathan&quot;,</span>
+<span class="sd">                  &quot;ascii_last&quot;: &quot;Toews&quot;,</span>
+<span class="sd">                  &quot;first&quot;: &quot;Jonathan&quot;,</span>
+<span class="sd">                  &quot;full&quot;: &quot;Jonathan Toews&quot;,</span>
+<span class="sd">                  &quot;last&quot;: &quot;Toews&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;ownership&quot;: {</span>
+<span class="sd">                  &quot;ownership_type&quot;: &quot;team&quot;,</span>
+<span class="sd">                  &quot;owner_team_key&quot;: &quot;303.l.69624.t.2&quot;,</span>
+<span class="sd">                  &quot;owner_team_name&quot;: &quot;The Bateleurs&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;percent_owned&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: 25,</span>
+<span class="sd">                  &quot;value&quot;: 98,</span>
+<span class="sd">                  &quot;delta&quot;: -1.0</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_id&quot;: 3981,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;303.p.3981&quot;,</span>
+<span class="sd">                &quot;player_notes_last_timestamp&quot;: 1651606838,</span>
+<span class="sd">                &quot;player_stats&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;date&quot;,</span>
+<span class="sd">                  &quot;stats&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                      &quot;stat&quot;: {</span>
+<span class="sd">                        &quot;stat_id&quot;: 1,</span>
+<span class="sd">                        &quot;value&quot;: 1.0</span>
+<span class="sd">                      }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                  ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;position_type&quot;: &quot;P&quot;,</span>
+<span class="sd">                &quot;primary_position&quot;: &quot;C&quot;,</span>
+<span class="sd">                &quot;selected_position&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;date&quot;,</span>
+<span class="sd">                  &quot;is_flex&quot;: 0,</span>
+<span class="sd">                  &quot;position&quot;: &quot;C&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniform_number&quot;: 19</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Player({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Player]]: List of dictionaries containing the single key &quot;player&quot; and value of each YFPY</span>
-<span class="sd">            Player instance containing the keys &quot;draft_analysis&quot;, &quot;ownership&quot;, &quot;percent_owned&quot;, and &quot;player_stats&quot;,</span>
-<span class="sd">            which each return instances of their respective YFPY objects.</span>
+<span class="sd">            list[Player]: List of YFPY Player instances containing attributes &quot;draft_analysis&quot;, &quot;ownership&quot;,</span>
+<span class="sd">                &quot;percent_owned&quot;, and &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -5091,7 +5058,7 @@
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -5104,76 +5071,75 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_roster_player_stats(1)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;player&quot;: {</span>
-<span class="sd">                  &quot;bye_weeks&quot;: {</span>
-<span class="sd">                    &quot;week&quot;: &quot;10&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;display_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;draft_analysis&quot;: {</span>
-<span class="sd">                    &quot;average_pick&quot;: &quot;65.9&quot;,</span>
-<span class="sd">                    &quot;average_round&quot;: &quot;7.6&quot;,</span>
-<span class="sd">                    &quot;average_cost&quot;: &quot;5.0&quot;,</span>
-<span class="sd">                    &quot;percent_drafted&quot;: &quot;1.00&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
-<span class="sd">                  &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
-<span class="sd">                  &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
-<span class="sd">                  &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
-<span class="sd">                  &quot;eligible_positions&quot;: {</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;has_player_notes&quot;: 1,</span>
-<span class="sd">                  &quot;headshot&quot;: {</span>
-<span class="sd">                    &quot;size&quot;: &quot;small&quot;,</span>
-<span class="sd">                    &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
-<span class="sd">                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;is_undroppable&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;name&quot;: {</span>
-<span class="sd">                    &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
-<span class="sd">                    &quot;first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;full&quot;: &quot;Tom Brady&quot;,</span>
-<span class="sd">                    &quot;last&quot;: &quot;Brady&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_id&quot;: &quot;5228&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
-<span class="sd">                  &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
-<span class="sd">                  &quot;player_points&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;season&quot;,</span>
-<span class="sd">                    &quot;total&quot;: 287.06</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_stats&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;season&quot;,</span>
-<span class="sd">                    &quot;stats&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;stat&quot;: {</span>
-<span class="sd">                          &quot;stat_id&quot;: &quot;4&quot;,</span>
-<span class="sd">                          &quot;value&quot;: &quot;4109&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      ...</span>
-<span class="sd">                    ]</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;O&quot;,</span>
-<span class="sd">                  &quot;primary_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;selected_position&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;is_flex&quot;: 0,</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;16&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Player({</span>
+<span class="sd">                &quot;bye_weeks&quot;: {</span>
+<span class="sd">                  &quot;week&quot;: &quot;10&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;display_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;draft_analysis&quot;: {</span>
+<span class="sd">                  &quot;average_pick&quot;: &quot;65.9&quot;,</span>
+<span class="sd">                  &quot;average_round&quot;: &quot;7.6&quot;,</span>
+<span class="sd">                  &quot;average_cost&quot;: &quot;5.0&quot;,</span>
+<span class="sd">                  &quot;percent_drafted&quot;: &quot;1.00&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
+<span class="sd">                &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
+<span class="sd">                &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
+<span class="sd">                &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
+<span class="sd">                &quot;eligible_positions&quot;: {</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;has_player_notes&quot;: 1,</span>
+<span class="sd">                &quot;headshot&quot;: {</span>
+<span class="sd">                  &quot;size&quot;: &quot;small&quot;,</span>
+<span class="sd">                  &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
+<span class="sd">                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ</span>
+<span class="sd">                    2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;is_undroppable&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;name&quot;: {</span>
+<span class="sd">                  &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
+<span class="sd">                  &quot;first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;full&quot;: &quot;Tom Brady&quot;,</span>
+<span class="sd">                  &quot;last&quot;: &quot;Brady&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_id&quot;: &quot;5228&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
+<span class="sd">                &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
+<span class="sd">                &quot;player_points&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;season&quot;,</span>
+<span class="sd">                  &quot;total&quot;: 287.06</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_stats&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;season&quot;,</span>
+<span class="sd">                  &quot;stats&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                      &quot;stat&quot;: {</span>
+<span class="sd">                        &quot;stat_id&quot;: &quot;4&quot;,</span>
+<span class="sd">                        &quot;value&quot;: &quot;4109&quot;</span>
+<span class="sd">                      }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                  ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;position_type&quot;: &quot;O&quot;,</span>
+<span class="sd">                &quot;primary_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;selected_position&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;is_flex&quot;: 0,</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;16&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniform_number&quot;: &quot;12&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Player({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Player]]: List of dictionaries with key = &quot;player&quot; and value = YFPY Player instance</span>
-<span class="sd">            containing the keys &quot;draft_analysis&quot;, &quot;ownership&quot;, &quot;percent_owned&quot;, and &quot;player_stats&quot;, which each</span>
-<span class="sd">            return instances of their respective YFPY objects.</span>
+<span class="sd">            list[Player]: List of YFPY Player instances containing attributes &quot;draft_analysis&quot;, &quot;ownership&quot;,</span>
+<span class="sd">                &quot;percent_owned&quot;, and &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -5183,7 +5149,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="YahooFantasySportsQuery.get_team_roster_player_stats_by_week"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats_by_week">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_roster_player_stats_by_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-                                             <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Player</span><span class="p">]]:</span>
+                                             <span class="n">chosen_week</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;current&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve roster with player stats of specific team by team_id and by week for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -5197,72 +5163,70 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_roster_player_stats_by_week(1, 1)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;player&quot;: {</span>
-<span class="sd">                  &quot;bye_weeks&quot;: {</span>
-<span class="sd">                    &quot;week&quot;: &quot;10&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;display_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
-<span class="sd">                  &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
-<span class="sd">                  &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
-<span class="sd">                  &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
-<span class="sd">                  &quot;eligible_positions&quot;: {</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;has_player_notes&quot;: 1,</span>
-<span class="sd">                  &quot;headshot&quot;: {</span>
-<span class="sd">                    &quot;size&quot;: &quot;small&quot;,</span>
-<span class="sd">                    &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
-<span class="sd">                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt</span>
-<span class="sd">                        3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;is_undroppable&quot;: &quot;0&quot;,</span>
-<span class="sd">                  &quot;name&quot;: {</span>
-<span class="sd">                    &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
-<span class="sd">                    &quot;first&quot;: &quot;Tom&quot;,</span>
-<span class="sd">                    &quot;full&quot;: &quot;Tom Brady&quot;,</span>
-<span class="sd">                    &quot;last&quot;: &quot;Brady&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_id&quot;: &quot;5228&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
-<span class="sd">                  &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
-<span class="sd">                  &quot;player_points&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;,</span>
-<span class="sd">                    &quot;total&quot;: 10.26</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;player_stats&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;,</span>
-<span class="sd">                    &quot;stats&quot;: [</span>
-<span class="sd">                      {</span>
-<span class="sd">                        &quot;stat&quot;: {</span>
-<span class="sd">                          &quot;stat_id&quot;: &quot;4&quot;,</span>
-<span class="sd">                          &quot;value&quot;: &quot;249&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                      },</span>
-<span class="sd">                      ...</span>
-<span class="sd">                    ]</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;position_type&quot;: &quot;O&quot;,</span>
-<span class="sd">                  &quot;primary_position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                  &quot;selected_position&quot;: {</span>
-<span class="sd">                    &quot;coverage_type&quot;: &quot;week&quot;,</span>
-<span class="sd">                    &quot;is_flex&quot;: 0,</span>
-<span class="sd">                    &quot;position&quot;: &quot;QB&quot;,</span>
-<span class="sd">                    &quot;week&quot;: &quot;1&quot;</span>
-<span class="sd">                  },</span>
-<span class="sd">                  &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              Player({</span>
+<span class="sd">                &quot;bye_weeks&quot;: {</span>
+<span class="sd">                  &quot;week&quot;: &quot;10&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;display_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;editorial_player_key&quot;: &quot;nfl.p.5228&quot;,</span>
+<span class="sd">                &quot;editorial_team_abbr&quot;: &quot;NE&quot;,</span>
+<span class="sd">                &quot;editorial_team_full_name&quot;: &quot;New England Patriots&quot;,</span>
+<span class="sd">                &quot;editorial_team_key&quot;: &quot;nfl.t.17&quot;,</span>
+<span class="sd">                &quot;eligible_positions&quot;: {</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;has_player_notes&quot;: 1,</span>
+<span class="sd">                &quot;headshot&quot;: {</span>
+<span class="sd">                  &quot;size&quot;: &quot;small&quot;,</span>
+<span class="sd">                  &quot;url&quot;: &quot;https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C</span>
+<span class="sd">                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt</span>
+<span class="sd">                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;is_undroppable&quot;: &quot;0&quot;,</span>
+<span class="sd">                &quot;name&quot;: {</span>
+<span class="sd">                  &quot;ascii_first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;ascii_last&quot;: &quot;Brady&quot;,</span>
+<span class="sd">                  &quot;first&quot;: &quot;Tom&quot;,</span>
+<span class="sd">                  &quot;full&quot;: &quot;Tom Brady&quot;,</span>
+<span class="sd">                  &quot;last&quot;: &quot;Brady&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_id&quot;: &quot;5228&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.5228&quot;,</span>
+<span class="sd">                &quot;player_notes_last_timestamp&quot;: 1568837880,</span>
+<span class="sd">                &quot;player_points&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;,</span>
+<span class="sd">                  &quot;total&quot;: 10.26</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;player_stats&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;,</span>
+<span class="sd">                  &quot;stats&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                      &quot;stat&quot;: {</span>
+<span class="sd">                        &quot;stat_id&quot;: &quot;4&quot;,</span>
+<span class="sd">                        &quot;value&quot;: &quot;249&quot;</span>
+<span class="sd">                      }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                  ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;position_type&quot;: &quot;O&quot;,</span>
+<span class="sd">                &quot;primary_position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                &quot;selected_position&quot;: {</span>
+<span class="sd">                  &quot;coverage_type&quot;: &quot;week&quot;,</span>
+<span class="sd">                  &quot;is_flex&quot;: 0,</span>
+<span class="sd">                  &quot;position&quot;: &quot;QB&quot;,</span>
+<span class="sd">                  &quot;week&quot;: &quot;1&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniform_number&quot;: &quot;12&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              Player({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Player]]: List of dictionaries with key = &quot;player&quot; and value = YFPY Player instance</span>
-<span class="sd">            containing the &quot;player_stats&quot; key (returns a YFPY PlayerStats instance).</span>
+<span class="sd">            list[Player]: List of YFPY Player instances containing attribute &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -5271,7 +5235,7 @@
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;roster&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;players&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DraftResult</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_draft_results"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_draft_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_draft_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DraftResult</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve draft results of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -5284,20 +5248,18 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_draft_results(1)</span>
 <span class="sd">            [</span>
-<span class="sd">              {</span>
-<span class="sd">                &quot;draft_result&quot;: {</span>
-<span class="sd">                  &quot;pick&quot;: 4,</span>
-<span class="sd">                  &quot;round&quot;: 1,</span>
-<span class="sd">                  &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
-<span class="sd">                  &quot;player_key&quot;: &quot;331.p.8256&quot;</span>
-<span class="sd">                }</span>
-<span class="sd">              },</span>
-<span class="sd">              ...</span>
+<span class="sd">              DraftResult({</span>
+<span class="sd">                &quot;pick&quot;: 4,</span>
+<span class="sd">                &quot;round&quot;: 1,</span>
+<span class="sd">                &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
+<span class="sd">                &quot;player_key&quot;: &quot;331.p.8256&quot;</span>
+<span class="sd">              }),</span>
+<span class="sd">              ...,</span>
+<span class="sd">              DraftResults({...})</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, DraftResult]]: List of dictionaries with key = &quot;draft_result&quot; and value = YFPY DraftResult</span>
-<span class="sd">            instance.</span>
+<span class="sd">            list[DraftResult]: List of YFPY DraftResult instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -5306,7 +5268,7 @@
             <span class="p">[</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="s2">&quot;draft_results&quot;</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_matchups"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_matchups">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_matchups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Matchup</span><span class="p">]]:</span>
+<div class="viewcode-block" id="YahooFantasySportsQuery.get_team_matchups"><a class="viewcode-back" href="../../_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery.get_team_matchups">[docs]</a>    <span class="k">def</span> <span class="nf">get_team_matchups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Matchup</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve matchups of specific team by team_id for chosen league.</span>
 
 <span class="sd">        Args:</span>
@@ -5319,15 +5281,13 @@
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_team_matchups(1)</span>
 <span class="sd">            [</span>
-<span class="sd">                {</span>
-<span class="sd">                    &quot;matchup&quot;: {</span>
-<span class="sd">                        &lt;matchup data&gt; (see get_league_matchups_by_week docstring for matchup data example)</span>
-<span class="sd">                    }</span>
-<span class="sd">                }</span>
+<span class="sd">                Matchup({</span>
+<span class="sd">                  &lt;matchup data&gt; (see get_league_matchups_by_week docstring for matchup data example)</span>
+<span class="sd">                })</span>
 <span class="sd">            ]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[dict[str, Matchup]]: List of dictionaries with key = &quot;matchup&quot; and value = YFPY Matchup instance.</span>
+<span class="sd">            list[Matchup]: List of YFPY Matchup instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">team_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">()</span><span class="si">}</span><span class="s2">.t.</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -5349,7 +5309,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_stats_for_season(&quot;331.p.7200&quot;)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;bye_weeks&quot;: {</span>
 <span class="sd">                &quot;week&quot;: &quot;9&quot;</span>
 <span class="sd">              },</span>
@@ -5398,7 +5358,7 @@
 <span class="sd">              &quot;position_type&quot;: &quot;O&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;QB&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Player: YFPY Player instance.</span>
@@ -5434,7 +5394,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_stats_by_week(&quot;331.p.7200&quot;, 1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;bye_weeks&quot;: {</span>
 <span class="sd">                &quot;week&quot;: &quot;9&quot;</span>
 <span class="sd">              },</span>
@@ -5485,10 +5445,10 @@
 <span class="sd">              &quot;position_type&quot;: &quot;O&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;QB&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Player: YFPY Player instance containing the &quot;player_stats&quot; key (returns a YFPY PlayerStats instance).</span>
+<span class="sd">            Player: YFPY Player instance containing attribute &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">limit_to_league_stats</span><span class="p">:</span>
@@ -5525,7 +5485,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_stats_by_date(&quot;nhl.p.4588&quot;, &quot;2011-05-01&quot;)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;display_position&quot;: &quot;G&quot;,</span>
 <span class="sd">              &quot;editorial_player_key&quot;: &quot;nhl.p.4588&quot;,</span>
 <span class="sd">              &quot;editorial_team_abbr&quot;: &quot;Was&quot;,</span>
@@ -5602,10 +5562,10 @@
 <span class="sd">              &quot;position_type&quot;: &quot;G&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;G&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;70&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Player: YFPY Player instnace containing the &quot;player_stats&quot; key (returns a YFPY PlayerStats instance).</span>
+<span class="sd">            Player: YFPY Player instnace containing attribute &quot;player_stats&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">limit_to_league_stats</span><span class="p">:</span>
@@ -5634,7 +5594,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_ownership(&quot;331.p.7200&quot;)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;bye_weeks&quot;: {</span>
 <span class="sd">                &quot;week&quot;: &quot;9&quot;</span>
 <span class="sd">              },</span>
@@ -5708,10 +5668,10 @@
 <span class="sd">              &quot;position_type&quot;: &quot;O&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;QB&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Player: YFPY Player instance containing the &quot;ownership&quot; key (returns a YFPY Ownership instance).</span>
+<span class="sd">            Player: YFPY Player instance containing attribute &quot;ownership&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -5733,7 +5693,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_percent_owned_by_week(&quot;331.p.7200&quot;, 1)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;bye_weeks&quot;: {</span>
 <span class="sd">                &quot;week&quot;: &quot;9&quot;</span>
 <span class="sd">              },</span>
@@ -5772,10 +5732,10 @@
 <span class="sd">              &quot;position_type&quot;: &quot;O&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;QB&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Player: YFPY Player instance containing the &quot;percent_owned&quot; key (returns a YFPY PercentOwned instance).</span>
+<span class="sd">            Player: YFPY Player instance containing attribute &quot;percent_owned&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -5796,7 +5756,7 @@
 <span class="sd">            &gt;&gt;&gt; from yfpy.query import YahooFantasySportsQuery</span>
 <span class="sd">            &gt;&gt;&gt; query = YahooFantasySportsQuery(Path(&quot;/path/to/auth/directory&quot;), league_id=&quot;######&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; query.get_player_draft_analysis(&quot;331.p.7200&quot;)</span>
-<span class="sd">            {</span>
+<span class="sd">            Player({</span>
 <span class="sd">              &quot;bye_weeks&quot;: {</span>
 <span class="sd">                &quot;week&quot;: &quot;9&quot;</span>
 <span class="sd">              },</span>
@@ -5835,10 +5795,10 @@
 <span class="sd">              &quot;position_type&quot;: &quot;O&quot;,</span>
 <span class="sd">              &quot;primary_position&quot;: &quot;QB&quot;,</span>
 <span class="sd">              &quot;uniform_number&quot;: &quot;12&quot;</span>
-<span class="sd">            }</span>
+<span class="sd">            })</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Player: YFPY Player instance containing the &quot;draft_analysis&quot; key (returns a YFPY DraftAnalysis instnace).</span>
+<span class="sd">            Player: YFPY Player instance containing attribute &quot;draft_analysis&quot;.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>

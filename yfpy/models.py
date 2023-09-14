@@ -16,7 +16,7 @@ import os
 from operator import getitem
 from typing import Union, Any, List, Dict, Type
 
-import stringcase
+from stringcase import snakecase
 
 from yfpy.logger import get_logger
 from yfpy.utils import jsonify_data
@@ -46,13 +46,46 @@ class YahooFantasyObject(object):
             self._keys: List = list(self._extracted_data.keys())
 
     def __str__(self):
+        """Override __str__ to display YahooFantasyObject attribute values as JSON.
+        """
         return f"{self.__class__.__name__}({self.to_json()})"
 
     def __repr__(self):
+        """Override __repr__ to display YahooFantasyObject attribute values as JSON.
+        """
         return f"{self.__class__.__name__}({self.to_json()})"
 
-    # def __getattribute__(self, item):
-    #     return flatten_to_objects(item)
+    def __getattribute__(self, attribute_name: str):
+        """Override __getattribute__ to flatten lists of single-key dictionaries with objects as values to lists of
+        objects.
+        """
+        attribute = object.__getattribute__(self, attribute_name)
+
+        # skip builtin attributes that start with underscores and check if attribute is a list or dict
+        if not attribute_name.startswith("_") and isinstance(attribute, (list, dict)):
+            if attribute:
+                # extract singular key from parent plural key
+                attribute_element_name = None
+                if attribute_name == "bonuses":
+                    attribute_element_name = "bonus"
+                elif attribute_name.endswith("s"):
+                    attribute_element_name = attribute_name[:-1]
+
+                if attribute_element_name:
+                    if isinstance(attribute, list):
+                        # flatten list of single-key dictionaries with object values to list of object values
+                        return [el[attribute_element_name] if isinstance(el, dict) else el for el in attribute]
+                    elif isinstance(attribute, dict):
+                        # flatten single-key dictionary with object value to list of object
+                        return [attribute[attribute_element_name]]
+                    else:
+                        return attribute
+                else:
+                    return attribute
+            else:
+                return attribute
+        else:
+            return attribute
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
@@ -143,7 +176,7 @@ class YahooFantasyObject(object):
             values.
 
         """
-        return {stringcase.snakecase(cls.__name__): cls for cls in self.__class__.__mro__[-2].__subclasses__()}
+        return {snakecase(cls.__name__): cls for cls in self.__class__.__mro__[-2].__subclasses__()}
 
     def clean_data_dict(self) -> Dict:
         """Recursive method to un-type custom class type objects for serialization.
