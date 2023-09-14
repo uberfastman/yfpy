@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.data &mdash; YFPY v12.2.0 documentation</title>
+  <title>yfpy.data &mdash; YFPY v13.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=0d587dbb"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=1382d64f"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -38,7 +38,7 @@
               <img src="../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v12.2.0
+                v13.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -2898,6 +2898,8 @@
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PosixPath</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">from</span> <span class="nn">stringcase</span> <span class="kn">import</span> <span class="n">snakecase</span>
+
 <span class="kn">from</span> <span class="nn">yfpy.logger</span> <span class="kn">import</span> <span class="n">get_logger</span>
 <span class="kn">from</span> <span class="nn">yfpy.models</span> <span class="kn">import</span> <span class="n">YahooFantasyObject</span>
 <span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
@@ -2998,7 +3000,14 @@
         <span class="c1"># save the retrieved data locally</span>
         <span class="n">saved_data_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">.json&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">saved_data_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
-            <span class="n">jsonify_data_to_file</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1"># unflatten list of object values to list of single-key dictionaries with object values if top level of</span>
+                <span class="c1"># data to be saved is a list</span>
+                <span class="n">unnested_data</span> <span class="o">=</span> <span class="p">[{</span><span class="n">snakecase</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">):</span> <span class="n">el</span><span class="p">}</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unnested_data</span> <span class="o">=</span> <span class="n">data</span>
+
+            <span class="n">jsonify_data_to_file</span><span class="p">(</span><span class="n">unnested_data</span><span class="p">,</span> <span class="n">data_file</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved locally to: </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># reset parent YahooFantasySportsQuery all_output_as_json_str = True and re-run query for json string return</span>
@@ -3039,6 +3048,13 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">saved_data_file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
                 <span class="n">unpacked</span> <span class="o">=</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_file</span><span class="p">),</span> <span class="n">YahooFantasyObject</span><span class="p">)</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">data_type_class</span><span class="p">(</span><span class="n">unpacked</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_type_class</span> <span class="k">else</span> <span class="n">unpacked</span>
+
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="c1"># flatten list of single-key dictionaries with object values to list of object values if top level</span>
+                    <span class="c1"># of loaded data is a list</span>
+                    <span class="n">data_element_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="p">[</span><span class="n">data_element_key</span><span class="p">]</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data loaded locally from: </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">saved_data_file_path</span><span class="si">}</span><span class="s2"> does not exist. Cannot load data locally without &quot;</span>

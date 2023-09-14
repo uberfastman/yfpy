@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>test.integration.conftest &mdash; YFPY v12.2.0 documentation</title>
+  <title>test.integration.conftest &mdash; YFPY v13.0.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=0d587dbb"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=1382d64f"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -38,7 +38,7 @@
               <img src="../../../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v12.2.0
+                v13.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -2869,6 +2869,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">quickstart</span> <span class="kn">import</span> <span class="n">quickstart</span>
 
 <span class="kn">import</span> <span class="nn">pytest</span>
 
@@ -2932,181 +2933,61 @@
 <div class="viewcode-block" id="season"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.season.html#test.integration.conftest.season">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">season</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports season for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># season = 2012</span>
-    <span class="c1"># season = 2013</span>
-    <span class="c1"># season = 2014</span>
-    <span class="c1"># season = 2015</span>
-    <span class="c1"># season = 2016</span>
-    <span class="c1"># season = 2017</span>
-    <span class="c1"># season = 2018</span>
-    <span class="c1"># season = 2019</span>
-    <span class="c1"># season = 2020</span>
-    <span class="c1"># season = 2021</span>
-    <span class="c1"># season = 2022</span>
-    <span class="n">season</span> <span class="o">=</span> <span class="mi">2023</span>
-
-    <span class="k">return</span> <span class="n">season</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_season</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="chosen_week"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.chosen_week.html#test.integration.conftest.chosen_week">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">chosen_week</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports chosen week for testing.&quot;&quot;&quot;</span>
-
-    <span class="n">chosen_week</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="k">return</span> <span class="n">chosen_week</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_chosen_week</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="chosen_date"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.chosen_date.html#test.integration.conftest.chosen_date">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">chosen_date</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports chosen date for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># chosen_date = &quot;2013-04-15&quot;  # NHL - 2013 (for 2012 season)</span>
-    <span class="n">chosen_date</span> <span class="o">=</span> <span class="s2">&quot;2021-10-25&quot;</span>  <span class="c1"># NHL - 2021</span>
-
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># chosen_date = &quot;2021-04-01&quot;  # MLB - 2021</span>
-    <span class="c1"># chosen_date = &quot;2022-04-10&quot;  # MLB - 2022</span>
-
-    <span class="k">return</span> <span class="n">chosen_date</span></div>
-
-
-<div class="viewcode-block" id="league_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.league_id.html#test.integration.conftest.league_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
-<span class="k">def</span> <span class="nf">league_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports league ID for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="c1"># league_id = &quot;907359&quot;  # NFL - 2015 (divisions)</span>
-    <span class="c1"># league_id = &quot;79230&quot;  # NFL - 2019</span>
-    <span class="c1"># league_id = &quot;655434&quot;  # NFL - 2020</span>
-    <span class="c1"># league_id = &quot;413954&quot;  # NFL - 2021</span>
-    <span class="c1"># league_id = &quot;791337&quot;  # NFL - 2022 (divisions)</span>
-    <span class="n">league_id</span> <span class="o">=</span> <span class="s2">&quot;321958&quot;</span>  <span class="c1"># NFL - 2023</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># league_id = &quot;69624&quot;  # NHL - 2012</span>
-    <span class="c1"># league_id = &quot;101592&quot;  # NHL - 2021</span>
-
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># league_id = &quot;40134&quot;  # MLB - 2021</span>
-
-    <span class="k">return</span> <span class="n">league_id</span></div>
-
-
-<div class="viewcode-block" id="game_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.game_id.html#test.integration.conftest.game_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
-<span class="k">def</span> <span class="nf">game_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports game ID for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="c1"># game_id = 331  # NFL - 2014</span>
-    <span class="c1"># game_id = 348  # NFL - 2015 (divisions)</span>
-    <span class="c1"># game_id = 359  # NFL - 2016</span>
-    <span class="c1"># game_id = 371  # NFL - 2017</span>
-    <span class="c1"># game_id = 380  # NFL - 2018</span>
-    <span class="c1"># game_id = 390  # NFL - 2019</span>
-    <span class="c1"># game_id = 399  # NFL - 2020</span>
-    <span class="c1"># game_id = 406  # NFL - 2021</span>
-    <span class="c1"># game_id = 414  # NFL - 2022 (divisions)</span>
-    <span class="n">game_id</span> <span class="o">=</span> <span class="mi">423</span>  <span class="c1"># NFL - 2023</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># game_id = 303  # NHL - 2012</span>
-    <span class="c1"># game_id = 411  # NHL - 2021</span>
-
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># game_id = 404  # MLB - 2021</span>
-    <span class="c1"># game_id = 412  # MLB - 2022</span>
-
-    <span class="k">return</span> <span class="n">game_id</span></div>
-
-
-<div class="viewcode-block" id="game_key"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.game_key.html#test.integration.conftest.game_key">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
-<span class="k">def</span> <span class="nf">game_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports game key for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="c1"># game_key = &quot;331&quot;  # NFL - 2014</span>
-    <span class="c1"># game_key = &quot;348&quot;  # NFL - 2015 (divisions)</span>
-    <span class="c1"># game_key = &quot;359&quot;  # NFL - 2016</span>
-    <span class="c1"># game_key = &quot;371&quot;  # NFL - 2017</span>
-    <span class="c1"># game_key = &quot;380&quot;  # NFL - 2018</span>
-    <span class="c1"># game_key = &quot;390&quot;  # NFL - 2019</span>
-    <span class="c1"># game_key = &quot;399&quot;  # NFL - 2020</span>
-    <span class="c1"># game_key = &quot;406&quot;  # NFL - 2021</span>
-    <span class="c1"># game_key = &quot;414&quot;  # NFL - 2022 (divisions)</span>
-    <span class="n">game_key</span> <span class="o">=</span> <span class="s2">&quot;423&quot;</span>  <span class="c1"># NFL - 2023</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># game_key = &quot;303&quot;  # NHL - 2012</span>
-    <span class="c1"># game_key = &quot;411&quot;  # NHL - 2021</span>
-
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># game_key = &quot;404&quot;  # MLB - 2021</span>
-    <span class="c1"># game_key = &quot;412&quot;  # MLB - 2022</span>
-
-    <span class="k">return</span> <span class="n">game_key</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_chosen_date</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="game_code"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.game_code.html#test.integration.conftest.game_code">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">game_code</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports game code for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_game_code</span><span class="p">()</span></div>
 
-    <span class="c1"># FOOTBALL</span>
-    <span class="n">game_code</span> <span class="o">=</span> <span class="s2">&quot;nfl&quot;</span>  <span class="c1"># NFL</span>
 
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># game_code = &quot;nhl&quot;  # NHL</span>
+<div class="viewcode-block" id="game_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.game_id.html#test.integration.conftest.game_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">game_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports game ID for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_game_id</span><span class="p">()</span></div>
 
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># game_code = &quot;mlb&quot;  # MLB</span>
 
-    <span class="k">return</span> <span class="n">game_code</span></div>
+<div class="viewcode-block" id="game_key"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.game_key.html#test.integration.conftest.game_key">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">game_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports game key for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_game_key</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="league_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.league_id.html#test.integration.conftest.league_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">league_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports league ID for testing.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_league_id</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="team_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.team_id.html#test.integration.conftest.team_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">team_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports team ID for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="n">team_id</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># NFL</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># team_id = 2  # NHL (2012)</span>
-
-    <span class="k">return</span> <span class="n">team_id</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_team_id</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="team_name"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.team_name.html#test.integration.conftest.team_name">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">team_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports team name for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="n">team_name</span> <span class="o">=</span> <span class="s2">&quot;Legion&quot;</span>  <span class="c1"># NFL</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># team_name = &quot;The Bateleurs&quot;  # NHL (2012)</span>
-
-    <span class="k">return</span> <span class="n">team_name</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_team_name</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="player_id"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.player_id.html#test.integration.conftest.player_id">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">player_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and set Yahoo Fantasy Sports player ID for testing.&quot;&quot;&quot;</span>
-
-    <span class="c1"># FOOTBALL</span>
-    <span class="n">player_id</span> <span class="o">=</span> <span class="mi">30123</span>  <span class="c1"># NFL: Patrick Mahomes - 2020/2021/2023</span>
-
-    <span class="c1"># HOCKEY</span>
-    <span class="c1"># player_id = 4588  # NHL: Braden Holtby - 2012</span>
-    <span class="c1"># player_id = 8205  # NHL: Jeffrey Viel - 2021</span>
-    <span class="c1"># player_id = 3637  # NHL: Alex Ovechkin - 2021</span>
-
-    <span class="c1"># BASEBALL</span>
-    <span class="c1"># player_id = 9897  # MLB: Tim Anderson - 2021/2022</span>
-
-    <span class="k">return</span> <span class="n">player_id</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_player_id</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="player_key"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.player_key.html#test.integration.conftest.player_key">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
@@ -3121,10 +3002,7 @@
 <div class="viewcode-block" id="league_player_limit"><a class="viewcode-back" href="../../../_autosummary/test.integration.conftest.league_player_limit.html#test.integration.conftest.league_player_limit">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">league_player_limit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set Yahoo Fantasy Sports league player retrieval limit for testing.&quot;&quot;&quot;</span>
-
-    <span class="n">league_player_limit</span> <span class="o">=</span> <span class="mi">101</span>
-
-    <span class="k">return</span> <span class="n">league_player_limit</span></div>
+    <span class="k">return</span> <span class="n">quickstart</span><span class="o">.</span><span class="n">get_league_player_limit</span><span class="p">()</span></div>
 </pre></div>
 
            </div>
