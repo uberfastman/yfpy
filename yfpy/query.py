@@ -246,8 +246,8 @@ class YahooFantasySportsQuery(object):
             url (str): REST API request URL string.
             data_key_list (list[str] | list[list[str]]): List of keys used to extract the specific data desired by the
                 given query (supports strings and lists of strings). Supports lists containing only key strings such as
-                ["game", "stat_categories"], and also supports lists containing key strings and lists of key strings
-                such as ["team", ["team_points", "team_projected_points"]].
+                ["game", "stat_categories"], and also supports lists containing key strings followed by lists of key
+                strings such as ["team", ["team_points", "team_projected_points"]].
             data_type_class (:obj:`Type`, optional): Highest level data model type (if one exists for the retrieved
                 data).
             sort_function (Callable of sort function, optional)): Optional lambda function to return sorted query
@@ -302,8 +302,17 @@ class YahooFantasySportsQuery(object):
 
             # cast the highest level of data to type corresponding to query (if type exists)
             query_data = data_type_class(unpacked) if data_type_class else unpacked
+
+            # sort data when applicable
             if sort_function and not isinstance(query_data, dict):
                 query_data = sorted(query_data, key=sort_function)
+
+            # flatten lists of single-key dicts of objects into lists of those objects
+            if isinstance(query_data, list):
+                last_data_key = data_key_list[-1]
+                if last_data_key.endswith("s"):
+                    query_data = [el[last_data_key[:-1]] for el in query_data]
+
             if self.all_output_as_json_str:
                 return jsonify_data(query_data)
             else:
@@ -312,7 +321,7 @@ class YahooFantasySportsQuery(object):
         else:
             logger.error("Cannot run Yahoo query while using offline mode! Please try again with offline=False.")
 
-    def get_all_yahoo_fantasy_game_keys(self) -> List[Dict[str, Game]]:
+    def get_all_yahoo_fantasy_game_keys(self) -> List[Game]:
         """Retrieve all Yahoo Fantasy Sports game keys by ID (from year of inception to present), sorted by season/year.
 
         Examples:
@@ -321,26 +330,24 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_all_yahoo_fantasy_game_keys()
             [
-              {
-                "game": {
-                  "code": "nfl",
-                  "game_id": "50",
-                  "game_key": "50",
-                  "is_game_over": 1,
-                  "is_offseason": 1,
-                  "is_registration_over": 1,
-                  "name": "Football",
-                  "season": "1999",
-                  "type": "full",
-                  "url": "https://football.fantasysports.yahoo.com/archive/nfl/1999"
-                }
-              },
-              ...
+              Game({
+                "code": "nfl",
+                "game_id": "50",
+                "game_key": "50",
+                "is_game_over": 1,
+                "is_offseason": 1,
+                "is_registration_over": 1,
+                "name": "Football",
+                "season": "1999",
+                "type": "full",
+                "url": "https://football.fantasysports.yahoo.com/archive/nfl/1999"
+              }),
+              ...,
+              Game({...})
             ]
 
         Returns:
-            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
-            instance.
+            list[Game]: List of YFPY Game instances.
 
         """
         return self.query(
@@ -390,7 +397,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_game_info()
-            {
+            Game({
               "code": "nfl",
               "game_id": "390",
               "game_key": "390",
@@ -443,7 +450,7 @@ class YahooFantasySportsQuery(object):
               },
               "type": "full",
               "url": "https://football.fantasysports.yahoo.com/f1"
-            }
+            })
 
         Returns:
             Game: YFPY Game instance.
@@ -464,7 +471,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_game_metadata()
-            {
+            Game({
               "code": "nfl",
               "game_id": "390",
               "game_key": "390",
@@ -476,7 +483,7 @@ class YahooFantasySportsQuery(object):
               "season": "2019",
               "type": "full",
               "url": "https://football.fantasysports.yahoo.com/f1"
-            }
+            })
 
         Returns:
             Game: YFPY Game instance.
@@ -499,7 +506,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_info_by_game_id(390)
-            {
+            Game({
               "code": "nfl",
               "game_id": "390",
               "game_key": "390",
@@ -552,7 +559,7 @@ class YahooFantasySportsQuery(object):
               },
               "type": "full",
               "url": "https://football.fantasysports.yahoo.com/f1"
-            }
+            })
 
         Returns:
             Game: YFPY Game instance.
@@ -576,7 +583,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_metadata_by_game_id(331)
-            {
+            Game({
               "code": "nfl",
               "game_id": "331",
               "game_key": "331",
@@ -587,7 +594,7 @@ class YahooFantasySportsQuery(object):
               "season": "2014",
               "type": "full",
               "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014"
-            }
+            })
 
         Returns:
             Game: YFPY Game instance.
@@ -599,7 +606,7 @@ class YahooFantasySportsQuery(object):
             Game
         )
 
-    def get_game_weeks_by_game_id(self, game_id: int) -> List[Dict[str, GameWeek]]:
+    def get_game_weeks_by_game_id(self, game_id: int) -> List[GameWeek]:
         """Retrieve all valid weeks of a specific game by ID.
 
         Args:
@@ -611,28 +618,23 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_weeks_by_game_id(331)
             [
-              {
-                "game_week": {
-                  "display_name": "1",
-                  "end": "2014-09-08",
-                  "start": "2014-09-04",
-                  "week": "1"
-                }
-              },
+              GameWeek({
+                "display_name": "1",
+                "end": "2014-09-08",
+                "start": "2014-09-04",
+                "week": "1"
+              }),
               ...,
-              {
-                "game_week": {
-                  "display_name": "17",
-                  "end": "2014-12-28",
-                  "start": "2014-12-23",
-                  "week": "17"
-                }
-              }
+              GameWeek({
+                "display_name": "17",
+                "end": "2014-12-28",
+                "start": "2014-12-23",
+                "week": "17"
+              })
             ]
 
         Returns:
-            list[dict[str, GameWeek]]: List of dictionaries containing the single key "game_week" and value of each YFPY
-            GameWeek instance.
+            list[GameWeek]: List of YFPY GameWeek instances.
 
         """
         return self.query(
@@ -651,7 +653,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_stat_categories_by_game_id(331)
-            {
+            StatCategories({
               "stats": [
                 {
                   "stat": {
@@ -671,7 +673,7 @@ class YahooFantasySportsQuery(object):
                   }
                 }
               ]
-            }
+            })
 
         Returns:
             StatCategories: YFPY StatCategories instance.
@@ -683,7 +685,7 @@ class YahooFantasySportsQuery(object):
             StatCategories
         )
 
-    def get_game_position_types_by_game_id(self, game_id: int) -> List[Dict[str, PositionType]]:
+    def get_game_position_types_by_game_id(self, game_id: int) -> List[PositionType]:
         """Retrieve all valid position types for specific game by ID sorted alphabetically by type.
 
         Args:
@@ -695,35 +697,19 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_position_types_by_game_id(331)
             [
-              {
-                "position_type": {
-                  "type": "O",
-                  "display_name": "Offense"
-                }
-              },
-              {
-                "position_type": {
-                  "type": "K",
-                  "display_name": "Kickers"
-                }
-              },
-              {
-                "position_type": {
-                  "type": "DT",
-                  "display_name": "Defense/Special Teams"
-                }
-              },
-              {
-                "position_type": {
-                  "type": "DP",
-                  "display_name": "Defensive Players"
-                }
-              }
+              PositionType({
+                "type": "O",
+                "display_name": "Offense"
+              }),
+              ...,
+              PositionType({
+                "type": "K",
+                "display_name": "Kickers"
+              })
             ]
 
         Returns:
-            list[dict[str, PositionType]]: List of dictionaries containing the single key "position_type" and value of
-            each YFPY PositionType instance.
+            list[PositionType]: List of YFPY PositionType instances.
 
         """
         return self.query(
@@ -732,7 +718,7 @@ class YahooFantasySportsQuery(object):
             sort_function=lambda x: x.get("position_type").type
         )
 
-    def get_game_roster_positions_by_game_id(self, game_id: int) -> List[Dict[str, RosterPosition]]:
+    def get_game_roster_positions_by_game_id(self, game_id: int) -> List[RosterPosition]:
         """Retrieve all valid roster positions for specific game by ID sorted alphabetically by position.
 
         Args:
@@ -744,23 +730,18 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_game_roster_positions_by_game_id(331)
             [
-              {
-                "roster_position": {
-                  "position": "BN"
-                }
-              },
+              {RosterPosition({
+                "position": "BN"
+              }),
               ...,
-              {
-                "roster_position": {
-                  "position": "WR",
-                  "position_type": "O"
-                }
-              }
+              RosterPosition({
+                "position": "WR",
+                "position_type": "O"
+              })
             ]
 
         Returns:
-            list[dict[str, RosterPosition]]: List of dictionaries containing the single key "roster_position" and value
-            of each YFPY RosterPosition instance.
+            list[RosterPosition]: List of YFPY RosterPosition instances.
 
         """
         return self.query(
@@ -806,9 +787,9 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_current_user()
-            {
+            User({
               "guid": "USER_GUID_STRING"
-            }
+            })
 
         Returns:
             User: YFPY User instance.
@@ -820,7 +801,7 @@ class YahooFantasySportsQuery(object):
             User
         )
 
-    def get_user_games(self) -> List[Dict[str, Game]]:
+    def get_user_games(self) -> List[Game]:
         """Retrieve game history for current logged-in user sorted by season/year.
 
         Examples:
@@ -829,8 +810,7 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_games()
             [
-              {
-                "game": {
+              Game({
                   "code": "nfl",
                   "game_id": "359",
                   "game_key": "359",
@@ -841,14 +821,13 @@ class YahooFantasySportsQuery(object):
                   "season": "2016",
                   "type": "full",
                   "url": "https://football.fantasysports.yahoo.com/archive/nfl/2016"
-                }
-              },
-              ...
+              })
+              ...,
+              Game({...})
             ]
 
         Returns:
-            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
-            instance.
+            list[Game]: List of YFPY Game instances.
 
         """
         return self.query(
@@ -857,7 +836,7 @@ class YahooFantasySportsQuery(object):
             sort_function=lambda x: x.get("game").season
         )
 
-    def get_user_leagues_by_game_key(self, game_key: Union[int, str]) -> List[Dict[str, League]]:
+    def get_user_leagues_by_game_key(self, game_key: Union[int, str]) -> List[League]:
         """Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.
 
         Args:
@@ -869,43 +848,42 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_leagues_by_game_key(331)
             [
-              {
-                "league": {
-                  "allow_add_to_dl_extra_pos": 0,
-                  "current_week": "16",
-                  "draft_status": "postdraft",
-                  "edit_key": "16",
-                  "end_date": "2018-12-24",
-                  "end_week": "16",
-                  "game_code": "nfl",
-                  "iris_group_chat_id": "<group chat id>",
-                  "is_cash_league": "0",
-                  "is_finished": 1,
-                  "is_pro_league": "0",
-                  "league_id": "169896",
-                  "league_key": "380.l.169896",
-                  "league_type": "private",
-                  "league_update_timestamp": "1546498723",
-                  "logo_url": "<logo url>",
-                  "name": "League Name",
-                  "num_teams": 12,
-                  "password": null,
-                  "renew": "371_52364",
-                  "renewed": "390_78725",
-                  "scoring_type": "head",
-                  "season": "2018",
-                  "short_invitation_url": "<invite url>",
-                  "start_date": "2018-09-06",
-                  "start_week": "1",
-                  "url": "<league url>",
-                  "weekly_deadline": null
-                }
-              }
+              League({
+                "allow_add_to_dl_extra_pos": 0,
+                "current_week": "16",
+                "draft_status": "postdraft",
+                "edit_key": "16",
+                "end_date": "2018-12-24",
+                "end_week": "16",
+                "game_code": "nfl",
+                "iris_group_chat_id": "<group chat id>",
+                "is_cash_league": "0",
+                "is_finished": 1,
+                "is_pro_league": "0",
+                "league_id": "169896",
+                "league_key": "380.l.169896",
+                "league_type": "private",
+                "league_update_timestamp": "1546498723",
+                "logo_url": "<logo url>",
+                "name": "League Name",
+                "num_teams": 12,
+                "password": null,
+                "renew": "371_52364",
+                "renewed": "390_78725",
+                "scoring_type": "head",
+                "season": "2018",
+                "short_invitation_url": "<invite url>",
+                "start_date": "2018-09-06",
+                "start_week": "1",
+                "url": "<league url>",
+                "weekly_deadline": null
+              }),
+              ...,
+              League({...})
             ]
 
         Returns:
-            list[dict[str, League]]: List of dictionaries containing the single key "league" and value of each YFPY
-            League instance.
+            list[League]: List of YFPY League instances.
 
         """
         leagues = self.query(
@@ -915,7 +893,7 @@ class YahooFantasySportsQuery(object):
         )
         return leagues if isinstance(leagues, list) else [leagues]
 
-    def get_user_teams(self) -> List[Dict[str, Game]]:
+    def get_user_teams(self) -> List[Game]:
         """Retrieve teams for all leagues for current logged-in user for current game sorted by season/year.
 
         Examples:
@@ -924,66 +902,65 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_user_teams()
             [
-              {
-                "game": {
-                  "code": "nfl",
-                  "game_id": "359",
-                  "game_key": "359",
-                  "is_game_over": 1,
-                  "is_offseason": 1,
-                  "is_registration_over": 1,
-                  "name": "Football",
-                  "season": "2016",
-                  "teams": [
-                    {
-                      "team": {
-                        "draft_grade": "A",
-                        "draft_position": 9,
-                        "draft_recap_url": "<draft recap url>",
-                        "has_draft_grade": 1,
-                        "league_scoring_type": "head",
-                        "managers": [
-                          {
-                            "manager": {
-                              "email": "<manager email>",
-                              "guid": "<manager user guid>",
-                              "image_url": "<manager user image url>",
-                              "is_comanager": "1",
-                              "manager_id": "14",
-                              "nickname": "<manager nickname>"
-                            }
+              Game({
+                "code": "nfl",
+                "game_id": "359",
+                "game_key": "359",
+                "is_game_over": 1,
+                "is_offseason": 1,
+                "is_registration_over": 1,
+                "name": "Football",
+                "season": "2016",
+                "teams": [
+                  {
+                    "team": {
+                      "draft_grade": "A",
+                      "draft_position": 9,
+                      "draft_recap_url": "<draft recap url>",
+                      "has_draft_grade": 1,
+                      "league_scoring_type": "head",
+                      "managers": [
+                        {
+                          "manager": {
+                            "email": "<manager email>",
+                            "guid": "<manager user guid>",
+                            "image_url": "<manager user image url>",
+                            "is_comanager": "1",
+                            "manager_id": "14",
+                            "nickname": "<manager nickname>"
                           }
-                        ],
-                        "name": "Legion",
-                        "number_of_moves": "48",
-                        "number_of_trades": "2",
-                        "roster_adds": {
-                          "coverage_type": "week",
-                          "coverage_value": "17",
-                          "value": "0"
-                        },
-                        "team_id": "1",
-                        "team_key": "359.l.5521.t.1",
-                        "team_logos": {
-                          "team_logo": {
-                            "size": "large",
-                            "url": "<logo url>"
-                          }
-                        },
-                        "url": "<team url>",
-                        "waiver_priority": 11
-                      }
+                        }
+                      ],
+                      "name": "Legion",
+                      "number_of_moves": "48",
+                      "number_of_trades": "2",
+                      "roster_adds": {
+                        "coverage_type": "week",
+                        "coverage_value": "17",
+                        "value": "0"
+                      },
+                      "team_id": "1",
+                      "team_key": "359.l.5521.t.1",
+                      "team_logos": {
+                        "team_logo": {
+                          "size": "large",
+                          "url": "<logo url>"
+                        }
+                      },
+                      "url": "<team url>",
+                      "waiver_priority": 11
                     }
-                  ],
-                  "type": "full",
-                  "url": "https://football.fantasysports.yahoo.com/archive/nfl/2016"
-                }
-              }
+                  }
+                ],
+                "type": "full",
+                "url": "https://football.fantasysports.yahoo.com/archive/nfl/2016"
+              })
+              ...,
+              Game({...})
           ]
 
         Returns:
-            list[dict[str, Game]]: List of dictionaries containing the single key "game" and value of each YFPY Game
-            instance with "teams" field containing list of YFPY Team instances.
+            list[Game]: List of YFPY Game instances with "teams" attribute containing list of YFPY Team instances.
 
         """
         return self.query(
@@ -1000,7 +977,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_info()
-            {
+            League({
               "allow_add_to_dl_extra_pos": 0,
               "current_week": "16",
               "draft_status": "postdraft",
@@ -1043,7 +1020,7 @@ class YahooFantasySportsQuery(object):
               "start_week": "1",
               "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259",
               "weekly_deadline": null
-            }
+            })
 
         Returns:
             League: YFPY League instance.
@@ -1064,7 +1041,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_metadata()
-            {
+            League({
               "allow_add_to_dl_extra_pos": 0,
               "current_week": "16",
               "draft_status": "postdraft",
@@ -1091,7 +1068,7 @@ class YahooFantasySportsQuery(object):
               "start_week": "1",
               "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259",
               "weekly_deadline": null
-            }
+            })
 
         Returns:
             League: YFPY League instance.
@@ -1111,7 +1088,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_settings()
-            {
+            Settings({
               "cant_cut_list": "yahoo",
               "draft_time": "1408410000",
               "draft_type": "live",
@@ -1179,7 +1156,7 @@ class YahooFantasySportsQuery(object):
               "waiver_rule": "gametime",
               "waiver_time": "2",
               "waiver_type": "R"
-            }
+            })
 
         Returns:
             Settings: YFPY Settings instance.
@@ -1199,7 +1176,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_standings()
-            {
+            Standings({
               "teams": [
                 {
                   "team": {
@@ -1260,7 +1237,7 @@ class YahooFantasySportsQuery(object):
                 },
                 ...
               ]
-            }
+            })
 
         Returns:
             Standings: YFPY Standings instance.
@@ -1272,7 +1249,7 @@ class YahooFantasySportsQuery(object):
             Standings
         )
 
-    def get_league_teams(self) -> List[Dict[str, Team]]:
+    def get_league_teams(self) -> List[Team]:
         """Retrieve teams for chosen league.
 
         Examples:
@@ -1281,48 +1258,46 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_teams()
             [
-              {
-                "team": {
-                  "clinched_playoffs": 1,
-                  "draft_grade": "B",
-                  "draft_position": 4,
-                  "draft_recap_url":
-                    "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap",
-                  "has_draft_grade": 1,
-                  "league_scoring_type": "head",
-                  "managers": {
-                    "manager": {
-                      "guid": "BMACD7S5UXV7JIQX4PGGUVQJAU",
-                      "manager_id": "1",
-                      "nickname": "--hidden--"
-                    }
-                  },
-                  "name": "Hellacious Hill 12",
-                  "number_of_moves": "71",
-                  "number_of_trades": 0,
-                  "roster_adds": {
-                    "coverage_type": "week",
-                    "coverage_value": "17",
-                    "value": "0"
-                  },
-                  "team_id": "1",
-                  "team_key": "331.l.729259.t.1",
-                  "team_logos": {
-                    "team_logo": {
-                      "size": "large",
-                      "url": "https://ct.yimg.com/cy/1441/24935131299_a8242dab70_192sq.jpg?ct=fantasy"
-                    }
-                  },
-                  "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1",
-                  "waiver_priority": 9
-                }
-              },
-              ...
+              Team({
+                "clinched_playoffs": 1,
+                "draft_grade": "B",
+                "draft_position": 4,
+                "draft_recap_url":
+                  "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1/draftrecap",
+                "has_draft_grade": 1,
+                "league_scoring_type": "head",
+                "managers": {
+                  "manager": {
+                    "guid": "BMACD7S5UXV7JIQX4PGGUVQJAU",
+                    "manager_id": "1",
+                    "nickname": "--hidden--"
+                  }
+                },
+                "name": "Hellacious Hill 12",
+                "number_of_moves": "71",
+                "number_of_trades": 0,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": "17",
+                  "value": "0"
+                },
+                "team_id": "1",
+                "team_key": "331.l.729259.t.1",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://ct.yimg.com/cy/1441/24935131299_a8242dab70_192sq.jpg?ct=fantasy"
+                  }
+                },
+                "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1",
+                "waiver_priority": 9
+              }),
+              ...,
+              Team({...})
             ]
 
         Returns:
-            list[dict[str, Team]]: List of dictionaries containing the single key "team" and value of each YFPY Team
-            instance.
+            list[Team]: List of YFPY Team instances.
 
         """
         return self.query(
@@ -1331,7 +1306,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_league_players(self, player_count_limit: int = None, player_count_start: int = 0,
-                           is_retry: bool = False) -> List[Dict[str, Player]]:
+                           is_retry: bool = False) -> List[Player]:
         """Retrieve valid players for chosen league.
 
         Args:
@@ -1345,49 +1320,47 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_players(50, 25)
             [
-              {
-                "player": {
-                  "bye_weeks": {
-                    "week": "10"
-                  },
-                  "display_position": "K",
-                  "editorial_player_key": "nfl.p.3727",
-                  "editorial_team_abbr": "Ind",
-                  "editorial_team_full_name": "Indianapolis Colts",
-                  "editorial_team_key": "nfl.t.11",
-                  "eligible_positions": {
-                    "position": "K"
-                  },
-                  "has_player_notes": 1,
-                  "headshot": {
-                    "size": "small",
-                    "url":
-                        "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
-                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
-                        3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
-                  },
-                  "is_undroppable": "0",
-                  "name": {
-                    "ascii_first": "Adam",
-                    "ascii_last": "Vinatieri",
-                    "first": "Adam",
-                    "full": "Adam Vinatieri",
-                    "last": "Vinatieri"
-                  },
-                  "player_id": "3727",
-                  "player_key": "331.p.3727",
-                  "player_notes_last_timestamp": 1568758320,
-                  "position_type": "K",
-                  "primary_position": "K",
-                  "uniform_number": "4"
-                }
-              },
-              ...
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "K",
+                "editorial_player_key": "nfl.p.3727",
+                "editorial_team_abbr": "Ind",
+                "editorial_team_full_name": "Indianapolis Colts",
+                "editorial_team_key": "nfl.t.11",
+                "eligible_positions": {
+                  "position": "K"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url":
+                    "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Adam",
+                  "ascii_last": "Vinatieri",
+                  "first": "Adam",
+                  "full": "Adam Vinatieri",
+                  "last": "Vinatieri"
+                },
+                "player_id": "3727",
+                "player_key": "331.p.3727",
+                "player_notes_last_timestamp": 1568758320,
+                "position_type": "K",
+                "primary_position": "K",
+                "uniform_number": "4"
+              }),
+              ...,
+              Player({...})
             ]
 
         Returns:
-            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
-            Player instance.
+            list[Player]: List of YFPY Player instances.
 
         """
         league_player_count = player_count_start
@@ -1466,7 +1439,7 @@ class YahooFantasySportsQuery(object):
 
         return league_player_data
 
-    def get_league_draft_results(self) -> List[Dict[str, DraftResult]]:
+    def get_league_draft_results(self) -> List[DraftResult]:
         """Retrieve draft results for chosen league.
 
         Examples:
@@ -1475,20 +1448,18 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_draft_results()
             [
-              {
-                "draft_result": {
-                  "pick": 1,
-                  "round": 1,
-                  "team_key": "331.l.729259.t.4",
-                  "player_key": "331.p.9317"
-                }
-              },
-              ...
+              DraftResult({
+                "pick": 1,
+                "round": 1,
+                "team_key": "331.l.729259.t.4",
+                "player_key": "331.p.9317"
+              }),
+              ...,
+              DraftResult({...})
             ]
 
         Returns:
-            list[dict[str, DraftResult]]: List of dictionaries containing the single key "draft_result" and value of
-            each YFPY DraftResult instance.
+            list[DraftResult]: List of YFPY DraftResult instances.
 
         """
         return self.query(
@@ -1496,7 +1467,7 @@ class YahooFantasySportsQuery(object):
             ["league", "draft_results"]
         )
 
-    def get_league_transactions(self) -> List[Dict[str, Transaction]]:
+    def get_league_transactions(self) -> List[Transaction]:
         """Retrieve transactions for chosen league.
 
         Examples:
@@ -1505,46 +1476,44 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_transactions()
             [
-              {
-                "transaction": {
-                  "players": [
-                    {
-                      "player": {
-                        "display_position": "RB",
-                        "editorial_team_abbr": "NO",
-                        "name": {
-                          "ascii_first": "Kerwynn",
-                          "ascii_last": "Williams",
-                          "first": "Kerwynn",
-                          "full": "Kerwynn Williams",
-                          "last": "Williams"
-                        },
-                        "player_id": "26853",
-                        "player_key": "331.p.26853",
-                        "position_type": "O",
-                        "transaction_data": {
-                          "destination_team_key": "331.l.729259.t.1",
-                          "destination_team_name": "Hellacious Hill 12",
-                          "destination_type": "team",
-                          "source_type": "freeagents",
-                          "type": "add"
-                        }
+              Transaction({
+                "players": [
+                  {
+                    "player": {
+                      "display_position": "RB",
+                      "editorial_team_abbr": "NO",
+                      "name": {
+                        "ascii_first": "Kerwynn",
+                        "ascii_last": "Williams",
+                        "first": "Kerwynn",
+                        "full": "Kerwynn Williams",
+                        "last": "Williams"
+                      },
+                      "player_id": "26853",
+                      "player_key": "331.p.26853",
+                      "position_type": "O",
+                      "transaction_data": {
+                        "destination_team_key": "331.l.729259.t.1",
+                        "destination_team_name": "Hellacious Hill 12",
+                        "destination_type": "team",
+                        "source_type": "freeagents",
+                        "type": "add"
                       }
                     }
-                  ],
-                  "status": "successful",
-                  "timestamp": "1419188151",
-                  "transaction_id": "282",
-                  "transaction_key": "331.l.729259.tr.282",
-                  "type": "add/drop"
-                }
-              },
-              ...
+                  }
+                ],
+                "status": "successful",
+                "timestamp": "1419188151",
+                "transaction_id": "282",
+                "transaction_key": "331.l.729259.tr.282",
+                "type": "add/drop"
+              }),
+              ...,
+              Transaction({...})
             ]
 
         Returns:
-            list[dict[str, Transaction]]: List of dictionaries containing the single key "transaction" and value of each
-            YFPY Transaction instance.
+            list[Transaction]: List of YFPY Transaction instances.
 
         """
         return self.query(
@@ -1563,7 +1532,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_scoreboard_by_week(1)
-            {
+            Scoreboard({
               "week": "1",
               "matchups": [
                 {
@@ -1611,7 +1580,7 @@ class YahooFantasySportsQuery(object):
                 },
                 ...
               ]
-            }
+            })
 
         Returns:
             Scoreboard: YFPY Scoreboard instance.
@@ -1624,7 +1593,7 @@ class YahooFantasySportsQuery(object):
             Scoreboard
         )
 
-    def get_league_matchups_by_week(self, chosen_week: int) -> List[Dict[str, Matchup]]:
+    def get_league_matchups_by_week(self, chosen_week: int) -> List[Matchup]:
         """Retrieve matchups for chosen league by week.
 
         Args:
@@ -1636,54 +1605,53 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_league_matchups_by_week(1)
             [
-                "matchup": {
-                    "is_consolation": "0",
-                    "is_matchup_recap_available": 1,
-                    "is_playoffs": "0",
-                    "is_tied": 0,
-                    "matchup_grades": [
-                      {
-                        "matchup_grade": {
-                          "grade": "B",
-                          "team_key": "331.l.729259.t.1"
-                        }
-                      },
-                      {
-                        "matchup_grade": {
-                          "grade": "B",
-                          "team_key": "331.l.729259.t.2"
-                        }
-                      }
-                    ],
-                    "matchup_recap_title": "Wax On Wax Off Gets Victory Against Hellacious Hill 12",
-                    "matchup_recap_url":
-                        "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?
-                        week=1&mid1=1&mid2=2",
-                    "status": "postevent",
-                    "teams": [
-                      {
-                        "team": {
-                            <team data>
-                        }
-                      },
-                      {
-                        "team": {
-                            <team data>
-                        }
-                      }
-                    ],
-                    "week": "1",
-                    "week_end": "2014-09-08",
-                    "week_start": "2014-09-04",
-                    "winner_team_key": "331.l.729259.t.2"
+              Matchup({
+                "is_consolation": "0",
+                "is_matchup_recap_available": 1,
+                "is_playoffs": "0",
+                "is_tied": 0,
+                "matchup_grades": [
+                  {
+                    "matchup_grade": {
+                      "grade": "B",
+                      "team_key": "331.l.729259.t.1"
+                    }
+                  },
+                  {
+                    "matchup_grade": {
+                      "grade": "B",
+                      "team_key": "331.l.729259.t.2"
+                    }
                   }
-                },
-                ...
+                ],
+                "matchup_recap_title": "Wax On Wax Off Gets Victory Against Hellacious Hill 12",
+                "matchup_recap_url":
+                  "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/recap?
+                  week=1&mid1=1&mid2=2",
+                "status": "postevent",
+                "teams": [
+                  {
+                    "team": {
+                      <team data>
+                    }
+                  },
+                  {
+                    "team": {
+                      <team data>
+                    }
+                  }
+                ],
+                "week": "1",
+                "week_end": "2014-09-08",
+                "week_start": "2014-09-04",
+                "winner_team_key": "331.l.729259.t.2"
+              }),
+              ...,
+              Matchup({...})
             ]
 
         Returns:
-            list[dict[str, Matchup]]: List of dictionaries containing the single key "matchup" and value of each YFPY
-            Matchup instance.
+            list[Matchup]: List of YFPY Matchup instances.
 
         """
         return self.query(
@@ -1704,7 +1672,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_info(1)
-            {
+            Team({
               "clinched_playoffs": 1,
               "draft_grade": "B",
               "draft_position": 4,
@@ -1766,7 +1734,7 @@ class YahooFantasySportsQuery(object):
               },
               "url": "https://football.fantasysports.yahoo.com/archive/nfl/2014/729259/1",
               "waiver_priority": 9
-            }
+            })
 
         Returns:
             Team: YFPY Team instance.
@@ -1792,7 +1760,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_metadata(1)
-            {
+            Team({
               "team_key": "331.l.729259.t.1",
               "team_id": "1",
               "name": "Hellacious Hill 12",
@@ -1824,7 +1792,7 @@ class YahooFantasySportsQuery(object):
                   "nickname": "--hidden--"
                 }
               }
-            }
+            })
 
         Returns:
             Team: YFPY Team instance.
@@ -1849,11 +1817,11 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_stats(1)
-            {
+            TeamPoints({
               "coverage_type": "season",
               "season": "2014",
               "total": "1409.24"
-            }
+            })
 
         Returns:
             TeamPoints: YFPY TeamPoints instance.
@@ -1866,8 +1834,9 @@ class YahooFantasySportsQuery(object):
             TeamPoints
         )
 
-    def get_team_stats_by_week(self, team_id: Union[str, int], chosen_week: Union[int, str] = "current") -> (
-            Dict[str, Dict[str, Union[TeamPoints, TeamProjectedPoints]]]):
+    def get_team_stats_by_week(
+            self, team_id: Union[str, int], chosen_week: Union[int, str] = "current"
+    ) -> Dict[str, Union[TeamPoints, TeamProjectedPoints]]:
         """Retrieve stats of specific team by team_id and by week for chosen league.
 
         Args:
@@ -1881,21 +1850,21 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_stats_by_week(1, 1)
             {
-              "team_points": {
+              "team_points": TeamPoints({
                 "coverage_type": "week",
                 "total": "95.06",
                 "week": "1"
-              },
-              "team_projected_points": {
+              }),
+              "team_projected_points": TeamProjectedPoints({
                 "coverage_type": "week",
                 "total": "78.85",
                 "week": "1"
-              }
+              })
             }
 
         Returns:
-            dict[str, TeamPoints | TeamProjectedPoints]: Dictionary containing both a YFPY TeamPoints instance and a
-            YFPY TeamProjectedPoints instance with respective keys "team_points" and "team_projected_points".
+            dict[str, TeamPoints | TeamProjectedPoints]: Dictionary containing keys "team_points" and
+                "team_projected_points" with respective values YFPY TeamPoints and YFPY TeamProjectedPoints instances.
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -1916,7 +1885,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_standings(1)
-            {
+            TeamStandings({
               "rank": 2,
               "playoff_seed": "2",
               "outcome_totals": {
@@ -1931,7 +1900,7 @@ class YahooFantasySportsQuery(object):
               },
               "points_for": "1409.24",
               "points_against": 1266.6599999999999
-            }
+            })
 
         Returns:
             TeamStandings: YFPY TeamStandings instance.
@@ -1957,7 +1926,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_by_week(1, 1)
-            {
+            Roster({
               "coverage_type": "week",
               "week": "1",
               "is_editable": 0,
@@ -2006,7 +1975,7 @@ class YahooFantasySportsQuery(object):
                 },
                 ...
               ]
-            }
+            })
 
         Returns:
             Roster: YFPY Roster instance.
@@ -2020,7 +1989,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_team_roster_player_info_by_week(self, team_id: Union[str, int],
-                                            chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
+                                            chosen_week: Union[int, str] = "current") -> List[Player]:
         """Retrieve roster with ALL player info of specific team by team_id and by week for chosen league.
 
         Args:
@@ -2034,89 +2003,88 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_info_by_week(1, 1)
             [
-              {
-                "player": {
-                  "bye_weeks": {
-                    "week": "10"
-                  },
-                  "display_position": "QB",
-                  "draft_analysis": {
-                    "average_pick": "65.9",
-                    "average_round": "7.6",
-                    "average_cost": "5.0",
-                    "percent_drafted": "1.00"
-                  },
-                  "editorial_player_key": "nfl.p.5228",
-                  "editorial_team_abbr": "NE",
-                  "editorial_team_full_name": "New England Patriots",
-                  "editorial_team_key": "nfl.t.17",
-                  "eligible_positions": {
-                    "position": "QB"
-                  },
-                  "has_player_notes": 1,
-                  "headshot": {
-                    "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
-                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
-                  },
-                  "is_undroppable": "0",
-                  "name": {
-                    "ascii_first": "Tom",
-                    "ascii_last": "Brady",
-                    "first": "Tom",
-                    "full": "Tom Brady",
-                    "last": "Brady"
-                  },
-                  "ownership": {
-                    "ownership_type": "team",
-                    "owner_team_key": "331.l.729259.t.1",
-                    "owner_team_name": "Hellacious Hill 12"
-                  },
-                  "percent_owned": {
-                    "coverage_type": "week",
-                    "week": "17",
-                    "value": 99,
-                    "delta": "0"
-                  },
-                  "player_id": "5228",
-                  "player_key": "331.p.5228",
-                  "player_notes_last_timestamp": 1568837880,
-                  "player_points": {
-                    "coverage_type": "week",
-                    "week": "1",
-                    "total": 10.26
-                  },
-                  "player_stats": {
-                    "coverage_type": "week",
-                    "week": "1",
-                    "stats": [
-                      {
-                        "stat": {
-                          "stat_id": "4",
-                          "value": "249"
-                        }
-                      },
-                      ...
-                    ]
-                  },
-                  "position_type": "O",
-                  "primary_position": "QB",
-                  "selected_position": {
-                    "coverage_type": "week",
-                    "is_flex": 0,
-                    "position": "QB",
-                    "week": "1"
-                  },
-                  "uniform_number": "12"
-                }
-              },
-              ...
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "QB",
+                "draft_analysis": {
+                  "average_pick": "65.9",
+                  "average_round": "7.6",
+                  "average_cost": "5.0",
+                  "percent_drafted": "1.00"
+                },
+                "editorial_player_key": "nfl.p.5228",
+                "editorial_team_abbr": "NE",
+                "editorial_team_full_name": "New England Patriots",
+                "editorial_team_key": "nfl.t.17",
+                "eligible_positions": {
+                  "position": "QB"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/
+                    https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Tom",
+                  "ascii_last": "Brady",
+                  "first": "Tom",
+                  "full": "Tom Brady",
+                  "last": "Brady"
+                },
+                "ownership": {
+                  "ownership_type": "team",
+                  "owner_team_key": "331.l.729259.t.1",
+                  "owner_team_name": "Hellacious Hill 12"
+                },
+                "percent_owned": {
+                  "coverage_type": "week",
+                  "week": "17",
+                  "value": 99,
+                  "delta": "0"
+                },
+                "player_id": "5228",
+                "player_key": "331.p.5228",
+                "player_notes_last_timestamp": 1568837880,
+                "player_points": {
+                  "coverage_type": "week",
+                  "week": "1",
+                  "total": 10.26
+                },
+                "player_stats": {
+                  "coverage_type": "week",
+                  "week": "1",
+                  "stats": [
+                    {
+                      "stat": {
+                        "stat_id": "4",
+                        "value": "249"
+                      }
+                    },
+                    ...
+                  ]
+                },
+                "position_type": "O",
+                "primary_position": "QB",
+                "selected_position": {
+                  "coverage_type": "week",
+                  "is_flex": 0,
+                  "position": "QB",
+                  "week": "1"
+                },
+                "uniform_number": "12"
+              }),
+              ...,
+              Player({...})
             ]
 
         Returns:
-            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
-            Player instance containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats",
-            which each return instances of their respective YFPY objects.
+            list[Player]: List of YFPY Player instances containing attributes "draft_analysis", "ownership",
+                "percent_owned", and "player_stats".
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2127,7 +2095,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_team_roster_player_info_by_date(self, team_id: Union[str, int],
-                                            chosen_date: str = None) -> List[Dict[str, Player]]:
+                                            chosen_date: str = None) -> List[Player]:
         """Retrieve roster with ALL player info of specific team by team_id and by date for chosen league.
 
         Note:
@@ -2145,81 +2113,80 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_info_by_date(1, "2011-05-01")
             [
-              {
-                "player": {
-                  "display_position": "C",
-                  "draft_analysis": {
-                    "average_pick": 33.2,
-                    "average_round": 3.5,
-                    "average_cost": 39.2,
-                    "percent_drafted": 1.0
-                  },
-                  "editorial_player_key": "nhl.p.3981",
-                  "editorial_team_abbr": "Chi",
-                  "editorial_team_full_name": "Chicago Blackhawks",
-                  "editorial_team_key": "nhl.t.4",
-                  "eligible_positions": [
-                    "C",
-                    "F"
-                  ],
-                  "has_player_notes": 1,
-                  "headshot": {
-                    "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/tz.KOMoEiBDch6AJAGaUtg--~C/
-                    YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nhl_cutout/players_l/11032021/3981.png"
-                  },
-                  "is_editable": 0,
-                  "is_undroppable": 0,
-                  "name": {
-                    "ascii_first": "Jonathan",
-                    "ascii_last": "Toews",
-                    "first": "Jonathan",
-                    "full": "Jonathan Toews",
-                    "last": "Toews"
-                  },
-                  "ownership": {
-                    "ownership_type": "team",
-                    "owner_team_key": "303.l.69624.t.2",
-                    "owner_team_name": "The Bateleurs"
-                  },
-                  "percent_owned": {
-                    "coverage_type": "week",
-                    "week": 25,
-                    "value": 98,
-                    "delta": -1.0
-                  },
-                  "player_id": 3981,
-                  "player_key": "303.p.3981",
-                  "player_notes_last_timestamp": 1651606838,
-                  "player_stats": {
-                    "coverage_type": "date",
-                    "stats": [
-                      {
-                        "stat": {
-                          "stat_id": 1,
-                          "value": 1.0
-                        }
-                      },
-                      ...
-                    ]
-                  },
-                  "position_type": "P",
-                  "primary_position": "C",
-                  "selected_position": {
-                    "coverage_type": "date",
-                    "is_flex": 0,
-                    "position": "C"
-                  },
-                  "uniform_number": 19
-                }
-              },
-              ...
+              Player({
+                "display_position": "C",
+                "draft_analysis": {
+                  "average_pick": 33.2,
+                  "average_round": 3.5,
+                  "average_cost": 39.2,
+                  "percent_drafted": 1.0
+                },
+                "editorial_player_key": "nhl.p.3981",
+                "editorial_team_abbr": "Chi",
+                "editorial_team_full_name": "Chicago Blackhawks",
+                "editorial_team_key": "nhl.t.4",
+                "eligible_positions": [
+                  "C",
+                  "F"
+                ],
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url": "https://s.yimg.com/iu/api/res/1.2/tz.KOMoEiBDch6AJAGaUtg--~C/
+                    YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/
+                    https://s.yimg.com/xe/i/us/sp/v/nhl_cutout/players_l/11032021/3981.png"
+                },
+                "is_editable": 0,
+                "is_undroppable": 0,
+                "name": {
+                  "ascii_first": "Jonathan",
+                  "ascii_last": "Toews",
+                  "first": "Jonathan",
+                  "full": "Jonathan Toews",
+                  "last": "Toews"
+                },
+                "ownership": {
+                  "ownership_type": "team",
+                  "owner_team_key": "303.l.69624.t.2",
+                  "owner_team_name": "The Bateleurs"
+                },
+                "percent_owned": {
+                  "coverage_type": "week",
+                  "week": 25,
+                  "value": 98,
+                  "delta": -1.0
+                },
+                "player_id": 3981,
+                "player_key": "303.p.3981",
+                "player_notes_last_timestamp": 1651606838,
+                "player_stats": {
+                  "coverage_type": "date",
+                  "stats": [
+                    {
+                      "stat": {
+                        "stat_id": 1,
+                        "value": 1.0
+                      }
+                    },
+                    ...
+                  ]
+                },
+                "position_type": "P",
+                "primary_position": "C",
+                "selected_position": {
+                  "coverage_type": "date",
+                  "is_flex": 0,
+                  "position": "C"
+                },
+                "uniform_number": 19
+              }),
+              ...,
+              Player({...})
             ]
 
         Returns:
-            list[dict[str, Player]]: List of dictionaries containing the single key "player" and value of each YFPY
-            Player instance containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats",
-            which each return instances of their respective YFPY objects.
+            list[Player]: List of YFPY Player instances containing attributes "draft_analysis", "ownership",
+                "percent_owned", and "player_stats".
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2230,7 +2197,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_roster_player_stats(self, team_id: Union[str, int]) -> List[Dict[str, Player]]:
+    def get_team_roster_player_stats(self, team_id: Union[str, int]) -> List[Player]:
         """Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.
 
         Args:
@@ -2243,76 +2210,75 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_stats(1)
             [
-              {
-                "player": {
-                  "bye_weeks": {
-                    "week": "10"
-                  },
-                  "display_position": "QB",
-                  "draft_analysis": {
-                    "average_pick": "65.9",
-                    "average_round": "7.6",
-                    "average_cost": "5.0",
-                    "percent_drafted": "1.00"
-                  },
-                  "editorial_player_key": "nfl.p.5228",
-                  "editorial_team_abbr": "NE",
-                  "editorial_team_full_name": "New England Patriots",
-                  "editorial_team_key": "nfl.t.17",
-                  "eligible_positions": {
-                    "position": "QB"
-                  },
-                  "has_player_notes": 1,
-                  "headshot": {
-                    "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
-                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
-                  },
-                  "is_undroppable": "0",
-                  "name": {
-                    "ascii_first": "Tom",
-                    "ascii_last": "Brady",
-                    "first": "Tom",
-                    "full": "Tom Brady",
-                    "last": "Brady"
-                  },
-                  "player_id": "5228",
-                  "player_key": "331.p.5228",
-                  "player_notes_last_timestamp": 1568837880,
-                  "player_points": {
-                    "coverage_type": "season",
-                    "total": 287.06
-                  },
-                  "player_stats": {
-                    "coverage_type": "season",
-                    "stats": [
-                      {
-                        "stat": {
-                          "stat_id": "4",
-                          "value": "4109"
-                        }
-                      },
-                      ...
-                    ]
-                  },
-                  "position_type": "O",
-                  "primary_position": "QB",
-                  "selected_position": {
-                    "coverage_type": "week",
-                    "is_flex": 0,
-                    "position": "QB",
-                    "week": "16"
-                  },
-                  "uniform_number": "12"
-                }
-              },
-              ...
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "QB",
+                "draft_analysis": {
+                  "average_pick": "65.9",
+                  "average_round": "7.6",
+                  "average_cost": "5.0",
+                  "percent_drafted": "1.00"
+                },
+                "editorial_player_key": "nfl.p.5228",
+                "editorial_team_abbr": "NE",
+                "editorial_team_full_name": "New England Patriots",
+                "editorial_team_key": "nfl.t.17",
+                "eligible_positions": {
+                  "position": "QB"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ
+                    2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Tom",
+                  "ascii_last": "Brady",
+                  "first": "Tom",
+                  "full": "Tom Brady",
+                  "last": "Brady"
+                },
+                "player_id": "5228",
+                "player_key": "331.p.5228",
+                "player_notes_last_timestamp": 1568837880,
+                "player_points": {
+                  "coverage_type": "season",
+                  "total": 287.06
+                },
+                "player_stats": {
+                  "coverage_type": "season",
+                  "stats": [
+                    {
+                      "stat": {
+                        "stat_id": "4",
+                        "value": "4109"
+                      }
+                    },
+                    ...
+                  ]
+                },
+                "position_type": "O",
+                "primary_position": "QB",
+                "selected_position": {
+                  "coverage_type": "week",
+                  "is_flex": 0,
+                  "position": "QB",
+                  "week": "16"
+                },
+                "uniform_number": "12"
+              }),
+              ...,
+              Player({...})
             ]
 
         Returns:
-            list[dict[str, Player]]: List of dictionaries with key = "player" and value = YFPY Player instance
-            containing the keys "draft_analysis", "ownership", "percent_owned", and "player_stats", which each
-            return instances of their respective YFPY objects.
+            list[Player]: List of YFPY Player instances containing attributes "draft_analysis", "ownership",
+                "percent_owned", and "player_stats".
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2322,7 +2288,7 @@ class YahooFantasySportsQuery(object):
         )
 
     def get_team_roster_player_stats_by_week(self, team_id: Union[str, int],
-                                             chosen_week: Union[int, str] = "current") -> List[Dict[str, Player]]:
+                                             chosen_week: Union[int, str] = "current") -> List[Player]:
         """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
 
         Args:
@@ -2336,72 +2302,70 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_roster_player_stats_by_week(1, 1)
             [
-              {
-                "player": {
-                  "bye_weeks": {
-                    "week": "10"
-                  },
-                  "display_position": "QB",
-                  "editorial_player_key": "nfl.p.5228",
-                  "editorial_team_abbr": "NE",
-                  "editorial_team_full_name": "New England Patriots",
-                  "editorial_team_key": "nfl.t.17",
-                  "eligible_positions": {
-                    "position": "QB"
-                  },
-                  "has_player_notes": 1,
-                  "headshot": {
-                    "size": "small",
-                    "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
-                        /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
-                        3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
-                  },
-                  "is_undroppable": "0",
-                  "name": {
-                    "ascii_first": "Tom",
-                    "ascii_last": "Brady",
-                    "first": "Tom",
-                    "full": "Tom Brady",
-                    "last": "Brady"
-                  },
-                  "player_id": "5228",
-                  "player_key": "331.p.5228",
-                  "player_notes_last_timestamp": 1568837880,
-                  "player_points": {
-                    "coverage_type": "week",
-                    "week": "1",
-                    "total": 10.26
-                  },
-                  "player_stats": {
-                    "coverage_type": "week",
-                    "week": "1",
-                    "stats": [
-                      {
-                        "stat": {
-                          "stat_id": "4",
-                          "value": "249"
-                        }
-                      },
-                      ...
-                    ]
-                  },
-                  "position_type": "O",
-                  "primary_position": "QB",
-                  "selected_position": {
-                    "coverage_type": "week",
-                    "is_flex": 0,
-                    "position": "QB",
-                    "week": "1"
-                  },
-                  "uniform_number": "12"
-                }
-              },
-              ...
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "QB",
+                "editorial_player_key": "nfl.p.5228",
+                "editorial_team_abbr": "NE",
+                "editorial_team_full_name": "New England Patriots",
+                "editorial_team_key": "nfl.t.17",
+                "eligible_positions": {
+                  "position": "QB"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url": "https://s.yimg.com/iu/api/res/1.2/_U9UJlrYMsJ22DpA..S3zg--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212019/5228.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Tom",
+                  "ascii_last": "Brady",
+                  "first": "Tom",
+                  "full": "Tom Brady",
+                  "last": "Brady"
+                },
+                "player_id": "5228",
+                "player_key": "331.p.5228",
+                "player_notes_last_timestamp": 1568837880,
+                "player_points": {
+                  "coverage_type": "week",
+                  "week": "1",
+                  "total": 10.26
+                },
+                "player_stats": {
+                  "coverage_type": "week",
+                  "week": "1",
+                  "stats": [
+                    {
+                      "stat": {
+                        "stat_id": "4",
+                        "value": "249"
+                      }
+                    },
+                    ...
+                  ]
+                },
+                "position_type": "O",
+                "primary_position": "QB",
+                "selected_position": {
+                  "coverage_type": "week",
+                  "is_flex": 0,
+                  "position": "QB",
+                  "week": "1"
+                },
+                "uniform_number": "12"
+              }),
+              ...,
+              Player({...})
             ]
 
         Returns:
-            list[dict[str, Player]]: List of dictionaries with key = "player" and value = YFPY Player instance
-            containing the "player_stats" key (returns a YFPY PlayerStats instance).
+            list[Player]: List of YFPY Player instances containing attribute "player_stats".
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2410,7 +2374,7 @@ class YahooFantasySportsQuery(object):
             ["team", "roster", "0", "players"]
         )
 
-    def get_team_draft_results(self, team_id: Union[str, int]) -> List[Dict[str, DraftResult]]:
+    def get_team_draft_results(self, team_id: Union[str, int]) -> List[DraftResult]:
         """Retrieve draft results of specific team by team_id for chosen league.
 
         Args:
@@ -2423,20 +2387,18 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_draft_results(1)
             [
-              {
-                "draft_result": {
-                  "pick": 4,
-                  "round": 1,
-                  "team_key": "331.l.729259.t.1",
-                  "player_key": "331.p.8256"
-                }
-              },
-              ...
+              DraftResult({
+                "pick": 4,
+                "round": 1,
+                "team_key": "331.l.729259.t.1",
+                "player_key": "331.p.8256"
+              }),
+              ...,
+              DraftResults({...})
             ]
 
         Returns:
-            list[dict[str, DraftResult]]: List of dictionaries with key = "draft_result" and value = YFPY DraftResult
-            instance.
+            list[DraftResult]: List of YFPY DraftResult instances.
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2445,7 +2407,7 @@ class YahooFantasySportsQuery(object):
             ["team", "draft_results"]
         )
 
-    def get_team_matchups(self, team_id: Union[str, int]) -> List[Dict[str, Matchup]]:
+    def get_team_matchups(self, team_id: Union[str, int]) -> List[Matchup]:
         """Retrieve matchups of specific team by team_id for chosen league.
 
         Args:
@@ -2458,15 +2420,13 @@ class YahooFantasySportsQuery(object):
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_team_matchups(1)
             [
-                {
-                    "matchup": {
-                        <matchup data> (see get_league_matchups_by_week docstring for matchup data example)
-                    }
-                }
+                Matchup({
+                  <matchup data> (see get_league_matchups_by_week docstring for matchup data example)
+                })
             ]
 
         Returns:
-            list[dict[str, Matchup]]: List of dictionaries with key = "matchup" and value = YFPY Matchup instance.
+            list[Matchup]: List of YFPY Matchup instances.
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
@@ -2488,7 +2448,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_for_season("331.p.7200")
-            {
+            Player({
               "bye_weeks": {
                 "week": "9"
               },
@@ -2537,7 +2497,7 @@ class YahooFantasySportsQuery(object):
               "position_type": "O",
               "primary_position": "QB",
               "uniform_number": "12"
-            }
+            })
 
         Returns:
             Player: YFPY Player instance.
@@ -2573,7 +2533,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_by_week("331.p.7200", 1)
-            {
+            Player({
               "bye_weeks": {
                 "week": "9"
               },
@@ -2624,10 +2584,10 @@ class YahooFantasySportsQuery(object):
               "position_type": "O",
               "primary_position": "QB",
               "uniform_number": "12"
-            }
+            })
 
         Returns:
-            Player: YFPY Player instance containing the "player_stats" key (returns a YFPY PlayerStats instance).
+            Player: YFPY Player instance containing attribute "player_stats".
 
         """
         if limit_to_league_stats:
@@ -2664,7 +2624,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_stats_by_date("nhl.p.4588", "2011-05-01")
-            {
+            Player({
               "display_position": "G",
               "editorial_player_key": "nhl.p.4588",
               "editorial_team_abbr": "Was",
@@ -2741,10 +2701,10 @@ class YahooFantasySportsQuery(object):
               "position_type": "G",
               "primary_position": "G",
               "uniform_number": "70"
-            }
+            })
 
         Returns:
-            Player: YFPY Player instnace containing the "player_stats" key (returns a YFPY PlayerStats instance).
+            Player: YFPY Player instnace containing attribute "player_stats".
 
         """
         if limit_to_league_stats:
@@ -2773,7 +2733,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_ownership("331.p.7200")
-            {
+            Player({
               "bye_weeks": {
                 "week": "9"
               },
@@ -2847,10 +2807,10 @@ class YahooFantasySportsQuery(object):
               "position_type": "O",
               "primary_position": "QB",
               "uniform_number": "12"
-            }
+            })
 
         Returns:
-            Player: YFPY Player instance containing the "ownership" key (returns a YFPY Ownership instance).
+            Player: YFPY Player instance containing attribute "ownership".
 
         """
         return self.query(
@@ -2872,7 +2832,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_percent_owned_by_week("331.p.7200", 1)
-            {
+            Player({
               "bye_weeks": {
                 "week": "9"
               },
@@ -2911,10 +2871,10 @@ class YahooFantasySportsQuery(object):
               "position_type": "O",
               "primary_position": "QB",
               "uniform_number": "12"
-            }
+            })
 
         Returns:
-            Player: YFPY Player instance containing the "percent_owned" key (returns a YFPY PercentOwned instance).
+            Player: YFPY Player instance containing attribute "percent_owned".
 
         """
         return self.query(
@@ -2935,7 +2895,7 @@ class YahooFantasySportsQuery(object):
             >>> from yfpy.query import YahooFantasySportsQuery
             >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######")
             >>> query.get_player_draft_analysis("331.p.7200")
-            {
+            Player({
               "bye_weeks": {
                 "week": "9"
               },
@@ -2974,10 +2934,10 @@ class YahooFantasySportsQuery(object):
               "position_type": "O",
               "primary_position": "QB",
               "uniform_number": "12"
-            }
+            })
 
         Returns:
-            Player: YFPY Player instance containing the "draft_analysis" key (returns a YFPY DraftAnalysis instnace).
+            Player: YFPY Player instance containing attribute "draft_analysis".
 
         """
         return self.query(

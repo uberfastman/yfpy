@@ -37,6 +37,8 @@ import json
 from pathlib import Path, PosixPath
 from typing import Any, Callable, Dict, List, Type, TypeVar, Union
 
+from stringcase import snakecase
+
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
 from yfpy.query import YahooFantasySportsQuery
@@ -137,7 +139,14 @@ class Data(object):
         # save the retrieved data locally
         saved_data_file_path = self.data_dir / f"{file_name}.json"
         with open(saved_data_file_path, "w", encoding="utf-8") as data_file:
-            jsonify_data_to_file(data, data_file)
+            if isinstance(data, list):
+                # unflatten list of object values to list of single-key dictionaries with object values if top level of
+                # data to be saved is a list
+                unnested_data = [{snakecase(el.__class__.__name__): el} for el in data]
+            else:
+                unnested_data = data
+
+            jsonify_data_to_file(unnested_data, data_file)
         logger.debug(f"Data saved locally to: {saved_data_file_path}")
 
         # reset parent YahooFantasySportsQuery all_output_as_json_str = True and re-run query for json string return
@@ -178,6 +187,13 @@ class Data(object):
             with open(saved_data_file_path, "r", encoding="utf-8") as data_file:
                 unpacked = unpack_data(json.load(data_file), YahooFantasyObject)
                 data = data_type_class(unpacked) if data_type_class else unpacked
+
+                if isinstance(data, list):
+                    # flatten list of single-key dictionaries with object values to list of object values if top level
+                    # of loaded data is a list
+                    data_element_key = list(data[0].keys())[0]
+                    data = [el[data_element_key] for el in data]
+
             logger.debug(f"Data loaded locally from: {saved_data_file_path}")
         else:
             raise FileNotFoundError(f"File {saved_data_file_path} does not exist. Cannot load data locally without "
