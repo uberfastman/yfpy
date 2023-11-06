@@ -9,8 +9,11 @@ include requirements.txt
 include dev-requirements.txt
 
 # Include Yahoo Fantasy Sports REST API authentication resources
-include auth/EXAMPLE.private.json
-include auth/EXAMPLE.env
+include auth/private.template.json
+include auth/.env.template
+
+# Include YFPY Docker resources
+include compose.yaml
 
 # Include quickstart resources
 include quickstart/quickstart.py

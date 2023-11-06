@@ -20,12 +20,12 @@ dist/
 test_output/
 
 # Environment
-*.env
+*.env*
+!.env.template
 *.venv
-!EXAMPLE.env
 .python-version
 
 # Credentials
 *private*.json
-!EXAMPLE.private.json
+!private.template.json
 *token*.json

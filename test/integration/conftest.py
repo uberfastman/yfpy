@@ -41,14 +41,14 @@ def yahoo_data(data_dir: Union[Path, str]) -> Data:
 
 
 @pytest.fixture
-def yahoo_query(auth_dir: Union[Path, str], league_id: str, game_id, game_code: str,
+def yahoo_query(auth_dir: Union[Path, str], league_id: str, game_code: str, game_id: int,
                 browser_callback: bool) -> YahooFantasySportsQuery:
     """Instantiate yfpy YahooFantasySportsQuery object and override league key."""
     yahoo_query = YahooFantasySportsQuery(
         auth_dir,
         league_id,
+        game_code,
         game_id=game_id,
-        game_code=game_code,
         offline=False,
         all_output_as_json_str=False,
         consumer_key=os.environ["YFPY_CONSUMER_KEY"],

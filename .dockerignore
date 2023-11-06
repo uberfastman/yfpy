@@ -1,0 +1,25 @@
+# macOS
+**.DS_Store
+
+# JetBrains
+.idea/
+
+# Python
+**__pycache__
+**.pytest_cache
+
+# environment
+**.env*
+!**.env.template*
+.venv
+
+# auth secrets
+**private*.json
+!**private.template.json
+**token*.json
+!**token.template.json
+
+# Docker
+compose*.yaml
+.dockerignore
+docker/Dockerfile
