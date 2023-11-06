@@ -7,7 +7,7 @@ services:
       - PYTHON_VERSION_MINOR=11
       context: .
       dockerfile: docker/Dockerfile
-    image: ghcr.io/uberfastman/yfpy:14.0.0  # DO NOT EDIT IMAGE - VERSIONING CONTROLLED BY GIT TAGS
+    image: ghcr.io/uberfastman/yfpy:15.0.0  # DO NOT EDIT IMAGE - VERSIONING CONTROLLED BY GIT TAGS
     platform: linux/amd64
     environment:
     - RUNTIME_ENVIRONMENT=docker
