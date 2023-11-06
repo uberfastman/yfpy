@@ -71,5 +71,6 @@
    .. autosummary::
    
       ~YahooFantasySportsQuery.YFO
+      ~YahooFantasySportsQuery.runtime_environment_is_docker
    
    

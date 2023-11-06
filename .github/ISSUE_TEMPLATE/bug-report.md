@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: 'Report any bugs, errors, problems, etc. found in the FFMWR app. '
+about: 'Report any bugs, errors, problems, etc. found in YFPY. '
 title: "[Bug] Short Description of Erroneous/Problematic Behavior"
 labels: bug
 assignees: uberfastman
@@ -12,14 +12,14 @@ Please put a longer description of the bug/issue/problem you are encountering he
 
 ## Additional Information as Applicable
 
-#### Fantasy Football Platform
-Yahoo/ESPN/Sleeper/Fleaflicker
-
-#### League ID
+#### Yahoo Fantasy Sports League ID
 XXXXXX...
 
-#### Operating System
-macOS/Windows/Linux
+#### Yahoo Fantasy Sports League Privacy
+Public/Private
+
+#### Operating System/Environment
+macOS/Windows/Linux/Docker/etc.
 
 #### Other
 Any other setup/environment/configuration information you might deem potentially relevant.

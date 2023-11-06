@@ -680,6 +680,8 @@ class Transaction(YahooFantasyObject):
             type (str): The type of the transaction ("add", "drop", "trade", etc.).
         """
         YahooFantasyObject.__init__(self, extracted_data)
+        self.faab_bid: int = self._extracted_data.get("faab_bid", None)
+        self.picks: List[Pick] = self._extracted_data.get("picks", [])
         self.players: List[Player] = self._extracted_data.get("players", [])
         self.status: str = self._extracted_data.get("status", "")
         self.timestamp: int = self._extracted_data.get("timestamp", None)
@@ -690,6 +692,39 @@ class Transaction(YahooFantasyObject):
         self.transaction_id: int = self._extracted_data.get("transaction_id", None)
         self.transaction_key: str = self._extracted_data.get("transaction_key", "")
         self.type: str = self._extracted_data.get("type", "")
+
+
+# noinspection PyUnresolvedReferences
+class Pick(YahooFantasyObject):
+    """Model class for "pick" data key.
+    """
+
+    def __init__(self, extracted_data):
+        """Instantiate the Pick child class of YahooFantasyObject.
+
+        Args:
+            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
+
+        Attributes:
+            destination_team_key (str): Team key in the format <game_key>.l.<league_id>.t.<team_id> of the team
+                receiving the pick in the transaction.
+            destination_team_name (str): Team name of the team receiving the pick in the transaction.
+            original_team_key (str): Team key in the format <game_key>.l.<league_id>.t.<team_id> of the team to which
+                the pick in the transaction originally belonged.
+            original_team_name (str): Team name of the team to which the pick in the transaction originally belonged.
+            round (int): The draft round of the pick in the transaction.
+            source_team_key (str): Team key in the format <game_key>.l.<league_id>.t.<team_id> of the team sending the
+                pick in the transaction.
+            source_team_name (str): Team name of the team sending the pick in the transaction.
+        """
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.destination_team_key: str = self._extracted_data.get("destination_team_key", "")
+        self.destination_team_name: str = self._extracted_data.get("destination_team_name", "")
+        self.original_team_key: str = self._extracted_data.get("original_team_key", "")
+        self.original_team_name: str = self._extracted_data.get("original_team_name", "")
+        self.round: int = self._extracted_data.get("round", None)
+        self.source_team_key: str = self._extracted_data.get("source_team_key", "")
+        self.source_team_name: str = self._extracted_data.get("source_team_name", "")
 
 
 # noinspection PyUnresolvedReferences
