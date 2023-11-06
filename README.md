@@ -91,7 +91,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
-    * Make a copy of [`auth/EXAMPLE.private.json`](https://github.com/uberfastman/yfpy/blob/main/auth/EXAMPLE.private.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
+    * Make a copy of [`auth/private.template.json`](https://github.com/uberfastman/yfpy/blob/main/auth/private.template.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
     * Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.
 
 ---
@@ -113,6 +113,34 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
   * Uncomment/comment out whichever query lines in the `RUN QUERIES` section you wish to run.
   * Uncomment/comment out whichever query lines in the `CHECK FOR MISSING DATA FIELDS` section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.
 
+#### Docker
+
+YFPY can be used within Docker for a more seamless, platform-agnostic experience.
+
+* Build the Docker image:
+    ```shell
+    docker compose build
+    ```
+* Run the Docker container:
+    ```shell
+    docker compose up
+    ``` 
+* You can then run commands in the Docker container in two different ways:
+  * Connect to the running container and run commands from within it:
+    ```shell
+    docker exec -it yfpy-package-1 bash
+    ```
+    Then:
+    ```shell
+    python quickstart/quickstart.py
+    ```
+  * Send commands to the running container from your host machine:
+    ```shell
+    docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"
+    ```
+
+***NOTE***: *If you wish to actively make changes to or develop against YFPY within the Docker container, uncomment the `- .:/opt/yfpy` volume mount in [`compose.yaml`](https://github.com/uberfastman/yfpy/blob/main/compose.yaml) so that any code changes you make in YFPY are reflected inside the running container.* 
+
 ---
 
 <a name="testing"></a>
@@ -127,7 +155,7 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 #### Integration
 
 * See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/main/test/integration/) directory for example code snippets using pytest.
-* Before running any integration tests, make a copy of [`auth/EXAMPLE.env`](https://github.com/uberfastman/yfpy/blob/main/auth/EXAMPLE.env) in the [`auth/`](https://github.com/uberfastman/yfpy/blob/main/auth/) directory and rename it to `.env`.
+* Before running any integration tests, make a copy of [`auth/.env.template`](https://github.com/uberfastman/yfpy/blob/main/auth/.env.template) in the [`auth/`](https://github.com/uberfastman/yfpy/blob/main/auth/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
 * The fixture values in [`test/integration/conftest.py`](https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py) are defined in [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py), and can be changed for testing by uncommenting/commenting out the values inside each respective function.

@@ -1,0 +1,21 @@
+services:
+  package:
+    build:
+      # DO NOT EDIT PYTHON VERSION BUILD ARGUMENTS - VERSIONING CONTROLLED BY GIT TAGS
+      args:
+      - PYTHON_VERSION_MAJOR=3
+      - PYTHON_VERSION_MINOR=11
+      context: .
+      dockerfile: docker/Dockerfile
+    image: ghcr.io/uberfastman/yfpy:15.0.0  # DO NOT EDIT IMAGE - VERSIONING CONTROLLED BY GIT TAGS
+    platform: linux/amd64
+    environment:
+    - RUNTIME_ENVIRONMENT=docker
+    env_file:
+    - ./auth/.env
+    ports:
+    - 5001:5000
+    volumes:
+    - /etc/localtime:/etc/localtime
+    # UNCOMMENT LOCAL CODE REPOSITORY MOUNT BELOW FOR LOCAL CHANGES TO BE REFLECTED WITHIN THE RUNNING DOCKER CONTAINER
+    #- .:/opt/yfpy

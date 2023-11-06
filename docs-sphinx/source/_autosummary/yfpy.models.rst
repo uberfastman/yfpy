@@ -38,6 +38,7 @@
       OutcomeTotals
       Ownership
       PercentOwned
+      Pick
       Player
       PlayerAdvancedStats
       PlayerPoints
