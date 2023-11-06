@@ -6,14 +6,13 @@ __author__ = "Wren J. R. (uberfastman)"
 __email__ = "uberfastman@uberfastman.dev"
 
 import os
+import sys
 from logging import DEBUG
 from pathlib import Path
 
 from dotenv import load_dotenv
 
 project_dir = Path(__file__).parent.parent
-
-import sys
 sys.path.insert(0, str(project_dir))
 
 from yfpy import Data
@@ -41,6 +40,7 @@ data_dir = Path(__file__).parent / "output"
 
 # create YFPY Data instance for saving/loading data
 data = Data(data_dir)
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # VARIABLE SETUP  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
