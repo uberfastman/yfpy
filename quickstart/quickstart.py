@@ -11,6 +11,11 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+project_dir = Path(__file__).parent.parent
+
+import sys
+sys.path.insert(0, str(project_dir))
+
 from yfpy import Data
 from yfpy.logger import get_logger
 from yfpy.query import YahooFantasySportsQuery
@@ -26,10 +31,10 @@ Example vars using public Yahoo leagues still require auth through a personal Ya
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # load .env file in order to read local environment variables
-load_dotenv(dotenv_path=Path(__file__).parent.parent / "auth" / ".env")
+load_dotenv(dotenv_path=project_dir / "auth" / ".env")
 
 # set directory location of private.json for authentication
-auth_dir = Path(__file__).parent.parent / "auth"
+auth_dir = project_dir / "auth"
 
 # set target directory for data output
 data_dir = Path(__file__).parent / "output"
@@ -121,6 +126,7 @@ def get_game_id():
     # HOCKEY
     # game_id = 303  # NHL - 2012
     # game_id = 411  # NHL - 2021
+    # game_id = 427  # NHL - 2023
 
     # BASEBALL
     # game_id = 404  # MLB - 2021
@@ -149,6 +155,7 @@ def get_game_key():
     # HOCKEY
     # game_key = "303"  # NHL - 2012
     # game_key = "411"  # NHL - 2021
+    # game_key = "427"  # NHL - 2023
 
     # BASEBALL
     # game_key = "404"  # MLB - 2021
@@ -173,6 +180,9 @@ def get_league_id():
     # HOCKEY
     # league_id = "69624"  # NHL - 2012
     # league_id = "101592"  # NHL - 2021
+    # league_id = "6546"  # NHL - 2021 (draft pick trading)
+    # league_id = "22827"  # NHL - 2023
+    # league_id = "1031"  # NHL - 2023 (FAAB)
 
     # BASEBALL
     # league_id = "40134"  # MLB - 2021
@@ -247,13 +257,12 @@ league_player_limit = get_league_player_limit()
 yahoo_query = YahooFantasySportsQuery(
     auth_dir,
     league_id,
+    game_code,
     game_id=game_id,
-    game_code=game_code,
     offline=False,
     all_output_as_json_str=False,
     consumer_key=os.environ["YFPY_CONSUMER_KEY"],
-    consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
-    browser_callback=True
+    consumer_secret=os.environ["YFPY_CONSUMER_SECRET"]
 )
 
 # Manually override league key for example code to work

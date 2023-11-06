@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v13.0.0 documentation</title>
+  <title>yfpy.query.YahooFantasySportsQuery &mdash; YFPY v14.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1382d64f"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8c41605e"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v13.0.0
+                v14.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -439,6 +439,24 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.serialized"><code class="docutils literal notranslate"><span class="pre">PercentOwned.serialized()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.subclass_dict"><code class="docutils literal notranslate"><span class="pre">PercentOwned.subclass_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.to_json"><code class="docutils literal notranslate"><span class="pre">PercentOwned.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Pick.html">yfpy.models.Pick</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick"><code class="docutils literal notranslate"><span class="pre">Pick</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.destination_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.destination_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.destination_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.destination_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.original_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.original_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.original_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.original_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.round"><code class="docutils literal notranslate"><span class="pre">Pick.round</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.source_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.source_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.source_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.source_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Pick.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.from_json"><code class="docutils literal notranslate"><span class="pre">Pick.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.serialized"><code class="docutils literal notranslate"><span class="pre">Pick.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.subclass_dict"><code class="docutils literal notranslate"><span class="pre">Pick.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.to_json"><code class="docutils literal notranslate"><span class="pre">Pick.to_json()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -975,7 +993,6 @@
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_code"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_code</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.offline"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.offline</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.all_output_as_json_str"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.all_output_as_json_str</span></code></a></li>
@@ -1441,6 +1458,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#authentication">Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#docker">Docker</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#testing">Testing</a><ul>
@@ -1848,6 +1866,24 @@
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.serialized"><code class="docutils literal notranslate"><span class="pre">PercentOwned.serialized()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.subclass_dict"><code class="docutils literal notranslate"><span class="pre">PercentOwned.subclass_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="yfpy.models.PercentOwned.html#yfpy.models.PercentOwned.to_json"><code class="docutils literal notranslate"><span class="pre">PercentOwned.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="yfpy.models.Pick.html">yfpy.models.Pick</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick"><code class="docutils literal notranslate"><span class="pre">Pick</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.destination_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.destination_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.destination_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.destination_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.original_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.original_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.original_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.original_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.round"><code class="docutils literal notranslate"><span class="pre">Pick.round</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.source_team_key"><code class="docutils literal notranslate"><span class="pre">Pick.source_team_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.source_team_name"><code class="docutils literal notranslate"><span class="pre">Pick.source_team_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.clean_data_dict"><code class="docutils literal notranslate"><span class="pre">Pick.clean_data_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.from_json"><code class="docutils literal notranslate"><span class="pre">Pick.from_json()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.serialized"><code class="docutils literal notranslate"><span class="pre">Pick.serialized()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.subclass_dict"><code class="docutils literal notranslate"><span class="pre">Pick.subclass_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="yfpy.models.Pick.html#yfpy.models.Pick.to_json"><code class="docutils literal notranslate"><span class="pre">Pick.to_json()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -2384,7 +2420,6 @@
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery._backoff"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery._backoff</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.fantasy_content_data_field"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.fantasy_content_data_field</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.league_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.league_id</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_id"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_id</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.game_code"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.game_code</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.offline"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.offline</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#yfpy.query.YahooFantasySportsQuery.all_output_as_json_str"><code class="docutils literal notranslate"><span class="pre">YahooFantasySportsQuery.all_output_as_json_str</span></code></a></li>
@@ -2869,34 +2904,34 @@
 <h1>yfpy.query.YahooFantasySportsQuery<a class="headerlink" href="#yfpy-query-yahoofantasysportsquery" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">YahooFantasySportsQuery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nfl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_output_as_json_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">YahooFantasySportsQuery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">game_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_output_as_json_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yfpy/query.html#YahooFantasySportsQuery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Yahoo Fantasy Sports REST API query CLASS to retrieve all types of fantasy sports data.</p>
 <p>Instantiate a YahooQueryObject for running queries against the Yahoo fantasy REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>auth_dir</strong> (<em>Path</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Location of both private.json (containing Yahoo dev app consumer_key and
+<li><p><strong>auth_dir</strong> (<em>Path</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Location of both private.json (containing Yahoo dev app consumer_key and
 consumer_secret) and token.json (generated by OAuth2 three-legged handshake).</p></li>
-<li><p><strong>league_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – League ID of selected Yahoo Fantasy league.</p></li>
-<li><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Game ID of selected Yahoo fantasy game corresponding to a specific year, and
+<li><p><strong>league_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – League ID of selected Yahoo Fantasy league.</p></li>
+<li><p><strong>game_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Game code of selected Yahoo Fantasy game corresponding to a specific sport (refers to the
+current season if used as the value for game_key), where “nfl” is for fantasy football, “nhl” is for
+fantasy hockey, “mlb” is for fantasy baseball, and “nba” is for fantasy basketball.</p></li>
+<li><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Game ID of selected Yahoo fantasy game corresponding to a specific year, and
 defaulting to the current year.</p></li>
-<li><p><strong>game_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Game code of selected Yahoo Fantasy game corresponding to a specific year,
-and defaulting to “nfl” (fantasy football), “nhl” (fantasy hockey), “mlb” (fantasy baseball), or “nba”
-(fantasy basketball)</p></li>
-<li><p><strong>offline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data
+<li><p><strong>offline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Boolean to run in offline mode (Only works if all needed Yahoo Fantasy data
 has been previously saved locally using the Data module in data.py).</p></li>
-<li><p><strong>all_output_as_json_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Option to automatically convert all query output to JSON
+<li><p><strong>all_output_as_json_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Option to automatically convert all query output to JSON
 strings.</p></li>
-<li><p><strong>consumer_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – User defined consumer key to use instead of values stored in the
+<li><p><strong>consumer_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – User defined consumer key to use instead of values stored in the
 private.json file (must be defined alongside a user defined consumer secret).</p></li>
-<li><p><strong>consumer_secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – User defined consumer secret to use instead of values stored in the
+<li><p><strong>consumer_secret</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – User defined consumer secret to use instead of values stored in the
 private.json file (must be defined alongside a user defined consumer key).</p></li>
-<li><p><strong>browser_callback</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Enable or disable (enabled by default) whether the yahoo-oauth
+<li><p><strong>browser_callback</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Enable or disable (enabled by default) whether the yahoo-oauth
 library automatically opens a browser window to authenticate (if disabled, it will output the callback
 URL).</p></li>
-<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Number of times to retry a query if it fails (defaults to 3).</p></li>
-<li><p><strong>backoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Multiplier that incrementally increases the wait time before retrying a
+<li><p><strong>retries</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Number of times to retry a query if it fails (defaults to 3).</p></li>
+<li><p><strong>backoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Multiplier that incrementally increases the wait time before retrying a
 failed query request.</p></li>
 </ul>
 </dd>
@@ -2920,7 +2955,7 @@ and token.json (generated by OAuth2 three-legged handshake).</p>
 file (must be defined alongside a user defined consumer secret).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2932,7 +2967,7 @@ file (must be defined alongside a user defined consumer secret).</p>
 private.json file (must be defined alongside a user defined consumer key).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2944,7 +2979,7 @@ private.json file (must be defined alongside a user defined consumer key).</p>
 reauthenticate on every access to the Yahoo Fantasy Sports API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2956,7 +2991,7 @@ reauthenticate on every access to the Yahoo Fantasy Sports API.</p>
 automatically opens a browser window to authenticate (if disabled, it will output the callback URL).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2967,7 +3002,7 @@ automatically opens a browser window to authenticate (if disabled, it will outpu
 <dd><p>Number of times to retry a query if it fails (defaults to 3).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2979,7 +3014,7 @@ automatically opens a browser window to authenticate (if disabled, it will outpu
 failed query request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2991,7 +3026,7 @@ failed query request.</p>
 store the data output of the submitted query.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3002,19 +3037,7 @@ store the data output of the submitted query.</p>
 <dd><p>League ID of selected Yahoo Fantasy league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.game_id">
-<span class="sig-name descname"><span class="pre">game_id</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.game_id" title="Permalink to this definition"></a></dt>
-<dd><p>Game ID of selected Yahoo fantasy game corresponding to a specific year, and defaulting to
-the current year.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3022,12 +3045,12 @@ the current year.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="yfpy.query.YahooFantasySportsQuery.game_code">
 <span class="sig-name descname"><span class="pre">game_code</span></span><a class="headerlink" href="#yfpy.query.YahooFantasySportsQuery.game_code" title="Permalink to this definition"></a></dt>
-<dd><p>Game code of selected Yahoo Fantasy game corresponding to a specific year, and defaulting
-to “nfl” (fantasy football), “nhl” (fantasy hockey), “mlb” (fantasy baseball), or “nba” (fantasy
-basketball)</p>
+<dd><p>Game code of selected Yahoo Fantasy game corresponding to a specific sport (refers to the
+current season if used as the value for game_key), where “nfl” is for fantasy football, “nhl” is for
+fantasy hockey, “mlb” is for fantasy baseball, and “nba” is for fantasy basketball.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3039,7 +3062,7 @@ basketball)</p>
 previously saved locally using the Data module in data.py).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3050,7 +3073,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Option to automatically convert all query output to JSON strings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3061,7 +3084,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>The Yahoo Fantasy Sports league key formatted as &lt;game_id&gt;.l.&lt;league_id&gt;.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3072,7 +3095,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>List of completed queries and their responses.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Any]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, Any]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3223,6 +3246,9 @@ previously saved locally using the Data module in data.py).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">YFO</span></code></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">runtime_environment_is_docker</span></code></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py method">
@@ -3257,7 +3283,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY Game instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3269,7 +3295,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_current_game_info</span><span class="p">()</span>
 <span class="go">Game({</span>
 <span class="go">  &quot;code&quot;: &quot;nfl&quot;,</span>
@@ -3344,7 +3370,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_current_game_metadata</span><span class="p">()</span>
 <span class="go">Game({</span>
 <span class="go">  &quot;code&quot;: &quot;nfl&quot;,</span>
@@ -3378,7 +3404,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_current_user</span><span class="p">()</span>
 <span class="go">User({</span>
 <span class="go">  &quot;guid&quot;: &quot;USER_GUID_STRING&quot;</span>
@@ -3401,13 +3427,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve game info for specific game by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_info_by_game_id</span><span class="p">(</span><span class="mi">390</span><span class="p">)</span>
 <span class="go">Game({</span>
 <span class="go">  &quot;code&quot;: &quot;nfl&quot;,</span>
@@ -3481,13 +3507,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve specific game key by season.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>season</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – User defined season/year for which to retrieve the Yahoo Fantasy Sports game.</p>
+<dd class="field-odd"><p><strong>season</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – User defined season/year for which to retrieve the Yahoo Fantasy Sports game.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_key_by_season</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
 <span class="go">338</span>
 </pre></div>
@@ -3497,7 +3523,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>The game key for a Yahoo Fantasy Sports game specified by season.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3508,13 +3534,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve game metadata for specific game by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_metadata_by_game_id</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">Game({</span>
 <span class="go">  &quot;code&quot;: &quot;nfl&quot;,</span>
@@ -3546,13 +3572,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve all valid position types for specific game by ID sorted alphabetically by type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_position_types_by_game_id</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  PositionType({</span>
@@ -3572,7 +3598,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY PositionType instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.PositionType.html#yfpy.models.PositionType" title="yfpy.models.PositionType">PositionType</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.PositionType.html#yfpy.models.PositionType" title="yfpy.models.PositionType">PositionType</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3583,13 +3609,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve all valid roster positions for specific game by ID sorted alphabetically by position.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_roster_positions_by_game_id</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  {RosterPosition({</span>
@@ -3608,7 +3634,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY RosterPosition instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition" title="yfpy.models.RosterPosition">RosterPosition</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.RosterPosition.html#yfpy.models.RosterPosition" title="yfpy.models.RosterPosition">RosterPosition</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3619,13 +3645,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve all valid stat categories of a specific game by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_stat_categories_by_game_id</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">StatCategories({</span>
 <span class="go">  &quot;stats&quot;: [</span>
@@ -3666,13 +3692,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve all valid weeks of a specific game by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
+<dd class="field-odd"><p><strong>game_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Game ID of selected Yahoo Fantasy game corresponding to a specific year.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_game_weeks_by_game_id</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  GameWeek({</span>
@@ -3696,7 +3722,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY GameWeek instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.GameWeek.html#yfpy.models.GameWeek" title="yfpy.models.GameWeek">GameWeek</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.GameWeek.html#yfpy.models.GameWeek" title="yfpy.models.GameWeek">GameWeek</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3708,7 +3734,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_draft_results</span><span class="p">()</span>
 <span class="go">[</span>
 <span class="go">  DraftResult({</span>
@@ -3727,7 +3753,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY DraftResult instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult" title="yfpy.models.DraftResult">DraftResult</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult" title="yfpy.models.DraftResult">DraftResult</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3739,7 +3765,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_info</span><span class="p">()</span>
 <span class="go">League({</span>
 <span class="go">  &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
@@ -3803,13 +3829,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve league key for selected league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>season</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – User defined season/year for which to retrieve the Yahoo Fantasy Sports league key.</p>
+<dd class="field-odd"><p><strong>season</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – User defined season/year for which to retrieve the Yahoo Fantasy Sports league key.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_key</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
 <span class="go">331.l.729259</span>
 </pre></div>
@@ -3819,7 +3845,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>League key string for selected league.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3830,13 +3856,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve matchups for chosen league by week.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p>
+<dd class="field-odd"><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_matchups_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Matchup({</span>
@@ -3890,7 +3916,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY Matchup instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Matchup.html#yfpy.models.Matchup" title="yfpy.models.Matchup">Matchup</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Matchup.html#yfpy.models.Matchup" title="yfpy.models.Matchup">Matchup</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3902,7 +3928,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_metadata</span><span class="p">()</span>
 <span class="go">League({</span>
 <span class="go">  &quot;allow_add_to_dl_extra_pos&quot;: 0,</span>
@@ -3951,16 +3977,16 @@ previously saved locally using the Data module in data.py).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>player_count_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Maximum number of players to retreive.</p></li>
-<li><p><strong>player_count_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Index from which to retrieve all subsequent players.</p></li>
-<li><p><strong>is_retry</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Boolean to indicate whether the method is being retried during error handling.</p></li>
+<li><p><strong>player_count_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Maximum number of players to retreive.</p></li>
+<li><p><strong>player_count_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Index from which to retrieve all subsequent players.</p></li>
+<li><p><strong>is_retry</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Boolean to indicate whether the method is being retried during error handling.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_players</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Player({</span>
@@ -4008,7 +4034,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY Player instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4019,13 +4045,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve scoreboard for chosen league by week.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p>
+<dd class="field-odd"><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_scoreboard_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Scoreboard({</span>
 <span class="go">  &quot;week&quot;: &quot;1&quot;,</span>
@@ -4095,7 +4121,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_settings</span><span class="p">()</span>
 <span class="go">Settings({</span>
 <span class="go">  &quot;cant_cut_list&quot;: &quot;yahoo&quot;,</span>
@@ -4185,7 +4211,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_standings</span><span class="p">()</span>
 <span class="go">Standings({</span>
 <span class="go">  &quot;teams&quot;: [</span>
@@ -4268,7 +4294,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_teams</span><span class="p">()</span>
 <span class="go">[</span>
 <span class="go">  Team({</span>
@@ -4315,7 +4341,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY Team instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team" title="yfpy.models.Team">Team</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Team.html#yfpy.models.Team" title="yfpy.models.Team">Team</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4327,7 +4353,7 @@ previously saved locally using the Data module in data.py).</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_league_transactions</span><span class="p">()</span>
 <span class="go">[</span>
 <span class="go">  Transaction({</span>
@@ -4372,7 +4398,7 @@ previously saved locally using the Data module in data.py).</p>
 <dd class="field-odd"><p>List of YFPY Transaction instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Transaction.html#yfpy.models.Transaction" title="yfpy.models.Transaction">Transaction</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Transaction.html#yfpy.models.Transaction" title="yfpy.models.Transaction">Transaction</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4383,13 +4409,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve draft analysis of specific player by player_key for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p>
+<dd class="field-odd"><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_draft_analysis</span><span class="p">(</span><span class="s2">&quot;331.p.7200&quot;</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;bye_weeks&quot;: {</span>
@@ -4449,13 +4475,13 @@ previously saved locally using the Data module in data.py).</p>
 <dd><p>Retrieve ownership of specific player by player_key for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p>
+<dd class="field-odd"><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_ownership</span><span class="p">(</span><span class="s2">&quot;331.p.7200&quot;</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;bye_weeks&quot;: {</span>
@@ -4551,15 +4577,15 @@ previously saved locally using the Data module in data.py).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_percent_owned_by_week</span><span class="p">(</span><span class="s2">&quot;331.p.7200&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;bye_weeks&quot;: {</span>
@@ -4625,9 +4651,9 @@ This query will FAIL if you pass it an INVALID date string!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
-<li><p><strong>chosen_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</p></li>
-<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
+<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
+<li><p><strong>chosen_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</p></li>
+<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
 selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).</p></li>
 </ul>
 </dd>
@@ -4635,7 +4661,7 @@ selected league. When set to False, query retrieves all player stats for the gam
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_stats_by_date</span><span class="p">(</span><span class="s2">&quot;nhl.p.4588&quot;</span><span class="p">,</span> <span class="s2">&quot;2011-05-01&quot;</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;display_position&quot;: &quot;G&quot;,</span>
@@ -4734,9 +4760,9 @@ selected league. When set to False, query retrieves all player stats for the gam
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
-<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
+<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
 selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).</p></li>
 </ul>
 </dd>
@@ -4744,7 +4770,7 @@ selected league. When set to False, query retrieves all player stats for the gam
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_stats_by_week</span><span class="p">(</span><span class="s2">&quot;331.p.7200&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;bye_weeks&quot;: {</span>
@@ -4817,8 +4843,8 @@ selected league. When set to False, query retrieves all player stats for the gam
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
-<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
+<li><p><strong>player_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The player key of chosen player (example: 331.p.7200 - &lt;game_id&gt;.p.&lt;player_id&gt;).</p></li>
+<li><p><strong>limit_to_league_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Boolean (default: True) to limit the retrieved player stats to those for the
 selected league. When set to False, query retrieves all player stats for the game (NFL, NHL, NBA, MLB).</p></li>
 </ul>
 </dd>
@@ -4826,7 +4852,7 @@ selected league. When set to False, query retrieves all player stats for the gam
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_player_stats_for_season</span><span class="p">(</span><span class="s2">&quot;331.p.7200&quot;</span><span class="p">)</span>
 <span class="go">Player({</span>
 <span class="go">  &quot;bye_weeks&quot;: {</span>
@@ -4896,7 +4922,7 @@ selected league. When set to False, query retrieves all player stats for the gam
 <dd><p>Retrieve Yahoo Fantasy Sports data from the REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – REST API request URL string.</p>
+<dd class="field-odd"><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – REST API request URL string.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>API response from Yahoo Fantasy Sports API request.</p>
@@ -4913,14 +4939,14 @@ selected league. When set to False, query retrieves all player stats for the gam
 <dd><p>Retrieve draft results of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_draft_results</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  DraftResult({</span>
@@ -4939,7 +4965,7 @@ number of teams in the league).</p>
 <dd class="field-odd"><p>List of YFPY DraftResult instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult" title="yfpy.models.DraftResult">DraftResult</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.DraftResult.html#yfpy.models.DraftResult" title="yfpy.models.DraftResult">DraftResult</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4950,14 +4976,14 @@ number of teams in the league).</p>
 <dd><p>Retrieve info of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_info</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Team({</span>
 <span class="go">  &quot;clinched_playoffs&quot;: 1,</span>
@@ -5040,14 +5066,14 @@ number of teams in the league).</p>
 <dd><p>Retrieve matchups of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_matchups</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">    Matchup({</span>
@@ -5061,7 +5087,7 @@ number of teams in the league).</p>
 <dd class="field-odd"><p>List of YFPY Matchup instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Matchup.html#yfpy.models.Matchup" title="yfpy.models.Matchup">Matchup</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Matchup.html#yfpy.models.Matchup" title="yfpy.models.Matchup">Matchup</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5072,14 +5098,14 @@ number of teams in the league).</p>
 <dd><p>Retrieve metadata of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_metadata</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">Team({</span>
 <span class="go">  &quot;team_key&quot;: &quot;331.l.729259.t.1&quot;,</span>
@@ -5133,16 +5159,16 @@ number of teams in the league).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_roster_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">Roster({</span>
 <span class="go">  &quot;coverage_type&quot;: &quot;week&quot;,</span>
@@ -5218,16 +5244,16 @@ This query will FAIL if you pass it an INVALID date string!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
-<li><p><strong>chosen_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</p></li>
+<li><p><strong>chosen_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Selected date for which to retrieve data. REQUIRED FORMAT: YYYY-MM-DD (Ex. 2011-05-01)</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_roster_player_info_by_date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;2011-05-01&quot;</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Player({</span>
@@ -5311,7 +5337,7 @@ number of teams in the league).</p></li>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5323,16 +5349,16 @@ number of teams in the league).</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_roster_player_info_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Player({</span>
@@ -5424,7 +5450,7 @@ number of teams in the league).</p></li>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5435,14 +5461,14 @@ number of teams in the league).</p></li>
 <dd><p>Retrieve roster with ALL player info for the season of specific team by team_id and for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_roster_player_stats</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Player({</span>
@@ -5521,7 +5547,7 @@ number of teams in the league).</p>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5533,16 +5559,16 @@ number of teams in the league).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_roster_player_stats_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  Player({</span>
@@ -5613,7 +5639,7 @@ number of teams in the league).</p></li>
 <dd class="field-odd"><p>List of YFPY Player instances containing attribute “player_stats”.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Player.html#yfpy.models.Player" title="yfpy.models.Player">Player</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5624,14 +5650,14 @@ number of teams in the league).</p></li>
 <dd><p>Retrieve standings of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_standings</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">TeamStandings({</span>
 <span class="go">  &quot;rank&quot;: 2,</span>
@@ -5667,14 +5693,14 @@ number of teams in the league).</p>
 <dd><p>Retrieve stats of specific team by team_id for chosen league.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<dd class="field-odd"><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_stats</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">TeamPoints({</span>
 <span class="go">  &quot;coverage_type&quot;: &quot;season&quot;,</span>
@@ -5700,16 +5726,16 @@ number of teams in the league).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
+<li><p><strong>team_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected team ID for which to retrieva data (can be integers 1 through n where n is the
 number of teams in the league).</p></li>
-<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
+<li><p><strong>chosen_week</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Selected week for which to retrieve data.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_team_stats_by_week</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">{</span>
 <span class="go">  &quot;team_points&quot;: TeamPoints({</span>
@@ -5734,7 +5760,7 @@ number of teams in the league).</p></li>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, <a class="reference internal" href="yfpy.models.TeamPoints.html#yfpy.models.TeamPoints" title="yfpy.models.TeamPoints">TeamPoints</a> | <a class="reference internal" href="yfpy.models.TeamProjectedPoints.html#yfpy.models.TeamProjectedPoints" title="yfpy.models.TeamProjectedPoints">TeamProjectedPoints</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference internal" href="yfpy.models.TeamPoints.html#yfpy.models.TeamPoints" title="yfpy.models.TeamPoints">TeamPoints</a> | <a class="reference internal" href="yfpy.models.TeamProjectedPoints.html#yfpy.models.TeamProjectedPoints" title="yfpy.models.TeamProjectedPoints">TeamProjectedPoints</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5746,7 +5772,7 @@ number of teams in the league).</p></li>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_user_games</span><span class="p">()</span>
 <span class="go">[</span>
 <span class="go">  Game({</span>
@@ -5771,7 +5797,7 @@ number of teams in the league).</p></li>
 <dd class="field-odd"><p>List of YFPY Game instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5782,13 +5808,13 @@ number of teams in the league).</p></li>
 <dd><p>Retrieve league history for current logged-in user for specific game by game IDs/keys sorted by season/year.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>game_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The game_id (int) or game_key (str) for a specific Yahoo Fantasy game.</p>
+<dd class="field-odd"><p><strong>game_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The game_id (int) or game_key (str) for a specific Yahoo Fantasy game.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_user_leagues_by_game_key</span><span class="p">(</span><span class="mi">331</span><span class="p">)</span>
 <span class="go">[</span>
 <span class="go">  League({</span>
@@ -5831,7 +5857,7 @@ number of teams in the league).</p></li>
 <dd class="field-odd"><p>List of YFPY League instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.League.html#yfpy.models.League" title="yfpy.models.League">League</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.League.html#yfpy.models.League" title="yfpy.models.League">League</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5843,7 +5869,7 @@ number of teams in the league).</p></li>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/auth/directory&quot;</span><span class="p">),</span> <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;######&quot;</span><span class="p">,</span> <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">query</span><span class="o">.</span><span class="n">get_user_teams</span><span class="p">()</span>
 <span class="go">[</span>
 <span class="go">  Game({</span>
@@ -5911,7 +5937,7 @@ number of teams in the league).</p></li>
 <dd class="field-odd"><p>List of YFPY Game instances with “teams” attribute containing list of YFPY Team instances.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="yfpy.models.Game.html#yfpy.models.Game" title="yfpy.models.Game">Game</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5923,8 +5949,8 @@ number of teams in the league).</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – REST API request URL string.</p></li>
-<li><p><strong>data_key_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em>) – List of keys used to extract the specific data desired by the
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – REST API request URL string.</p></li>
+<li><p><strong>data_key_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em>) – List of keys used to extract the specific data desired by the
 given query (supports strings and lists of strings). Supports lists containing only key strings such as
 [“game”, “stat_categories”], and also supports lists containing key strings followed by lists of key
 strings such as [“team”, [“team_points”, “team_projected_points”]].</p></li>
@@ -5939,7 +5965,7 @@ results.</p></li>
 and parsed response data.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)">object</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)">object</a></p>
 </dd>
 </dl>
 </dd></dl>
