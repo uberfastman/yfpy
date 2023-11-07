@@ -1,6 +1,6 @@
 services:
   package:
-    image: ghcr.io/uberfastman/yfpy:15.0.0  # DO NOT EDIT IMAGE - VERSIONING CONTROLLED BY GIT TAGS
+    image: ghcr.io/uberfastman/yfpy:15.0.3  # DO NOT EDIT IMAGE - VERSIONING CONTROLLED BY GIT TAGS
     platform: linux/amd64
     environment:
     - RUNTIME_ENVIRONMENT=docker

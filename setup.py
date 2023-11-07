@@ -72,7 +72,7 @@ if docker_compose_build_yaml_file.exists():
     print("Updating \"compose.build.yaml\" with Python version from .env before packaging...")
 
     yaml = YAML(typ="rt")
-    docker_compose_build_yaml = yaml.load(docker_compose_yaml_file)
+    docker_compose_build_yaml = yaml.load(docker_compose_build_yaml_file)
 
     updated_build_args = []
     for build_arg in docker_compose_build_yaml["services"]["package"]["build"]["args"]:
@@ -85,7 +85,7 @@ if docker_compose_build_yaml_file.exists():
     docker_compose_build_yaml["services"]["package"]["build"]["args"] = updated_build_args
 
     yaml.default_flow_style = False
-    yaml.dump(docker_compose_build_yaml, docker_compose_yaml_file)
+    yaml.dump(docker_compose_build_yaml, docker_compose_build_yaml_file)
 
 setuptools.setup(
     name="yfpy",
