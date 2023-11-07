@@ -1,0 +1,9 @@
+services:
+  package:
+    build:
+      # DO NOT EDIT PYTHON VERSION BUILD ARGUMENTS - VERSIONING CONTROLLED BY GIT TAGS
+      args:
+        - PYTHON_VERSION_MAJOR=3
+        - PYTHON_VERSION_MINOR=10
+      context: .
+      dockerfile: docker/Dockerfile
