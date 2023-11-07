@@ -111,24 +111,29 @@
     make -C docs-sphinx deploy
     ```
 
-19. *(If needed)* Authenticate with GitHub Personal Access Token (PAT):
-     ```shell
-     jq -r .github_personal_access_token.value auth/github/private.json | docker login ghcr.io -u uberfastman --password-stdin
-     ```
+19. Build Docker container:
+    ```shell
+    docker compose -f compose.yaml -f compose.build.yaml build
+    ```
 
-20. Deploy the newly-built Docker image with respective major, minor, and patch version numbers to the GitHub Container Registry:
-     ```shell
-     docker push ghcr.io/uberfastman/yfpy:X.X.X
-     ```
+20. *(If needed)* Authenticate with GitHub Personal Access Token (PAT):
+    ```shell
+    jq -r .github_personal_access_token.value auth/github/private.json | docker login ghcr.io -u uberfastman --password-stdin
+    ```
 
-21. Create a second git commit with updated version number and documentation:
+21. Deploy the newly-built Docker image with respective major, minor, and patch version numbers to the GitHub Container Registry:
+    ```shell
+    docker push ghcr.io/uberfastman/yfpy:X.X.X
+    ```
+
+22. Create a second git commit with updated version number and documentation:
 
     ```shell
     git add .
     git commit -m 'update version number and docs'
     ```
 
-22. Update YFPY GitHub repository:
+23. Update YFPY GitHub repository:
 
     ```shell
     git push

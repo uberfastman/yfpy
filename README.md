@@ -117,11 +117,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
 
 YFPY can be used within Docker for a more seamless, platform-agnostic experience.
 
-* Build the Docker image:
-    ```shell
-    docker compose build
-    ```
-* Run the Docker container:
+* Run the Docker container (pulls the YFPY Docker image from GitHub Package Registry):
     ```shell
     docker compose up
     ``` 
