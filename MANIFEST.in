@@ -14,6 +14,7 @@ include auth/.env.template
 
 # Include YFPY Docker resources
 include compose.yaml
+include compose.dev.yaml
 
 # Include quickstart resources
 include quickstart/quickstart.py
