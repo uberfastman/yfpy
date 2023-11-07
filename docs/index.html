@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v15.0.1 documentation</title>
+  <title>YFPY - Yahoo Fantasy Sports API Wrapper &mdash; YFPY v15.0.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=d549db01"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e2b1516b"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -40,7 +40,7 @@
               <img src="_static/yfpy-logo.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                v15.0.1
+                v15.0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -1457,7 +1457,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker-development-optional">Docker Development (optional)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-image-deployment">Docker Image Deployment</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a><ul>
@@ -3062,9 +3066,22 @@
 </ul>
 </li>
 </ul>
-<p><em><strong>NOTE</strong></em>: <em>If you wish to actively make changes to or develop against YFPY within the Docker container, uncomment the <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">.:/opt/yfpy</span></code> volume mount in <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/compose.yaml"><code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code></a> so that any code changes you make in YFPY are reflected inside the running container.</em></p>
+<section id="docker-development-optional">
+<h4>Docker Development (optional)<a class="headerlink" href="#docker-development-optional" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Run the Docker container for local development (mount all local code into container):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>compose.yaml<span class="w"> </span>-f<span class="w"> </span>compose.dev.yaml<span class="w"> </span>up
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="docker-image-deployment">
+<h4>Docker Image Deployment<a class="headerlink" href="#docker-image-deployment" title="Permalink to this heading"></a></h4>
+<p>See <a class="reference external" href="https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md">DEPLOYMENT.md</a> for Docker image deployment.</p>
 <hr class="docutils" />
 <p><a name="testing"></a></p>
+</section>
 </section>
 </section>
 <section id="testing">
