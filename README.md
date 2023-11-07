@@ -139,7 +139,16 @@ YFPY can be used within Docker for a more seamless, platform-agnostic experience
     docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"
     ```
 
-***NOTE***: *If you wish to actively make changes to or develop against YFPY within the Docker container, uncomment the `- .:/opt/yfpy` volume mount in [`compose.yaml`](https://github.com/uberfastman/yfpy/blob/main/compose.yaml) so that any code changes you make in YFPY are reflected inside the running container.* 
+##### Docker Development (optional)
+
+* Run the Docker container for local development (mount all local code into container):
+    ```shell
+    docker compose -f compose.yaml -f compose.dev.yaml up
+    ```
+  
+##### Docker Image Deployment
+
+See [DEPLOYMENT.md](https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md) for Docker image deployment.
 
 ---
 

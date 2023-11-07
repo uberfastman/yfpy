@@ -17,5 +17,3 @@ services:
     - 5001:5000
     volumes:
     - /etc/localtime:/etc/localtime
-    # UNCOMMENT LOCAL CODE REPOSITORY MOUNT BELOW FOR LOCAL CHANGES TO BE REFLECTED WITHIN THE RUNNING DOCKER CONTAINER
-    #- .:/opt/yfpy

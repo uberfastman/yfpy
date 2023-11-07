@@ -1,0 +1,4 @@
+services:
+  package:
+    volumes:
+    - .:/opt/yfpy

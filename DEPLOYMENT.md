@@ -77,14 +77,24 @@
     make -C docs-sphinx open_local_docs
     ```
 
-14. Create a git commit:
+14. Authenticate with GitHub Personal Access Token (PAT):
+     ```shell
+     jq -r .github_personal_access_token.value auth/github/private.json | docker login ghcr.io -u uberfastman --password-stdin
+     ```
+
+15. Deploy the newly-built Docker image with respective major, minor, and patch version numbers to the GitHub Container Registry:
+     ```shell
+     docker push ghcr.io/uberfastman/yfpy:X.X.X
+     ```
+
+16. Create a git commit:
 
     ```shell
     git add .
     git commit -m 'commit message'
     ```
 
-15. Update the git tag with the new version:
+17. Update the git tag with the new version:
 
     `git tag -a [tag_name/version] -m [message]`
 
@@ -93,32 +103,32 @@
     git push origin --tags
     ```
     
-16. Install `twine` (if not already installed):
+18. Install `twine` (if not already installed):
 
     ```shell
     pip install twine
     ```
     
-17. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
+19. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
 
     ```shell
     make -C docs-sphinx test_deploy
     ```
 
-18. Deploy YFPY by building the PyPI packages, recreating the Sphinx documentation, and deploying to PyPI:
+20. Deploy YFPY by building the PyPI packages, recreating the Sphinx documentation, and deploying to PyPI:
 
     ```shell
     make -C docs-sphinx deploy
     ```
 
-19. Create a second git commit with updated version number and documentation:
+21. Create a second git commit with updated version number and documentation:
 
     ```shell
     git add .
     git commit -m 'update version number and docs'
     ```
 
-20. Update YFPY GitHub repository:
+22. Update YFPY GitHub repository:
 
     ```shell
     git push
