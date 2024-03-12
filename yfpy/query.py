@@ -261,8 +261,9 @@ class YahooFantasySportsQuery(object):
         """
         if not self.offline:
             response = self.get_response(url)
+            breakpoint()
             raw_response_data = response.json().get(self.fantasy_content_data_field)
-
+            breakpoint()
             # iterate through list of data keys and drill down to final desired data field
             for i in range(len(data_key_list)):
                 if isinstance(raw_response_data, list):
@@ -286,9 +287,10 @@ class YahooFantasySportsQuery(object):
             if raw_response_data:
                 logger.debug(f"Response (Yahoo fantasy data extracted from: {data_key_list}): {raw_response_data}")
             else:
-                error_msg = f"No data found when attempting extraction from fields: {data_key_list}"
+                breakpoint()
+                error_msg = f"PP poopoo attempting extraction from fields: {data_key_list}"
                 logger.error(error_msg)
-                raise YahooFantasySportsDataNotFound(error_msg, payload=data_key_list, url=response.url)
+                return None
 
             # unpack, parse, and assign data types to all retrieved data content
             unpacked = unpack_data(raw_response_data, YahooFantasyObject)
@@ -1306,7 +1308,279 @@ class YahooFantasySportsQuery(object):
             ["league", "teams"]
         )
 
+    # def get_league_players(self, player_count_limit: int = None, player_count_start: int = 0,
+    #                        is_retry: bool = False) -> List[Player]:
+    #     """Retrieve valid players for chosen league.
+
+    #     Args:
+    #         player_count_limit (int): Maximum number of players to retreive.
+    #         player_count_start (int): Index from which to retrieve all subsequent players.
+    #         is_retry (bool): Boolean to indicate whether the method is being retried during error handling.
+
+    #     Examples:
+    #         >>> from pathlib import Path
+    #         >>> from yfpy.query import YahooFantasySportsQuery
+    #         >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######", game_code="nfl")
+    #         >>> query.get_league_players(50, 25)
+    #         [
+    #           Player({
+    #             "bye_weeks": {
+    #               "week": "10"
+    #             },
+    #             "display_position": "K",
+    #             "editorial_player_key": "nfl.p.3727",
+    #             "editorial_team_abbr": "Ind",
+    #             "editorial_team_full_name": "Indianapolis Colts",
+    #             "editorial_team_key": "nfl.t.11",
+    #             "eligible_positions": {
+    #               "position": "K"
+    #             },
+    #             "has_player_notes": 1,
+    #             "headshot": {
+    #               "size": "small",
+    #               "url":
+    #                 "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
+    #                 /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+    #                 3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
+    #             },
+    #             "is_undroppable": "0",
+    #             "name": {
+    #               "ascii_first": "Adam",
+    #               "ascii_last": "Vinatieri",
+    #               "first": "Adam",
+    #               "full": "Adam Vinatieri",
+    #               "last": "Vinatieri"
+    #             },
+    #             "player_id": "3727",
+    #             "player_key": "331.p.3727",
+    #             "player_notes_last_timestamp": 1568758320,
+    #             "position_type": "K",
+    #             "primary_position": "K",
+    #             "uniform_number": "4"
+    #           }),
+    #           ...,
+    #           Player({...})
+    #         ]
+
+    #     Returns:
+    #         list[Player]: List of YFPY Player instances.
+
+    #     """
+    #     league_player_count = player_count_start
+    #     all_players_retrieved = False
+    #     league_player_data = []
+    #     league_player_retrieval_limit = 25
+    #     while not all_players_retrieved:
+
+    #         try:
+    #             league_player_query_data = self.query(
+    #                 f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
+    #                 f"start={league_player_count};count={league_player_retrieval_limit if not is_retry else 1}",
+    #                 ["league", "players"]
+    #             )
+
+    #             league_players = (league_player_query_data if isinstance(league_player_query_data, list) else
+    #                               [league_player_query_data])
+    #             league_player_count_from_query = len(league_players)
+
+    #             if player_count_limit:
+    #                 if (league_player_count + league_player_count_from_query) < player_count_limit:
+    #                     league_player_count += league_player_count_from_query
+    #                     league_player_data.extend(league_players)
+
+    #                 else:
+    #                     for ndx in range(player_count_limit - league_player_count):
+    #                         league_player_data.append(league_players[ndx])
+    #                     league_player_count += (player_count_limit - league_player_count)
+    #                     all_players_retrieved = True
+
+    #             else:
+    #                 league_player_count += league_player_count_from_query
+    #                 league_player_data.extend(league_players)
+
+    #         except YahooFantasySportsDataNotFound as yfpy_err:
+    #             if not is_retry:
+    #                 payload = yfpy_err.payload
+    #                 if payload:
+    #                     logger.debug("No more league player data available.")
+    #                     all_players_retrieved = True
+    #                 else:
+    #                     logger.warning(
+    #                         f"Error retrieving player batch: "
+    #                         f"{league_player_count}-{league_player_count + league_player_retrieval_limit - 1}. "
+    #                         f"Attempting to retrieve individual players from batch.")
+
+    #                     player_retrieval_successes = []
+    #                     player_retrieval_failures = []
+    #                     for i in range(25):
+    #                         try:
+    #                             player_data = self.get_league_players(
+    #                                 player_count_limit=league_player_count + 1,
+    #                                 player_count_start=league_player_count,
+    #                                 is_retry=True
+    #                             )
+    #                             player_retrieval_successes.extend(player_data)
+
+    #                         except YahooFantasySportsDataNotFound as nested_yfpy_err:
+    #                             player_retrieval_failures.append(
+    #                                 {
+    #                                     "failed_player_retrieval_index": league_player_count,
+    #                                     "failed_player_retrieval_url": nested_yfpy_err.url,
+    #                                     "failed_player_retrieval_message": nested_yfpy_err.message
+    #                                 }
+    #                             )
+
+    #                         league_player_count += 1
+
+    #                     league_player_data.extend(player_retrieval_successes)
+    #                     logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
+
+    #             else:
+    #                 raise yfpy_err
+
+    #         logger.debug(f"League player count: {league_player_count}")
+
+    #     return league_player_data
+    
+    
     def get_league_players(self, player_count_limit: int = None, player_count_start: int = 0,
+                           is_retry: bool = False) -> List[Player]:
+        """Retrieve valid players for chosen league.
+
+        Args:
+            player_count_limit (int): Maximum number of players to retreive.
+            player_count_start (int): Index from which to retrieve all subsequent players.
+            is_retry (bool): Boolean to indicate whether the method is being retried during error handling.
+
+        Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
+            >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######", game_code="nfl")
+            >>> query.get_league_players(50, 25)
+            [
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "K",
+                "editorial_player_key": "nfl.p.3727",
+                "editorial_team_abbr": "Ind",
+                "editorial_team_full_name": "Indianapolis Colts",
+                "editorial_team_key": "nfl.t.11",
+                "eligible_positions": {
+                  "position": "K"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url":
+                    "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Adam",
+                  "ascii_last": "Vinatieri",
+                  "first": "Adam",
+                  "full": "Adam Vinatieri",
+                  "last": "Vinatieri"
+                },
+                "player_id": "3727",
+                "player_key": "331.p.3727",
+                "player_notes_last_timestamp": 1568758320,
+                "position_type": "K",
+                "primary_position": "K",
+                "uniform_number": "4"
+              }),
+              ...,
+              Player({...})
+            ]
+
+        Returns:
+            list[Player]: List of YFPY Player instances.
+
+        """
+        league_player_count = player_count_start
+        test_var = 'abc'
+        all_players_retrieved = False
+        league_player_data = []
+        league_player_retrieval_limit = 25
+        while not all_players_retrieved:
+
+            try:
+                league_player_query_data = self.query(
+                    f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;",
+                    f"start={league_player_count};count={league_player_retrieval_limit if not is_retry else 1}",
+                    ["league", "players"]
+                )
+
+                league_players = (league_player_query_data if isinstance(league_player_query_data, list) else
+                                  [league_player_query_data])
+                league_player_count_from_query = len(league_players)
+
+                if player_count_limit:
+                    if (league_player_count + league_player_count_from_query) < player_count_limit:
+                        league_player_count += league_player_count_from_query
+                        league_player_data.extend(league_players)
+
+                    else:
+                        for ndx in range(player_count_limit - league_player_count):
+                            league_player_data.append(league_players[ndx])
+                        league_player_count += (player_count_limit - league_player_count)
+                        all_players_retrieved = True
+
+                else:
+                    league_player_count += league_player_count_from_query
+                    league_player_data.extend(league_players)
+                    breakpoint()
+
+            except YahooFantasySportsDataNotFound as yfpy_err:
+                breakpoint()
+                if not is_retry:
+                    payload = yfpy_err.payload
+                    if payload:
+                        logger.debug("No more league player data available.")
+                        all_players_retrieved = True
+                    else:
+                        logger.warning(
+                            f"Error retrieving player batch: "
+                            f"{league_player_count}-{league_player_count + league_player_retrieval_limit - 1}. "
+                            f"Attempting to retrieve individual players from batch.")
+
+                        player_retrieval_successes = []
+                        player_retrieval_failures = []
+                        for i in range(25):
+                            try:
+                                player_data = self.get_league_players(
+                                    player_count_limit=league_player_count + 1,
+                                    player_count_start=league_player_count,
+                                    is_retry=True
+                                )
+                                player_retrieval_successes.extend(player_data)
+
+                            except YahooFantasySportsDataNotFound as nested_yfpy_err:
+                                player_retrieval_failures.append(
+                                    {
+                                        "failed_player_retrieval_index": league_player_count,
+                                        "failed_player_retrieval_url": nested_yfpy_err.url,
+                                        "failed_player_retrieval_message": nested_yfpy_err.message
+                                    }
+                                )
+
+                            league_player_count += 1
+
+                        league_player_data.extend(player_retrieval_successes)
+                        logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
+
+                else:
+                    raise yfpy_err
+
+            logger.debug(f"League player count: {league_player_count}")
+
+        return league_player_data
+
+    def get_all_available_players(self, player_count_limit: int = None, player_count_start: int = 0,
                            is_retry: bool = False) -> List[Player]:
         """Retrieve valid players for chosen league.
 
@@ -1373,7 +1647,7 @@ class YahooFantasySportsQuery(object):
             try:
                 league_player_query_data = self.query(
                     f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
-                    f"start={league_player_count};count={league_player_retrieval_limit if not is_retry else 1}",
+                    f"start={league_player_count};count={league_player_retrieval_limit if not is_retry else 1};status=A",
                     ["league", "players"]
                 )
 
@@ -1440,6 +1714,141 @@ class YahooFantasySportsQuery(object):
 
         return league_player_data
 
+    def get_all_available_pitchers(self, player_count_limit: int = None, player_count_start: int = 0,
+                           is_retry: bool = False) -> List[Player]:
+        """Retrieve valid players for chosen league.
+
+        Args:
+            player_count_limit (int): Maximum number of players to retreive.
+            player_count_start (int): Index from which to retrieve all subsequent players.
+            is_retry (bool): Boolean to indicate whether the method is being retried during error handling.
+
+        Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
+            >>> query = YahooFantasySportsQuery(Path("/path/to/auth/directory"), league_id="######", game_code="nfl")
+            >>> query.get_league_players(50, 25)
+            [
+              Player({
+                "bye_weeks": {
+                  "week": "10"
+                },
+                "display_position": "K",
+                "editorial_player_key": "nfl.p.3727",
+                "editorial_team_abbr": "Ind",
+                "editorial_team_full_name": "Indianapolis Colts",
+                "editorial_team_key": "nfl.t.11",
+                "eligible_positions": {
+                  "position": "K"
+                },
+                "has_player_notes": 1,
+                "headshot": {
+                  "size": "small",
+                  "url":
+                    "https://s.yimg.com/iu/api/res/1.2/OpHvpCHjl_PQvkeQUgsjsA--~C
+                    /YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt
+                    3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08152019/3727.png"
+                },
+                "is_undroppable": "0",
+                "name": {
+                  "ascii_first": "Adam",
+                  "ascii_last": "Vinatieri",
+                  "first": "Adam",
+                  "full": "Adam Vinatieri",
+                  "last": "Vinatieri"
+                },
+                "player_id": "3727",
+                "player_key": "331.p.3727",
+                "player_notes_last_timestamp": 1568758320,
+                "position_type": "K",
+                "primary_position": "K",
+                "uniform_number": "4"
+              }),
+              ...,
+              Player({...})
+            ]
+
+        Returns:
+            list[Player]: List of YFPY Player instances.
+
+        """
+        league_player_count = player_count_start
+        all_players_retrieved = False
+        league_player_data = []
+        league_player_retrieval_limit = 25
+        while not all_players_retrieved:
+
+            try:
+                league_player_query_data = self.query(
+                    f"https://fantasysports.yahooapis.com/fantasy/v2/league/{self.get_league_key()}/players;"
+                    f"start={league_player_count};count={league_player_retrieval_limit if not is_retry else 1};status=A;position=SP",
+                    ["league", "players"]
+                )
+
+                league_players = (league_player_query_data if isinstance(league_player_query_data, list) else
+                                  [league_player_query_data])
+                league_player_count_from_query = len(league_players)
+
+                if player_count_limit:
+                    if (league_player_count + league_player_count_from_query) < player_count_limit:
+                        league_player_count += league_player_count_from_query
+                        league_player_data.extend(league_players)
+
+                    else:
+                        for ndx in range(player_count_limit - league_player_count):
+                            league_player_data.append(league_players[ndx])
+                        league_player_count += (player_count_limit - league_player_count)
+                        all_players_retrieved = True
+
+                else:
+                    league_player_count += league_player_count_from_query
+                    league_player_data.extend(league_players)
+
+            except YahooFantasySportsDataNotFound as yfpy_err:
+                if not is_retry:
+                    payload = yfpy_err.payload
+                    if payload:
+                        logger.debug("No more league player data available.")
+                        all_players_retrieved = True
+                    else:
+                        logger.warning(
+                            f"Error retrieving player batch: "
+                            f"{league_player_count}-{league_player_count + league_player_retrieval_limit - 1}. "
+                            f"Attempting to retrieve individual players from batch.")
+
+                        player_retrieval_successes = []
+                        player_retrieval_failures = []
+                        for i in range(25):
+                            try:
+                                player_data = self.get_league_players(
+                                    player_count_limit=league_player_count + 1,
+                                    player_count_start=league_player_count,
+                                    is_retry=True
+                                )
+                                player_retrieval_successes.extend(player_data)
+
+                            except YahooFantasySportsDataNotFound as nested_yfpy_err:
+                                player_retrieval_failures.append(
+                                    {
+                                        "failed_player_retrieval_index": league_player_count,
+                                        "failed_player_retrieval_url": nested_yfpy_err.url,
+                                        "failed_player_retrieval_message": nested_yfpy_err.message
+                                    }
+                                )
+
+                            league_player_count += 1
+
+                        league_player_data.extend(player_retrieval_successes)
+                        logger.warning(f"Players retrieval failures:\n{prettify_data(player_retrieval_failures)}")
+
+                else:
+                    raise yfpy_err
+
+            logger.debug(f"League player count: {league_player_count}")
+
+        return league_player_data
+      
+      
     def get_league_draft_results(self) -> List[DraftResult]:
         """Retrieve draft results for chosen league.
 
