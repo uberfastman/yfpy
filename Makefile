@@ -23,14 +23,14 @@ docs: version ## Build MkDocs documentation for distribution.
 pages: docs ## Prepare documentation in /docs directory for GitHub Pages.
 	python docs-mkdocs/scripts/update_docs_for_github_pages.py
 
-build: pages ## Build PyPI packages for distribution.
+build: ## Build PyPI packages for distribution.
 	cd ${HOME}/Projects/personal/yfpy; python setup.py sdist bdist_wheel
 
 verify_build: ## Check PyPI packages for issues.
 	twine check dist/*
 
-test_deploy: pages ## Deploy PyPI packages to Test PyPI.
+test_deploy: build pages ## Deploy PyPI packages to Test PyPI.
 	twine upload -r testpypi dist/*
 
-deploy: pages ## Deploy PyPI packages to PyPI.
+deploy: build pages ## Deploy PyPI packages to PyPI.
 	twine upload dist/*
