@@ -1,0 +1,26 @@
+
+/* CSS for readthedocs theme */
+
+/* remove duplicate module nav item on the top of each module members list */
+body > div.wy-grid-for-nav > nav > div > div.wy-menu.wy-menu-vertical > ul.current > li.toctree-l1.current > ul > li:nth-child(1) > a {
+    display: none;
+}
+
+/* CSS for snippet version of README.md */
+
+/* hide YFPY logo */
+body > div.wy-grid-for-nav > section > div > div > div.document > div > p:nth-child(1) {
+    display: none;
+}
+
+/* hide "read the docs here" section */
+body > div.wy-grid-for-nav > section > div > div > div.document > div > p:nth-child(13) {
+    display: none;
+}
+
+/* hide in-line TOC (title, table of contents, and horizontal line) */
+#table-of-contents,
+body > div.wy-grid-for-nav > section > div > div > div.document > div > ul:nth-child(15),
+body > div.wy-grid-for-nav > section > div > div > div.document > div > hr:nth-child(16) {
+    display: none;
+}

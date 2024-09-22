@@ -6,7 +6,6 @@ Note:
 
 Attributes:
     logger (Logger): Game data integration tests logger.
-    env_path (Path): Path to the local .env file used to set environment variables at runtime.
 
 """
 __author__ = "Wren J. R. (uberfastman)"
@@ -14,10 +13,8 @@ __email__ = "uberfastman@uberfastman.dev"
 
 import logging
 import warnings
-from pathlib import Path
 
 import pytest
-from dotenv import load_dotenv
 
 from yfpy.logger import get_logger
 from yfpy.models import User
@@ -31,13 +28,14 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 # Ignore resource warnings from unittest module
 warnings.simplefilter("ignore", ResourceWarning)
 
-# load .env file in order to read local environment variables
-load_dotenv(dotenv_path=Path(__file__).parent.parent.parent / "auth" / ".env")
-
 
 @pytest.mark.integration
 def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
-    """Retrieve metadata for current logged-in user.
+    """Integration test for retrieval of metadata for current logged-in Yahoo user.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_current_user`.
+
     """
     new_data_dir = data_dir
     query_result_data = yahoo_data.save("user", yahoo_query.get_current_user, new_data_dir=new_data_dir)
@@ -58,7 +56,11 @@ def test_get_current_user(yahoo_query, yahoo_data, data_dir, season, game_id, sh
 
 @pytest.mark.integration
 def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
-    """Retrieve game history for current logged-in user.
+    """Integration test for retrieval of game history for current logged-in Yahoo user.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_user_games`.
+
     """
     new_data_dir = data_dir
     query_result_data = yahoo_data.save(
@@ -85,7 +87,11 @@ def test_get_user_games(yahoo_query, yahoo_data, data_dir, season, game_id, show
 )
 @pytest.mark.integration
 def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
-    """Retrieve league history for current logged-in user for specific game by id.
+    """Integration test for retrieval of league history by game ID for current logged-in Yahoo user.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_user_leagues_by_game_key`.
+
     """
     new_data_dir = data_dir
     query_result_data = yahoo_data.save(
@@ -111,6 +117,12 @@ def test_get_user_leagues_by_game_id(yahoo_query, yahoo_data, data_dir, season, 
 
 @pytest.mark.integration
 def test_get_user_teams(yahoo_query, yahoo_data, data_dir, season, game_id, show_log_output):
+    """Integration test for retrieval of teams for the current game for the current logged-in Yahoo user.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_user_teams`.
+
+    """
     """Retrieve teams for all leagues for current logged-in user for current game.
     """
     new_data_dir = data_dir

@@ -5,6 +5,6 @@ services:
     environment:
     - RUNTIME_ENVIRONMENT=docker
     env_file:
-    - ./auth/.env
+    - ./.env
     volumes:
     - /etc/localtime:/etc/localtime  # sync container timezone with host

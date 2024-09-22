@@ -9,7 +9,7 @@ import pytest
 
 
 @pytest.fixture
-def show_log_output():
+def show_log_output() -> bool:
     """Turn on/off example code stdout logging output.
 
     Returns:

@@ -6,7 +6,6 @@ Note:
 
 Attributes:
     logger (Logger): Game data integration tests logger.
-    env_path (Path): Path to the local .env file used to set environment variables at runtime.
 
 """
 __author__ = "Wren J. R. (uberfastman)"
@@ -14,10 +13,8 @@ __email__ = "uberfastman@uberfastman.dev"
 
 import logging
 import warnings
-from pathlib import Path
 
 import pytest
-from dotenv import load_dotenv
 
 from yfpy.logger import get_logger
 from yfpy.models import Player
@@ -31,14 +28,15 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 # Ignore resource warnings from unittest module
 warnings.simplefilter("ignore", ResourceWarning)
 
-# load .env file in order to read local environment variables
-load_dotenv(dotenv_path=Path(__file__).parent.parent.parent / "auth" / ".env")
-
 
 @pytest.mark.integration
 def test_get_player_stats_for_season(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, player_id,
                                      player_key, show_log_output):
-    """Retrieve stats of specific player by player_key for season for chosen league.
+    """Integration test for retrieval of player stats by season for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_stats_for_season`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
     query_result_data = yahoo_data.save(
@@ -65,7 +63,11 @@ def test_get_player_stats_for_season(yahoo_query, yahoo_data, data_dir, season, 
 @pytest.mark.integration
 def test_get_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id,
                                   player_id, player_key, show_log_output):
-    """Retrieve stats of specific player by player_key and by week for chosen league.
+    """Integration test for retrieval of player stats by week for chosen Yahoo fantasy league..
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_stats_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "players"
     query_result_data = yahoo_data.save(
@@ -95,7 +97,11 @@ def test_get_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, cho
 @pytest.mark.integration
 def test_get_player_stats_by_date(yahoo_query, yahoo_data, data_dir, season, chosen_date, game_id, league_id,
                                   player_id, player_key, show_log_output):
-    """Retrieve stats of specific player by player_key and by date for chosen league.
+    """Integration test for retrieval of player stats by date for Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_stats_by_date`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / str(chosen_date) / "players"
     query_result_data = yahoo_data.save(
@@ -122,7 +128,11 @@ def test_get_player_stats_by_date(yahoo_query, yahoo_data, data_dir, season, cho
 @pytest.mark.integration
 def test_get_player_ownership(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, player_id, player_key,
                               show_log_output):
-    """Retrieve ownership of specific player by player_key for chosen league.
+    """Integration test for retrieval of ownership of chosen player for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_ownership`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
     query_result_data = yahoo_data.save(
@@ -149,7 +159,11 @@ def test_get_player_ownership(yahoo_query, yahoo_data, data_dir, season, game_id
 @pytest.mark.integration
 def test_get_player_percent_owned_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id,
                                           player_id, player_key, show_log_output):
-    """Retrieve percent-owned of specific player by player_key and by week for chosen league.
+    """Integration test for retrieval of percent ownership by week of chosen player for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_percent_owned_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "players"
     query_result_data = yahoo_data.save(
@@ -176,7 +190,11 @@ def test_get_player_percent_owned_by_week(yahoo_query, yahoo_data, data_dir, sea
 @pytest.mark.integration
 def test_get_player_draft_analysis(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, player_id,
                                    player_key, show_log_output):
-    """Retrieve draft analysis of specific player by player_key for chosen league.
+    """Integration test for retrieval of player draft analysis of chosen player for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_draft_analysis`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "players"
     query_result_data = yahoo_data.save(

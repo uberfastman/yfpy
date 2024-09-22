@@ -7,17 +7,15 @@ data can be done in one place without the need to manually run the queries and m
 Example:
     The Data module can be used as follows::
 
-        auth_directory = Path(__file__).parent / "auth"
         yahoo_query = YahooFantasySportsQuery(
-            auth_directory,
             "<league_id>",
+            "<game_code>",
             game_id="<game_key>",
-            game_code="<game_code>",
-            offline=False,
+            yahoo_consumer_key=os.environ.get("YFPY_CONSUMER_KEY"),
+            yahoo_consumer_secret=os.environ.get("YFPY_CONSUMER_SECRET"),
             all_output_as_json_str=False,
-            consumer_key=os.environ["YFPY_CONSUMER_KEY"],
-            consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
-            browser_callback=True
+            browser_callback=True,
+            offline=False
         )
 
         data_directory = Path(__file__).parent / "output"

@@ -14,7 +14,7 @@ __email__ = "uberfastman@uberfastman.dev"
 
 import os
 from operator import getitem
-from typing import Union, Any, List, Dict, Type
+from typing import Union, Any, List, Dict, Type, Optional
 
 from stringcase import snakecase
 
@@ -216,7 +216,7 @@ class YahooFantasyObject(object):
         return jsonify_data(self.serialized())
 
     @classmethod
-    def from_json(cls, json_data: Dict):
+    def from_json(cls, json_data: Dict) -> object:
         """Deserialize JSON to a class object.
 
         Returns:
@@ -290,10 +290,10 @@ class Game(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.code: str = self._extracted_data.get("code", "")
-        self.contest_group_id: int = self._extracted_data.get("contest_group_id", None)
-        self.current_week: int = self._extracted_data.get("current_week", None)
-        self.editorial_season: int = self._extracted_data.get("editorial_season", None)
-        self.game_id: int = self._extracted_data.get("game_id", None)
+        self.contest_group_id: Optional[int] = self._extracted_data.get("contest_group_id", None)
+        self.current_week: Optional[int] = self._extracted_data.get("current_week", None)
+        self.editorial_season: Optional[int] = self._extracted_data.get("editorial_season", None)
+        self.game_id: Optional[int] = self._extracted_data.get("game_id", None)
         self.game_key: str = self._convert_to_string("game_key")  # convert to string to handle leading zeros
         self.game_weeks: List[GameWeek] = self._extracted_data.get("game_weeks", [])
         self.has_schedule: int = self._extracted_data.get("has_schedule", 0)
@@ -310,7 +310,7 @@ class Game(YahooFantasyObject):
         self.position_types: List[PositionType] = self._extracted_data.get("position_types", [])
         self.roster_positions: List[RosterPosition] = self._extracted_data.get("roster_positions", [])
         self.scenario_generator: int = self._extracted_data.get("scenario_generator", 0)
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.stat_categories: StatCategories = self._extracted_data.get("stat_categories", StatCategories({}))
         self.teams: List[Team] = self._extracted_data.get("teams", [])
         self.type: str = self._extracted_data.get("type", "")
@@ -339,7 +339,7 @@ class GameWeek(YahooFantasyObject):
         self.display_name: str = self._extracted_data.get("display_name", "")
         self.end: str = self._extracted_data.get("end", "")
         self.start: str = self._extracted_data.get("start", "")
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -426,13 +426,13 @@ class League(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.allow_add_to_dl_extra_pos: int = self._extracted_data.get("allow_add_to_dl_extra_pos", 0)
-        self.current_week: int = self._extracted_data.get("current_week", None)
+        self.current_week: Optional[int] = self._extracted_data.get("current_week", None)
         self.draft_results: List[DraftResult] = self._extracted_data.get("draft_results", [])
         self.draft_status: str = self._extracted_data.get("draft_status", "")
         self.display_name: str = self._extracted_data.get("display_name", "")
-        self.edit_key: int = self._extracted_data.get("edit_key", None)
+        self.edit_key: Optional[int] = self._extracted_data.get("edit_key", None)
         self.end_date: str = self._extracted_data.get("end_date", "")
-        self.end_week: str = self._extracted_data.get("end_week", None)
+        self.end_week: Optional[str] = self._extracted_data.get("end_week", None)
         self.entry_fee: str = self._extracted_data.get("entry_fee", "")
         self.felo_tier: str = self._extracted_data.get("felo_tier", "")
         self.game_code: str = self._extracted_data.get("game_code", "")
@@ -444,7 +444,7 @@ class League(YahooFantasyObject):
         self.league_id: str = self._convert_to_string("league_id")  # convert to string to handle leading zeros
         self.league_key: str = self._extracted_data.get("league_key", "")
         self.league_type: str = self._extracted_data.get("league_type", "")
-        self.league_update_timestamp: int = self._extracted_data.get("league_update_timestamp", None)
+        self.league_update_timestamp: Optional[int] = self._extracted_data.get("league_update_timestamp", None)
         self.logo_url: str = self._extracted_data.get("logo_url", "")
         self.name: bytes = self._extracted_data.get("name", "").encode("utf-8")  # support special characters
         self.num_teams: int = self._extracted_data.get("num_teams", 0)
@@ -456,12 +456,12 @@ class League(YahooFantasyObject):
         self.scoreboard: Scoreboard = self._extracted_data.get("scoreboard", Scoreboard({}))
         self.matchups: List[Matchup] = self._get_nested_value(self.scoreboard, "matchups", [])
         self.scoring_type: str = self._extracted_data.get("scoring_type", "")
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.settings: Settings = self._extracted_data.get("settings", Settings({}))
         self.short_invitation_url: str = self._extracted_data.get("short_invitation_url", "")
         self.standings: Standings = self._extracted_data.get("standings", Standings({}))
         self.start_date: str = self._extracted_data.get("start_date", "")
-        self.start_week: int = self._extracted_data.get("start_week", None)
+        self.start_week: Optional[int] = self._extracted_data.get("start_week", None)
         self.teams: List[Team] = self._extracted_data.get("teams", [])
         self.teams_ordered_by_standings: List[Team] = self._get_nested_value(self.standings, "teams", [])
         self.transactions: List[Transaction] = self._extracted_data.get("transactions", [])
@@ -555,15 +555,15 @@ class Team(YahooFantasyObject):
         self.champion_pick: str = self._extracted_data.get("champion_pick", "")
         self.champion_status: str = self._extracted_data.get("champion_status", "")
         self.clinched_playoffs: int = self._extracted_data.get("clinched_playoffs", 0)
-        self.division_id: int = self._extracted_data.get("division_id", None)
-        self.done_week: str = self._extracted_data.get("done_week", None)
+        self.division_id: Optional[int] = self._extracted_data.get("division_id", None)
+        self.done_week: Optional[str] = self._extracted_data.get("done_week", None)
         self.draft_grade: str = self._extracted_data.get("draft_grade", "")
-        self.draft_position: int = self._extracted_data.get("draft_position", None)
+        self.draft_position: Optional[int] = self._extracted_data.get("draft_position", None)
         self.draft_recap_url: str = self._extracted_data.get("draft_recap_url", "")
         self.draft_results: List[DraftResult] = self._extracted_data.get("draft_results", [])
-        self.elimination_week: int = self._extracted_data.get("elimination_week", None)
+        self.elimination_week: Optional[int] = self._extracted_data.get("elimination_week", None)
         self.email_address: str = self._extracted_data.get("email_address", "")
-        self.faab_balance: int = self._extracted_data.get("faab_balance", None)
+        self.faab_balance: Optional[int] = self._extracted_data.get("faab_balance", None)
         self.has_draft_grade: int = self._extracted_data.get("has_draft_grade", 0)
         self.is_in_contest: int = self._extracted_data.get("is_in_contest", 0)
         self.is_owned_by_current_login: int = self._extracted_data.get("is_owned_by_current_login", 0)
@@ -580,7 +580,7 @@ class Team(YahooFantasyObject):
         self.players: List[Player] = self._get_nested_value(self.roster, "players", [])
         self.roster_adds: RosterAdds = self._extracted_data.get("roster_adds", RosterAdds({}))
         self.roster_adds_value: int = self._get_nested_value(self.roster_adds, "value", 0)
-        self.team_id: int = self._extracted_data.get("team_id", None)
+        self.team_id: Optional[int] = self._extracted_data.get("team_id", None)
         self.team_key: str = self._extracted_data.get("team_key", "")
         self.team_logo: str = self._extracted_data.get("team_logo", "")
         self.team_logos: List[TeamLogo] = self._extracted_data.get("team_logos", [])
@@ -608,7 +608,7 @@ class Team(YahooFantasyObject):
         self.url: str = self._extracted_data.get("url", "")
         self.user_display_name: str = self._extracted_data.get("user_display_name", "")
         self.user_profile_image: str = self._extracted_data.get("user_profile_image", "")
-        self.waiver_priority: int = self._extracted_data.get("waiver_priority", None)
+        self.waiver_priority: Optional[int] = self._extracted_data.get("waiver_priority", None)
         self.win_probability: float = self._get_nested_value(self._extracted_data, "win_probability", 0.0, float)
 
 
@@ -631,9 +631,9 @@ class DraftResult(YahooFantasyObject):
             player_key (str): The Yahoo player key of the player that was drafted.
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.cost: int = self._extracted_data.get("cost", None)
-        self.pick: int = self._extracted_data.get("pick", None)
-        self.round: int = self._extracted_data.get("round", None)
+        self.cost: Optional[int] = self._extracted_data.get("cost", None)
+        self.pick: Optional[int] = self._extracted_data.get("pick", None)
+        self.round: Optional[int] = self._extracted_data.get("round", None)
         self.team_key: str = self._extracted_data.get("team_key", "")
         self.player_key: str = self._extracted_data.get("player_key", "")
 
@@ -680,16 +680,16 @@ class Transaction(YahooFantasyObject):
             type (str): The type of the transaction ("add", "drop", "trade", etc.).
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.faab_bid: int = self._extracted_data.get("faab_bid", None)
+        self.faab_bid: Optional[int] = self._extracted_data.get("faab_bid", None)
         self.picks: List[Pick] = self._extracted_data.get("picks", [])
         self.players: List[Player] = self._extracted_data.get("players", [])
         self.status: str = self._extracted_data.get("status", "")
-        self.timestamp: int = self._extracted_data.get("timestamp", None)
+        self.timestamp: Optional[int] = self._extracted_data.get("timestamp", None)
         self.tradee_team_key: str = self._extracted_data.get("tradee_team_key", "")
         self.tradee_team_name: str = self._extracted_data.get("tradee_team_name", "")
         self.trader_team_key: str = self._extracted_data.get("trader_team_key", "")
         self.trader_team_name: str = self._extracted_data.get("trader_team_name", "")
-        self.transaction_id: int = self._extracted_data.get("transaction_id", None)
+        self.transaction_id: Optional[int] = self._extracted_data.get("transaction_id", None)
         self.transaction_key: str = self._extracted_data.get("transaction_key", "")
         self.type: str = self._extracted_data.get("type", "")
 
@@ -722,7 +722,7 @@ class Pick(YahooFantasyObject):
         self.destination_team_name: str = self._extracted_data.get("destination_team_name", "")
         self.original_team_key: str = self._extracted_data.get("original_team_key", "")
         self.original_team_name: str = self._extracted_data.get("original_team_name", "")
-        self.round: int = self._extracted_data.get("round", None)
+        self.round: Optional[int] = self._extracted_data.get("round", None)
         self.source_team_key: str = self._extracted_data.get("source_team_key", "")
         self.source_team_name: str = self._extracted_data.get("source_team_name", "")
 
@@ -762,14 +762,14 @@ class Manager(YahooFantasyObject):
         self.email: str = self._extracted_data.get("email", "")
         self.emails: List[str] = self._extracted_data.get("emails", [])
         self.fantasy_profile_url: str = self._extracted_data.get("fantasy_profile_url", "")
-        self.felo_score: int = self._extracted_data.get("felo_score", None)
+        self.felo_score: Optional[int] = self._extracted_data.get("felo_score", None)
         self.felo_tier: str = self._extracted_data.get("felo_tier", "")
         self.guid: str = self._extracted_data.get("guid", "")
         self.image_url: str = self._extracted_data.get("image_url", "")
         self.is_comanager: int = self._extracted_data.get("is_comanager", 0)
         self.is_commissioner: int = self._extracted_data.get("is_comanager", 0)
         self.is_current_login: int = self._extracted_data.get("is_current_login", 0)
-        self.manager_id: int = self._extracted_data.get("manager_id", None)
+        self.manager_id: Optional[int] = self._extracted_data.get("manager_id", None)
         self.nickname: str = self._extracted_data.get("nickname", "")
         self.profile_image_url: str = self._extracted_data.get("profile_image_url", "")
 
@@ -789,12 +789,14 @@ class Roster(YahooFantasyObject):
             coverage_type (str): The timeframe for the selected roster ("week", "date", "season", etc.).
             week (int): The week number.
             is_editable (int): Numeric boolean (0 or 1) representing if the roster is editable.
+            is_prescoring (int): Numeric boolean (0 or 1) representing if the roster is in a prescoring state.
             players (list[Player]): A list of YFPY Player instances.
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
         self.is_editable: int = self._extracted_data.get("is_editable", 0)
+        self.is_prescoring: int = self._extracted_data.get("is_prescoring", 0)  # TODO: what does prescoring mean?
         self.players: List[Player] = self._extracted_data.get("players", [])
 
 
@@ -859,9 +861,9 @@ class TeamPoints(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.total: float = self._get_nested_value(self._extracted_data, "total", 0.0, float)
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -883,7 +885,7 @@ class TeamProjectedPoints(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
         self.total: float = self._get_nested_value(self._extracted_data, "total", 0.0, float)
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -913,7 +915,7 @@ class TeamStandings(YahooFantasyObject):
         self.playoff_seed: int = self._extracted_data.get("playoff_seed", 0)
         self.points_against: float = self._get_nested_value(self._extracted_data, "points_against", 0.0, float)
         self.points_for: float = self._get_nested_value(self._extracted_data, "points_for", 0.0, float)
-        self.rank: int = self._extracted_data.get("rank", None)
+        self.rank: Optional[int] = self._extracted_data.get("rank", None)
         self.streak: Streak = self._extracted_data.get("streak", Streak({}))
 
 
@@ -1000,7 +1002,7 @@ class Scoreboard(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.matchups: List[Matchup] = self._extracted_data.get("matchups", [])
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection DuplicatedCode, PyUnresolvedReferences
@@ -1027,9 +1029,12 @@ class Settings(YahooFantasyObject):
             has_playoff_consolation_games (bool): Numeric boolean (0 or 1) representing if the league has a consolation
                 playoff bracket.
             is_auction_draft (int): Numeric boolean (0 or 1) representing if the league uses an auction draft.
+            league_premium_features (List): List of features enables as part of subscription to Yahoo Fantasy Plus or
+                Yahoo Fantasy Commissioner Plus.
             max_teams (int): The maximum number of teams allowed in the league.
             num_playoff_consolation_teams (int): The number of teams that make the consolation playoff bracket.
             num_playoff_teams (int): The number of teams that make the playoffs.
+            persistent_url (str): Custom URL configured for the league that remains the same every season.
             pickem_enabled (int): Numeric boolean (0 or 1) representing if the league has enabled the built-in Yahoo
                 "pick 'em" game that allows managers to pick winners of each fantasy matchup each week in the league.
             player_pool (str): Value designating what player pool is allowed for the league ("ALL", etc.).
@@ -1061,19 +1066,22 @@ class Settings(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.cant_cut_list: int = self._extracted_data.get("cant_cut_list", 0)
         self.divisions: List[Division] = self._extracted_data.get("divisions", [])
-        self.draft_pick_time: int = self._extracted_data.get("draft_pick_time", None)
-        self.draft_time: int = self._extracted_data.get("draft_time", None)
+        self.draft_pick_time: Optional[int] = self._extracted_data.get("draft_pick_time", None)
+        self.draft_time: Optional[int] = self._extracted_data.get("draft_time", None)
         self.draft_together: int = self._extracted_data.get("draft_together", 0)
         self.draft_type: str = self._extracted_data.get("draft_type", "")
         self.has_multiweek_championship: int = self._extracted_data.get("has_multiweek_championship", 0)
         self.has_playoff_consolation_games: int = self._extracted_data.get("has_playoff_consolation_games", 0)
         self.is_auction_draft: int = self._extracted_data.get("is_auction_draft", 0)
-        self.max_teams: int = self._extracted_data.get("max_teams", None)
-        self.num_playoff_consolation_teams: int = self._extracted_data.get("num_playoff_consolation_teams", None)
-        self.num_playoff_teams: int = self._extracted_data.get("num_playoff_teams", None)
+        self.league_premium_features: List = self._extracted_data.get("league_premium_features", [])  # TODO: features?
+        self.max_teams: Optional[int] = self._extracted_data.get("max_teams", None)
+        self.num_playoff_consolation_teams: Optional[int] = self._extracted_data.get("num_playoff_consolation_teams",
+                                                                                     None)
+        self.num_playoff_teams: Optional[int] = self._extracted_data.get("num_playoff_teams", None)
+        self.persistent_url: Optional[str] = self._extracted_data.get("persistent_url", None)
         self.pickem_enabled: int = self._extracted_data.get("pickem_enabled", 0)
         self.player_pool: str = self._extracted_data.get("player_pool", "")
-        self.playoff_start_week: int = self._extracted_data.get("playoff_start_week", None)
+        self.playoff_start_week: Optional[int] = self._extracted_data.get("playoff_start_week", None)
         self.post_draft_players: str = self._extracted_data.get("post_draft_players", "")
         self.roster_positions: List[RosterPosition] = self._extracted_data.get("roster_positions", [])
         self.scoring_type: str = self._extracted_data.get("scoring_type", "")
@@ -1082,7 +1090,7 @@ class Settings(YahooFantasyObject):
         self.stat_modifiers: StatModifiers = self._extracted_data.get("stat_modifiers", StatModifiers({}))
         self.trade_end_date: str = self._extracted_data.get("trade_end_date", "")
         self.trade_ratify_type: str = self._extracted_data.get("trade_ratify_type", "")
-        self.trade_reject_time: int = self._extracted_data.get("trade_reject_time", None)
+        self.trade_reject_time: Optional[int] = self._extracted_data.get("trade_reject_time", None)
         self.uses_faab: int = self._extracted_data.get("uses_faab", 0)
         self.uses_fractional_points: int = self._extracted_data.get("uses_fractional_points", 0)
         self.uses_lock_eliminated_teams: int = self._extracted_data.get("uses_lock_eliminated_teams", 0)
@@ -1091,7 +1099,7 @@ class Settings(YahooFantasyObject):
         self.uses_playoff: int = self._extracted_data.get("uses_playoff", 0)
         self.uses_playoff_reseeding: int = self._extracted_data.get("uses_playoff_reseeding", 0)
         self.waiver_rule: str = self._extracted_data.get("waiver_rule", "")
-        self.waiver_time: int = self._extracted_data.get("waiver_time", None)
+        self.waiver_time: Optional[int] = self._extracted_data.get("waiver_time", None)
         self.waiver_type: str = self._extracted_data.get("waiver_type", "")
 
 
@@ -1111,7 +1119,7 @@ class Division(YahooFantasyObject):
             name (str): The division name.
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.division_id: int = self._extracted_data.get("division_id", None)
+        self.division_id: Optional[int] = self._extracted_data.get("division_id", None)
         self.name: str = self._extracted_data.get("name", "")
 
 
@@ -1247,7 +1255,7 @@ class Stat(YahooFantasyObject):
         self.position_type: str = self._extracted_data.get("position_type", "")
         self.position_types: List[PositionType] = self._extracted_data.get("position_types", [])
         self.sort_order: int = self._extracted_data.get("sort_order", 0)
-        self.stat_id: int = self._extracted_data.get("stat_id", None)
+        self.stat_id: Optional[int] = self._extracted_data.get("stat_id", None)
         self.stat_position_types: List[PositionType] = self._extracted_data.get("position_types", [])
         self.value: float = self._get_nested_value(self._extracted_data, "value", 0.0, float)
 
@@ -1290,7 +1298,7 @@ class Bonus(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.points: float = self._get_nested_value(self._extracted_data, "points", 0.0, float)
-        self.target: int = self._extracted_data.get("target", None)
+        self.target: Optional[int] = self._extracted_data.get("target", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -1329,7 +1337,7 @@ class Matchup(YahooFantasyObject):
         self.matchup_recap_url: str = self._extracted_data.get("matchup_recap_url", "")
         self.status: str = self._extracted_data.get("status", "")
         self.teams: List[Team] = self._extracted_data.get("teams", [])
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
         self.week_end: str = self._extracted_data.get("week_end", "")
         self.week_start: str = self._extracted_data.get("week_start", "")
         self.winner_team_key: str = self._extracted_data.get("winner_team_key", "")
@@ -1383,6 +1391,7 @@ class Player(YahooFantasyObject):
             editorial_team_url (str): The direct URL of the professional team for which the player plays on Yahoo
                 Sports.
             eligible_positions (list[str]): A list of positions for which the player is eligible.
+            eligible_positions_to_add (list[str]): A list of positions for which the player can have eligibility added.
             has_player_notes (int): Numeric boolean (0 or 1) representing if the player has any notes.
             has_recent_player_notes (int): Numeric boolean (0 or 1) representing if the player has any recent notes.
             headshot (Headshot): A YFPY Headshot instance.
@@ -1443,6 +1452,7 @@ class Player(YahooFantasyObject):
                     self.eligible_positions.append(position)
         elif isinstance(eligible_positions, str):
             self.eligible_positions.append(eligible_positions)
+        self.eligible_positions_to_add: List[str] = self._extracted_data.get("eligible_positions_to_add", [])
         self.has_player_notes: int = self._extracted_data.get("has_player_notes", 0)
         self.has_recent_player_notes: int = self._extracted_data.get("has_recent_player_notes", 0)
         self.headshot: Headshot = self._extracted_data.get("headshot", Headshot({}))
@@ -1462,9 +1472,9 @@ class Player(YahooFantasyObject):
         self.percent_owned_value: float = self._get_nested_value(self.percent_owned, "value", 0.0, float)
         self.player_advanced_stats: PlayerAdvancedStats = self._extracted_data.get("player_advanced_stats",
                                                                                    PlayerAdvancedStats({}))
-        self.player_id: int = self._extracted_data.get("player_id", None)
+        self.player_id: Optional[int] = self._extracted_data.get("player_id", None)
         self.player_key: str = self._extracted_data.get("player_key", "")
-        self.player_notes_last_timestamp: int = self._extracted_data.get("player_notes_last_timestamp", None)
+        self.player_notes_last_timestamp: Optional[int] = self._extracted_data.get("player_notes_last_timestamp", None)
         self.player_points: PlayerPoints = self._extracted_data.get("player_points", PlayerPoints({}))
         self.player_points_value: float = self._get_nested_value(self.player_points, "total", 0.0, float)
         self.player_stats: PlayerStats = self._extracted_data.get("player_stats", PlayerStats({}))
@@ -1478,7 +1488,7 @@ class Player(YahooFantasyObject):
         self.status_full: str = self._extracted_data.get("status_full", "")
         self.transaction_data: TransactionData = self._extracted_data.get("transaction_data",
                                                                           TransactionData({}))
-        self.uniform_number: int = self._extracted_data.get("uniform_number", None)
+        self.uniform_number: Optional[int] = self._extracted_data.get("uniform_number", None)
         self.url: str = self._extracted_data.get("url", "")
 
 
@@ -1497,7 +1507,7 @@ class ByeWeeks(YahooFantasyObject):
             week (int): The week number that the player is on bye.
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -1606,7 +1616,7 @@ class Ownership(YahooFantasyObject):
             waiver_date (str): The date the player went on waivers (when applicable).
         """
         YahooFantasyObject.__init__(self, extracted_data)
-        self.display_date: int = self._extracted_data.get("display_date", None)
+        self.display_date: Optional[int] = self._extracted_data.get("display_date", None)
         self.ownership_type: str = self._extracted_data.get("ownership_type", "")
         self.owner_team_key: str = self._extracted_data.get("owner_team_key", "")
         self.owner_team_name: str = self._extracted_data.get("owner_team_name", "")
@@ -1634,7 +1644,7 @@ class PercentOwned(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
         self.value: int = self._get_nested_value(self._extracted_data, "value", 0, int)
         self.delta: float = self._get_nested_value(self._extracted_data, "delta", 0.0, float)
 
@@ -1658,9 +1668,9 @@ class PlayerAdvancedStats(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.stats: List[Stat] = self._extracted_data.get("stats", [])
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -1682,9 +1692,9 @@ class PlayerPoints(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.total: float = self._get_nested_value(self._extracted_data, "total", 0.0, float)
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -1708,9 +1718,9 @@ class PlayerStats(YahooFantasyObject):
         YahooFantasyObject.__init__(self, extracted_data)
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
         self.date: str = self._extracted_data.get("date", "")
-        self.season: int = self._extracted_data.get("season", None)
+        self.season: Optional[int] = self._extracted_data.get("season", None)
         self.stats: List[Stat] = self._extracted_data.get("stats", [])
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences
@@ -1736,7 +1746,7 @@ class SelectedPosition(YahooFantasyObject):
         self.date: str = self._extracted_data.get("date", "")
         self.is_flex: int = self._extracted_data.get("is_flex", 0)
         self.position: str = self._extracted_data.get("position", "")
-        self.week: int = self._extracted_data.get("week", None)
+        self.week: Optional[int] = self._extracted_data.get("week", None)
 
 
 # noinspection PyUnresolvedReferences

@@ -6,7 +6,6 @@ Note:
 
 Attributes:
     logger (Logger): Game data integration tests logger.
-    env_path (Path): Path to the local .env file used to set environment variables at runtime.
 
 """
 __author__ = "Wren J. R. (uberfastman)"
@@ -14,10 +13,8 @@ __email__ = "uberfastman@uberfastman.dev"
 
 import logging
 import warnings
-from pathlib import Path
 
 import pytest
-from dotenv import load_dotenv
 
 from yfpy.logger import get_logger
 from yfpy.models import Team, TeamPoints, TeamStandings, Roster
@@ -31,14 +28,15 @@ logging.getLogger("yfpy.query").setLevel(level=logging.INFO)
 # Ignore resource warnings from unittest module
 warnings.simplefilter("ignore", ResourceWarning)
 
-# load .env file in order to read local environment variables
-load_dotenv(dotenv_path=Path(__file__).parent.parent.parent / "auth" / ".env")
-
 
 @pytest.mark.integration
 def test_get_team_info(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                        show_log_output):
-    """Retrieve info of specific team by team_id for chosen league.
+    """Integration test for retrieval of info for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_info`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(
@@ -65,7 +63,11 @@ def test_get_team_info(yahoo_query, yahoo_data, data_dir, season, game_id, leagu
 @pytest.mark.integration
 def test_get_team_metadata(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                            show_log_output):
-    """Retrieve metadata of specific team by team_id for chosen league.
+    """Integration test for retrieval of metadata for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_metadata`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(
@@ -92,7 +94,11 @@ def test_get_team_metadata(yahoo_query, yahoo_data, data_dir, season, game_id, l
 @pytest.mark.integration
 def test_get_team_stats(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                         show_log_output):
-    """Retrieve stats of specific team by team_id for chosen league.
+    """Integration test for retrieval of stats for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_stats`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(
@@ -119,7 +125,11 @@ def test_get_team_stats(yahoo_query, yahoo_data, data_dir, season, game_id, leag
 @pytest.mark.integration
 def test_get_team_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id, team_id,
                                 team_name, show_log_output):
-    """Retrieve stats of specific team by team_id and by week for chosen league.
+    """Integration test for retrieval of stats for chosen team by team ID and by week for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_stats_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}"
     query_result_data = yahoo_data.save(
@@ -145,7 +155,11 @@ def test_get_team_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chose
 @pytest.mark.integration
 def test_get_team_standings(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                             show_log_output):
-    """Retrieve standings of specific team by team_id for chosen league.
+    """Integration test for retrieval of standings for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_standings`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(
@@ -172,7 +186,11 @@ def test_get_team_standings(yahoo_query, yahoo_data, data_dir, season, game_id, 
 @pytest.mark.integration
 def test_get_team_roster_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id, team_id,
                                  team_name, show_log_output):
-    """Retrieve roster of specific team by team_id and by week for chosen league.
+    """Integration test for retrieval of roster for chosen team by team ID and by week for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_roster_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "rosters"
     query_result_data = yahoo_data.save(
@@ -199,7 +217,12 @@ def test_get_team_roster_by_week(yahoo_query, yahoo_data, data_dir, season, chos
 @pytest.mark.integration
 def test_get_team_roster_player_info_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id,
                                              league_id, team_id, team_name, show_log_output):
-    """Retrieve roster with player info of specific team by team_id and by week for chosen league.
+    """Integration test for retrieval of roster with player info for chosen team by team ID and by week for chosen Yahoo
+    fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "rosters"
     query_result_data = yahoo_data.save(
@@ -228,7 +251,12 @@ def test_get_team_roster_player_info_by_week(yahoo_query, yahoo_data, data_dir, 
 @pytest.mark.integration
 def test_get_team_roster_player_info_by_date(yahoo_query, yahoo_data, data_dir, season, chosen_date, game_id,
                                              league_id, team_id, team_name, show_log_output):
-    """Retrieve roster with player info of specific team by team_id and by date for chosen league.
+    """Integration test for retrieval of roster with player info for chosen team by team ID and by date for chosen Yahoo
+    fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_roster_player_info_by_date`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / str(chosen_date) / "rosters"
     query_result_data = yahoo_data.save(
@@ -254,7 +282,12 @@ def test_get_team_roster_player_info_by_date(yahoo_query, yahoo_data, data_dir, 
 @pytest.mark.integration
 def test_get_team_roster_player_stats(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id,
                                       team_name, show_log_output):
-    """Retrieve roster with player info for season of specific team by team_id for chosen league.
+    """Integration test for retrieval of roster with player info for chosen team by team ID and for chosen season for
+    chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "rosters"
     query_result_data = yahoo_data.save(
@@ -280,7 +313,12 @@ def test_get_team_roster_player_stats(yahoo_query, yahoo_data, data_dir, season,
 @pytest.mark.integration
 def test_get_team_roster_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id,
                                               league_id, team_id, team_name, show_log_output):
-    """Retrieve roster with player stats of specific team by team_id and by week for chosen league.
+    """Integration test for retrieval of roster with player info for chosen team by team ID and by week for chosen Yahoo
+    fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_roster_player_stats_by_week`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / f"week_{chosen_week}" / "rosters"
     query_result_data = yahoo_data.save(
@@ -306,7 +344,11 @@ def test_get_team_roster_player_stats_by_week(yahoo_query, yahoo_data, data_dir,
 @pytest.mark.integration
 def test_get_team_draft_results(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                                 show_log_output):
-    """Retrieve draft results of specific team by team_id for chosen league.
+    """Integration test for retrieval of draft results for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_draft_results`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(
@@ -332,7 +374,11 @@ def test_get_team_draft_results(yahoo_query, yahoo_data, data_dir, season, game_
 @pytest.mark.integration
 def test_get_team_matchups(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, team_id, team_name,
                            show_log_output):
-    """Retrieve matchups of specific team by team_id for chosen league.
+    """Integration test for retrieval of matchups for chosen team by team ID for chosen Yahoo fantasy league.
+
+    Note:
+        Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_team_matchups`.
+
     """
     new_data_dir = data_dir / str(season) / f"{game_id}.l.{league_id}" / "teams" / f"{team_id}-{team_name}"
     query_result_data = yahoo_data.save(

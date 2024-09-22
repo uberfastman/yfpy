@@ -1,0 +1,38 @@
+
+/*
+CSS for mkdocs theme
+*/
+
+.navbar-expand-md.bs-sidebar {
+    width: fit-content;
+}
+
+/*
+CSS for readthedocs theme
+*/
+
+/* remove duplicate module nav item on the top of each module members list */
+body > div.wy-grid-for-nav > nav > div > div.wy-menu.wy-menu-vertical > ul.current > li.toctree-l1.current > ul > li:nth-child(1) > a {
+    display: none;
+}
+
+/*
+README.md
+*/
+
+img[src="https://github.com/uberfastman/yfpy/raw/main/docs/_static/yfpy-logo.svg"] {
+    display: none;
+}
+
+body > div.wy-grid-for-nav > section > div > div > div.document > div > p:nth-child(13) {
+    display: none;
+}
+
+#table-of-contents,
+body > div.wy-grid-for-nav > section > div > div > div.document > div > ul:nth-child(15) {
+    display: none;
+}
+
+body > div.wy-grid-for-nav > section > div > div > div.document > div > hr:nth-child(16) {
+    display: none;
+}
