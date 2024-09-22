@@ -14,7 +14,7 @@
 .venv
 
 # auth secrets
-**private*.json
+private.json
 !**private.template.json
 **token*.json
 !**token.template.json

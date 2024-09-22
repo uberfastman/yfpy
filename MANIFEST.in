@@ -6,15 +6,15 @@ include LICENSE
 
 # Include dependency lists
 include requirements.txt
-include dev-requirements.txt
+include requirements-dev.txt
 
 # Include Yahoo Fantasy Sports REST API authentication resources
-include auth/private.template.json
-include auth/.env.template
+include .env.template
 
 # Include YFPY Docker resources
 include compose.yaml
 include compose.dev.yaml
+include compose.build.yaml
 
 # Include quickstart resources
 include quickstart/quickstart.py

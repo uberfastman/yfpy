@@ -12,12 +12,35 @@ import json
 import re
 from collections import ChainMap, OrderedDict
 from typing import Any, Dict, IO, List, Type, Union
+from time import sleep
 
 import stringcase
 
 from yfpy.logger import get_logger
 
 logger = get_logger(__name__)
+
+yahoo_fantasy_sports_game_codes = ["nfl", "nhl", "mlb", "nba"]
+
+
+def retrieve_game_code_from_user() -> str:
+    """Recursive function to retrieve required Yahoo Fantasy Sports game code from user input.
+
+    Returns:
+        str: Yahoo Fantasy Sports game code ("nfl", "nhl", "mlb", or "nba").
+
+    """
+    game_code = input(
+        "YFPY requires the use of a Yahoo Fantasy Sports game code in order to select the correct sport. Please enter "
+        "NFL, NHL, MLB, or NBA (case does not matter) here -> "
+    )
+    game_code = game_code.strip().lower()
+    if game_code in yahoo_fantasy_sports_game_codes:
+        return game_code
+    else:
+        logger.warning(f"Selection \"{game_code}\" is not a valid Yahoo Fantasy Sports game code. Please try again.")
+        sleep(0.25)
+        return retrieve_game_code_from_user()
 
 
 def complex_json_handler(obj: Any) -> Any:
@@ -57,7 +80,7 @@ def jsonify_data_to_file(data: object, data_file: IO[str]) -> None:
 
     Args:
         data (object): YahooFantasyObject to be serialized to JSON and output to a file.
-        data_file (IO[str])
+        data_file (IO[str]): Target filestream for writing the data.
 
     """
     json.dump(data, data_file, indent=2, ensure_ascii=False, default=complex_json_handler)

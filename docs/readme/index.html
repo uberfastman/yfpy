@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Wren J. R. (uberfastman)" /><link rel="canonical" href="https://yfpy.uberfastman.com/readme/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>YFPY - Yahoo Fantasy Sports API Wrapper - YFPY - Yahoo Fantasy Sports API Wrapper</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "YFPY - Yahoo Fantasy Sports API Wrapper";
+        var mkdocs_page_input_path = "readme.md";
+        var mkdocs_page_url = "/readme/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../yfpy-logo.svg" class="logo" alt="Logo"/>
+        </a>
+        <div class="version">
+          v15.0.3
+        </div><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">YFPY - Yahoo Fantasy Sports API Wrapper</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#about">About</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#pip">Pip</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manual">Manual</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#yahoo-developer-network-app">Yahoo Developer Network App</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#programmatic-persistent-authentication">Programmatic Persistent Authentication</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#persistent-authentication-using-access-token-json">Persistent Authentication Using Access Token JSON</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#docker-development">Docker Development</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#docker-image-deployment">Docker Image Deployment</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#unit-tests">Unit Tests</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#integration-tests">Integration Tests</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-tests">Run Tests</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#platform">Platform</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#python">Python</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#development">Development</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#yahoo-fantasy-sports-api">Yahoo Fantasy Sports API</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Example Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../quickstart/">Quickstart</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Package</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../query/">Query</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../data/">Data</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../models/">Models</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extras</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../utils/">Utilities</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exceptions/">Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../logger/">Logging</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Testing</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../test/">PyTest</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">YFPY - Yahoo Fantasy Sports API Wrapper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">YFPY - Yahoo Fantasy Sports API Wrapper</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a href="https://github.com/uberfastman/yfpy"><img src="https://github.com/uberfastman/yfpy/raw/main/docs/_static/yfpy-logo.svg" width="400"/></a></p>
+<h2 id="yfpy-yahoo-fantasy-sports-api-wrapper">YFPY - Yahoo Fantasy Sports API Wrapper<a class="headerlink" href="#yfpy-yahoo-fantasy-sports-api-wrapper" title="Permanent link">&para;</a></h2>
+<p>Python API wrapper for the Yahoo Fantasy Sports public API</p>
+<p><em>Author: Wren J. R. (uberfastman)</em></p>
+<p><a href="https://github.com/uberfastman/yfpy/releases/latest"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/uberfastman/yfpy?color=yellowgreen&amp;label=latest%20release&amp;sort=semver" /></a>
+<a href="https://github.com/uberfastman/yfpy/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/uberfastman/yfpy?color=yellowgreen&amp;label=latest%20version&amp;sort=semver" /></a>
+<a href="https://github.com/uberfastman/yfpy/actions/workflows/python-package.yml"><img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/uberfastman/yfpy/python-package.yml?color=brightgreen&amp;label=build" /></a></p>
+<p><a href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/v/yfpy.svg?style=flat" /></a>
+<a href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/dm/yfpy.svg?style=flat" /></a>
+<a href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/pyversions/yfpy.svg?style=flat" /></a>
+<a href="https://pypi.python.org/pypi/yfpy"><img alt="PyPI" src="https://img.shields.io/pypi/l/yfpy.svg?style=flat" /></a></p>
+<hr />
+<p><sub><strong><em>Do you like the YFPY API wrapper? Star the repository on GitHub and please consider helping support its ongoing development:</em></strong></sub></p>
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VZZCNLRHH9BQS"><img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-paypal.png" width="75"/></a> <a href="https://share.trustwallet.com/ZoAkTpY1I9"><img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-bitcoin.png" width="75"/></a> <a href="https://share.trustwallet.com/MF8YBO01I9"><img src="https://github.com/uberfastman/yfpy/raw/main/resources/images/donate-ethereum.png" width="75"/></a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><sub><sup>Cryptocurrency</sup></sub></th>
+<th style="text-align: center;"><sub><sup>Address</sup></sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><sub><sup>Bitcoin (BTC)</sup></sub></td>
+<td style="text-align: center;"><sub><sup><code>bc1qataspvklhewtswm357m0677q4raag5new2xt3e</code></sup></sub></td>
+</tr>
+<tr>
+<td style="text-align: right;"><sub><sup>Ethereum (ETH)</sup></sub></td>
+<td style="text-align: center;"><sub><sup><code>0x5eAa522e66a90577D49e9E72f253EC952CDB4059</code></sup></sub></td>
+</tr>
+</tbody>
+</table>
+<p><sub><sup></sup></sub></p>
+<hr />
+<p><strong><a href="https://yfpy.uberfastman.com">READ THE DOCS HERE!</a></strong>
+<br/>
+<sup>Detailed documentation on YFPY can be found at <a href="https://yfpy.uberfastman.com">https://yfpy.uberfastman.com</a>.</sup></p>
+<h3 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#installation">Installation</a><ul>
+<li><a href="#pip">Pip</a></li>
+<li><a href="#manual">Manual</a></li>
+</ul>
+</li>
+<li><a href="#setup">Setup</a><ul>
+<li><a href="#yahoo-developer-network-app">Yahoo Developer Network App</a></li>
+<li><a href="#environment-variables">Environment Variables</a></li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a><ul>
+<li><a href="#authentication">Authentication</a><ul>
+<li><a href="#programmatic-persistent-authentication">Programmatic Persistent Authentication</a></li>
+<li><a href="#persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields</a></li>
+<li><a href="#persistent-authentication-using-access-token-json">Persistent Authentication Using Access Token JSON</a></li>
+</ul>
+</li>
+<li><a href="#querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API</a></li>
+<li><a href="#docker">Docker</a><ul>
+<li><a href="#docker-development">Docker Development</a></li>
+<li><a href="#docker-image-deployment">Docker Image Deployment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#testing">Testing</a><ul>
+<li><a href="#unit-tests">Unit Tests</a></li>
+<li><a href="#integration-tests">Integration Tests</a></li>
+<li><a href="#run-tests">Run Tests</a></li>
+</ul>
+</li>
+<li><a href="#dependencies">Dependencies</a><ul>
+<li><a href="#platform">Platform</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#development">Development</a></li>
+</ul>
+</li>
+<li><a href="#troubleshooting">Troubleshooting</a><ul>
+<li><a href="#yahoo-fantasy-sports-api">Yahoo Fantasy Sports API</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a name="about"></a></p>
+<h3 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h3>
+<p>YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows for easy retrieval and parsing of almost any data you might wish to extract and use from any Yahoo fantasy league to which your Yahoo account has access (or for public leagues). The primary focus of this wrapper is on fantasy football (NFL), but it also supports usage with fantasy hockey (NHL), fantasy baseball (MLB), and fantasy basketball (NBA). </p>
+<hr />
+<p><a name="installation"></a></p>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<p><a name="pip"></a></p>
+<h4 id="pip">Pip<a class="headerlink" href="#pip" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>If you wish to use YFPY within another project, from within your project directory, run
+    <code>shell
+    pip install yfpy</code></p>
+<p>or add <code>yfpy</code> to your project <code>requirements.txt</code>.</p>
+</li>
+</ul>
+<p><a name="manual"></a></p>
+<h4 id="manual">Manual<a class="headerlink" href="#manual" title="Permanent link">&para;</a></h4>
+<ul>
+<li>If you wish to download and use YFPY locally, clone the git repository:
+  <code>shell
+  git clone git@github.com:uberfastman/yfpy.git</code></li>
+</ul>
+<hr />
+<p><a name="setup"></a></p>
+<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<p><a name="yahoo-developer-network-app"></a></p>
+<h4 id="yahoo-developer-network-app">Yahoo Developer Network App<a class="headerlink" href="#yahoo-developer-network-app" title="Permanent link">&para;</a></h4>
+<p>In order to use YFPY with private fantasy leagues, you must set up an app on your Yahoo account to allow access. Follow the step-by-step guide below for instructions on how to do so, or see <a href="https://developer.yahoo.com/oauth2/guide/openid_connect/getting_started.html">Getting Started</a> in the Yahoo Developer Network docs for more details.</p>
+<p><strong>Note:</strong> <em>If you are only planning on using YFPY to pull "read only" data from public leagues, you do not need to do this.</em></p>
+<ul>
+<li>Log in to a Yahoo account with access to whatever fantasy leagues from which you wish to retrieve data.</li>
+<li>Go to <a href="https://developer.yahoo.com/apps/create/">https://developer.yahoo.com/apps/create/</a> and create an app (you must be logged into your Yahoo account as stated above). For the app, select the following options:<ul>
+<li><code>Application Name</code> (<strong>Required</strong>): <code>yfpy</code> (you can name your app whatever you want, but this is just an example).</li>
+<li><code>Application Type</code> (<strong>Required</strong>): select the <code>Installed Application</code> radio button.</li>
+<li><code>Description</code> (<em>Optional</em>): you <em>may</em> write a short description of what the app does.</li>
+<li><code>Home Page URL</code> (<em>Optional</em>): if you have a web address related to your app you <em>may</em> add it here.</li>
+<li><code>Redirect URI(s)</code> (<strong>Required</strong>): this field must contain a valid redirect address, so you can use <code>https://localhost:8080</code></li>
+<li><code>API Permissions</code> (<strong>Required</strong>): check the <code>Fantasy Sports</code> checkbox. You can leave the <code>Read</code> option selected (appears in an accordion expansion underneath the <code>Fantasy Sports</code> checkbox once you select it).</li>
+<li>Click the <code>Create App</code> button.</li>
+<li>Once the app is created, it should redirect you to a page for your app, which will show both a <code>Client ID</code> and a <code>Client Secret</code>.</li>
+<li>Copy the <code>Client ID</code> and <code>Client Secret</code> and proceed with the steps in <a href="#environment-variables">Environment Variables</a> or <a href="#programmatic-persistent-authentication">Programmatic Persistent Authentication</a>.</li>
+</ul>
+</li>
+</ul>
+<p><a name="environment-variables"></a></p>
+<h4 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h4>
+<p>YFPY now supports the usage of environment variables, either directly within the command line or using a <code>.env</code> file.</p>
+<ul>
+<li>Set up your <code>.env</code> file by making a copy of <code>.env.template</code> in the root project directory and renaming it <code>.env</code> (you can do this in the command line by running <code>cp .env.template .env</code>).</li>
+<li>Paste the <code>Client ID</code> and <code>Client Secret</code> retrieved by following the steps in <a href="#yahoo-developer-network-app">Yahoo Developer Network App</a> into their respective environment variables in your <code>.env</code> file:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>YAHOO_CONSUMER_KEY=&lt;YAHOO_DEVELOPER_APP_CONSUMER_KEY_STRING&gt;
+YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
+</code></pre></div>
+
+<ul>
+<li>YFPY is configured by default to check for environment variables for authentication with Yahoo, so you will now be able to proceed directly to <a href="#authentication">Authentication</a>.</li>
+</ul>
+<p><strong>Note</strong>: *You can disable the fallback to environment variables behavior during instantiation of a YFPY query by passing the argument <code>env_var_fallback=False</code> to the object:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
+    <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">,</span>
+    <span class="n">game_id</span><span class="o">=</span><span class="mi">449</span><span class="p">,</span>
+    <span class="n">yahoo_consumer_key</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_CONSUMER_KEY&gt;&quot;</span><span class="p">,</span>
+    <span class="n">yahoo_consumer_secret</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_CONSUMER_SECRET&gt;&quot;</span><span class="p">,</span>
+    <span class="n">env_var_fallback</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<p><a name="usage"></a></p>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<p><a name="authentication"></a></p>
+<h4 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Follow the instructions in the <a href="#installation">Installation</a> and <a href="#setup">Setup</a> sections.</li>
+<li>The <strong><em>first</em></strong> time you use YFPY, a browser window will open up asking you to allow your app to access your Yahoo fantasy sports data. You <strong><em>MUST</em></strong> hit allow, and then copy the verification code that pops up into the command line prompt where it will now be asking for verification, hit enter, and the OAuth2 three-legged handshake should be complete and your data should have been successfully retrieved.</li>
+</ul>
+<p><strong>Note</strong>: <em>If you are running YFPY in Docker, instead of opening a new browser window, YFPY will output a URL to the command line, which you must then copy to a browser window in order to log in to your Yahoo account, allow access to your app, and retrieve the required verification code.</em></p>
+<p><a name="programmatic-persistent-authentication"></a></p>
+<h5 id="programmatic-persistent-authentication">Programmatic Persistent Authentication<a class="headerlink" href="#programmatic-persistent-authentication" title="Permanent link">&para;</a></h5>
+<p>YFPY supports programmatic authentication using <code>yahoo_consumer_key</code> and <code>yahoo_consumer_secret</code> arguments when instantiating a <code>YahooFantasySportsQuery</code> object. Additionally, you can pass in either a valid JSON string or a Python dictionary to <code>yahoo_access_token_json</code> containing all required fields of a Yahoo access token.</p>
+<ul>
+<li>Providing <code>yahoo_consumer_key</code> and <code>yahoo_consumer_secret</code> overrides any values provided in a <code>.env</code> file.</li>
+<li>Providing a value to <code>yahoo_access_token_json</code> overrides both <code>yahoo_consumer_key</code>/<code>yahoo_consumer_secret</code> values <em>and</em> any values provided in a <code>.env</code> file for a Yahoo access token.</li>
+<li>Required fields (either in a JSON string with escaped double quotes or a Python dictionary) for the value of <code>yahoo_access_token_json</code> are the following:<ul>
+<li><code>access_token</code></li>
+<li><code>consumer_key</code></li>
+<li><code>consumer_secret</code></li>
+<li><code>guid</code></li>
+<li><code>refresh_token</code></li>
+<li><code>token_time</code></li>
+<li><code>token_type</code></li>
+</ul>
+</li>
+<li>The <code>consumer_key</code> and <code>consumer_secret</code> fields in <code>yahoo_access_token_json</code> override </li>
+</ul>
+<p>Example of Using <code>yahoo_access_token_json</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
+    <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">,</span>
+    <span class="n">game_id</span><span class="o">=</span><span class="mi">449</span><span class="p">,</span>
+    <span class="n">yahoo_access_token_json</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;YAHOO_ACCESS_TOKEN&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;consumer_key&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;YAHOO_CONSUMER_KEY&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;consumer_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;YAHOO_CONSUMER_SECRET&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;guid&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;YAHOO_TOKEN_GUID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;YAHOO_REFRESH_TOKEN&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;token_time&quot;</span><span class="p">:</span> <span class="mf">1234567890.123456</span><span class="p">,</span>
+        <span class="s2">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><a name="persistent-authentication-using-access-token-fields"></a></p>
+<h5 id="persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields<a class="headerlink" href="#persistent-authentication-using-access-token-fields" title="Permanent link">&para;</a></h5>
+<ul>
+<li>YFPY no longer uses JSON files to store Yahoo credentials or access tokens. However, if you wish to preserve your access token in order to remain verified, you can now instantiate a YFPY query with <code>save_token_data_to_env_file=True</code>, which will write all required Yahoo access token fields to an <code>.env</code> file (the <code>.env</code> file will be located in the project root directory by default, but you can tell YFPY to use a different <code>.env</code> file by specifying the path to a custom location using <code>env_file_location</code>). </li>
+<li>For all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same <code>.env</code> file to authenticate your app.</li>
+</ul>
+<p><a name="persistent-authentication-using-access-token-json"></a></p>
+<h5 id="persistent-authentication-using-access-token-json">Persistent Authentication Using Access Token JSON<a class="headerlink" href="#persistent-authentication-using-access-token-json" title="Permanent link">&para;</a></h5>
+<ul>
+<li>YFPY <em>also</em> supports the use of a <strong>single</strong> environment variable by providing a valid JSON string in <code>YAHOO_ACCESS_TOKEN_JSON</code>. This environment variable is only used if <code>env_var_fallback=True</code> when instantiating a YFPY query.</li>
+</ul>
+<p><a name="querying-the-yahoo-fantasy-sports-api"></a></p>
+<h4 id="querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API<a class="headerlink" href="#querying-the-yahoo-fantasy-sports-api" title="Permanent link">&para;</a></h4>
+<ul>
+<li>See the documentation on the  <a href="https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery"><code>yfpy.query.YahooFantasySportsQuery</code></a> class for example usage of all available queries.</li>
+<li>See <a href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code>quickstart/quickstart.py</code></a> for example usage output.</li>
+<li>Uncomment/comment out whichever configuration values in their respective functions with which you wish to experiment.</li>
+<li>Uncomment/comment out whichever query lines in the <code>RUN QUERIES</code> section you wish to run.</li>
+<li>Uncomment/comment out whichever query lines in the <code>CHECK FOR MISSING DATA FIELDS</code> section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.</li>
+</ul>
+<p><a name="docker"></a></p>
+<h4 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h4>
+<p>YFPY can be used within Docker for a more seamless, platform-agnostic experience.</p>
+<ul>
+<li>Run the Docker container (pulls the YFPY Docker image from GitHub Package Registry):
+    <code>shell
+    docker compose up</code> </li>
+<li>You can then run commands in the Docker container in two different ways:</li>
+<li>Connect to the running container and run commands from within it:
+    <code>shell
+    docker exec -it yfpy-package-1 bash</code>
+    Then:
+    <code>shell
+    python quickstart/quickstart.py</code></li>
+<li>Send commands to the running container from your host machine:
+    <code>shell
+    docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"</code></li>
+</ul>
+<p><a name="docker-development"></a></p>
+<h5 id="docker-development">Docker Development<a class="headerlink" href="#docker-development" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Run the Docker container for local development (mount all local code into container):
+    <code>shell
+    docker compose -f compose.yaml -f compose.dev.yaml up</code></li>
+</ul>
+<p><a name="docker-image-deployment"></a></p>
+<h5 id="docker-image-deployment">Docker Image Deployment<a class="headerlink" href="#docker-image-deployment" title="Permanent link">&para;</a></h5>
+<p>See <a href="https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md">DEPLOYMENT.md</a> for Docker image deployment.</p>
+<hr />
+<p><a name="testing"></a></p>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<p>YFPY has a collection of fully functional code snippets that can be run using <a href="https://docs.pytest.org/en/6.2.x/">pytest</a>. These snippets demonstrate how to use YFPY to retrieve your Yahoo Fantasy Sports data.</p>
+<p><a name="unit-tests"></a></p>
+<h4 id="unit-tests">Unit Tests<a class="headerlink" href="#unit-tests" title="Permanent link">&para;</a></h4>
+<ul>
+<li>See the <a href="https://github.com/uberfastman/yfpy/blob/main/test/unit/"><code>test/unit</code></a> directory for example code snippets using pytest.</li>
+</ul>
+<p><a name="integration-tests"></a></p>
+<h4 id="integration-tests">Integration Tests<a class="headerlink" href="#integration-tests" title="Permanent link">&para;</a></h4>
+<ul>
+<li>See the <a href="https://github.com/uberfastman/yfpy/blob/main/test/integration/"><code>test/integration</code></a> directory for example code snippets using pytest.</li>
+<li>Before running any integration tests, make a copy of <a href="https://github.com/uberfastman/yfpy/blob/main/auth/.env.template"><code>auth/.env.template</code></a> in the <a href="https://github.com/uberfastman/yfpy/blob/main/auth/"><code>auth/</code></a> directory and rename it to <code>.env</code>.</li>
+<li>Copy your Yahoo <code>Client ID</code> and <code>Client Secret</code> into the environment variables in <code>.env</code> so that pytest can use them when hitting the Yahoo Fantasy Sports API.</li>
+<li>If this is the first time running pytest with your Yahoo API credentials, you <strong><em>MUST</em></strong> allow interactive prompts within pytest by using the <code>-s</code> flag.</li>
+<li>The fixture values in <a href="https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py"><code>test/integration/conftest.py</code></a> are defined in <a href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code>quickstart/quickstart.py</code></a>, and can be changed for testing by uncommenting/commenting out the values inside each respective function.</li>
+</ul>
+<p><a name="run-tests"></a></p>
+<h4 id="run-tests">Run Tests<a class="headerlink" href="#run-tests" title="Permanent link">&para;</a></h4>
+<ul>
+<li>You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:</li>
+<li><code>pytest -v -s</code></li>
+<li>If you want to run only the unit tests, you can run:</li>
+<li><code>pytest -v -s -m unit</code></li>
+<li>If you want to run only the integration tests, you can run:</li>
+<li><code>pytest -v -s -m integration</code></li>
+</ul>
+<hr />
+<p><a name="dependencies"></a></p>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<p><a name="platform"></a></p>
+<h4 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">&para;</a></h4>
+<p>YFPY has only been tested extensively on macOS, but is written to be platform-agnostic, and seems to work without issue on Windows and Linux. </p>
+<p><a name="python"></a></p>
+<h4 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h4>
+<p>YFPY requires Python 3.8 or later, and has been tested through Python 3.12.</p>
+<p><a name="development"></a></p>
+<h4 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h4>
+<p>Direct project dependencies can be viewed in <code>requirements.txt</code>, and additional development and build dependencies (<em>not</em> including transitive dependencies) can be viewed in <code>requirements-dev.txt</code>.</p>
+<hr />
+<p><a name="troubleshooting"></a></p>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<p><a name="yahoo-fantasy-sports-api"></a></p>
+<h4 id="yahoo-fantasy-sports-api">Yahoo Fantasy Sports API<a class="headerlink" href="#yahoo-fantasy-sports-api" title="Permanent link">&para;</a></h4>
+<p>Occasionally when you use the Yahoo Fantasy Sports API, there are hangups on the other end that can cause data not to transmit, and you might encounter an error similar to this:</p>
+<div class="codehilite"><pre><span></span><code>Traceback<span class="w"> </span><span class="o">(</span>most<span class="w"> </span>recent<span class="w"> </span>call<span class="w"> </span>last<span class="o">)</span>:
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;yfpy-app.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">114</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span><span class="nv">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>app.run<span class="o">()</span>
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/Users/your_username/PATH/T0/LOCAL/PROJECT/yfpy-app.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">429</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>run
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>team<span class="w"> </span><span class="k">in</span><span class="w"> </span>team_standings:
+IndexError:<span class="w"> </span>list<span class="w"> </span>index<span class="w"> </span>out<span class="w"> </span>of<span class="w"> </span>range
+</code></pre></div>
+
+<p>Typically, when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Welcome"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quickstart/" class="btn btn-neutral float-right" title="Quickstart">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/uberfastman/yfpy" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../quickstart/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../extra.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

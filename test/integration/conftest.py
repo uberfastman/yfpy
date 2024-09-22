@@ -23,12 +23,6 @@ Example vars using public Yahoo leagues still require auth through a personal Ya
 
 
 @pytest.fixture
-def auth_dir() -> Path:
-    """Put private.json (see README.md) in yfpy/auth/ directory."""
-    return Path(__file__).parent.parent.parent / "auth"
-
-
-@pytest.fixture
 def data_dir() -> Path:
     """Code tests will output data to this directory."""
     return Path(__file__).parent / "test_output"
@@ -41,19 +35,17 @@ def yahoo_data(data_dir: Union[Path, str]) -> Data:
 
 
 @pytest.fixture
-def yahoo_query(auth_dir: Union[Path, str], league_id: str, game_code: str, game_id: int,
-                browser_callback: bool) -> YahooFantasySportsQuery:
+def yahoo_query(league_id: str, game_code: str, game_id: int, browser_callback: bool) -> YahooFantasySportsQuery:
     """Instantiate yfpy YahooFantasySportsQuery object and override league key."""
     yahoo_query = YahooFantasySportsQuery(
-        auth_dir,
         league_id,
         game_code,
         game_id=game_id,
-        offline=False,
+        yahoo_consumer_key=os.environ.get("YFPY_CONSUMER_KEY"),
+        yahoo_consumer_secret=os.environ.get("YFPY_CONSUMER_SECRET"),
         all_output_as_json_str=False,
-        consumer_key=os.environ["YFPY_CONSUMER_KEY"],
-        consumer_secret=os.environ["YFPY_CONSUMER_SECRET"],
-        browser_callback=browser_callback
+        browser_callback=browser_callback,
+        offline=False,
     )
 
     # Manually override league key for example code to work

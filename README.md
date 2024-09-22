@@ -36,11 +36,30 @@ Python API wrapper for the Yahoo Fantasy Sports public API
 ### Table of Contents
 * [About](#about)
 * [Installation](#installation)
+    * [Pip](#pip)
+    * [Manual](#manual)
 * [Setup](#setup)
+    * [Yahoo Developer Network App](#yahoo-developer-network-app)
+    * [Environment Variables](#environment-variables)
 * [Usage](#usage)
+    * [Authentication](#authentication)
+        * [Programmatic Persistent Authentication](#programmatic-persistent-authentication)
+        * [Persistent Authentication Using Access Token Fields](#persistent-authentication-using-access-token-fields)
+        * [Persistent Authentication Using Access Token JSON](#persistent-authentication-using-access-token-json)
+    * [Querying the Yahoo Fantasy Sports API](#querying-the-yahoo-fantasy-sports-api)
+    * [Docker](#docker)
+        * [Docker Development](#docker-development)
+        * [Docker Image Deployment](#docker-image-deployment)
 * [Testing](#testing)
+    * [Unit Tests](#unit-tests)
+    * [Integration Tests](#integration-tests)
+    * [Run Tests](#run-tests)
 * [Dependencies](#dependencies)
+    * [Platform](#platform)
+    * [Python](#python)
+    * [Development](#development)
 * [Troubleshooting](#troubleshooting)
+    * [Yahoo Fantasy Sports API](#yahoo-fantasy-sports-api)
 
 ---
 
@@ -54,6 +73,7 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 <a name="installation"></a>
 ### Installation
 
+<a name="pip"></a>
 #### Pip
 
 * If you wish to use YFPY within another project, from within your project directory, run
@@ -63,6 +83,7 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
     
     or add `yfpy` to your project `requirements.txt`.
 
+<a name="manual"></a>
 #### Manual
 
 * If you wish to download and use YFPY locally, clone the git repository:
@@ -75,6 +96,7 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 <a name="setup"></a>
 ### Setup
 
+<a name="yahoo-developer-network-app"></a>
 #### Yahoo Developer Network App
 
 In order to use YFPY with private fantasy leagues, you must set up an app on your Yahoo account to allow access. Follow the step-by-step guide below for instructions on how to do so, or see [Getting Started](https://developer.yahoo.com/oauth2/guide/openid_connect/getting_started.html) in the Yahoo Developer Network docs for more details.
@@ -91,20 +113,97 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
     * `API Permissions` (**Required**): check the `Fantasy Sports` checkbox. You can leave the `Read` option selected (appears in an accordion expansion underneath the `Fantasy Sports` checkbox once you select it).
     * Click the `Create App` button.
     * Once the app is created, it should redirect you to a page for your app, which will show both a `Client ID` and a `Client Secret`.
-    * Make a copy of [`auth/private.template.json`](https://github.com/uberfastman/yfpy/blob/main/auth/private.template.json), rename it to just `private.json`, and copy the `Client ID` and `Client Secret` values to their respective fields (make sure the strings are wrapped regular quotes (`""`), NOT formatted quotes (`“”`)). The path to this file will be needed to point YFPY to your credentials.
-    * Now you should be ready to initialize the OAuth2 connection between YFPY your Yahoo account.
+    * Copy the `Client ID` and `Client Secret` and proceed with the steps in [Environment Variables](#environment-variables) or [Programmatic Persistent Authentication](#programmatic-persistent-authentication).
+
+<a name="environment-variables"></a>
+#### Environment Variables
+
+YFPY now supports the usage of environment variables, either directly within the command line or using a `.env` file.
+
+* Set up your `.env` file by making a copy of `.env.template` in the root project directory and renaming it `.env` (you can do this in the command line by running `cp .env.template .env`).
+* Paste the `Client ID` and `Client Secret` retrieved by following the steps in [Yahoo Developer Network App](#yahoo-developer-network-app) into their respective environment variables in your `.env` file:
+```dotenv
+YAHOO_CONSUMER_KEY=<YAHOO_DEVELOPER_APP_CONSUMER_KEY_STRING>
+YAHOO_CONSUMER_SECRET=<YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING>
+```
+* YFPY is configured by default to check for environment variables for authentication with Yahoo, so you will now be able to proceed directly to [Authentication](#authentication).
+
+**Note**: *You can disable the fallback to environment variables behavior during instantiation of a YFPY query by passing the argument `env_var_fallback=False` to the object:
+```python
+from yfpy.query import YahooFantasySportsQuery
+
+query = YahooFantasySportsQuery(
+    league_id="<YAHOO_LEAGUE_ID>",
+    game_code="nfl",
+    game_id=449,
+    yahoo_consumer_key="<YAHOO_CONSUMER_KEY>",
+    yahoo_consumer_secret="<YAHOO_CONSUMER_SECRET>",
+    env_var_fallback=False
+)
+```
 
 ---
 
 <a name="usage"></a>
 ### Usage
 
+<a name="authentication"></a>
 #### Authentication
 
 * Follow the instructions in the [Installation](#installation) and [Setup](#setup) sections.
 * The ***first*** time you use YFPY, a browser window will open up asking you to allow your app to access your Yahoo fantasy sports data. You ***MUST*** hit allow, and then copy the verification code that pops up into the command line prompt where it will now be asking for verification, hit enter, and the OAuth2 three-legged handshake should be complete and your data should have been successfully retrieved.
-* YFPY should have now generated a `token.json` for you in the same directory where you stored your `private.json` credentials, and for all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same `token.json` file to authenticate your app.
 
+**Note**: *If you are running YFPY in Docker, instead of opening a new browser window, YFPY will output a URL to the command line, which you must then copy to a browser window in order to log in to your Yahoo account, allow access to your app, and retrieve the required verification code.*
+
+<a name="programmatic-persistent-authentication"></a>
+##### Programmatic Persistent Authentication
+
+YFPY supports programmatic authentication using `yahoo_consumer_key` and `yahoo_consumer_secret` arguments when instantiating a `YahooFantasySportsQuery` object. Additionally, you can pass in either a valid JSON string or a Python dictionary to `yahoo_access_token_json` containing all required fields of a Yahoo access token.
+
+* Providing `yahoo_consumer_key` and `yahoo_consumer_secret` overrides any values provided in a `.env` file.
+* Providing a value to `yahoo_access_token_json` overrides both `yahoo_consumer_key`/`yahoo_consumer_secret` values *and* any values provided in a `.env` file for a Yahoo access token.
+  * Required fields (either in a JSON string with escaped double quotes or a Python dictionary) for the value of `yahoo_access_token_json` are the following:
+    * `access_token`
+    * `consumer_key`
+    * `consumer_secret`
+    * `guid`
+    * `refresh_token`
+    * `token_time`
+    * `token_type`
+  * The `consumer_key` and `consumer_secret` fields in `yahoo_access_token_json` override 
+
+Example of Using `yahoo_access_token_json`:
+```python
+from yfpy.query import YahooFantasySportsQuery
+
+query = YahooFantasySportsQuery(
+    league_id="<YAHOO_LEAGUE_ID>",
+    game_code="nfl",
+    game_id=449,
+    yahoo_access_token_json={
+        "access_token": "<YAHOO_ACCESS_TOKEN>",
+        "consumer_key": "<YAHOO_CONSUMER_KEY>",
+        "consumer_secret": "<YAHOO_CONSUMER_SECRET>",
+        "guid": "<YAHOO_TOKEN_GUID>",
+        "refresh_token": "<YAHOO_REFRESH_TOKEN>",
+        "token_time": 1234567890.123456,
+        "token_type": "bearer"
+    }
+)
+```
+
+<a name="persistent-authentication-using-access-token-fields"></a>
+##### Persistent Authentication Using Access Token Fields
+
+* YFPY no longer uses JSON files to store Yahoo credentials or access tokens. However, if you wish to preserve your access token in order to remain verified, you can now instantiate a YFPY query with `save_token_data_to_env_file=True`, which will write all required Yahoo access token fields to an `.env` file (the `.env` file will be located in the project root directory by default, but you can tell YFPY to use a different `.env` file by specifying the path to a custom location using `env_file_location`). 
+* For all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same `.env` file to authenticate your app.
+
+<a name="persistent-authentication-using-access-token-json"></a>
+##### Persistent Authentication Using Access Token JSON
+
+* YFPY *also* supports the use of a **single** environment variable by providing a valid JSON string in `YAHOO_ACCESS_TOKEN_JSON`. This environment variable is only used if `env_var_fallback=True` when instantiating a YFPY query.
+
+<a name="querying-the-yahoo-fantasy-sports-api"></a>
 #### Querying the Yahoo Fantasy Sports API
 
 * See the documentation on the  [`yfpy.query.YahooFantasySportsQuery`](https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery) class for example usage of all available queries.
@@ -113,6 +212,7 @@ In order to use YFPY with private fantasy leagues, you must set up an app on you
   * Uncomment/comment out whichever query lines in the `RUN QUERIES` section you wish to run.
   * Uncomment/comment out whichever query lines in the `CHECK FOR MISSING DATA FIELDS` section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.
 
+<a name="docker"></a>
 #### Docker
 
 YFPY can be used within Docker for a more seamless, platform-agnostic experience.
@@ -135,13 +235,15 @@ YFPY can be used within Docker for a more seamless, platform-agnostic experience
     docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"
     ```
 
-##### Docker Development (optional)
+<a name="docker-development"></a>
+##### Docker Development
 
 * Run the Docker container for local development (mount all local code into container):
     ```shell
     docker compose -f compose.yaml -f compose.dev.yaml up
     ```
-  
+
+<a name="docker-image-deployment"></a>
 ##### Docker Image Deployment
 
 See [DEPLOYMENT.md](https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md) for Docker image deployment.
@@ -153,11 +255,13 @@ See [DEPLOYMENT.md](https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md)
 
 YFPY has a collection of fully functional code snippets that can be run using [pytest](https://docs.pytest.org/en/6.2.x/). These snippets demonstrate how to use YFPY to retrieve your Yahoo Fantasy Sports data.
 
-#### Unit
+<a name="unit-tests"></a>
+#### Unit Tests
 
 * See the [`test/unit`](https://github.com/uberfastman/yfpy/blob/main/test/unit/) directory for example code snippets using pytest.
 
-#### Integration
+<a name="integration-tests"></a>
+#### Integration Tests
 
 * See the [`test/integration`](https://github.com/uberfastman/yfpy/blob/main/test/integration/) directory for example code snippets using pytest.
 * Before running any integration tests, make a copy of [`auth/.env.template`](https://github.com/uberfastman/yfpy/blob/main/auth/.env.template) in the [`auth/`](https://github.com/uberfastman/yfpy/blob/main/auth/) directory and rename it to `.env`.
@@ -165,7 +269,8 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
 * The fixture values in [`test/integration/conftest.py`](https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py) are defined in [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py), and can be changed for testing by uncommenting/commenting out the values inside each respective function.
 
-#### Running
+<a name="run-tests"></a>
+#### Run Tests
 
 * You can invoke all pytest tests (both integration test and unit tests) by running the below from the root directory:
   * `pytest -v -s`
@@ -179,14 +284,17 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 <a name="dependencies"></a>
 ### Dependencies
 
+<a name="platform"></a>
 #### Platform
 
 YFPY has only been tested extensively on macOS, but is written to be platform-agnostic, and seems to work without issue on Windows and Linux. 
 
+<a name="python"></a>
 #### Python
 
-YFPY requires Python 3.8 or later, and has been tested through Python 3.11.
+YFPY requires Python 3.8 or later, and has been tested through Python 3.12.
 
+<a name="development"></a>
 #### Development
 
 Direct project dependencies can be viewed in `requirements.txt`, and additional development and build dependencies (*not* including transitive dependencies) can be viewed in `requirements-dev.txt`.
@@ -196,10 +304,11 @@ Direct project dependencies can be viewed in `requirements.txt`, and additional 
 <a name="troubleshooting"></a>
 ### Troubleshooting
 
+<a name="yahoo-fantasy-sports-api"></a>
 #### Yahoo Fantasy Sports API
 
 Occasionally when you use the Yahoo Fantasy Sports API, there are hangups on the other end that can cause data not to transmit, and you might encounter an error similar to this:
-```
+```shell
 Traceback (most recent call last):
   File "yfpy-app.py", line 114, in <module>
     var = app.run()
