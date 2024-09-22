@@ -1,4 +1,4 @@
-[<img src="https://github.com/uberfastman/yfpy/raw/main/docs/_static/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
+[<img src="https://raw.githubusercontent.com/uberfastman/yfpy/refs/heads/main/docs/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
 
 ## YFPY - Yahoo Fantasy Sports API Wrapper
 Python API wrapper for the Yahoo Fantasy Sports public API
@@ -292,7 +292,7 @@ YFPY has only been tested extensively on macOS, but is written to be platform-ag
 <a name="python"></a>
 #### Python
 
-YFPY requires Python 3.8 or later, and has been tested through Python 3.12.
+YFPY requires Python 3.10 or later, and has been tested through Python 3.12.
 
 <a name="development"></a>
 #### Development
