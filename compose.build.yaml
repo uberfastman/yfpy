@@ -6,5 +6,6 @@ services:
       - PYTHON_VERSION_MAJOR=3
       - PYTHON_VERSION_MINOR=12
       - PYTHON_VERSION_PATCH=0
+      - BUILD_PLATFORM=linux/amd64
       context: .
       dockerfile: docker/Dockerfile
