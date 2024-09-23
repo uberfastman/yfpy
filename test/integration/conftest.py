@@ -43,6 +43,7 @@ def yahoo_query(league_id: str, game_code: str, game_id: int, browser_callback: 
         game_id=game_id,
         yahoo_consumer_key=os.environ.get("YFPY_CONSUMER_KEY"),
         yahoo_consumer_secret=os.environ.get("YFPY_CONSUMER_SECRET"),
+        env_file_location=Path(__file__).parent.parent.parent / "env",
         all_output_as_json_str=False,
         browser_callback=browser_callback,
         offline=False,
