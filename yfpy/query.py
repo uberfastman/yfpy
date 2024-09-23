@@ -371,23 +371,25 @@ class YahooFantasySportsQuery(object):
 
         return env_file_content
 
-    def save_access_token_data_to_env_file(self, env_file_directory: Path, env_file_name: str = ".env",
-                                           save_json_to_var: bool = False) -> None:
+    def save_access_token_data_to_env_file(self, env_file_location: Path, env_file_name: str = ".env",
+                                           save_json_to_var_only: bool = False) -> None:
         """Saves the fields and values of a Yahoo access token into a .env file.
 
         Args:
-            env_file_directory (Path): The path to the directory where the target .env file is/will be located.
+            env_file_location (:obj:`Path`, optional): Path to directory where existing .env file is located or new .env
+                file should be generated.
             env_file_name (:obj:`str`, optional): The name of the target .env file (defaults to ".env").
-            save_json_to_var (:obj:`bool`, optional): Boolean to determine whether or not to write a JSON string of
+            save_json_to_var_only (:obj:`bool`, optional): Boolean to determine whether or not to write a JSON string of
                 Yahoo access token fields to a YAHOO_ACCESS_TOKEN_JSON environment variable in the target .env file
+                instead of writing Yahoo access token fields to separate environment variables in the target .env file.
                 (defaults to False).
 
         Returns:
             None
 
         """
-        if env_file_directory:
-            env_file_path = env_file_directory / env_file_name
+        if env_file_location:
+            env_file_path = env_file_location / env_file_name
         else:
             logger.warning("Missing argument env_file_location. Yahoo access token will NOT be saved to .env file.")
             # exit method without saving Yahoo access token data when no env_file_location argument is provided
@@ -395,14 +397,16 @@ class YahooFantasySportsQuery(object):
 
         env_file_content = self._retrieve_env_file_contents(env_file_path)
 
-        # replace values of any matching environment variables in .env file with values from Yahoo access token fields
-        for k, v in self._yahoo_access_token_dict.items():
-            env_file_content[f"yahoo_{k}"] = v
-
-        # generate a JSON string with escaped double quotes using nested json.dumps() and write it to a
-        # YAHOO_ACCESS_TOKEN_JSON environment variable if save_json_to_var is set to True
-        if save_json_to_var:
+        if save_json_to_var_only:
+            # generate a JSON string with escaped double quotes using nested json.dumps() and write it to a
+            # YAHOO_ACCESS_TOKEN_JSON environment variable if save_json_to_var_only is set to True instead of writing
+            # Yahoo access token fields to separate environment variables in target .env file
             env_file_content["yahoo_access_token_json"] = json.dumps(json.dumps(self._yahoo_access_token_dict))
+        else:
+            # replace values of any matching environment variables in .env file with values from Yahoo access token
+            # fields or add new environment variables to .env file if any fields are missing
+            for k, v in self._yahoo_access_token_dict.items():
+                env_file_content[f"yahoo_{k}"] = v
 
         # write contents to .env file (overwrites contents if file exists or creates a new file if not)
         with open(env_file_path, "w") as env_file:

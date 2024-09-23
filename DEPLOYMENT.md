@@ -86,7 +86,7 @@
     make test_docs
     ```
 
-15. *(Optional)* Build the MkDocs documentation and PyPI package independent of deployment:
+15. *(Optional)* Build the PyPI package and MkDocs documentation independent of deployment:
 
     ```shell
     make docs

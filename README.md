@@ -204,6 +204,26 @@ query = YahooFantasySportsQuery(
 ##### Persistent Authentication Using Access Token JSON
 
 * YFPY *also* supports the use of a **single** environment variable by providing a valid JSON string in `YAHOO_ACCESS_TOKEN_JSON`. This environment variable is only used if `env_var_fallback=True` (default) when instantiating a YFPY query.
+* You can save the Yahoo access token fields as valid JSON with escaped double quotes (`"`) by invoking `YahooFantasySportsQuery.save_access_token_data_to_env_file` with `save_json_to_var_only=True` (instead of saving the Yahoo access token fields to individual environment variables as described in [Persistent Authentication Using Access Token Fields](#persistent-authentication-using-access-token-fields)) like below:
+```python
+from pathlib import Path
+
+from yfpy.query import YahooFantasySportsQuery
+
+query = YahooFantasySportsQuery(
+    league_id="<YAHOO_LEAGUE_ID>",
+    game_code="nfl",
+    game_id=449,
+    yahoo_consumer_key="<YAHOO_CONSUMER_KEY>",
+    yahoo_consumer_secret="<YAHOO_CONSUMER_SECRET>",
+    env_file_location=Path(".env")
+)
+
+query.save_access_token_data_to_env_file(
+    env_file_location=Path(".env"), 
+    save_json_to_var_only=True
+)
+```
 
 <a name="querying-the-yahoo-fantasy-sports-api"></a>
 #### Querying the Yahoo Fantasy Sports API

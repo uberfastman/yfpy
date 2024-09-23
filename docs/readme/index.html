@@ -389,7 +389,27 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <h5 id="persistent-authentication-using-access-token-json">Persistent Authentication Using Access Token JSON<a class="headerlink" href="#persistent-authentication-using-access-token-json" title="Permanent link">&para;</a></h5>
 <ul>
 <li>YFPY <em>also</em> supports the use of a <strong>single</strong> environment variable by providing a valid JSON string in <code>YAHOO_ACCESS_TOKEN_JSON</code>. This environment variable is only used if <code>env_var_fallback=True</code> (default) when instantiating a YFPY query.</li>
+<li>You can save the Yahoo access token fields as valid JSON with escaped double quotes (<code>"</code>) by invoking <code>YahooFantasySportsQuery.save_access_token_data_to_env_file</code> with <code>save_json_to_var_only=True</code> (instead of saving the Yahoo access token fields to individual environment variables as described in <a href="#persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields</a>) like below:</li>
 </ul>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
+    <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="n">game_code</span><span class="o">=</span><span class="s2">&quot;nfl&quot;</span><span class="p">,</span>
+    <span class="n">game_id</span><span class="o">=</span><span class="mi">449</span><span class="p">,</span>
+    <span class="n">yahoo_consumer_key</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_CONSUMER_KEY&gt;&quot;</span><span class="p">,</span>
+    <span class="n">yahoo_consumer_secret</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_CONSUMER_SECRET&gt;&quot;</span><span class="p">,</span>
+    <span class="n">env_file_location</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.env&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">query</span><span class="o">.</span><span class="n">save_access_token_data_to_env_file</span><span class="p">(</span>
+    <span class="n">env_file_location</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.env&quot;</span><span class="p">),</span> 
+    <span class="n">save_json_to_var_only</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
 <p><a name="querying-the-yahoo-fantasy-sports-api"></a></p>
 <h4 id="querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API<a class="headerlink" href="#querying-the-yahoo-fantasy-sports-api" title="Permanent link">&para;</a></h4>
 <ul>

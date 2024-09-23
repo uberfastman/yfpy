@@ -271,18 +271,15 @@ test_league_player_limit = get_league_player_limit()
 query = YahooFantasySportsQuery(
     test_league_id,
     test_game_code,
-    test_game_id,
+    game_id=test_game_id,
     yahoo_consumer_key=os.environ.get("YAHOO_CONSUMER_KEY"),
     yahoo_consumer_secret=os.environ.get("YAHOO_CONSUMER_SECRET"),
     # yahoo_access_token_json=os.environ.get("YAHOO_ACCESS_TOKEN_JSON"),
-    env_var_fallback=True,
-    env_file_location=Path(__file__).parent.parent,
-    save_token_data_to_env_file=True,
-    all_output_as_json_str=False,
-    offline=False
+    env_file_location=project_dir,
+    save_token_data_to_env_file=True
 )
 
-# query.save_access_token_data_to_env_file(project_dir, save_json_to_var=True)
+# query.save_access_token_data_to_env_file(project_dir, save_json_to_var_only=True)
 
 # Manually override league key for example code to work
 query.league_key = f"{test_game_id}.l.{test_league_id}"
