@@ -306,9 +306,9 @@
 </ul>
 <p><a name="environment-variables"></a></p>
 <h4 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h4>
-<p>YFPY now supports the usage of environment variables, either directly within the command line or using a <code>.env</code> file.</p>
+<p>YFPY now supports the usage of environment variables, either directly within the command line or using a <code>.env</code> file. Any environment variables exported to the same shell in which YFPY runs will automatically be read when a <code>YahooFantasySportsQuery</code> object is instantiated when <code>env_var_fallback=True</code> (default).</p>
 <ul>
-<li>Set up your <code>.env</code> file by making a copy of <code>.env.template</code> in the root project directory and renaming it <code>.env</code> (you can do this in the command line by running <code>cp .env.template .env</code>).</li>
+<li>If you wish to <em>also</em> use environment variables stored in a <code>.env</code> file, you can set up a <code>.env</code> file by making a copy of <code>.env.template</code> in the root project directory and renaming it <code>.env</code> (you can do this in the command line by running <code>cp .env.template .env</code>).</li>
 <li>Paste the <code>Client ID</code> and <code>Client Secret</code> retrieved by following the steps in <a href="#yahoo-developer-network-app">Yahoo Developer Network App</a> into their respective environment variables in your <code>.env</code> file:</li>
 </ul>
 <div class="codehilite"><pre><span></span><code>YAHOO_CONSUMER_KEY=&lt;YAHOO_DEVELOPER_APP_CONSUMER_KEY_STRING&gt;
@@ -318,7 +318,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <ul>
 <li>YFPY is configured by default to check for environment variables for authentication with Yahoo, so you will now be able to proceed directly to <a href="#authentication">Authentication</a>.</li>
 </ul>
-<p><strong>Note</strong>: *You can disable the fallback to environment variables behavior during instantiation of a YFPY query by passing the argument <code>env_var_fallback=False</code> to the object:</p>
+<p><strong>Note</strong>: <em>You can disable the fallback to environment variables behavior during instantiation of a YFPY query by passing the argument <code>env_var_fallback=False</code> to the object:</em></p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
@@ -346,7 +346,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <p>YFPY supports programmatic authentication using <code>yahoo_consumer_key</code> and <code>yahoo_consumer_secret</code> arguments when instantiating a <code>YahooFantasySportsQuery</code> object. Additionally, you can pass in either a valid JSON string or a Python dictionary to <code>yahoo_access_token_json</code> containing all required fields of a Yahoo access token.</p>
 <ul>
 <li>Providing <code>yahoo_consumer_key</code> and <code>yahoo_consumer_secret</code> overrides any values provided in a <code>.env</code> file.</li>
-<li>Providing a value to <code>yahoo_access_token_json</code> overrides both <code>yahoo_consumer_key</code>/<code>yahoo_consumer_secret</code> values <em>and</em> any values provided in a <code>.env</code> file for a Yahoo access token.</li>
+<li>Providing a value to <code>yahoo_access_token_json</code> overrides <code>yahoo_consumer_key</code>/<code>yahoo_consumer_secret</code> values <em>and</em> any values provided in a <code>.env</code> file for Yahoo access token individual fields.</li>
 <li>Required fields (either in a JSON string with escaped double quotes or a Python dictionary) for the value of <code>yahoo_access_token_json</code> are the following:<ul>
 <li><code>access_token</code></li>
 <li><code>consumer_key</code></li>
@@ -357,7 +357,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <li><code>token_type</code></li>
 </ul>
 </li>
-<li>The <code>consumer_key</code> and <code>consumer_secret</code> fields in <code>yahoo_access_token_json</code> override </li>
+<li>The <code>consumer_key</code> and <code>consumer_secret</code> fields in <code>yahoo_access_token_json</code> override any values provided in <code>yahoo_consumer_key</code>/<code>yahoo_consumer_secret</code>.</li>
 </ul>
 <p>Example of Using <code>yahoo_access_token_json</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
@@ -381,13 +381,14 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <p><a name="persistent-authentication-using-access-token-fields"></a></p>
 <h5 id="persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields<a class="headerlink" href="#persistent-authentication-using-access-token-fields" title="Permanent link">&para;</a></h5>
 <ul>
-<li>YFPY no longer uses JSON files to store Yahoo credentials or access tokens. However, if you wish to preserve your access token in order to remain verified, you can now instantiate a YFPY query with <code>save_token_data_to_env_file=True</code>, which will write all required Yahoo access token fields to an <code>.env</code> file (the <code>.env</code> file will be located in the project root directory by default, but you can tell YFPY to use a different <code>.env</code> file by specifying the path to a custom location using <code>env_file_location</code>). </li>
+<li>YFPY no longer uses JSON files to store Yahoo credentials or access tokens. However, if you wish to preserve your access token in order to remain verified, you can now instantiate a YFPY query with <code>save_token_data_to_env_file=True</code>, which will write all required Yahoo access token fields an <code>.env</code> file located in the provided <code>env_file_location</code> directory.</li>
 <li>For all subsequent runs of your app, you should be able to keep retrieving Yahoo fantasy sports data using YFPY without re-verifying, since the generated refresh token should now just renew whenever you use the same <code>.env</code> file to authenticate your app.</li>
 </ul>
+<p><strong>Note</strong>: <em>You </em><em>MUST</em><em> provide a value for <code>env_file_location</code> or else </em><em>NO</em><em> Yahoo access token data will be saved!</em></p>
 <p><a name="persistent-authentication-using-access-token-json"></a></p>
 <h5 id="persistent-authentication-using-access-token-json">Persistent Authentication Using Access Token JSON<a class="headerlink" href="#persistent-authentication-using-access-token-json" title="Permanent link">&para;</a></h5>
 <ul>
-<li>YFPY <em>also</em> supports the use of a <strong>single</strong> environment variable by providing a valid JSON string in <code>YAHOO_ACCESS_TOKEN_JSON</code>. This environment variable is only used if <code>env_var_fallback=True</code> when instantiating a YFPY query.</li>
+<li>YFPY <em>also</em> supports the use of a <strong>single</strong> environment variable by providing a valid JSON string in <code>YAHOO_ACCESS_TOKEN_JSON</code>. This environment variable is only used if <code>env_var_fallback=True</code> (default) when instantiating a YFPY query.</li>
 </ul>
 <p><a name="querying-the-yahoo-fantasy-sports-api"></a></p>
 <h4 id="querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API<a class="headerlink" href="#querying-the-yahoo-fantasy-sports-api" title="Permanent link">&para;</a></h4>

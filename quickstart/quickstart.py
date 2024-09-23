@@ -275,8 +275,9 @@ query = YahooFantasySportsQuery(
     yahoo_consumer_key=os.environ.get("YAHOO_CONSUMER_KEY"),
     yahoo_consumer_secret=os.environ.get("YAHOO_CONSUMER_SECRET"),
     # yahoo_access_token_json=os.environ.get("YAHOO_ACCESS_TOKEN_JSON"),
-    save_token_data_to_env_file=True,
     env_var_fallback=True,
+    env_file_location=Path(__file__).parent.parent,
+    save_token_data_to_env_file=True,
     all_output_as_json_str=False,
     offline=False
 )

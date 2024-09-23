@@ -382,8 +382,9 @@
     <span class="n">yahoo_consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;YAHOO_CONSUMER_KEY&quot;</span><span class="p">),</span>
     <span class="n">yahoo_consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;YAHOO_CONSUMER_SECRET&quot;</span><span class="p">),</span>
     <span class="c1"># yahoo_access_token_json=os.environ.get(&quot;YAHOO_ACCESS_TOKEN_JSON&quot;),</span>
-    <span class="n">save_token_data_to_env_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">env_var_fallback</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">env_file_location</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+    <span class="n">save_token_data_to_env_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">all_output_as_json_str</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">offline</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
