@@ -2624,7 +2624,8 @@ class YahooFantasySportsQuery(object):
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
-            f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster;week={chosen_week}/players/stats",
+            f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/roster;"
+            f"week={chosen_week}/players/stats;type=week;week={chosen_week}",
             ["team", "roster", "0", "players"]
         )
 
