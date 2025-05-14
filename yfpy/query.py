@@ -522,16 +522,16 @@ class YahooFantasySportsQuery(object):
                     if isinstance(data_key_list[i], list):
                         reformatted = reformat_json_list(raw_response_data)
                         raw_response_data = [
-                            {data_key_list[i][0]: reformatted[data_key_list[i][0]]},
-                            {data_key_list[i][1]: reformatted[data_key_list[i][1]]}
+                            {key: reformatted[key]} for key in data_key_list[i]
+                            if key in reformatted
                         ]
                     else:
                         raw_response_data = reformat_json_list(raw_response_data)[data_key_list[i]]
                 else:
                     if isinstance(data_key_list[i], list):
                         raw_response_data = [
-                            {data_key_list[i][0]: raw_response_data[data_key_list[i][0]]},
-                            {data_key_list[i][1]: raw_response_data[data_key_list[i][1]]}
+                            {key: raw_response_data[key]} for key in data_key_list[i]
+                            if key in raw_response_data
                         ]
                     else:
                         raw_response_data = raw_response_data.get(data_key_list[i])
@@ -2124,7 +2124,7 @@ class YahooFantasySportsQuery(object):
         team_key = f"{self.get_league_key()}.t.{team_id}"
         return self.query(
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/stats;type=week;week={chosen_week}",
-            ["team", ["team_points", "team_projected_points"]]
+            ["team", ["team_points", "team_stats", "team_projected_points"]]
         )
 
     def get_team_standings(self, team_id: Union[str, int]) -> TeamStandings:
