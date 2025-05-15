@@ -46,6 +46,7 @@ from yfpy.models import (
     TeamPoints,
     TeamProjectedPoints,
     TeamStandings,
+    TeamStats,
     Transaction,
     User,
     YahooFantasyObject
@@ -2090,7 +2091,7 @@ class YahooFantasySportsQuery(object):
 
     def get_team_stats_by_week(
             self, team_id: Union[str, int], chosen_week: Union[int, str] = "current"
-    ) -> Dict[str, Union[TeamPoints, TeamProjectedPoints]]:
+    ) -> Dict[str, Union[TeamPoints, TeamStats, TeamProjectedPoints]]:
         """Retrieve stats of specific team by team_id and by week for chosen league.
 
         Args:
@@ -2113,12 +2114,26 @@ class YahooFantasySportsQuery(object):
                 "coverage_type": "week",
                 "total": "78.85",
                 "week": "1"
+              }),
+              "team_stats": TeamStats({
+                "coverage_type": "week",
+                "week": "1",
+                "stats": [
+                  {
+                    "stat": {
+                      "stat_id": "4",
+                      "value": "249"
+                    }
+                  },
+                  ...
+                ]
               })
             }
 
         Returns:
-            dict[str, TeamPoints | TeamProjectedPoints]: Dictionary containing keys "team_points" and
-                "team_projected_points" with respective values YFPY TeamPoints and YFPY TeamProjectedPoints instances.
+            dict[str, TeamPoints | TeamProjectedPoints | TeamStats]: Dictionary containing keys "team_points", 
+                "team_projected_points", and "team_stats" with respective values YFPY TeamPoints, YFPY TeamProjectedPoints,
+                and YFPY TeamStats instances.
 
         """
         team_key = f"{self.get_league_key()}.t.{team_id}"

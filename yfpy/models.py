@@ -889,6 +889,28 @@ class TeamProjectedPoints(YahooFantasyObject):
 
 
 # noinspection PyUnresolvedReferences
+class TeamStats(YahooFantasyObject):
+    """Model class for "team_stats" data key.
+    """
+
+    def __init__(self, extracted_data):
+        """Instantiate the TeamStats child class of YahooFantasyObject.
+
+        Args:
+            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
+
+        Attributes:
+            coverage_type (str): The timeframe for the selected team stats ("week", "date", "season", etc.).
+            week (int): The week number.
+            stats (list[Stat]): List of Stat objects containing the team's statistics.
+        """
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type: str = self._extracted_data.get("coverage_type", "")
+        self.week: Optional[int] = self._extracted_data.get("week", None)
+        self.stats: List[Stat] = self._extracted_data.get("stats", [])
+
+
+# noinspection PyUnresolvedReferences
 class TeamStandings(YahooFantasyObject):
     """Model class for "team_standings" data key.
     """
@@ -1777,3 +1799,4 @@ class TransactionData(YahooFantasyObject):
         self.source_team_name: str = self._extracted_data.get("source_team_name", "")
         self.source_type: str = self._extracted_data.get("source_type", "")
         self.type: str = self._extracted_data.get("type", "")
+
