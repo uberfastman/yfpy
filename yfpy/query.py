@@ -2141,6 +2141,159 @@ class YahooFantasySportsQuery(object):
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/stats;type=week;week={chosen_week}",
             ["team", ["team_points", "team_stats", "team_projected_points"]]
         )
+    
+    def get_teams_stats_by_week(self, team_ids: List[Union[str, int]], chosen_week: Union[int, str] = "current") -> List[Team]:
+      """Get stats for multiple teams for a specific week.
+
+      Args:
+          team_ids (List[Union[str, int]]): List of team IDs to get stats for
+          chosen_week (Union[int, str], optional): Week number to get stats for. Defaults to "current".
+
+      Examples:
+            >>> from yfpy.query import YahooFantasySportsQuery
+            >>> query = YahooFantasySportsQuery(league_id="#####", game_code="nba")
+            >>> query.get_teams_stats_by_week([1, 2], 22)
+            [
+              {
+                "clinched_playoffs": 1,
+                "draft_position": 4,
+                "has_draft_grade": 0,
+                "league_scoring_type": "head",
+                "managers": {
+                  "manager": {
+                    "email": "manager1@example.com",
+                    "felo_score": 801,
+                    "felo_tier": "platinum",
+                    "guid": "ABCD1234EFGH5678IJKL9012MN",
+                    "image_url": "https://s.yimg.com/ag/images/sample_profile_64sq.jpg",
+                    "is_commissioner": 0,
+                    "manager_id": 1,
+                    "nickname": "Manager1"
+                  }
+                },
+                "name": "Team Alpha",
+                "number_of_moves": 81,
+                "number_of_trades": 0,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 23,
+                  "value": 0
+                },
+                "team_id": 1,
+                "team_key": "454.l.######.t.1",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/0adf0d289fa54e02c4e3a6d8e99533ff29f1f93b22b7392cfd4fac4951f4c627.jpg"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 5.0,
+                  "week": 22
+                },
+                "team_stats": {
+                  "coverage_type": "week",
+                  "week": 22,
+                  "stats": [
+                    {
+                      "stat": {
+                        "stat_id": 9004003,
+                        "value": 0.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 5,
+                        "value": 0.445
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 9007006,
+                        "value": 0.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 8,
+                        "value": 0.822
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 10,
+                        "value": 86.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 12,
+                        "value": 772.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 15,
+                        "value": 268.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 16,
+                        "value": 178.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 17,
+                        "value": 56.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 18,
+                        "value": 34.0
+                      }
+                    },
+                    {
+                      "stat": {
+                        "stat_id": 19,
+                        "value": 80.0
+                      }
+                    }
+                  ]
+                },
+                "url": "https://basketball.fantasysports.yahoo.com/nba/######/1",
+                "team_remaining_games": {
+                  "coverage_type": "week",
+                  "week": 22,
+                  "total": {
+                    "remaining_games": 0,
+                    "live_games": 0,
+                    "completed_games": 58
+                  }
+                }
+              },
+              ...
+            ]
+
+      Returns:
+          List[Team]: List of YFPY Team instances containing comprehensive team data for the specified week. Each Team
+              instance includes team_points (TeamPoints), team_stats (TeamStats), team_remaining_games 
+              (TeamRemainingGames), managers (Manager), roster_adds (RosterAdds), team_logos (TeamLogo), and other 
+              team-related attributes populated with week-specific statistical data.
+      
+      """
+      # Convert team IDs to team keys using game_code from initialization and league ID (52687)
+      team_keys = [f"{self.get_league_key()}.t.{team_id}" for team_id in team_ids]
+      team_keys_str = ",".join(team_keys)
+      return self.query(
+          f"https://fantasysports.yahooapis.com/fantasy/v2/teams;team_keys={team_keys_str}/stats;type=week;week={chosen_week}",
+          ["teams"]
+      )
+    
+
 
     def get_team_standings(self, team_id: Union[str, int]) -> TeamStandings:
         """Retrieve standings of specific team by team_id for chosen league.
