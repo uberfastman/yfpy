@@ -2856,6 +2856,35 @@ class YahooFantasySportsQuery(object):
             f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/matchups",
             ["team", "matchups"]
         )
+  
+    def get_team_matchup_by_week(self, team_id: Union[str, int], chosen_week: Union[int, str]) -> Matchup:
+        """Retrieve matchup of specific team by team_id for a specific week in the chosen league.
+
+        Args:
+            team_id (str | int): Selected team ID for which to retrieve data (can be integers 1 through n where n is the
+                number of teams in the league).
+            chosen_week (Union[int, str]): Week number to get matchup for.
+
+        Examples:
+            >>> from pathlib import Path
+            >>> from yfpy.query import YahooFantasySportsQuery
+            >>> query = YahooFantasySportsQuery(league_id="######", game_code="nfl")
+            >>> # Get matchup for a specific week
+            >>> query.get_team_matchup_by_week(1, 5)
+            Matchup({
+              <matchup data> (see get_league_matchups_by_week docstring for matchup data example)
+            })
+
+        Returns:
+            Matchup: YFPY Matchup instance for the specified week.
+
+        """
+        team_key = f"{self.get_league_key()}.t.{team_id}"
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/team/{team_key}/matchups;weeks={chosen_week}",
+            ["team", "matchups", "0", "matchup"],
+            Matchup
+        )
 
     def get_player_stats_for_season(self, player_key: str, limit_to_league_stats: bool = True) -> Player:
         """Retrieve stats of specific player by player_key for the entire season for chosen league.
