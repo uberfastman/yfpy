@@ -20,7 +20,7 @@ from yfpy.logger import get_logger
 
 logger = get_logger(__name__)
 
-yahoo_fantasy_sports_game_codes = ["nfl", "nhl", "mlb", "nba"]
+yahoo_fantasy_sports_game_codes = ["nfl", "nhl", "mlb", "nba","454"]
 
 
 def retrieve_game_code_from_user() -> str:

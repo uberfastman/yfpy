@@ -2968,6 +2968,32 @@ class YahooFantasySportsQuery(object):
                 ["players", "0", "player"],
                 Player
             )
+        
+    def get_players_stats_for_season(self, player_keys: list[str], limit_to_league_stats: bool = True) -> list[Player]:
+        """Retrieve stats of multiple players by player_keys for the entire season.
+
+        Args:
+            player_keys (list[str]): List of player keys (e.g., ["454.p.6417", "454.p.6032"]).
+            limit_to_league_stats (bool): Limit stats to the league context (default: True). When False, retrieves general game stats.
+
+        Examples:
+            >>> from yfpy.query import YahooFantasySportsQuery
+            >>> query = YahooFantasySportsQuery(league_id="######", game_code="nfl")
+            >>> player_keys = ["454.p.6417", "454.p.6032"]
+            >>> query.get_players_stats_for_season(player_keys)
+            [Player(...), Player(...)]
+
+        Returns:
+            list[Player]: List of YFPY Player instances.
+        """
+        player_keys_str = ",".join(player_keys)
+
+        # The query method should support extracting a list of Player instances
+        return self.query(
+            f"https://fantasysports.yahooapis.com/fantasy/v2/players;"
+            f"player_keys={player_keys_str}/stats",
+            ["players"],
+        )        
 
     def get_player_stats_by_week(self, player_key: str, chosen_week: Union[int, str] = "current",
                                  limit_to_league_stats: bool = True) -> Player:
