@@ -528,6 +528,9 @@ class Team(YahooFantasyObject):
             team_projected_points (TeamProjectedPoints): A YFPY TeamProjectedPoints instance.
             projected_points (float): The total projected points for the team.
             team_standings (TeamStandings): A YFPY TeamStandings instance.
+            team_stats (TeamStats): A YFPY TeamStats instance containing the team's statistics.
+            team_remaining_games (TeamRemainingGames): A YFPY TeamRemainingGames instance containing information about
+                remaining games for the team.
             wins (int): The number of wins by the team.
             losses (int): The number of losses by the team.
             ties (int): The number of ties by the team.
@@ -587,10 +590,11 @@ class Team(YahooFantasyObject):
         self.team_paid: int = self._extracted_data.get("team_paid", 0)
         self.team_points: TeamPoints = self._extracted_data.get("team_points", TeamPoints({}))
         self.points: float = self._get_nested_value(self.team_points, "total", 0.0, float)
-        self.team_projected_points: TeamProjectedPoints = self._extracted_data.get("team_projected_points",
-                                                                                   TeamProjectedPoints({}))
+        self.team_projected_points: TeamProjectedPoints = self._extracted_data.get("team_projected_points", TeamProjectedPoints({}))
         self.projected_points: float = self._get_nested_value(self.team_projected_points, "total", 0.0, float)
         self.team_standings: TeamStandings = self._extracted_data.get("team_standings", TeamStandings({}))
+        self.team_stats: TeamStats = self._extracted_data.get("team_stats", TeamStats({}))
+        self.team_remaining_games: TeamRemainingGames = self._extracted_data.get("team_remaining_games", TeamRemainingGames({}))
         self.wins: int = self._get_nested_value(self.team_standings, ["outcome_totals", "wins"], 0, int)
         self.losses: int = self._get_nested_value(self.team_standings, ["outcome_totals", "losses"], 0, int)
         self.ties: int = self._get_nested_value(self.team_standings, ["outcome_totals", "ties"], 0, int)
@@ -886,6 +890,55 @@ class TeamProjectedPoints(YahooFantasyObject):
         self.coverage_type: str = self._extracted_data.get("coverage_type", "")
         self.total: float = self._get_nested_value(self._extracted_data, "total", 0.0, float)
         self.week: Optional[int] = self._extracted_data.get("week", None)
+
+# noinspection PyUnresolvedReferences
+class TeamRemainingGames(YahooFantasyObject):
+    """Model class for "team_remaining_games" data key.
+    """
+
+    def __init__(self, extracted_data):
+        """Instantiate the TeamRemainingGames child class of YahooFantasyObject.
+
+        Args:
+            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
+
+        Attributes:
+            coverage_type (str): The timeframe for the remaining games data ("week", "date", "season", etc.).
+            week (int): The week number.
+            total (dict): Dictionary containing remaining games statistics:
+                remaining_games (int): Number of remaining games.
+                live_games (int): Number of currently live games.
+                completed_games (int): Number of completed games.
+        """
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type: str = self._extracted_data.get("coverage_type", "")
+        self.week: Optional[int] = self._extracted_data.get("week", None)
+        self.total: dict = self._extracted_data.get("total", {})
+        self.remaining_games: int = self._get_nested_value(self.total, "remaining_games", 0, int)
+        self.live_games: int = self._get_nested_value(self.total, "live_games", 0, int)
+        self.completed_games: int = self._get_nested_value(self.total, "completed_games", 0, int)
+
+
+# noinspection PyUnresolvedReferences
+class TeamStats(YahooFantasyObject):
+    """Model class for "team_stats" data key.
+    """
+
+    def __init__(self, extracted_data):
+        """Instantiate the TeamStats child class of YahooFantasyObject.
+
+        Args:
+            extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
+
+        Attributes:
+            coverage_type (str): The timeframe for the selected team stats ("week", "date", "season", etc.).
+            week (int): The week number.
+            stats (list[Stat]): List of Stat objects containing the team's statistics.
+        """
+        YahooFantasyObject.__init__(self, extracted_data)
+        self.coverage_type: str = self._extracted_data.get("coverage_type", "")
+        self.week: Optional[int] = self._extracted_data.get("week", None)
+        self.stats: List[Stat] = self._extracted_data.get("stats", [])
 
 
 # noinspection PyUnresolvedReferences
