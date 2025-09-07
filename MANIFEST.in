@@ -8,6 +8,9 @@ include LICENSE
 include requirements.txt
 include requirements-dev.txt
 
+# Include version bounds file
+include VERSION_PYTHON.py
+
 # Include Yahoo Fantasy Sports REST API authentication resources
 include .env.template
 

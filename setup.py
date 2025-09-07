@@ -6,9 +6,28 @@ from pathlib import Path
 import setuptools
 from ruamel.yaml import YAML
 
-from VERSION_PYTHON import __version_minimum_python__, __version_maximum_python__
+# --- Load supported Python version bounds without importing the module (import failed in build isolation) ---
+# We avoid `import VERSION_PYTHON` because during `pip install .` (PEP 517 isolated build) the project root
+# may not yet be reliably on sys.path when setuptools initially evaluates setup.py for build requirements.
+def _read_version_bounds(version_file_path: Path):
+    minimum = "3.10"  # sensible defaults if file missing
+    maximum = "3.12"
+    if version_file_path.exists():
+        try:
+            for line in version_file_path.read_text(encoding="utf-8").splitlines():
+                if line.startswith("__version_minimum_python__"):
+                    minimum = line.split("=")[-1].strip().strip('"').strip("'")
+                elif line.startswith("__version_maximum_python__"):
+                    maximum = line.split("=")[-1].strip().strip('"').strip("'")
+        except Exception:
+            # Fall back to defaults if parsing somehow fails
+            pass
+    return minimum, maximum
 
 project_root_dir = Path(__file__).parent
+_min_py, _max_py = _read_version_bounds(project_root_dir / "VERSION_PYTHON.py")
+__version_minimum_python__, __version_maximum_python__ = _min_py, _max_py
+
 
 version_file = project_root_dir / "VERSION.py"
 
