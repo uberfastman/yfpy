@@ -33,18 +33,18 @@ jobs:
     - name: Install dependencies
       run: |
         uv sync --locked --all-extras --dev
-        source .venv/bin/activate
 
     - name: Lint with ruff
       run: |
         source .venv/bin/activate
-        ruff check .
+        make lint
 
     - name: Security check with bandit
       run: |
         source .venv/bin/activate
-        bandit -c pyproject.toml -r .
+        make secure
 
 #    - name: Run tests with pytest
-#      working-directory: ./
-#      run: make test_code
+#      run: |
+#        source .venv/bin/activate
+#        make test_code
