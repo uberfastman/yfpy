@@ -36,10 +36,14 @@ jobs:
         source .venv/bin/activate
 
     - name: Lint with ruff
-      run: ruff check .
+      run: |
+        source .venv/bin/activate
+        ruff check .
 
     - name: Security check with bandit
-      run: bandit -c pyproject.toml -r .
+      run: |
+        source .venv/bin/activate
+        bandit -c pyproject.toml -r .
 
 #    - name: Run tests with pytest
 #      working-directory: ./
