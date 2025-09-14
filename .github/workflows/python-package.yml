@@ -34,13 +34,11 @@ jobs:
       run: |
         uv sync --locked --all-extras --dev
 
-#    - name: Lint with ruff
-#      working-directory: ./
-#      run: make lint
+    - name: Lint with ruff
+      run: ruff check .
 
-#    - name: Security check with bandit
-#      working-directory: ./
-#      run: make secure
+    - name: Security check with bandit
+      run: bandit -c pyproject.toml -r .
 
 #    - name: Run tests with pytest
 #      working-directory: ./
