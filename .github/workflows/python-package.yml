@@ -35,10 +35,13 @@ jobs:
         uv sync --locked --all-extras --dev
 
     - name: Lint with ruff
+      working-directory: ./yfpy
       run: make lint
 
     - name: Security check with bandit
+      working-directory: ./yfpy
       run: make secure
 
 #    - name: Run tests with pytest
+#      working-directory: ./yfpy
 #      run: make test_code
