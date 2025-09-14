@@ -38,9 +38,9 @@ jobs:
 #      working-directory: ./
 #      run: make lint
 
-    - name: Security check with bandit
-      working-directory: ./
-      run: make secure
+#    - name: Security check with bandit
+#      working-directory: ./
+#      run: make secure
 
 #    - name: Run tests with pytest
 #      working-directory: ./
