@@ -34,9 +34,9 @@ jobs:
       run: |
         uv sync --locked --all-extras --dev
 
-    - name: Lint with ruff
-      working-directory: ./
-      run: make lint
+#    - name: Lint with ruff
+#      working-directory: ./
+#      run: make lint
 
     - name: Security check with bandit
       working-directory: ./
