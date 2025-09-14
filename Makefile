@@ -42,10 +42,10 @@ pre_build: ## Set Python package version in VERSION.py using latest git tag, upd
 	python scripts/pre_build.py
 
 test_docs: ## Extract Python package version and serve MkDocs documentation locally for testing.
-	export PYTHON_PACKAGE_VERSION=$$(python -c "from VERSION import __version__; print(f'v{__version__}')") && mkdocs serve
+	export YFPY_VERSION=$$(python -c "from VERSION import __version__; print(f'v{__version__}')") && mkdocs serve
 
 docs: pre_build build ## Extract Python package version and build MkDocs documentation for distribution.
-	export PYTHON_PACKAGE_VERSION=$$(python -c "from VERSION import __version__; print(f'v{__version__}')") && mkdocs build
+	export YFPY_VERSION=$$(python -c "from VERSION import __version__; print(f'v{__version__}')") && mkdocs build
 
 test_deploy: docs verify_build ## Deploy PyPI package to Test PyPI with Twine.
 	twine upload -r testpypi dist/*
