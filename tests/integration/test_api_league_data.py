@@ -61,7 +61,7 @@ def test_get_league_info(yahoo_query, yahoo_data, data_dir, season, game_id, lea
 
 @pytest.mark.integration
 def test_get_league_metadata(yahoo_query, yahoo_data, data_dir, season, game_id, league_id, show_log_output):
-    """Integration test for retrieval of metadata for chosen Yahoo fantasy league..
+    """Integration test for retrieval of metadata for chosen Yahoo fantasy league.
 
     Note:
         Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_league_metadata`.

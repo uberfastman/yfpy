@@ -18,29 +18,27 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+
+    - name: Install uv and set the python version to ${{ matrix.python-version }}
+      uses: astral-sh/setup-uv@v6
       with:
+        version: "0.8.17"
+        enable-cache: true
         python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install flake8 bandit pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors
-        flake8 . --count --show-source --statistics
-        # exit-zero treats all errors as warnings
-        flake8 . --count --exit-zero --statistics
-    - name: Security lint with bandit
-      run: |
-        # stop the build if there are security warnings
-        bandit -r yfpy/
-#    - name: Test with pytest
-#      run: |
-#        pytest
+        uv sync --locked --all-extras --dev
+
+    - name: Lint with ruff
+      run: make lint
+
+    - name: Security check with bandit
+      run: make secure
+
+#    - name: Run tests with pytest
+#      run: make test_code

@@ -1,3 +1,3 @@
 ```python 
---8<-- "quickstart/quickstart.py"
+--8<-- "scripts/quickstart.py"
 ```

@@ -36,7 +36,7 @@
           <img src="../yfpy-logo.svg" class="logo" alt="Logo"/>
         </a>
         <div class="version">
-          v16.0.3
+          vX.X.X
         </div><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -59,6 +59,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#pip">Pip</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#uv">uv</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#manual">Manual</a>
     </li>
@@ -120,6 +122,8 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#yahoo-fantasy-sports-api">Yahoo Fantasy Sports API</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jetbrains-and-pycharm">JetBrains and PyCharm</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -150,7 +154,7 @@
               </ul>
               <p class="caption"><span class="caption-text">Testing</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../test/">PyTest</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../tests/">PyTest</a>
                   </li>
               </ul>
       </div>
@@ -218,6 +222,7 @@
 <li><a href="#about">About</a></li>
 <li><a href="#installation">Installation</a><ul>
 <li><a href="#pip">Pip</a></li>
+<li><a href="#uv">uv</a></li>
 <li><a href="#manual">Manual</a></li>
 </ul>
 </li>
@@ -255,6 +260,7 @@
 </li>
 <li><a href="#troubleshooting">Troubleshooting</a><ul>
 <li><a href="#yahoo-fantasy-sports-api">Yahoo Fantasy Sports API</a></li>
+<li><a href="#jetbrains-and-pycharm">JetBrains and PyCharm</a></li>
 </ul>
 </li>
 </ul>
@@ -269,10 +275,20 @@
 <h4 id="pip">Pip<a class="headerlink" href="#pip" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
-<p>If you wish to use YFPY within another project, from within your project directory, run
+<p>If you wish to use YFPY within another project, from within your project directory, run:
     <code>shell
     pip install yfpy</code></p>
 <p>or add <code>yfpy</code> to your project <code>requirements.txt</code>.</p>
+</li>
+</ul>
+<p><a name="uv"></a></p>
+<h4 id="uv">uv<a class="headerlink" href="#uv" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>If you wish to use YFPY within another project, from within your project directory, run:
+    <code>shell
+    uv add yfpy</code></p>
+<p>or add <code>yfpy</code> to the project <code>dependencies</code> section in your <code>pyproject.toml</code>.</p>
 </li>
 </ul>
 <p><a name="manual"></a></p>
@@ -319,7 +335,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <li>YFPY is configured by default to check for environment variables for authentication with Yahoo, so you will now be able to proceed directly to <a href="#authentication">Authentication</a>.</li>
 </ul>
 <p><strong>Note</strong>: <em>You can disable the fallback to environment variables behavior during instantiation of a YFPY query by passing the argument <code>env_var_fallback=False</code> to the object:</em></p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">yfpy.query</span><span class="w"> </span><span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
     <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
@@ -360,7 +376,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <li>The <code>consumer_key</code> and <code>consumer_secret</code> fields in <code>yahoo_access_token_json</code> override any values provided in <code>yahoo_consumer_key</code>/<code>yahoo_consumer_secret</code>.</li>
 </ul>
 <p>Example of Using <code>yahoo_access_token_json</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">yfpy.query</span><span class="w"> </span><span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
     <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
@@ -391,9 +407,9 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <li>YFPY <em>also</em> supports the use of a <strong>single</strong> environment variable by providing a valid JSON string in <code>YAHOO_ACCESS_TOKEN_JSON</code>. This environment variable is only used if <code>env_var_fallback=True</code> (default) when instantiating a YFPY query.</li>
 <li>You can save the Yahoo access token fields as valid JSON with escaped double quotes (<code>"</code>) by invoking <code>YahooFantasySportsQuery.save_access_token_data_to_env_file</code> with <code>save_json_to_var_only=True</code> (instead of saving the Yahoo access token fields to individual environment variables as described in <a href="#persistent-authentication-using-access-token-fields">Persistent Authentication Using Access Token Fields</a>) like below:</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yfpy.query</span><span class="w"> </span><span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="n">YahooFantasySportsQuery</span><span class="p">(</span>
     <span class="n">league_id</span><span class="o">=</span><span class="s2">&quot;&lt;YAHOO_LEAGUE_ID&gt;&quot;</span><span class="p">,</span>
@@ -414,7 +430,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <h4 id="querying-the-yahoo-fantasy-sports-api">Querying the Yahoo Fantasy Sports API<a class="headerlink" href="#querying-the-yahoo-fantasy-sports-api" title="Permanent link">&para;</a></h4>
 <ul>
 <li>See the documentation on the  <a href="https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery"><code>yfpy.query.YahooFantasySportsQuery</code></a> class for example usage of all available queries.</li>
-<li>See <a href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code>quickstart/quickstart.py</code></a> for example usage output.</li>
+<li>See <a href="https://github.com/uberfastman/yfpy/blob/main/scripts/quickstart.py"><code>scripts/quickstart.py</code></a> for example usage output.</li>
 <li>Uncomment/comment out whichever configuration values in their respective functions with which you wish to experiment.</li>
 <li>Uncomment/comment out whichever query lines in the <code>RUN QUERIES</code> section you wish to run.</li>
 <li>Uncomment/comment out whichever query lines in the <code>CHECK FOR MISSING DATA FIELDS</code> section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.</li>
@@ -432,10 +448,10 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
     docker exec -it yfpy-package-1 bash</code>
     Then:
     <code>shell
-    python quickstart/quickstart.py</code></li>
+    python scripts/quickstart.py</code></li>
 <li>Send commands to the running container from your host machine:
     <code>shell
-    docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"</code></li>
+    docker exec -i yfpy-package-1 bash -c "python scripts/quickstart.py"</code></li>
 </ul>
 <p><a name="docker-development"></a></p>
 <h5 id="docker-development">Docker Development<a class="headerlink" href="#docker-development" title="Permanent link">&para;</a></h5>
@@ -463,7 +479,7 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <li>Before running any integration tests, make a copy of <a href="https://github.com/uberfastman/yfpy/blob/main/auth/.env.template"><code>auth/.env.template</code></a> in the <a href="https://github.com/uberfastman/yfpy/blob/main/auth/"><code>auth/</code></a> directory and rename it to <code>.env</code>.</li>
 <li>Copy your Yahoo <code>Client ID</code> and <code>Client Secret</code> into the environment variables in <code>.env</code> so that pytest can use them when hitting the Yahoo Fantasy Sports API.</li>
 <li>If this is the first time running pytest with your Yahoo API credentials, you <strong><em>MUST</em></strong> allow interactive prompts within pytest by using the <code>-s</code> flag.</li>
-<li>The fixture values in <a href="https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py"><code>test/integration/conftest.py</code></a> are defined in <a href="https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py"><code>quickstart/quickstart.py</code></a>, and can be changed for testing by uncommenting/commenting out the values inside each respective function.</li>
+<li>The fixture values in <a href="https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py"><code>test/integration/conftest.py</code></a> are defined in <a href="https://github.com/uberfastman/yfpy/blob/main/scripts/quickstart.py"><code>scripts/quickstart.py</code></a>, and can be changed for testing by uncommenting/commenting out the values inside each respective function.</li>
 </ul>
 <p><a name="run-tests"></a></p>
 <h4 id="run-tests">Run Tests<a class="headerlink" href="#run-tests" title="Permanent link">&para;</a></h4>
@@ -483,10 +499,10 @@ YAHOO_CONSUMER_SECRET=&lt;YAHOO_DEVELOPER_APP_CONSUMER_SECRET_STRING&gt;
 <p>YFPY has only been tested extensively on macOS, but is written to be platform-agnostic, and seems to work without issue on Windows and Linux. </p>
 <p><a name="python"></a></p>
 <h4 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h4>
-<p>YFPY requires Python 3.10 or later, and has been tested through Python 3.12.</p>
+<p>YFPY requires Python 3.10 or later, and has been tested through Python 3.13.</p>
 <p><a name="development"></a></p>
 <h4 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h4>
-<p>Direct project dependencies can be viewed in <code>requirements.txt</code>, and additional development and build dependencies (<em>not</em> including transitive dependencies) can be viewed in <code>requirements-dev.txt</code>.</p>
+<p>Run, development, and build dependencies (<em>not</em> including transitive dependencies) can be viewed in <code>pyproject.toml</code>.</p>
 <hr />
 <p><a name="troubleshooting"></a></p>
 <h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
@@ -502,6 +518,9 @@ IndexError:<span class="w"> </span>list<span class="w"> </span>index<span class=
 </code></pre></div>
 
 <p>Typically, when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.</p>
+<p><a name="jetbrains-and-pycharm"></a></p>
+<h4 id="jetbrains-and-pycharm">JetBrains and PyCharm<a class="headerlink" href="#jetbrains-and-pycharm" title="Permanent link">&para;</a></h4>
+<p>If you are using PyCharm for development against this project and want the IDE to be aware of the installed dependencies in your Python interpreter, PyCharm currently has a bug with its <code>uv</code> integration that <em>requires</em> the project to have the <code>uv</code> Python interpreter exists in a <code>.venv</code> directory in the project root. In the event that you have a <code>uv</code> Python interpreter configured elsewhere, you can run <code>ln -sf /path/to/uv/interpreter/directory .venv</code> in the YFPY project root, and then configure the Python interpreter in PyCharm to point to the Python executable in the <code>.venv</code> symbolic link, and all of your installed dependencies will show up and the IDE will be aware that they are installed.</p>
               
             </div>
           </div><footer>

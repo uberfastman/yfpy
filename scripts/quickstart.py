@@ -52,7 +52,8 @@ def get_season():
     # season = 2021
     # season = 2022
     # season = 2023
-    season = 2024
+    # season = 2024
+    season = 2025
     return season
 
 
@@ -120,7 +121,8 @@ def get_game_id():
     # game_id = 406  # NFL - 2021
     # game_id = 414  # NFL - 2022 (divisions)
     # game_id = 423  # NFL - 2023
-    game_id = 449  # NFL - 2024
+    # game_id = 449  # NFL - 2024
+    game_id = 461  # NFL - 2025
 
     # HOCKEY
     # game_id = 303  # NHL - 2012
@@ -153,7 +155,8 @@ def get_game_key():
     # game_key = "406"  # NFL - 2021
     # game_key = "414"  # NFL - 2022 (divisions)
     # game_key = "423"  # NFL - 2023
-    game_key = "449"  # NFL - 2024
+    # game_key = "449"  # NFL - 2024
+    game_key = "461"  # NFL - 2025
 
     # HOCKEY
     # game_key = "303"  # NHL - 2012
@@ -182,7 +185,8 @@ def get_league_id():
     # league_id = "413954"  # NFL - 2021
     # league_id = "791337"  # NFL - 2022 (divisions)
     # league_id = "321958"  # NFL - 2023
-    league_id = "365083"  # NFL - 2024
+    # league_id = "365083"  # NFL - 2024
+    league_id = "524458"  # NFL - 2025
 
     # HOCKEY
     # league_id = "69624"  # NHL - 2012
@@ -221,7 +225,7 @@ test_team_id = get_team_id()
 # set desired team name within desired league
 def get_team_name():
     # FOOTBALL
-    team_name = "Let Baker Bake"  # NFL
+    team_name = "Gibbs Me A Bake"  # NFL
 
     # HOCKEY
     # team_name = "The Bateleurs"  # NHL (2012)

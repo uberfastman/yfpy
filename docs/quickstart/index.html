@@ -36,7 +36,7 @@
           <img src="../yfpy-logo.svg" class="logo" alt="Logo"/>
         </a>
         <div class="version">
-          v16.0.3
+          vX.X.X
         </div><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -78,7 +78,7 @@
               </ul>
               <p class="caption"><span class="caption-text">Testing</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../test/">PyTest</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../tests/">PyTest</a>
                   </li>
               </ul>
       </div>
@@ -112,17 +112,17 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Wren J. R. (uberfastman)&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;uberfastman@uberfastman.dev&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">DEBUG</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEBUG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">project_dir</span><span class="p">))</span>
 
-<span class="kn">from</span> <span class="nn">yfpy</span> <span class="kn">import</span> <span class="n">Data</span>  <span class="c1"># noqa: E402</span>
-<span class="kn">from</span> <span class="nn">yfpy.logger</span> <span class="kn">import</span> <span class="n">get_logger</span>  <span class="c1"># noqa: E402</span>
-<span class="kn">from</span> <span class="nn">yfpy.query</span> <span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>  <span class="c1"># noqa: E402</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yfpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Data</span>  <span class="c1"># noqa: E402</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yfpy.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>  <span class="c1"># noqa: E402</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">yfpy.query</span><span class="w"> </span><span class="kn">import</span> <span class="n">YahooFantasySportsQuery</span>  <span class="c1"># noqa: E402</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example public Yahoo league URL: &quot;https://archive.fantasysports.yahoo.com/nfl/2014/729259&quot;</span>
@@ -146,7 +146,7 @@
 
 
 <span class="c1"># set desired season year</span>
-<span class="k">def</span> <span class="nf">get_season</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_season</span><span class="p">():</span>
     <span class="c1"># season = 2012</span>
     <span class="c1"># season = 2013</span>
     <span class="c1"># season = 2014</span>
@@ -159,7 +159,8 @@
     <span class="c1"># season = 2021</span>
     <span class="c1"># season = 2022</span>
     <span class="c1"># season = 2023</span>
-    <span class="n">season</span> <span class="o">=</span> <span class="mi">2024</span>
+    <span class="c1"># season = 2024</span>
+    <span class="n">season</span> <span class="o">=</span> <span class="mi">2025</span>
     <span class="k">return</span> <span class="n">season</span>
 
 
@@ -167,7 +168,7 @@
 
 
 <span class="c1"># set desired week</span>
-<span class="k">def</span> <span class="nf">get_chosen_week</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_chosen_week</span><span class="p">():</span>
     <span class="n">chosen_week</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">chosen_week</span>
 
@@ -176,7 +177,7 @@
 
 
 <span class="c1"># set desired date</span>
-<span class="k">def</span> <span class="nf">get_chosen_date</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_chosen_date</span><span class="p">():</span>
     <span class="c1"># HOCKEY</span>
     <span class="c1"># chosen_date = &quot;2013-04-15&quot;  # NHL - 2013 (for 2012 season)</span>
     <span class="n">chosen_date</span> <span class="o">=</span> <span class="s2">&quot;2021-10-25&quot;</span>  <span class="c1"># NHL - 2021</span>
@@ -195,7 +196,7 @@
 
 
 <span class="c1"># set desired Yahoo Fantasy Sports game code</span>
-<span class="k">def</span> <span class="nf">get_game_code</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_game_code</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="n">game_code</span> <span class="o">=</span> <span class="s2">&quot;nfl&quot;</span>  <span class="c1"># NFL</span>
 
@@ -215,7 +216,7 @@
 
 
 <span class="c1"># set desired Yahoo Fantasy Sports game ID (see the get_all_yahoo_fantasy_game_keys query to retrieve values)</span>
-<span class="k">def</span> <span class="nf">get_game_id</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_game_id</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="c1"># game_id = 331  # NFL - 2014</span>
     <span class="c1"># game_id = 348  # NFL - 2015 (divisions)</span>
@@ -227,7 +228,8 @@
     <span class="c1"># game_id = 406  # NFL - 2021</span>
     <span class="c1"># game_id = 414  # NFL - 2022 (divisions)</span>
     <span class="c1"># game_id = 423  # NFL - 2023</span>
-    <span class="n">game_id</span> <span class="o">=</span> <span class="mi">449</span>  <span class="c1"># NFL - 2024</span>
+    <span class="c1"># game_id = 449  # NFL - 2024</span>
+    <span class="n">game_id</span> <span class="o">=</span> <span class="mi">461</span>  <span class="c1"># NFL - 2025</span>
 
     <span class="c1"># HOCKEY</span>
     <span class="c1"># game_id = 303  # NHL - 2012</span>
@@ -248,7 +250,7 @@
 
 
 <span class="c1"># set desired Yahoo Fantasy Sports game key (see the get_all_yahoo_fantasy_game_keys query to retrieve values)</span>
-<span class="k">def</span> <span class="nf">get_game_key</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_game_key</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="c1"># game_key = &quot;331&quot;  # NFL - 2014</span>
     <span class="c1"># game_key = &quot;348&quot;  # NFL - 2015 (divisions)</span>
@@ -260,7 +262,8 @@
     <span class="c1"># game_key = &quot;406&quot;  # NFL - 2021</span>
     <span class="c1"># game_key = &quot;414&quot;  # NFL - 2022 (divisions)</span>
     <span class="c1"># game_key = &quot;423&quot;  # NFL - 2023</span>
-    <span class="n">game_key</span> <span class="o">=</span> <span class="s2">&quot;449&quot;</span>  <span class="c1"># NFL - 2024</span>
+    <span class="c1"># game_key = &quot;449&quot;  # NFL - 2024</span>
+    <span class="n">game_key</span> <span class="o">=</span> <span class="s2">&quot;461&quot;</span>  <span class="c1"># NFL - 2025</span>
 
     <span class="c1"># HOCKEY</span>
     <span class="c1"># game_key = &quot;303&quot;  # NHL - 2012</span>
@@ -281,7 +284,7 @@
 
 
 <span class="c1"># set desired league ID (see README.md for finding value)</span>
-<span class="k">def</span> <span class="nf">get_league_id</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_league_id</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="c1"># league_id = &quot;907359&quot;  # NFL - 2015 (divisions)</span>
     <span class="c1"># league_id = &quot;79230&quot;  # NFL - 2019</span>
@@ -289,7 +292,8 @@
     <span class="c1"># league_id = &quot;413954&quot;  # NFL - 2021</span>
     <span class="c1"># league_id = &quot;791337&quot;  # NFL - 2022 (divisions)</span>
     <span class="c1"># league_id = &quot;321958&quot;  # NFL - 2023</span>
-    <span class="n">league_id</span> <span class="o">=</span> <span class="s2">&quot;365083&quot;</span>  <span class="c1"># NFL - 2024</span>
+    <span class="c1"># league_id = &quot;365083&quot;  # NFL - 2024</span>
+    <span class="n">league_id</span> <span class="o">=</span> <span class="s2">&quot;524458&quot;</span>  <span class="c1"># NFL - 2025</span>
 
     <span class="c1"># HOCKEY</span>
     <span class="c1"># league_id = &quot;69624&quot;  # NHL - 2012</span>
@@ -312,7 +316,7 @@
 
 
 <span class="c1"># set desired team ID within desired league</span>
-<span class="k">def</span> <span class="nf">get_team_id</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_team_id</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="n">team_id</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># NFL</span>
 
@@ -326,9 +330,9 @@
 
 
 <span class="c1"># set desired team name within desired league</span>
-<span class="k">def</span> <span class="nf">get_team_name</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_team_name</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
-    <span class="n">team_name</span> <span class="o">=</span> <span class="s2">&quot;Let Baker Bake&quot;</span>  <span class="c1"># NFL</span>
+    <span class="n">team_name</span> <span class="o">=</span> <span class="s2">&quot;Gibbs Me A Bake&quot;</span>  <span class="c1"># NFL</span>
 
     <span class="c1"># HOCKEY</span>
     <span class="c1"># team_name = &quot;The Bateleurs&quot;  # NHL (2012)</span>
@@ -340,7 +344,7 @@
 
 
 <span class="c1"># set desired team ID within desired league</span>
-<span class="k">def</span> <span class="nf">get_player_id</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_player_id</span><span class="p">():</span>
     <span class="c1"># FOOTBALL</span>
     <span class="n">player_id</span> <span class="o">=</span> <span class="mi">30123</span>  <span class="c1"># NFL: Patrick Mahomes - 2020/2021/2023/2024</span>
 
@@ -362,7 +366,7 @@
 
 
 <span class="c1"># set the maximum number players you wish the get_league_players query to retrieve</span>
-<span class="k">def</span> <span class="nf">get_league_player_limit</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_league_player_limit</span><span class="p">():</span>
     <span class="n">league_player_limit</span> <span class="o">=</span> <span class="mi">101</span>
 
     <span class="k">return</span> <span class="n">league_player_limit</span>

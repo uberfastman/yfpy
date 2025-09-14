@@ -17,13 +17,15 @@ dist/
 
 # Testing
 .pytest_cache/
-test_output/
+output/
 
 # Environment
 *.env*
 !.env.template
-*.venv
+.venv
+.venv*/
 .python-version
+.python-venv
 
 # Credentials
 *private*.json

@@ -36,7 +36,7 @@
           <img src="../yfpy-logo.svg" class="logo" alt="Logo"/>
         </a>
         <div class="version">
-          v16.0.3
+          vX.X.X
         </div><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -90,7 +90,7 @@
               </ul>
               <p class="caption"><span class="caption-text">Testing</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../test/">PyTest</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../tests/">PyTest</a>
                   </li>
               </ul>
       </div>
@@ -142,7 +142,7 @@
         <ul class="first simple">
             <li>
               <b><code>logger</code></b>
-                  (<code>Logger</code>)
+                  (<code><span title="Logger">Logger</span></code>)
               –
               <div class="doc-md-description">
                 <p>Module level logger for usage and debugging.</p>
@@ -155,7 +155,49 @@
 </table>
 
 
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Classes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="YahooFantasySportsException (yfpy.exceptions.YahooFantasySportsException)" href="#yfpy.exceptions.YahooFantasySportsException">YahooFantasySportsException</a></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base YFPY exception class for Yahoo Fantasy Sports API exceptions.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="YahooFantasySportsDataNotFound (yfpy.exceptions.YahooFantasySportsDataNotFound)" href="#yfpy.exceptions.YahooFantasySportsDataNotFound">YahooFantasySportsDataNotFound</a></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>YFPY exception when no data was retrieved from the Yahoo Fantasy Sports REST API.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
   <div class="doc doc-children">
+
 
 
 
@@ -177,10 +219,43 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code>Exception</code></p>
+              Bases: <code><span title="Exception">Exception</span></code></p>
 
 
         <p>Base YFPY exception class for Yahoo Fantasy Sports API exceptions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="__init__ (yfpy.exceptions.YahooFantasySportsException.__init__)" href="#yfpy.exceptions.YahooFantasySportsException.__init__">__init__</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Instantiate YFPY exception.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
 
               <details class="quote">
                 <summary>Source code in <code>yfpy/exceptions.py</code></summary>
@@ -206,10 +281,10 @@
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">YahooFantasySportsException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">YahooFantasySportsException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base YFPY exception class for Yahoo Fantasy Sports API exceptions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate YFPY exception.</span>
 
 <span class="sd">        Args:</span>
@@ -227,7 +302,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">payload</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">url</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -235,6 +310,7 @@
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -252,7 +328,7 @@
 
 
 <a href="#yfpy.exceptions.YahooFantasySportsException.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature codehilite"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">message</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="doc-signature codehilite"><pre><span></span><code><span class="nf">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -272,7 +348,7 @@
         <ul class="first simple">
             <li>
               <b><code>message</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Human readable string describing the exception.</p>
@@ -280,7 +356,7 @@
             </li>
             <li>
               <b><code>payload</code></b>
-                  (<code>str</code>, default:
+                  (<code><span title="str">str</span></code>, default:
                       <code>None</code>
 )
               –
@@ -290,7 +366,7 @@
             </li>
             <li>
               <b><code>url</code></b>
-                  (<code>str</code>, default:
+                  (<code><span title="str">str</span></code>, default:
                       <code>None</code>
 )
               –
@@ -316,7 +392,7 @@
         <ul class="first simple">
             <li>
               <b><code>message</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Human readable string describing the exception.</p>
@@ -324,7 +400,7 @@
             </li>
             <li>
               <b><code>payload</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>The API exception error payload.</p>
@@ -332,7 +408,7 @@
             </li>
             <li>
               <b><code>url</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Yahoo Fantasy Sports REST API URL.</p>
@@ -343,6 +419,7 @@
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/exceptions.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
@@ -361,7 +438,7 @@
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate YFPY exception.</span>
 
 <span class="sd">    Args:</span>
@@ -405,15 +482,27 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="yfpy.exceptions.YahooFantasySportsException" href="#yfpy.exceptions.YahooFantasySportsException">YahooFantasySportsException</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="YahooFantasySportsException (yfpy.exceptions.YahooFantasySportsException)" href="#yfpy.exceptions.YahooFantasySportsException">YahooFantasySportsException</a></code></p>
 
 
         <p>YFPY exception when no data was retrieved from the Yahoo Fantasy Sports REST API.</p>
 
+
+
+
+
+
+
+
+
+
+
+
+
               <details class="quote">
                 <summary>Source code in <code>yfpy/exceptions.py</code></summary>
                 <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">YahooFantasySportsDataNotFound</span><span class="p">(</span><span class="n">YahooFantasySportsException</span><span class="p">):</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">YahooFantasySportsDataNotFound</span><span class="p">(</span><span class="n">YahooFantasySportsException</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;YFPY exception when no data was retrieved from the Yahoo Fantasy Sports REST API.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -421,6 +510,7 @@
 
 
   <div class="doc doc-children">
+
 
 
 

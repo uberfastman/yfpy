@@ -8,7 +8,7 @@ __email__ = "uberfastman@uberfastman.dev"
 import os
 from pathlib import Path
 from typing import Union
-from quickstart import quickstart
+from scripts import quickstart
 
 import pytest
 
@@ -25,7 +25,7 @@ Example vars using public Yahoo leagues still require auth through a personal Ya
 @pytest.fixture
 def data_dir() -> Path:
     """Code tests will output data to this directory."""
-    return Path(__file__).parent / "test_output"
+    return Path(__file__).parent / "output"
 
 
 @pytest.fixture

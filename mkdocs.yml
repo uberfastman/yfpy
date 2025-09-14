@@ -44,7 +44,7 @@ nav:
     - Exceptions: exceptions.md
     - Logging: logger.md
   - Testing:
-    - PyTest: test.md
+    - PyTest: tests.md
 
 markdown_extensions:
   - toc:

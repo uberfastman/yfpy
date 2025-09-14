@@ -206,9 +206,9 @@ def get_type(json_obj_dict: Dict[str, Any], parent_class: Type, subclasses: Dict
     """Cast JSON object to custom subclass type extracted from parent class.
 
     Args:
-        json_obj_dict (dict of str: Any): JSON dictionary with strings of data type as keys and JSON objects as values.
+        json_obj_dict (dict[str, Any]): JSON dictionary with strings of data type as keys and JSON objects as values.
         parent_class (Type): Parent class from which to derive subclasses for casting.
-        subclasses (dict of str: Type): Dictionary of subclasses with strings that match the json dict keys as keys
+        subclasses (dict[str,Type]): Dictionary of subclasses with strings that match the json dict keys as keys
             and classes for casting as values.
 
     Returns:
@@ -323,7 +323,7 @@ def reorganize_json_dict(json_dict: Dict[str, Any], obj_key: str, val_to_key: st
     The reorganized JSON dictionary is an ordered dictionary sorted by a specific attribute of the value dictionaries.
 
     Args:
-        json_dict (dict of str: Any): JSON dictionary.
+        json_dict (dict[str, Any]): JSON dictionary.
         obj_key (str): Key to access the dictionaries contained in json_dict.
         val_to_key (str): Key used to sort the dictionaries contained in json_dict.
 

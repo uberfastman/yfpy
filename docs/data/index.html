@@ -36,7 +36,7 @@
           <img src="../yfpy-logo.svg" class="logo" alt="Logo"/>
         </a>
         <div class="version">
-          v16.0.3
+          vX.X.X
         </div><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -98,7 +98,7 @@
               </ul>
               <p class="caption"><span class="caption-text">Testing</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../test/">PyTest</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../tests/">PyTest</a>
                   </li>
               </ul>
       </div>
@@ -173,7 +173,7 @@ data can be done in one place without the need to manually run the queries and m
         <ul class="first simple">
             <li>
               <b><code>logger</code></b>
-                  (<code>Logger</code>)
+                  (<code><span title="Logger">Logger</span></code>)
               –
               <div class="doc-md-description">
                 <p>Module level logger for usage and debugging.</p>
@@ -186,7 +186,41 @@ data can be done in one place without the need to manually run the queries and m
 </table>
 
 
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Classes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="Data (yfpy.data.Data)" href="#yfpy.data.Data">Data</a></code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
   <div class="doc doc-children">
+
 
 
 
@@ -208,10 +242,88 @@ data can be done in one place without the need to manually run the queries and m
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code>object</code></p>
+              Bases: <code><span title="object">object</span></code></p>
 
 
         <p>YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="__init__ (yfpy.data.Data.__init__)" href="#yfpy.data.Data.__init__">__init__</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="update_data_dir (yfpy.data.Data.update_data_dir)" href="#yfpy.data.Data.update_data_dir">update_data_dir</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Modify the data storage directory if it needs to be updated.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="fetch
+
+
+  
+      staticmethod
+   (yfpy.data.Data.fetch)" href="#yfpy.data.Data.fetch">fetch</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Run query to retrieve Yahoo Fantasy Sports data.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="save (yfpy.data.Data.save)" href="#yfpy.data.Data.save">save</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Retrieve and save Yahoo Fantasy Sports data locally.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="load (yfpy.data.Data.load)" href="#yfpy.data.Data.load">load</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Load Yahoo Fantasy Sports data already stored locally.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="retrieve (yfpy.data.Data.retrieve)" href="#yfpy.data.Data.retrieve">retrieve</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Fetch data from the web or load it locally (combination of the save and load methods).</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+
 
               <details class="quote">
                 <summary>Source code in <code>yfpy/data.py</code></summary>
@@ -395,13 +507,13 @@ data can be done in one place without the need to manually run the queries and m
 <span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
-<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Data</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Data</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;YFPY Data object for Yahoo Fantasy Sports data retrieval, saving, and loading data as JSON.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">YFO</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;YFO&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">YahooFantasyObject</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.</span>
 
 <span class="sd">        Args:</span>
@@ -415,7 +527,7 @@ data can be done in one place without the need to manually run the queries and m
         <span class="bp">self</span><span class="o">.</span><span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">save_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">dev_offline</span>
 
-    <span class="k">def</span> <span class="nf">update_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_save_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_save_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify the data storage directory if it needs to be updated.</span>
 
 <span class="sd">        Args:</span>
@@ -428,13 +540,13 @@ data can be done in one place without the need to manually run the queries and m
         <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">new_save_dir</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_save_dir</span><span class="p">,</span> <span class="n">PosixPath</span><span class="p">)</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">new_save_dir</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
               <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run query to retrieve Yahoo Fantasy Sports data.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            object: Data retrieved by the yfpy query.</span>
@@ -445,14 +557,14 @@ data can be done in one place without the need to manually run the queries and m
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">yf_query</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve and save Yahoo Fantasy Sports data locally.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file_name (str): Name of file to which data will be saved.</span>
 <span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 <span class="sd">            new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.</span>
 
 <span class="sd">        Returns:</span>
@@ -506,7 +618,7 @@ data can be done in one place without the need to manually run the queries and m
 
         <span class="k">return</span> <span class="n">data</span>
 
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">all_output_as_json_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load Yahoo Fantasy Sports data already stored locally.</span>
@@ -552,7 +664,7 @@ data can be done in one place without the need to manually run the queries and m
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span>
 
-    <span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch data from the web or load it locally (combination of the save and load methods).</span>
@@ -560,7 +672,7 @@ data can be done in one place without the need to manually run the queries and m
 <span class="sd">        Args:</span>
 <span class="sd">            file_name (str): Name of file to/from which data will be saved/loaded.</span>
 <span class="sd">            yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 <span class="sd">            data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.</span>
 <span class="sd">            new_data_dir (str | Path, optional): Full path to new desired directory to/from which data will be</span>
 <span class="sd">                saved/loaded.</span>
@@ -591,6 +703,7 @@ data can be done in one place without the need to manually run the queries and m
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -599,7 +712,7 @@ data can be done in one place without the need to manually run the queries and m
 
 
 <a href="#yfpy.data.Data.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature codehilite"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span><span class="nf">data_dir</span><span class="p">,</span> <span class="n">save_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doc-signature codehilite"><pre><span></span><code><span class="nf">__init__</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">save_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -619,7 +732,7 @@ data can be done in one place without the need to manually run the queries and m
         <ul class="first simple">
             <li>
               <b><code>data_dir</code></b>
-                  (<code><span title="pathlib.Path">Path</span> | str</code>)
+                  (<code><span title="pathlib.Path">Path</span> | <span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Directory path where data will be saved/loaded.</p>
@@ -627,7 +740,7 @@ data can be done in one place without the need to manually run the queries and m
             </li>
             <li>
               <b><code>save_data</code></b>
-                  (<code>bool</code>, default:
+                  (<code><span title="bool">bool</span></code>, default:
                       <code>False</code>
 )
               –
@@ -637,7 +750,7 @@ data can be done in one place without the need to manually run the queries and m
             </li>
             <li>
               <b><code>dev_offline</code></b>
-                  (<code>bool</code>, default:
+                  (<code><span title="bool">bool</span></code>, default:
                       <code>False</code>
 )
               –
@@ -651,6 +764,7 @@ save_data = True).</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
@@ -665,7 +779,7 @@ save_data = True).</p>
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">save_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dev_offline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate data object to retrieve, save, and load Yahoo Fantasy Sports data.</span>
 
 <span class="sd">    Args:</span>
@@ -712,7 +826,7 @@ save_data = True).</p>
         <ul class="first simple">
             <li>
               <b><code>new_save_dir</code></b>
-                  (<code>str | <span title="pathlib.Path">Path</span></code>)
+                  (<code><span title="str">str</span> | <span title="pathlib.Path">Path</span></code>)
               –
               <div class="doc-md-description">
                 <p>Full path to new desired directory where data will be saved/loaded.</p>
@@ -746,6 +860,7 @@ save_data = True).</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
@@ -758,7 +873,7 @@ save_data = True).</p>
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_save_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_save_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify the data storage directory if it needs to be updated.</span>
 
 <span class="sd">    Args:</span>
@@ -815,12 +930,12 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>params</code></b>
-                  (<code>dict of str</code>, default:
+                  (<code><span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>, default:
                       <code>None</code>
 )
               –
               <div class="doc-md-description">
-                <p>str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</p>
+                <p>Dictionary of parameters to be passed to chosen yfpy query function.</p>
               </div>
             </li>
         </ul>
@@ -840,7 +955,7 @@ save_data = True).</p>
       <td class="field-body">
         <ul class="first simple">
             <li>
-<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
+<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
 )              –
               <div class="doc-md-description">
                 <p>Data retrieved by the yfpy query.</p>
@@ -851,6 +966,7 @@ save_data = True).</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">80</span>
@@ -870,13 +986,13 @@ save_data = True).</p>
 <span class="normal">94</span>
 <span class="normal">95</span>
 <span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
           <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run query to retrieve Yahoo Fantasy Sports data.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">        params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">        params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        object: Data retrieved by the yfpy query.</span>
@@ -920,7 +1036,7 @@ save_data = True).</p>
         <ul class="first simple">
             <li>
               <b><code>file_name</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Name of file to which data will be saved.</p>
@@ -936,17 +1052,17 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>params</code></b>
-                  (<code>dict of str</code>, default:
+                  (<code><span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>, default:
                       <code>None</code>
 )
               –
               <div class="doc-md-description">
-                <p>str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</p>
+                <p>Dictionary of parameters to be passed to chosen yfpy query function.</p>
               </div>
             </li>
             <li>
               <b><code>new_data_dir</code></b>
-                  (<code>str | <span title="pathlib.Path">Path</span></code>, default:
+                  (<code><span title="str">str</span> | <span title="pathlib.Path">Path</span></code>, default:
                       <code>None</code>
 )
               –
@@ -971,7 +1087,7 @@ save_data = True).</p>
       <td class="field-body">
         <ul class="first simple">
             <li>
-<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
+<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
 )              –
               <div class="doc-md-description">
                 <p>Data retrieved by the yfpy query.</p>
@@ -982,6 +1098,7 @@ save_data = True).</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
@@ -1043,14 +1160,14 @@ save_data = True).</p>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
          <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve and save Yahoo Fantasy Sports data locally.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file_name (str): Name of file to which data will be saved.</span>
 <span class="sd">        yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">        params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">        params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 <span class="sd">        new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.</span>
 
 <span class="sd">    Returns:</span>
@@ -1147,7 +1264,7 @@ save_data = True).</p>
         <ul class="first simple">
             <li>
               <b><code>file_name</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Name of file from which data will be loaded.</p>
@@ -1155,7 +1272,7 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>data_type_class</code></b>
-                  (<code><span title="typing.Type">Type</span>[<a class="autorefs autorefs-internal" title="yfpy.models.YahooFantasyObject" href="../models/#yfpy.models.YahooFantasyObject">YahooFantasyObject</a>]</code>, default:
+                  (<code><span title="typing.Type">Type</span>[<a class="autorefs autorefs-internal" title="YahooFantasyObject (yfpy.models.YahooFantasyObject)" href="../models/#yfpy.models.YahooFantasyObject">YahooFantasyObject</a>]</code>, default:
                       <code>None</code>
 )
               –
@@ -1165,7 +1282,7 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>new_data_dir</code></b>
-                  (<code>str | <span title="pathlib.Path">Path</span></code>, default:
+                  (<code><span title="str">str</span> | <span title="pathlib.Path">Path</span></code>, default:
                       <code>None</code>
 )
               –
@@ -1175,7 +1292,7 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>all_output_as_json_str</code></b>
-                  (<code>bool</code>, default:
+                  (<code><span title="bool">bool</span></code>, default:
                       <code>False</code>
 )
               –
@@ -1200,7 +1317,7 @@ save_data = True).</p>
       <td class="field-body">
         <ul class="first simple">
             <li>
-<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
+<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
 )              –
               <div class="doc-md-description">
                 <p>Data loaded from the selected JSON file.</p>
@@ -1211,6 +1328,7 @@ save_data = True).</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
@@ -1257,7 +1375,7 @@ save_data = True).</p>
 <span class="normal">200</span>
 <span class="normal">201</span>
 <span class="normal">202</span>
-<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
          <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
          <span class="n">all_output_as_json_str</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load Yahoo Fantasy Sports data already stored locally.</span>
@@ -1342,7 +1460,7 @@ save_data = True).</p>
         <ul class="first simple">
             <li>
               <b><code>file_name</code></b>
-                  (<code>str</code>)
+                  (<code><span title="str">str</span></code>)
               –
               <div class="doc-md-description">
                 <p>Name of file to/from which data will be saved/loaded.</p>
@@ -1358,17 +1476,17 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>params</code></b>
-                  (<code>dict of str</code>, default:
+                  (<code><span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>, default:
                       <code>None</code>
 )
               –
               <div class="doc-md-description">
-                <p>str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</p>
+                <p>Dictionary of parameters to be passed to chosen yfpy query function.</p>
               </div>
             </li>
             <li>
               <b><code>data_type_class</code></b>
-                  (<code><span title="typing.Type">Type</span>[<a class="autorefs autorefs-internal" title="yfpy.models.YahooFantasyObject" href="../models/#yfpy.models.YahooFantasyObject">YahooFantasyObject</a>]</code>, default:
+                  (<code><span title="typing.Type">Type</span>[<a class="autorefs autorefs-internal" title="YahooFantasyObject (yfpy.models.YahooFantasyObject)" href="../models/#yfpy.models.YahooFantasyObject">YahooFantasyObject</a>]</code>, default:
                       <code>None</code>
 )
               –
@@ -1378,7 +1496,7 @@ save_data = True).</p>
             </li>
             <li>
               <b><code>new_data_dir</code></b>
-                  (<code>str | <span title="pathlib.Path">Path</span></code>, default:
+                  (<code><span title="str">str</span> | <span title="pathlib.Path">Path</span></code>, default:
                       <code>None</code>
 )
               –
@@ -1404,7 +1522,7 @@ saved/loaded.</p>
       <td class="field-body">
         <ul class="first simple">
             <li>
-<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[str, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
+<b><code>object</code></b>(                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>, <span title="typing.List">List</span>[<span title="yfpy.data.Data.YFO">YFO</span>], <span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="yfpy.data.Data.YFO">YFO</span>]]</code>
 )              –
               <div class="doc-md-description">
                 <p>Data retrieved by the yfpy query OR loaded from the selected JSON file.</p>
@@ -1415,6 +1533,7 @@ saved/loaded.</p>
     </tr>
   </tbody>
 </table>
+
             <details class="quote">
               <summary>Source code in <code>yfpy/data.py</code></summary>
               <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">205</span>
@@ -1440,7 +1559,7 @@ saved/loaded.</p>
 <span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
-<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">yf_query</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">data_type_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">YahooFantasyObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">new_data_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">YFO</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YFO</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch data from the web or load it locally (combination of the save and load methods).</span>
@@ -1448,7 +1567,7 @@ saved/loaded.</p>
 <span class="sd">    Args:</span>
 <span class="sd">        file_name (str): Name of file to/from which data will be saved/loaded.</span>
 <span class="sd">        yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.</span>
-<span class="sd">        params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
+<span class="sd">        params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.</span>
 <span class="sd">        data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.</span>
 <span class="sd">        new_data_dir (str | Path, optional): Full path to new desired directory to/from which data will be</span>
 <span class="sd">            saved/loaded.</span>

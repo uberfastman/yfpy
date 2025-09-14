@@ -39,7 +39,7 @@ from stringcase import snakecase
 
 from yfpy.logger import get_logger
 from yfpy.models import YahooFantasyObject
-from yfpy.query import YahooFantasySportsQuery
+from yfpy.query import YahooFantasySportsQuery  # noqa
 from yfpy.utils import jsonify_data, jsonify_data_to_file, unpack_data
 
 logger = get_logger(__name__)
@@ -84,7 +84,7 @@ class Data(object):
 
         Args:
             yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
-            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.
 
         Returns:
             object: Data retrieved by the yfpy query.
@@ -102,7 +102,7 @@ class Data(object):
         Args:
             file_name (str): Name of file to which data will be saved.
             yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
-            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.
             new_data_dir (str | Path, optional): Full path to new desired directory to which data will be saved.
 
         Returns:
@@ -210,7 +210,7 @@ class Data(object):
         Args:
             file_name (str): Name of file to/from which data will be saved/loaded.
             yf_query (Callable of YahooFantasySportsQuery): Chosen yfpy query method to run.
-            params (dict of str: str, optional): Dictionary of parameters to be passed to chosen yfpy query function.
+            params (dict[str, str], optional): Dictionary of parameters to be passed to chosen yfpy query function.
             data_type_class (Type[YahooFantasyObject], optional): YFPY models.py class for data casting.
             new_data_dir (str | Path, optional): Full path to new desired directory to/from which data will be
                 saved/loaded.

@@ -1,6 +1,7 @@
 [<img src="https://raw.githubusercontent.com/uberfastman/yfpy/refs/heads/main/docs/yfpy-logo.svg" width="400"/>](https://github.com/uberfastman/yfpy)
 
 ## YFPY - Yahoo Fantasy Sports API Wrapper
+
 Python API wrapper for the Yahoo Fantasy Sports public API
 
 *Author: Wren J. R. (uberfastman)*
@@ -34,9 +35,11 @@ Python API wrapper for the Yahoo Fantasy Sports public API
 <sup>Detailed documentation on YFPY can be found at [https://yfpy.uberfastman.com](https://yfpy.uberfastman.com).</sup>
 
 ### Table of Contents
+
 * [About](#about)
 * [Installation](#installation)
     * [Pip](#pip)
+    * [uv](#uv)
     * [Manual](#manual)
 * [Setup](#setup)
     * [Yahoo Developer Network App](#yahoo-developer-network-app)
@@ -60,6 +63,7 @@ Python API wrapper for the Yahoo Fantasy Sports public API
     * [Development](#development)
 * [Troubleshooting](#troubleshooting)
     * [Yahoo Fantasy Sports API](#yahoo-fantasy-sports-api)
+    * [JetBrains and PyCharm](#jetbrains-and-pycharm)
 
 ---
 
@@ -76,12 +80,22 @@ YFPY is a comprehensive wrapper around the Yahoo Fantasy Sports API. It allows f
 <a name="pip"></a>
 #### Pip
 
-* If you wish to use YFPY within another project, from within your project directory, run
+* If you wish to use YFPY within another project, from within your project directory, run:
     ```shell
     pip install yfpy
     ```
     
     or add `yfpy` to your project `requirements.txt`.
+
+<a name="uv"></a>
+#### uv
+
+* If you wish to use YFPY within another project, from within your project directory, run:
+    ```shell
+    uv add yfpy
+    ```
+    
+    or add `yfpy` to the project `dependencies` section in your `pyproject.toml`.
 
 <a name="manual"></a>
 #### Manual
@@ -229,7 +243,7 @@ query.save_access_token_data_to_env_file(
 #### Querying the Yahoo Fantasy Sports API
 
 * See the documentation on the  [`yfpy.query.YahooFantasySportsQuery`](https://yfpy.uberfastman.com/_autosummary/yfpy.query.YahooFantasySportsQuery.html#yfpy.query.YahooFantasySportsQuery) class for example usage of all available queries.
-* See [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py) for example usage output.
+* See [`scripts/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/scripts/quickstart.py) for example usage output.
   * Uncomment/comment out whichever configuration values in their respective functions with which you wish to experiment.
   * Uncomment/comment out whichever query lines in the `RUN QUERIES` section you wish to run.
   * Uncomment/comment out whichever query lines in the `CHECK FOR MISSING DATA FIELDS` section you wish to check for any new/missing data fields returned by the Yahoo Sports Fantasy Football API.
@@ -250,11 +264,11 @@ YFPY can be used within Docker for a more seamless, platform-agnostic experience
     ```
     Then:
     ```shell
-    python quickstart/quickstart.py
+    python scripts/quickstart.py
     ```
   * Send commands to the running container from your host machine:
     ```shell
-    docker exec -i yfpy-package-1 bash -c "python quickstart/quickstart.py"
+    docker exec -i yfpy-package-1 bash -c "python scripts/quickstart.py"
     ```
 
 <a name="docker-development"></a>
@@ -289,7 +303,7 @@ YFPY has a collection of fully functional code snippets that can be run using [p
 * Before running any integration tests, make a copy of [`auth/.env.template`](https://github.com/uberfastman/yfpy/blob/main/auth/.env.template) in the [`auth/`](https://github.com/uberfastman/yfpy/blob/main/auth/) directory and rename it to `.env`.
 * Copy your Yahoo `Client ID` and `Client Secret` into the environment variables in `.env` so that pytest can use them when hitting the Yahoo Fantasy Sports API.
 * If this is the first time running pytest with your Yahoo API credentials, you ***MUST*** allow interactive prompts within pytest by using the `-s` flag.
-* The fixture values in [`test/integration/conftest.py`](https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py) are defined in [`quickstart/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/quickstart/quickstart.py), and can be changed for testing by uncommenting/commenting out the values inside each respective function.
+* The fixture values in [`test/integration/conftest.py`](https://github.com/uberfastman/yfpy/blob/main/test/integration/conftest.py) are defined in [`scripts/quickstart.py`](https://github.com/uberfastman/yfpy/blob/main/scripts/quickstart.py), and can be changed for testing by uncommenting/commenting out the values inside each respective function.
 
 <a name="run-tests"></a>
 #### Run Tests
@@ -314,12 +328,12 @@ YFPY has only been tested extensively on macOS, but is written to be platform-ag
 <a name="python"></a>
 #### Python
 
-YFPY requires Python 3.10 or later, and has been tested through Python 3.12.
+YFPY requires Python 3.10 or later, and has been tested through Python 3.13.
 
 <a name="development"></a>
 #### Development
 
-Direct project dependencies can be viewed in `requirements.txt`, and additional development and build dependencies (*not* including transitive dependencies) can be viewed in `requirements-dev.txt`.
+Run, development, and build dependencies (*not* including transitive dependencies) can be viewed in `pyproject.toml`.
 
 ---
 
@@ -340,3 +354,8 @@ IndexError: list index out of range
 ```
 
 Typically, when the above error (or a similar error) occurs, it simply means that one of the Yahoo Fantasy Sports API calls failed and so no data was retrieved. This can be fixed by simply re-running data query.
+
+<a name="jetbrains-and-pycharm"></a>
+#### JetBrains and PyCharm
+
+If you are using PyCharm for development against this project and want the IDE to be aware of the installed dependencies in your Python interpreter, PyCharm currently has a bug with its `uv` integration that _requires_ the project to have the `uv` Python interpreter exists in a `.venv` directory in the project root. In the event that you have a `uv` Python interpreter configured elsewhere, you can run `ln -sf /path/to/uv/interpreter/directory .venv` in the YFPY project root, and then configure the Python interpreter in PyCharm to point to the Python executable in the `.venv` symbolic link, and all of your installed dependencies will show up and the IDE will be aware that they are installed.

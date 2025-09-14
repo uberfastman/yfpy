@@ -329,6 +329,7 @@ class GameWeek(YahooFantasyObject):
             extracted_data (dict): Parsed and cleaned JSON data retrieved from the Yahoo Fantasy Sports REST API.
 
         Attributes:
+            current (str): The start date of the current Yahoo Fantasy game week.
             display_name (str): The display name of the Yahoo Fantasy game week.
             end (str): The end date of the Yahoo Fantasy game week.
             start (str): The start date of the Yahoo Fantasy game week.
@@ -336,6 +337,7 @@ class GameWeek(YahooFantasyObject):
 
         """
         YahooFantasyObject.__init__(self, extracted_data)
+        self.current: str = self._extracted_data.get("current", "")
         self.display_name: str = self._extracted_data.get("display_name", "")
         self.end: str = self._extracted_data.get("end", "")
         self.start: str = self._extracted_data.get("start", "")
@@ -389,6 +391,7 @@ class League(YahooFantasyObject):
             game_code (str): The Yahoo game code ("nfl", "nhl", "nba", "mlb").
             iris_group_chat_id (str | null): The unique IRIS group chat ID for the league.
             is_cash_league (int): Numeric boolean (0 or 1) representing if the league is a Yahoo paid league.
+            is_highschore (bool): Boolean ATTRIBUTE MEANING UNKNOWN.
             is_finished (int): Numeric boolean (0 or 1) representing if the league season has completed.
             is_plus_league (int): Numeric boolean (0 or 1) representing if the league has paid for Yahoo Fantasy Plus.
             is_pro_league (str): Numeric boolean (0 or 1) representing if the league is a Yahoo Pro league.
@@ -397,6 +400,7 @@ class League(YahooFantasyObject):
             league_type (str): The type of the league ("private", "public").
             league_update_timestamp (int): A timestamp representing the last time the league was updated.
             logo_url (str): The direct URL of the league logo photo.
+            matchup_week (str): The current matchup week for the league.
             name (str): The name of the league.
             num_teams (str): The number of teams in the league.
             password (str | null): The password required to join the league (if applicable).
@@ -408,6 +412,7 @@ class League(YahooFantasyObject):
             renewed (str | null): A string indicating the next Yahoo game code and next Yahoo league ID (Ex.:
                 "390_303233") (if applicable).
             scoreboard (Scoreboard): A YFPY Scoreboard instance.
+            roster_type (Optional): ATTRIBUTE MEANING UNKNOWN.
             matchups (list[Matchup]): A list of YFPY Matchup instances.
             scoring_type (str): The scoring type of the league ("head" for head-to-head, etc.).
             season (int): The season year of the league.
@@ -439,6 +444,7 @@ class League(YahooFantasyObject):
         self.iris_group_chat_id: str = self._extracted_data.get("iris_group_chat_id", "")
         self.is_cash_league: int = self._extracted_data.get("is_cash_league", 0)
         self.is_finished: int = self._extracted_data.get("is_finished", 0)
+        self.is_highscore: bool = self._extracted_data.get("is_highscore", False)
         self.is_plus_league: int = self._extracted_data.get("is_plus_league", 0)
         self.is_pro_league: int = self._extracted_data.get("is_pro_league", 0)
         self.league_id: str = self._convert_to_string("league_id")  # convert to string to handle leading zeros
@@ -446,6 +452,7 @@ class League(YahooFantasyObject):
         self.league_type: str = self._extracted_data.get("league_type", "")
         self.league_update_timestamp: Optional[int] = self._extracted_data.get("league_update_timestamp", None)
         self.logo_url: str = self._extracted_data.get("logo_url", "")
+        self.matchup_week: str = self._extracted_data.get("matchup_week", "")
         self.name: bytes = self._extracted_data.get("name", "").encode("utf-8")  # support special characters
         self.num_teams: int = self._extracted_data.get("num_teams", 0)
         self.password: str = self._extracted_data.get("password", "")
@@ -453,6 +460,7 @@ class League(YahooFantasyObject):
         self.players: List[Player] = self._extracted_data.get("players", [])
         self.renew: str = self._extracted_data.get("renew", "")
         self.renewed: str = self._extracted_data.get("renewed", "")
+        self.roster_type: Optional = self._extracted_data.get("roster_type", None)
         self.scoreboard: Scoreboard = self._extracted_data.get("scoreboard", Scoreboard({}))
         self.matchups: List[Matchup] = self._get_nested_value(self.scoreboard, "matchups", [])
         self.scoring_type: str = self._extracted_data.get("scoring_type", "")
@@ -507,6 +515,7 @@ class Team(YahooFantasyObject):
                 head-to-head, etc.).
             logo_type (str): (for Tourney Pick'em) The team logo type ("avatar", etc.) of the user competing in the
                 contest.
+            losses (int): The number of losses by the team.
             manager (Manager): (for Survival Football) A YFPY Manager instance for the user competing in the contest.
             managers (list[Manager] | dict[str, Manager]): A list or dict (depending on source data) of YFPY Manager
                 instances.
@@ -514,31 +523,30 @@ class Team(YahooFantasyObject):
             name (str): The team name.
             number_of_moves (int): The number of moves made by the team (adds/drops/trades/etc.).
             number_of_trades (int): The number of trades made by the team.
-            roster (Roster): A YFPY Roster instance.
+            percentage (float): The win percentage of the team.
             players (list[Player]): A list of YFPY Player instances.
+            playoff_seed (int): The playoff seed of the team.
+            points (float): The total points scored by the team.
+            points_against (float): The total team points against.
+            points_for (float): The total team points for.
+            previous_season_team_rank (int): The final rank of the team in the league standings for the previous season.
+            projected_points (float): The total projected points for the team.
+            rank (int): The rank of the team in the league standings.
+            roster (Roster): A YFPY Roster instance.
             roster_adds (RosterAdds): A YFPY RosterAdds instance.
             roster_adds_value (int): The number of roster adds made by the team.
+            status (str): (for Survival Football) The status of user competing in the contest ("dead", etc.).
+            streak_length (int): The length of the streak.
+            streak_type (str): The active team win/loss/tie streak.
             team_id (int): The unique team ID in the league.
             team_key (str): The Yahoo team key.
             team_logo (str): (for Tourney Pick'em) The direct URL to the team logo of the user competing in the contest.
             team_logos (list[TeamLogo]): A list of YFPY TeamLogo instances.
             team_paid (int): Numeric boolean (0 or 1) representing if the team has paid for Yahoo Fantasy Plus.
             team_points (TeamPoints): A YFPY TeamPoints instance.
-            points (float): The total points scored by the team.
             team_projected_points (TeamProjectedPoints): A YFPY TeamProjectedPoints instance.
-            projected_points (float): The total projected points for the team.
             team_standings (TeamStandings): A YFPY TeamStandings instance.
-            wins (int): The number of wins by the team.
-            losses (int): The number of losses by the team.
             ties (int): The number of ties by the team.
-            percentage (float): The win percentage of the team.
-            playoff_seed (int): The playoff seed of the team.
-            points_against (float): The total team points against.
-            points_for (float): The total team points for.
-            rank (int): The rank of the team in the league standings.
-            status (str): (for Survival Football) The status of user competing in the contest ("dead", etc.).
-            streak_type (str): The active team win/loss/tie streak.
-            streak_length (int): The length of the streak.
             total_strikes (int): (for Survival Football) The total number of strikes (incorrect selections) made by the
                 user competing in the contest.
             url (str): The direct URL to the team.
@@ -548,6 +556,7 @@ class Team(YahooFantasyObject):
             waiver_priority (int): The waiver priority of the team.
             win_probability (float): The active win probability of the team in its current matchup (ranges from 0.0 to
                 1.0).
+            wins (int): The number of wins by the team.
 
         """
         YahooFantasyObject.__init__(self, extracted_data)
@@ -578,6 +587,7 @@ class Team(YahooFantasyObject):
         self.number_of_trades: int = self._extracted_data.get("number_of_trades", 0)
         self.roster: Roster = self._extracted_data.get("roster", Roster({}))
         self.players: List[Player] = self._get_nested_value(self.roster, "players", [])
+        self.previous_season_team_rank: Optional[int] = self._extracted_data.get("previous_season_team_rank", None)
         self.roster_adds: RosterAdds = self._extracted_data.get("roster_adds", RosterAdds({}))
         self.roster_adds_value: int = self._get_nested_value(self.roster_adds, "value", 0)
         self.team_id: Optional[int] = self._extracted_data.get("team_id", None)
@@ -590,6 +600,8 @@ class Team(YahooFantasyObject):
         self.team_projected_points: TeamProjectedPoints = self._extracted_data.get("team_projected_points",
                                                                                    TeamProjectedPoints({}))
         self.projected_points: float = self._get_nested_value(self.team_projected_points, "total", 0.0, float)
+
+        # subsequent attributes must be extracted after team_standings so are not in alphabetical order
         self.team_standings: TeamStandings = self._extracted_data.get("team_standings", TeamStandings({}))
         self.wins: int = self._get_nested_value(self.team_standings, ["outcome_totals", "wins"], 0, int)
         self.losses: int = self._get_nested_value(self.team_standings, ["outcome_totals", "losses"], 0, int)
@@ -1028,6 +1040,7 @@ class Settings(YahooFantasyObject):
                 championship matchup.
             has_playoff_consolation_games (bool): Numeric boolean (0 or 1) representing if the league has a consolation
                 playoff bracket.
+            invite_permission (str): The level of invitation permission the user has for this league.
             is_auction_draft (int): Numeric boolean (0 or 1) representing if the league uses an auction draft.
             league_premium_features (List): List of features enables as part of subscription to Yahoo Fantasy Plus or
                 Yahoo Fantasy Commissioner Plus.
@@ -1072,6 +1085,7 @@ class Settings(YahooFantasyObject):
         self.draft_type: str = self._extracted_data.get("draft_type", "")
         self.has_multiweek_championship: int = self._extracted_data.get("has_multiweek_championship", 0)
         self.has_playoff_consolation_games: int = self._extracted_data.get("has_playoff_consolation_games", 0)
+        self.invite_permission: str = self._extracted_data.get("invite_permission", "")
         self.is_auction_draft: int = self._extracted_data.get("is_auction_draft", 0)
         self.league_premium_features: List = self._extracted_data.get("league_premium_features", [])  # TODO: features?
         self.max_teams: Optional[int] = self._extracted_data.get("max_teams", None)
@@ -1236,7 +1250,7 @@ class Stat(YahooFantasyObject):
             is_only_display_stat (int): Numeric boolean (0 or 1) representing if this stat is only for display.
             name (str): The full name of the stat.
             position_type (str): The player position type eligible for the stat.
-            position_types (list[PositionType): A list of YFPY PositionType instances.
+            position_types (list[PositionType]): A list of YFPY PositionType instances.
             sort_order (int): Numeric boolean (0 or 1) representing if the stat is sorted highest to lowest (1) or
                 lowest to highest (0).
             stat_id (int): The unique stat ID number in the league.
@@ -1314,6 +1328,8 @@ class Matchup(YahooFantasyObject):
 
         Attributes:
             is_consolation (int): Numeric boolean (0 or 1) representing if the matchup is in a consolation bracket.
+            is_matchup_of_the_week (int): Numeric boolean (0 or 1) representing if the matchup is the Yahoo matchup of
+                the week.
             is_matchup_recap_available (int): Numeric boolean (0 or 1) representing if the matchup recap is available.
             is_playoffs (int): Numeric boolean (0 or 1) representing if the matchup is in the playoffs bracket.
             is_tied (int): Numeric boolean (0 or 1) representing if the matchup result is tied.
@@ -1329,6 +1345,7 @@ class Matchup(YahooFantasyObject):
         """
         YahooFantasyObject.__init__(self, extracted_data)
         self.is_consolation: int = self._extracted_data.get("is_consolation", 0)
+        self.is_matchup_of_the_week: int = self._extracted_data.get("is_matchup_of_the_week", 0)
         self.is_matchup_recap_available: int = self._extracted_data.get("is_matchup_recap_available", 0)
         self.is_playoffs: int = self._extracted_data.get("is_playoffs", 0)
         self.is_tied: int = self._extracted_data.get("is_tied", 0)

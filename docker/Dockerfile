@@ -1,11 +1,10 @@
 ARG PYTHON_VERSION_MAJOR=$PYTHON_VERSION_MAJOR
 ARG PYTHON_VERSION_MINOR=$PYTHON_VERSION_MINOR
-ARG PYTHON_VERSION_PATCH=$PYTHON_VERSION_PATCH
 
 ARG BUILD_PLATFORM=$BUILD_PLATFORM
 
-# set base image
-FROM --platform=${BUILD_PLATFORM} python:${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}.${PYTHON_VERSION_PATCH}-slim
+# set base image from uv images: https://docs.astral.sh/uv/guides/integration/docker/
+FROM --platform=${BUILD_PLATFORM} ghcr.io/astral-sh/uv:python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}-bookworm-slim
 
 LABEL "org.opencontainers.image.source"="https://github.com/uberfastman/yfpy"
 
@@ -14,6 +13,8 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y git
 
+RUN uv python list --only-installed
+
 # set the working directory in the container
 WORKDIR /opt/yfpy
 
@@ -21,17 +22,13 @@ WORKDIR /opt/yfpy
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-## copy the project root contents to the working directory
+# copy package files to the working directory
 COPY .. .
 
 # install dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN uv sync
 
 RUN chmod +x ./docker/docker-entrypoint.sh
-
-# specify docker as package runtime environment
-ENV RUNTIME_ENVIRONMENT docker
 
 ENTRYPOINT ["./docker/docker-entrypoint.sh"]
 

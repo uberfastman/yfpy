@@ -61,9 +61,9 @@ def test_get_player_stats_for_season(yahoo_query, yahoo_data, data_dir, season, 
 
 
 @pytest.mark.integration
-def test_get_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id,
-                                  player_id, player_key, show_log_output):
-    """Integration test for retrieval of player stats by week for chosen Yahoo fantasy league..
+def test_get_player_stats_by_week(yahoo_query, yahoo_data, data_dir, season, chosen_week, game_id, league_id, player_id,
+                                  player_key, show_log_output):
+    """Integration test for retrieval of player stats by week for chosen Yahoo fantasy league.
 
     Note:
         Tests :func:`~yfpy.query.YahooFantasySportsQuery.get_player_stats_by_week`.

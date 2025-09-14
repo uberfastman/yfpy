@@ -1,0 +1,102 @@
+[project]
+name = "yfpy"
+dynamic = ["version"]
+authors = [
+    { name="Wren J. R. (uberfastman)", email="uberfastman@uberfastman.dev" },
+]
+license = { text = "GNU General Public License v3 (GPLv3)" }
+description = "Python API wrapper for the Yahoo Fantasy Sports public API."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "python-dotenv==1.1.1",
+    "requests==2.32.5",
+    "stringcase==1.2.0",
+    "yahoo-oauth==2.1.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/uberfastman/yfpy"
+Issues = "https://github.com/uberfastman/yfpy/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "bandit>=1.8.6",
+    "black>=25.1.0",
+    "hatchling>=1.27.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-autorefs>=1.4.3",
+    "mkdocstrings-python>=1.18.2",
+    "pygments>=2.18.0",
+    "pymdown-extensions>=10.10",
+    "pytest>=8.4.2",
+    "ruamel.yaml>=0.18.15",
+    "ruff>=0.13.0",
+    "twine>=6.2.0",
+]
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".github",
+    ".idea",
+    ".pytest_cache",
+    ".python-venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "docker",
+    "docs",
+    "docs-mkdocs",
+    "resources",
+    "scripts"
+]
+extend-exclude = [
+    "yfpy/__init__.py"
+]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+extend-select = [
+    "E501"
+]
+
+[tool.bandit]
+exclude_dirs = [
+    "./.github",
+    "./.venv*",
+    "./resources",
+    "./scripts",
+    "./tests"
+]
+
+[tool.hatch.version]
+path = "VERSION.py"
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: tests that are self-contained without any external interactions",
+    "integration: tests that require interaction with external components (such as an API)"
+]
+
+[tool.custom]
+environment = ".venv-python_3.13.7"

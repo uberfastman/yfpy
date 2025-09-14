@@ -3,33 +3,33 @@
 1. *(Optional)* Clear virtual machine of old requirements:
 
     ```shell
-    pip uninstall -y -r <(pip freeze)
+    uv pip uninstall -y -r <(uv pip freeze)
     ```
 
-2. *(Optional)* Check `requirements.txt` and `requirement-dev.txt` for latest dependency versions.
+2. *(Optional)* Check the `dependencies` and `dev-dependencies` sections of `pyproject.toml` for latest dependency versions.
 
 3. *(Optional)* Update virtual machine with the latest dependencies:
 
     ```shell
-    pip install -r requirements.txt -r requirements-dev.txt
+    make update
     ```
    
-4. Lint code with `flake8`:
+4. Lint code with `ruff`:
 
     ```shell
-    flake8 . --count --show-source --statistics
+    make lint
     ```
 
 5. Check code security with `bandit`:
 
     ```shell
-    bandit -r yfpy/
+    make secure
     ```
 
 6. Run *all* `pytest` tests (see following commands for running subsets of tests):
 
     ```shell
-    python -m pytest
+    make test_code
     ```
 
 7. Run *all* `pytest` tests *verbosely*:
@@ -47,19 +47,19 @@
 9. *(Optional)* Run all tests from `pytest` file:
 
    ```shell
-   python -m pytest -v -s -m integration test/integration/test_api_game_data.py
+   python -m pytest -v -s -m integration tests/integration/test_api_game_data.py
    ```
 
 10. *(Optional)* Run *specific* test from `pytest` file:
 
     ```shell
-    python -m pytest -v -s -m integration test/integration/test_api_game_data.py -k test_get_game_key_by_season
+    python -m pytest -v -s -m integration tests/integration/test_api_game_data.py -k test_get_game_key_by_season
     ```
 
 11. *(Optional)* Test Python support using [act](https://github.com/nektos/act) for GitHub Actions:
 
     ```shell
-    act_amd -j build
+    make test_actions
     ```
     
     ***Note***: If `act` is unable to locate Docker, make sure that the required `/var/run/docker.sock` symlink exists. If it does not, you can fix it by running:
@@ -92,7 +92,7 @@
     make docs
     ```
 
-    ***Note***: Running `make test_docs` from the previous step recreates the documentation without building the PyPI package with `setup.py`.
+    ***Note***: Running `make test_docs` from the previous step recreates the documentation without building the PyPI package with `uv`.
 
 16. Create a git commit:
 
@@ -113,7 +113,7 @@
 18. Install `twine` (if not already installed):
 
     ```shell
-    pip install twine
+    uv add twine
     ```
      
 19. *(Optional)* Test deployment by building the PyPI packages, recreating the documentation, and deploying to Test PyPI:
