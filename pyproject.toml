@@ -18,7 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "python-dotenv==1.1.1",
-    "requests==2.32.5",
+    "requests==2.33.0",
     "stringcase==1.2.0",
     "yahoo-oauth==2.1.1",
 ]
