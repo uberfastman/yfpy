@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "python-dotenv==1.1.1",
+    "python-dotenv==1.2.2",
     "requests==2.32.5",
     "stringcase==1.2.0",
     "yahoo-oauth==2.1.1",
