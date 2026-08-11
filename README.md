@@ -53,6 +53,7 @@ Python API wrapper for the Yahoo Fantasy Sports public API
     * [Docker](#docker)
         * [Docker Development](#docker-development)
         * [Docker Image Deployment](#docker-image-deployment)
+    * [Export League Data](#export-league-data)
 * [Testing](#testing)
     * [Unit Tests](#unit-tests)
     * [Integration Tests](#integration-tests)
@@ -283,6 +284,27 @@ YFPY can be used within Docker for a more seamless, platform-agnostic experience
 ##### Docker Image Deployment
 
 See [DEPLOYMENT.md](https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md) for Docker image deployment.
+
+<a name="export-league-data"></a>
+#### Export League Data
+
+YFPY includes a utility script for exporting comprehensive league data to CSV and JSON files.
+
+* Install optional export dependencies:
+    ```shell
+    pip install yfpy[export]
+    ```
+    or with `uv`:
+    ```shell
+    uv pip install yfpy[export]
+    ```
+
+* Run the export script:
+    ```shell
+    python scripts/export_league_data.py YOUR_TOKEN LEAGUE_KEY [OPTIONS]
+    ```
+
+* For detailed usage and examples, see [`scripts/EXPORT_LEAGUE_DATA.md`](https://github.com/uberfastman/yfpy/blob/main/scripts/EXPORT_LEAGUE_DATA.md)
 
 ---
 
