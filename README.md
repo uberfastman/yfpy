@@ -288,7 +288,9 @@ See [DEPLOYMENT.md](https://github.com/uberfastman/yfpy/blob/main/DEPLOYMENT.md)
 <a name="export-league-data"></a>
 #### Export League Data
 
-YFPY includes a utility script for exporting comprehensive league data to CSV and JSON files.
+YFPY includes utility scripts for exporting comprehensive league data to CSV and JSON files.
+
+**Yahoo Fantasy Export**
 
 * Install optional export dependencies:
     ```shell
@@ -305,6 +307,24 @@ YFPY includes a utility script for exporting comprehensive league data to CSV an
     ```
 
 * For detailed usage and examples, see [`scripts/EXPORT_LEAGUE_DATA.md`](https://github.com/uberfastman/yfpy/blob/main/scripts/EXPORT_LEAGUE_DATA.md)
+
+**Sleeper Fantasy Export**
+
+* Export Sleeper league data (no authentication required):
+    ```shell
+    python scripts/export_sleeper_league_data.py LEAGUE_ID [OPTIONS]
+    ```
+
+* For detailed usage and examples, see [`scripts/EXPORT_SLEEPER_LEAGUE_DATA.md`](https://github.com/uberfastman/yfpy/blob/main/scripts/EXPORT_SLEEPER_LEAGUE_DATA.md)
+
+**Bulk Export Multiple Leagues**
+
+* Export from multiple Yahoo and Sleeper leagues simultaneously:
+    ```shell
+    python scripts/bulk_export_leagues.py export leagues.json
+    ```
+
+* For detailed usage and examples, see [`scripts/BULK_EXPORT_LEAGUES.md`](https://github.com/uberfastman/yfpy/blob/main/scripts/BULK_EXPORT_LEAGUES.md)
 
 ---
 

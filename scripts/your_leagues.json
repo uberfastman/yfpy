@@ -1,0 +1,105 @@
+{
+  "yahoo_token": "YOUR_YAHOO_ACCESS_TOKEN_HERE",
+  "leagues": {
+    "sleeper": [
+      {
+        "year": 2026,
+        "league_id": "1389378429505241088",
+        "name": "YeahThatFantasyLeague!",
+        "weeks": null
+      },
+      {
+        "year": 2025,
+        "league_id": "1245905122328846336",
+        "name": "YeahThatFantasyLeague!",
+        "weeks": null
+      }
+    ],
+    "yahoo": [
+      {
+        "year": 2024,
+        "league_id": "42081",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2023,
+        "league_id": "243817",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2022,
+        "league_id": "367036",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2021,
+        "league_id": "428007",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2020,
+        "league_id": "275203",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2019,
+        "league_id": "222624",
+        "name": "#TotallyHeterosexualMensFFL",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2018,
+        "league_id": "562266",
+        "name": "#BunchaFaggetsFantasyLeague",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2017,
+        "league_id": "351067",
+        "name": "#BunchaFaggetsFantasyLeague",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2016,
+        "league_id": "827116",
+        "name": "#BunchaFaggetsFantasyLeague",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2015,
+        "league_id": "902076",
+        "name": "#BunchaFaggetsFantasyLeague",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2014,
+        "league_id": "605315",
+        "name": "#BunchaFaggetsFantasyLeague",
+        "start_week": 1,
+        "end_week": 17
+      },
+      {
+        "year": 2013,
+        "league_id": "777575",
+        "name": "Rondros Fantasy League",
+        "start_week": 1,
+        "end_week": 17
+      }
+    ]
+  }
+}
