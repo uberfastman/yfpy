@@ -23,6 +23,12 @@ dependencies = [
     "yahoo-oauth==2.1.1",
 ]
 
+[project.optional-dependencies]
+export = [
+    "xmltodict>=0.13.0",
+    "pandas>=2.0.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/uberfastman/yfpy"
 Issues = "https://github.com/uberfastman/yfpy/issues"
