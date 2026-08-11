@@ -31,7 +31,7 @@ Example vars using public Yahoo leagues still require auth through a personal Ya
 data_dir = Path(__file__).parent / "output"
 
 # create YFPY Data instance for saving/loading data
-data = Data(data_dir)
+data = None  # created in __main__
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # VARIABLE SETUP  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -272,24 +272,34 @@ test_league_player_limit = get_league_player_limit()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # configure the Yahoo Fantasy Sports query (change all_output_as_json_str=True if you want to output JSON strings)
-query = YahooFantasySportsQuery(
-    test_league_id,
-    test_game_code,
-    game_id=test_game_id,
-    yahoo_consumer_key=os.environ.get("YAHOO_CONSUMER_KEY"),
-    yahoo_consumer_secret=os.environ.get("YAHOO_CONSUMER_SECRET"),
-    # yahoo_access_token_json=os.environ.get("YAHOO_ACCESS_TOKEN_JSON"),
-    env_file_location=project_dir,
-    save_token_data_to_env_file=True
-)
+
+def create_query():
+    query = YahooFantasySportsQuery(
+        test_league_id,
+        test_game_code,
+        game_id=test_game_id,
+        yahoo_consumer_key=os.environ.get("YAHOO_CONSUMER_KEY"),
+        yahoo_consumer_secret=os.environ.get("YAHOO_CONSUMER_SECRET"),
+        # yahoo_access_token_json=os.environ.get("YAHOO_ACCESS_TOKEN_JSON"),
+        env_file_location=project_dir,
+        save_token_data_to_env_file=True
+    )
+
+    # Manually override league key for example code to work
+    query.league_key = f"{test_game_id}.l.{test_league_id}"
+
+    # Manually override player key for example code to work
+    test_player_key = f"{test_game_id}.p.{test_player_id}"
+
+    return query, test_player_key
+
+
+# When run as a script, instantiate resources and create the query
+if __name__ == "__main__":
+    data = Data(data_dir)
+    query, test_player_key = create_query()
 
 # query.save_access_token_data_to_env_file(project_dir, save_json_to_var_only=True)
-
-# Manually override league key for example code to work
-query.league_key = f"{test_game_id}.l.{test_league_id}"
-
-# Manually override player key for example code to work
-test_player_key = f"{test_game_id}.p.{test_player_id}"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # RUN QUERIES # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
